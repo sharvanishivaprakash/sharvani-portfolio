@@ -24,7 +24,7 @@ The hero character lives in `assets/character/`. Its pupils are separate layers 
 - `project.html`: case study template
 - `css/style.css`: colours, fonts and spacing at the top in `:root`, then sections
 - `js/main.js`: renders everything from `content.js`
-- `js/preloader.js`: the name intro on the homepage (`shar` + a rolling sage word: … → who → vani → hey, it’s → vani). Timings are at the top of the file; the markup is at the top of `index.html`, styles under “Name intro” in `style.css`. It plays on a fresh visit or refresh, not when coming back from a case study.
+- `js/preloader.js`: the name intro on the homepage (`shar` + a rolling sage word: … → who → vani, then the whole line rolls to “hey, it’s sharvani”). Timings are at the top of the file; the markup is at the top of `index.html`, styles under “Name intro” in `style.css`. It plays on a fresh visit or refresh, not when coming back from a case study.
 - `js/pixel-name.js`: the hero name that rasterises into "Interaction Designer"
 - `js/character.js`: the character's eyes following the pointer
 - `js/cursor.js`: the eye cursor (desktop only; touch keeps the normal behaviour)

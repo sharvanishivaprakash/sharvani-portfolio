@@ -1,10 +1,11 @@
 /*
   Name intro shown before the homepage hero.
   "shar" stays still; the sage word rolls upward through a clipped window:
-    ...  →  who  →  vani  →  hey, it's  →  vani
-  then the white screen fades away and the hero reveals (main.js listens for "preloader:done").
+    shar ...  →  shar who  →  shar vani
+  then the whole line rolls up to "hey, it's sharvani" in sage,
+  the words lift away, the page fades in and the hero reveals (main.js listens for "preloader:done").
   Whether it plays is decided by the small inline script in index.html's <head>.
-  Reduced motion: a short still "shar vani", then the homepage.
+  Reduced motion: a short still "hey, it's sharvani", then the homepage.
 */
 (function () {
   const root = document.documentElement;
@@ -12,39 +13,37 @@
   if (!el || !root.classList.contains("is-preloading")) { if (el) el.remove(); return; }
 
   const line = el.querySelector(".pl-line");
+  const stack = el.querySelector(".pl-stack");
   const reel = el.querySelector(".pl-reel");
+  const blur = document.getElementById("pl-round-blur");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
-  const STEP = 1.2; // em, matches --pl-lh in css/style.css
+  const STEP = 1.25; // em, matches --pl-lh in css/style.css
 
-  // Timing in ms: hold on "...", then [roll, hold] for each next word. Last hold is the name reveal.
-  const FIRST_HOLD = 400;
-  const ROLL = 400;
-  const HOLDS = [300, 350, 400, 450]; // who, vani, hey it's, vani
-  const EXIT = 320; // white fade after the words have gone
+  // Timing in ms
+  const FIRST_HOLD = 450; // shar ...
+  const ROLL = 400;       // each roll
+  const HOLD_WHO = 350;
+  const HOLD_VANI = 450;
+  const HOLD_GREET = 800; // hey, it's sharvani
+  const EXIT = 320;       // page fade after the words have gone
 
   const timers = [];
   const anims = [];
   let finished = false;
 
-  // Centre the line on its resting state, "shar vani", so the name lands in the middle of the screen;
-  // the window still keeps room for "hey, it's" to its right. Shrink the type only if that would not fit.
+  // Keep each line on one row: shrink the type only if the longest line would not fit.
   function fit() {
     line.style.fontSize = "";
-    line.style.marginRight = "";
-    const range = document.createRange();
-    range.selectNodeContents(reel.children[2]);
-    const name = range.getBoundingClientRect().right - line.getBoundingClientRect().left; // "shar vani"
-    const full = line.scrollWidth; // "shar" + space + window wide enough for "hey, it's"
     const room = el.clientWidth - 32;
-    const need = 2 * full - name;
-    const scale = need > room ? room / need : 1;
-    if (scale < 1) line.style.fontSize = parseFloat(getComputedStyle(line).fontSize) * scale + "px";
-    line.style.marginRight = -(full - name) * scale + "px";
+    const w = Math.max(...[...stack.children].map((row) => row.scrollWidth));
+    let fs = parseFloat(getComputedStyle(line).fontSize);
+    if (w > room) { fs *= room / w; line.style.fontSize = fs + "px"; }
+    if (blur) blur.setAttribute("stdDeviation", Math.max(0.6, fs * 0.014).toFixed(2)); // same rounding as the hero
   }
 
-  // Exit: the words lift away first, then the white lifts and the hero fades up,
-  // so the intro name and the hero name are never on screen together.
+  // Exit: the words lift away first, then the page fades in and the hero fades up,
+  // so the intro and the hero name are never on screen together.
   function finish() {
     if (finished) return;
     finished = true;
@@ -82,34 +81,44 @@
     el.classList.add("is-ready");
 
     if (reduce) {
-      reel.style.transform = `translateY(${-2 * STEP}em)`; // still "shar vani"
-      timers.push(setTimeout(finish, 900));
+      stack.style.transform = `translateY(${-STEP}em)`; // still "hey, it's sharvani"
+      timers.push(setTimeout(finish, 1000));
       return;
     }
 
-    // One continuous timeline: each roll eases, each hold sits still.
-    const total = FIRST_HOLD + HOLDS.length * ROLL + HOLDS.reduce((a, b) => a + b, 0);
-    const frames = [{ transform: "translateY(0em)", offset: 0 }];
-    let t = FIRST_HOLD;
-    HOLDS.forEach((hold, i) => {
-      frames.push({ transform: `translateY(${-i * STEP}em)`, offset: t / total, easing: EASE });
-      t += ROLL;
-      frames.push({ transform: `translateY(${-(i + 1) * STEP}em)`, offset: t / total });
-      t += hold;
-    });
-    frames.push({ transform: `translateY(${-HOLDS.length * STEP}em)`, offset: 1 });
+    const y = (n) => `translateY(${-n * STEP}em)`;
+    const reelEnd = FIRST_HOLD + ROLL + HOLD_WHO + ROLL; // reel settles on "vani"
+    const total = reelEnd + HOLD_VANI + ROLL + HOLD_GREET;
+    const at = (t) => t / total;
 
-    const roll = reel.animate(frames, { duration: total, fill: "forwards" });
-    anims.push(roll);
-    roll.onfinish = finish;
-    timers.push(setTimeout(finish, total + 1000)); // never leave the visitor on a white screen
+    // The green word: ... → who → vani, each roll eased, each hold still.
+    const words = reel.animate([
+      { transform: y(0), offset: 0 },
+      { transform: y(0), offset: at(FIRST_HOLD), easing: EASE },
+      { transform: y(1), offset: at(FIRST_HOLD + ROLL) },
+      { transform: y(1), offset: at(FIRST_HOLD + ROLL + HOLD_WHO), easing: EASE },
+      { transform: y(2), offset: at(reelEnd) },
+      { transform: y(2), offset: 1 },
+    ], { duration: total, fill: "forwards" });
+
+    // The whole line: "shar vani" rolls up and "hey, it's sharvani" rolls in.
+    const lineRoll = stack.animate([
+      { transform: y(0), offset: 0 },
+      { transform: y(0), offset: at(reelEnd + HOLD_VANI), easing: EASE },
+      { transform: y(1), offset: at(reelEnd + HOLD_VANI + ROLL) },
+      { transform: y(1), offset: 1 },
+    ], { duration: total, fill: "forwards" });
+
+    anims.push(words, lineRoll);
+    lineRoll.onfinish = finish;
+    timers.push(setTimeout(finish, total + 1000)); // never leave the visitor on a blank screen
   }
 
-  // Start once the display font is in (no swap mid-roll), but never wait long for it.
+  // Start once the lettering font is in (no swap mid-roll), but never wait long for it.
   let started = false;
   const start = () => { if (!started) { started = true; play(); } };
   timers.push(setTimeout(start, 800));
   if (document.fonts && document.fonts.load) {
-    document.fonts.load('600 1em "Outfit"', "sharvni.who,’ ").then(start, start);
+    document.fonts.load('700 1em "Pixelify Sans"', "sharvni.who,’ yeit").then(start, start);
   } else start();
 })();

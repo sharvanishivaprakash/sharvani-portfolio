@@ -26,10 +26,18 @@
   </script>
 </head>
 <body data-page="home">
-  <!-- Name intro: "shar" stays still while the green word rolls ... → who → vani → hey, it's → vani -->
+  <!-- Name intro: "shar" stays still while the green word rolls ... → who → vani,
+       then the whole line rolls on to "hey, it's sharvani" -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <p class="pl-line"><span class="pl-fixed">shar</span> <span class="pl-window"><span class="pl-sizer">hey, it’s</span><span class="pl-reel"><span>...</span><span>who</span><span>vani</span><span>hey, it’s</span><span>vani</span></span></span></p>
+    <svg class="defs" focusable="false" width="0" height="0">
+      <filter id="pl-round" color-interpolation-filters="sRGB">
+        <feGaussianBlur id="pl-round-blur" stdDeviation="1.2"/>
+        <feComponentTransfer><feFuncA type="table" tableValues="0 0 0 1 1"/></feComponentTransfer>
+      </filter>
+    </svg>
+    <p class="pl-line"><span class="pl-stack"><span class="pl-row"><span class="pl-fixed">shar</span> <span class="pl-window"><span class="pl-sizer"><span>...</span><span>who</span><span>vani</span></span><span class="pl-reel"><span>...</span><span>who</span><span>vani</span></span></span></span><span class="pl-row pl-greet">hey, it’s sharvani</span></span></p>
   </div>
+
   <a class="skip" href="#work">Skip to work</a>
 
   <header class="nav-bar">

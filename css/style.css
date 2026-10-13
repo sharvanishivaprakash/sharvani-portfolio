@@ -566,9 +566,10 @@ body.cursor-out .cursor-eye { opacity: 0; }
 .is-loaded .hero-hello.reveal { transform: rotate(-3deg); }
 
 /* ---------- Name intro (preloader) ----------
-   One line of type: "shar" never moves; the green word rolls through a clipped window
-   that is always as wide as "hey, it's", so nothing shifts. The gap between them is the
-   real space character in the markup, so it is a natural word-space at every size. */
+   Same paper and grid as the page, same rounded pixel lettering as the hero name.
+   "shar" never moves while the green word rolls ... → who → vani through a clipped window
+   (always as wide as its widest word, so nothing shifts). Then the whole line rolls on to
+   "hey, it's sharvani". The gap is the real space character, so it is a natural word-space. */
 
 .preloader { display: none; }
 html.is-preloading { overflow: hidden; }
@@ -576,25 +577,38 @@ html.is-preloading { overflow: hidden; }
   position: fixed; inset: 0; z-index: 10000;
   display: flex; align-items: center; justify-content: center;
   padding: 0 16px;
-  background: #fff;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: center top;
   overflow: hidden;
 }
 html.has-cursor .preloader { cursor: default !important; } /* plain pointer while the eye cursor is covered */
 .pl-line {
-  --pl-lh: 1.2em;
-  font-family: var(--display); font-weight: 600;
-  font-size: clamp(2.6rem, 15vw, 9rem); /* js/preloader.js scales down further if it would not fit */
-  letter-spacing: -0.04em;
+  --pl-lh: 1.25em;
+  margin: 0;
+  font-family: var(--lettering); font-weight: 700;
+  font-size: clamp(1.9rem, 5.6vw, 4.75rem); /* js/preloader.js scales down further if it would not fit */
+  letter-spacing: 0.01em;
   line-height: var(--pl-lh);
   white-space: nowrap;
-  color: #111;
+  color: var(--ink);
+  filter: url(#pl-round);
+  height: var(--pl-lh);
+  overflow: hidden; /* the whole line is a window too, for the last roll */
   visibility: hidden; /* shown once the font is ready, so it never swaps mid-animation */
 }
 .preloader.is-ready .pl-line { visibility: visible; }
+.pl-stack { display: flex; flex-direction: column; align-items: center; will-change: transform; }
+.pl-row { display: block; height: var(--pl-lh); }
+.pl-greet { color: var(--name-color); }
 /* top-aligned boxes of equal height and font share one baseline */
 .pl-fixed, .pl-window { display: inline-block; vertical-align: top; height: var(--pl-lh); }
 .pl-window { position: relative; overflow: hidden; color: var(--name-color); }
-.pl-sizer { display: block; visibility: hidden; }
+.pl-sizer { display: grid; visibility: hidden; }
+.pl-sizer > span { grid-area: 1 / 1; }
 .pl-reel { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; will-change: transform; }
 .pl-reel > span { display: block; height: var(--pl-lh); white-space: nowrap; }
 
