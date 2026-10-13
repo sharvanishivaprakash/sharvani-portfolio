@@ -565,6 +565,39 @@ body.cursor-out .cursor-eye { opacity: 0; }
 .hero-hello.reveal { transform: translateY(14px) rotate(-3deg); }
 .is-loaded .hero-hello.reveal { transform: rotate(-3deg); }
 
+/* ---------- Name intro (preloader) ----------
+   One line of type: "shar" never moves; the green word rolls through a clipped window
+   that is always as wide as "hey, it's", so nothing shifts. The gap between them is the
+   real space character in the markup, so it is a natural word-space at every size. */
+
+.preloader { display: none; }
+html.is-preloading { overflow: hidden; }
+.is-preloading .preloader {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 16px;
+  background: #fff;
+  overflow: hidden;
+}
+html.has-cursor .preloader { cursor: default !important; } /* plain pointer while the eye cursor is covered */
+.pl-line {
+  --pl-lh: 1.2em;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(2.6rem, 15vw, 9rem); /* js/preloader.js scales down further if it would not fit */
+  letter-spacing: -0.04em;
+  line-height: var(--pl-lh);
+  white-space: nowrap;
+  color: #111;
+  visibility: hidden; /* shown once the font is ready, so it never swaps mid-animation */
+}
+.preloader.is-ready .pl-line { visibility: visible; }
+/* top-aligned boxes of equal height and font share one baseline */
+.pl-fixed, .pl-window { display: inline-block; vertical-align: top; height: var(--pl-lh); }
+.pl-window { position: relative; overflow: hidden; color: var(--name-color); }
+.pl-sizer { display: block; visibility: hidden; }
+.pl-reel { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; will-change: transform; }
+.pl-reel > span { display: block; height: var(--pl-lh); white-space: nowrap; }
+
 /* ---------- Touch devices ---------- */
 
 @media (hover: none) {

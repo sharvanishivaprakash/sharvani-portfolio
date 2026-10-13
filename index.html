@@ -11,8 +11,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Pixelify+Sans:wght@700&family=Reenie+Beanie&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    /* Runs before first paint: decides whether the name intro plays (js/preloader.js runs it).
+       It plays on a fresh visit or a refresh, not when coming back from another page of this site. */
+    (function () {
+      try {
+        var nav = performance.getEntriesByType("navigation")[0];
+        var type = nav ? nav.type : "navigate";
+        var internal = document.referrer && new URL(document.referrer).origin === location.origin;
+        if (type === "back_forward" || (internal && type !== "reload")) return;
+      } catch (e) {}
+      document.documentElement.classList.add("is-preloading");
+    })();
+  </script>
 </head>
 <body data-page="home">
+  <!-- Name intro: "shar" stays still while the green word rolls ... → who → vani → hey, it's → vani -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <p class="pl-line"><span class="pl-fixed">shar</span> <span class="pl-window"><span class="pl-sizer">hey, it’s</span><span class="pl-reel"><span>...</span><span>who</span><span>vani</span><span>hey, it’s</span><span>vani</span></span></span></p>
+  </div>
   <a class="skip" href="#work">Skip to work</a>
 
   <header class="nav-bar">
@@ -133,6 +150,7 @@
   </footer>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
+  <script src="js/preloader.js"></script>
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
   <script src="js/pixel-name.js"></script>

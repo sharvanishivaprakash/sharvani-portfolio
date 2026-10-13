@@ -51,7 +51,10 @@
     addEventListener("scroll", onScroll, { passive: true });
   }
 
-  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+  // On the homepage the hero waits for the name intro (js/preloader.js) to finish.
+  const reveal = () => requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+  if (document.documentElement.classList.contains("is-preloading")) addEventListener("preloader:done", reveal, { once: true });
+  else reveal();
 
   const page = document.body.dataset.page;
   if (page === "home") renderHome();
