@@ -3,65 +3,118 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sharvani — multidisciplinary designer</title>
-  <meta name="description" content="Portfolio of Sharvani, a multidisciplinary designer.">
-  <meta name="theme-color" content="#f2eee6">
+  <title>Sharvani SP — Interaction Designer</title>
+  <meta name="description" content="Sharvani SP, Interaction Designer — making experiences understandable, engaging, and humane.">
+  <meta name="theme-color" content="#fdfdfb">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Reenie+Beanie&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="wordmark" href="index.html" aria-label="Sharvani, home">Sharvani<span class="bindi" aria-hidden="true"></span></a>
-      <span class="coords" aria-label="Location coordinates"></span>
-      <nav class="nav" aria-label="Main">
-        <a href="index.html#work" aria-current="page">Projects</a>
-        <a href="side-projects.html">Side projects</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <header class="nav-bar">
+    <a class="wordmark" href="#top">Sharvani SP</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work" data-section="work">Work</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#playground" data-section="playground">Playground</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </nav>
+    <span class="mono nav-meta" id="clock" aria-hidden="true"></span>
   </header>
-  <main id="main">
+
+  <main id="top">
+    <!-- Hero -->
     <section class="hero" aria-labelledby="hero-name">
-      <canvas class="hero-dots" aria-hidden="true"></canvas>
-      <div class="wrap">
-        <h1 class="hero-name reveal" id="hero-name">Sharvani<svg class="kolam" viewBox="0 0 100 100" aria-hidden="true"></svg></h1>
-        <p class="hero-intro reveal" style="--i:1" id="intro"></p>
-        <div class="hero-jump reveal" style="--i:2">
-          <a class="pill" href="#work"><span class="dot"></span>Projects</a>
-          <a class="pill" href="side-projects.html">Side projects</a>
-          <a class="pill" href="about.html">About me</a>
-        </div>
+      <p class="hand hero-hello reveal">hi, my name is</p>
+
+      <div class="name-wrap reveal" style="--i:1">
+        <!-- The visible letters swap to "interaction designer" with a pixel effect.
+             Screen readers always get the plain sentence in .sr-only. -->
+        <h1 class="name" id="hero-name" tabindex="0">
+          <span class="sr-only">Sharvani SP, interaction designer</span>
+          <span class="name-a" aria-hidden="true">Sharvani SP</span>
+          <span class="name-b" aria-hidden="true">interaction designer</span>
+          <canvas class="name-canvas" aria-hidden="true"></canvas>
+        </h1>
+        <span class="mono name-hint" aria-hidden="true"><span class="hint-hover">hover my name</span><span class="hint-tap">tap my name</span></span>
+
+        <figure class="doodle">
+          <img id="doodle" src="assets/doodle.webp" alt="" width="320" height="258">
+          <figcaption class="hand">that's me ↙</figcaption>
+        </figure>
+      </div>
+
+      <p class="statement reveal" style="--i:2" id="statement"></p>
+
+      <div class="hero-foot reveal" style="--i:3">
+        <span class="mono" id="coords"></span>
+        <a class="mono scroll-cue" href="#work">Scroll to explore <span aria-hidden="true">↓</span></a>
       </div>
     </section>
-    <hr class="kolam-rule">
+
+    <!-- Work -->
     <section class="section" id="work" aria-labelledby="work-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 class="section-title" id="work-title">Projects</h2>
-          <p class="section-note">Selected design work. Open any project for the full story.</p>
-        </div>
-        <ul class="project-list" id="project-list"></ul>
+      <div class="section-head">
+        <span class="mono label">01</span>
+        <h2 id="work-title">Selected work</h2>
+        <p class="mono note">Four projects. Open any of them for the case study.</p>
       </div>
+      <div class="work-grid" id="work-grid"></div>
     </section>
-    <section class="section" aria-labelledby="side-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 class="section-title" id="side-title">Side projects</h2>
-          <p class="section-note">Experiments and things made out of curiosity. <a href="side-projects.html">See them all</a></p>
-        </div>
-        <div class="home-side side-grid" id="home-side"></div>
+
+    <!-- About -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="section-head">
+        <span class="mono label">02</span>
+        <h2 id="about-title">About</h2>
+        <p class="about-intro" id="about-intro"></p>
       </div>
+      <ul class="collage" id="collage"></ul>
+    </section>
+
+    <!-- Playground -->
+    <section class="section" id="playground" aria-labelledby="play-title">
+      <div class="section-head">
+        <span class="mono label">03</span>
+        <h2 id="play-title">Playground</h2>
+        <p class="mono note">Sketches, experiments and things that don't need a case study.</p>
+      </div>
+      <ul class="play-grid" id="play-grid"></ul>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <span class="mono label">04</span>
+      <h2 class="sr-only" id="contact-title">Contact</h2>
+      <a class="say-hello" id="say-hello" href="#">
+        <span class="sh-a">Say hello</span>
+        <span class="sh-b" aria-hidden="true">Let's talk</span>
+        <span class="sh-arrow" aria-hidden="true">→</span>
+      </a>
+      <div class="contact-row">
+        <button class="mono copy-email" id="copy-email" type="button">
+          <span id="email-text"></span> <span class="copy-label">Copy</span>
+        </button>
+        <ul class="mono socials" id="socials"></ul>
+      </div>
+      <p class="mono toast" id="toast" role="status" aria-live="polite"></p>
     </section>
   </main>
-  <footer class="site-footer" id="footer"></footer>
-  <noscript><p class="wrap">This site needs JavaScript to show its projects.</p></noscript>
+
+  <footer class="site-footer mono">
+    <span>© <span id="year"></span> Sharvani SP</span>
+    <span id="footer-coords"></span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/pixel-name.js"></script>
   <script src="js/cursor.js"></script>
 </body>
 </html>

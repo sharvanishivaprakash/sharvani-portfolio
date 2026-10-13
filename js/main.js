@@ -1,306 +1,209 @@
-/* Renders pages from window.SITE (js/content.js) and wires up small interactions. */
+/*
+  Renders the content from js/content.js into the page.
+  index.html  → work grid, collage, playground, contact
+  project.html?p=<slug> → one case study (placeholder until you write it)
+*/
 (function () {
   const S = window.SITE;
-  const page = document.body.dataset.page;
   const $ = (sel, root = document) => root.querySelector(sel);
   const esc = (s) =>
-    String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const pad = (n) => String(n).padStart(2, "0");
+  const isPlaceholder = (s) => !s || /^\[.*\]$/.test(String(s).trim());
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Placeholder art, or the real image once `src` is set in content.js.
-  function art(src, tone, label, alt) {
-    if (src) return `<img class="cover-img" src="${esc(src)}" alt="${esc(alt || "")}" loading="lazy">`;
-    return `<div class="ph tone-${esc(tone || "indigo")}" role="img" aria-label="Placeholder image"><span>${esc(label)}</span></div>`;
+  // A real image if one is set, otherwise a labelled placeholder box.
+  function media(image, alt, label, tint) {
+    if (image) return `<img src="${esc(image)}" alt="${esc(alt)}" loading="lazy">`;
+    return `<div class="ph tint-${tint}" role="img" aria-label="Placeholder image: ${esc(label)}">[ ${esc(label)} ]</div>`;
   }
 
-  /* ---------- Footer (shared) ---------- */
-  const footer = $("#footer");
-  if (footer) {
-    footer.innerHTML = `
-      <div class="wrap">
-        <p class="footer-hello">Have an idea, a project or a question?<br><a href="mailto:${esc(S.email)}">Say hello.</a></p>
-        <div class="footer-meta">
-          <ul>${S.links.map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`).join("")}</ul>
-          <span>© ${new Date().getFullYear()} ${esc(S.name)}</span>
-        </div>
-      </div>`;
+  function metaList(m) {
+    const rows = [["Type", m.type], ["Discipline", m.discipline], ["Year", m.year], ["Team", m.team]];
+    return rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("");
   }
+
+  /* ---------- Shared bits ---------- */
+
+  const year = $("#year");
+  if (year) year.textContent = new Date().getFullYear();
+  const fc = $("#footer-coords");
+  if (fc) fc.textContent = S.coordinates;
+
+  const clock = $("#clock");
+  if (clock) {
+    const tick = () => {
+      const opts = { hour: "2-digit", minute: "2-digit", hour12: false };
+      if (S.timezone) opts.timeZone = S.timezone;
+      let t;
+      try { t = new Intl.DateTimeFormat("en-GB", opts).format(new Date()); }
+      catch (e) { t = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()); }
+      clock.textContent = `${S.location} · ${t}`;
+    };
+    tick();
+    setInterval(tick, 30000);
+  }
+
+  const bar = $(".nav-bar");
+  if (bar) {
+    const onScroll = () => bar.classList.toggle("is-scrolled", scrollY > 8);
+    onScroll();
+    addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+
+  const page = document.body.dataset.page;
+  if (page === "home") renderHome();
+  if (page === "project") renderProject();
 
   /* ---------- Home ---------- */
-  if (page === "home") {
-    $("#intro").textContent = S.intro;
 
-    $("#project-list").innerHTML = S.projects
-      .map(
-        (p) => `
-        <li class="project-row">
-          <a href="project.html?p=${encodeURIComponent(p.slug)}" data-cursor="view" data-preview="${esc(p.slug)}">
-            <span class="title">${esc(p.title)}</span>
-            <span class="thumb">${art(p.cover, p.tone, "Cover image", p.title)}</span>
-            <p class="summary">${esc(p.summary)}</p>
-            <span class="meta"><span>${esc(p.discipline)}</span><span>${esc(p.year)}</span></span>
+  function renderHome() {
+    // Statement: keep the words exactly, put the second half in italic.
+    const st = $("#statement");
+    const parts = S.statement.split(" — ");
+    st.innerHTML = parts.length === 2 ? `${esc(parts[0])} — <em>${esc(parts[1])}</em>` : esc(S.statement);
+
+    $("#coords").textContent = S.coordinates;
+    const doodle = $("#doodle");
+    if (S.doodle) { doodle.src = S.doodle.src; doodle.alt = S.doodle.alt; }
+
+    // Work
+    $("#work-grid").innerHTML = S.projects
+      .map((p, i) => `
+        <article class="project${p.size === "large" ? " is-large" : ""}">
+          <a class="project-link" href="project.html?p=${encodeURIComponent(p.slug)}" data-cursor="view" data-cursor-label="Open">
+            <div class="project-media">
+              <span class="mono project-num">${pad(i + 1)}</span>
+              ${media(p.image, p.title, `${p.title} cover image`, (i % 4) + 1)}
+            </div>
+            <div class="project-body">
+              <h3>${esc(p.title)}</h3>
+              <span class="mono project-open">Open <span class="arrow" aria-hidden="true">→</span></span>
+              <p class="project-summary">${esc(p.summary)}</p>
+              <dl class="mono project-meta">${metaList(p.meta)}</dl>
+            </div>
           </a>
-        </li>`
-      )
+        </article>`)
       .join("");
 
-    $("#home-side").innerHTML = S.sideProjects
-      .slice(0, 4)
-      .map((sp) => sideCard(sp))
+    // About
+    $("#about-intro").textContent = S.about.intro;
+    const shapes = ["", "is-tall", "", "is-wide", "is-tall", "", "is-wide"];
+    $("#collage").innerHTML = S.about.collage
+      .map((c, i) => `
+        <li class="polaroid ${shapes[i % shapes.length]}">
+          <button class="polaroid-card" type="button" aria-expanded="false">
+            ${media(c.image, c.caption, `Photo: ${c.caption}`, (i % 4) + 1)}
+            <span class="polaroid-caption">${esc(c.caption)}</span>
+          </button>
+          <span class="polaroid-note">${esc(c.note)}</span>
+        </li>`)
       .join("");
-
-    projectPreview();
-    heroDots();
-  }
-
-  /* ---------- Side projects ---------- */
-  if (page === "side") {
-    $("#side-grid").innerHTML = S.sideProjects.map((sp) => sideCard(sp)).join("");
-  }
-
-  function sideCard(sp) {
-    const external = /^https?:/.test(sp.href);
-    return `
-      <a class="side-card" href="${esc(sp.href)}" data-cursor="view" data-cursor-label="${external ? "Open" : "View"}"${
-        external ? ' target="_blank" rel="noopener"' : ""
-      }>
-        <div class="art">${art(sp.image, sp.tone, "Image", sp.title)}</div>
-        <h3>${esc(sp.title)}</h3>
-        <div class="kind"><span>${esc(sp.kind)}</span><span>${esc(sp.year)}</span></div>
-        <p>${esc(sp.note)}</p>
-      </a>`;
-  }
-
-  /* ---------- Project detail ---------- */
-  if (page === "project") {
-    const slug = new URLSearchParams(location.search).get("p");
-    const i = Math.max(0, S.projects.findIndex((p) => p.slug === slug));
-    const p = S.projects[i];
-    const next = S.projects[(i + 1) % S.projects.length];
-    document.title = `${p.title} · ${S.name}`;
-
-    $("#project").innerHTML = `
-      <section class="project-hero">
-        <h1 class="project-title reveal">${esc(p.title)}</h1>
-        <ul class="tags reveal" style="--i:1">${(p.tags || []).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-        <p class="project-started reveal" style="--i:2">Started this project in ${esc(p.year)}</p>
-        <div class="project-cover reveal" style="--i:3">${art(p.cover, p.tone, "Hero image 16:9", p.title)}</div>
-      </section>
-      <section class="overview">
-        <h2>Overview</h2>
-        <div>
-          <p class="project-summary">${esc(p.summary)}</p>
-          <dl class="facts">
-            <div><dt>Year</dt><dd>${esc(p.year)}</dd></div>
-            <div><dt>Discipline</dt><dd>${esc(p.discipline)}</dd></div>
-            <div><dt>Role</dt><dd>${esc(p.role)}</dd></div>
-            <div><dt>Duration</dt><dd>${esc(p.duration)}</dd></div>
-            <div><dt>Team</dt><dd>${esc(p.team)}</dd></div>
-          </dl>
-          <div class="project-actions">
-            ${p.link ? `<a class="pill pill-solid" href="${esc(p.link)}" target="_blank" rel="noopener"><span class="dot"></span>Visit project</a>` : ""}
-            <a class="pill" href="index.html#work">Back to projects</a>
-          </div>
-        </div>
-      </section>
-      <div class="story">
-        ${p.sections
-          .map(
-            (s, k) => `
-          <section class="story-block">
-            <h2>${esc(s.heading)}</h2>
-            <div><p>${esc(s.body)}</p></div>
-          </section>
-          ${p.images[k] !== undefined ? `<div class="story-img">${art(p.images[k], p.tone, "Process image", p.title)}</div>` : ""}`
-          )
-          .join("")}
-      </div>
-      <a class="next-project" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
-        <div>
-          <small>Next project</small>
-          <span class="title">${esc(next.title)}</span>
-        </div>
-        <div class="next-thumb">${art(next.cover, next.tone, "Cover image", next.title)}</div>
-      </a>`;
-  }
-
-  /* ---------- About ---------- */
-  if (page === "about") {
-    const a = S.about;
-    $("#portrait").innerHTML = art(a.portrait, "kumkum", "Portrait photo", `Portrait of ${S.name}`);
-    $("#about-body").innerHTML = a.paragraphs.map((t, k) => `<p class="${k === 0 ? "about-lead" : ""}">${esc(t)}</p>`).join("");
-    $("#interests").innerHTML = a.interests.map((t) => `<li>${esc(t)}</li>`).join("");
-    $("#cv").innerHTML = a.experience
-      .map((e) => `<li><span class="what">${esc(e.what)}</span><span class="where">${esc(e.where)}</span><span class="when">${esc(e.when)}</span></li>`)
-      .join("");
-    $("#about-email").href = `mailto:${S.email}`;
-  }
-
-  /* ---------- Kolam: a looping line drawn around a grid of dots ---------- */
-  document.querySelectorAll("svg.kolam").forEach(drawKolam);
-  function drawKolam(svg) {
-    // Four-petal rose curve (r = cos 2θ) weaving between four dots, like a simple pulli kolam.
-    const pts = [];
-    for (let t = 0; t <= Math.PI * 2 + 0.001; t += Math.PI / 90) {
-      const r = 44 * Math.cos(2 * t);
-      pts.push(`${(50 + r * Math.cos(t)).toFixed(2)},${(50 + r * Math.sin(t)).toFixed(2)}`);
-    }
-    const dots = [[30, 30], [70, 30], [30, 70], [70, 70], [50, 50]]
-      .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.2"/>`)
-      .join("");
-    svg.innerHTML = `<path d="M${pts.join("L")}"/>${dots}`;
-    const path = svg.querySelector("path");
-    svg.style.setProperty("--len", Math.ceil(path.getTotalLength()));
-  }
-
-  /* ---------- Hide header on scroll down, show on scroll up ---------- */
-  const header = $(".site-header");
-  let lastY = scrollY;
-  addEventListener(
-    "scroll",
-    () => {
-      const y = scrollY;
-      header.classList.toggle("is-hidden", y > lastY && y > 200);
-      lastY = y;
-    },
-    { passive: true }
-  );
-
-  /* ---------- Floating project preview on desktop ---------- */
-  function projectPreview() {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    const box = document.createElement("div");
-    box.className = "preview";
-    box.setAttribute("aria-hidden", "true");
-    box.innerHTML = S.projects
-      .map((p) => `<div data-slug="${esc(p.slug)}" style="opacity:0">${art(p.cover, p.tone, "Cover image", "")}</div>`)
-      .join("");
-    document.body.appendChild(box);
-
-    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, raf = null;
-    const loop = () => {
-      cx += (x - cx) * (reduceMotion ? 1 : 0.12);
-      cy += (y - cy) * (reduceMotion ? 1 : 0.12);
-      const tilt = Math.max(-6, Math.min(6, (x - cx) * 0.05));
-      box.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%) rotate(${tilt}deg) scale(${box.classList.contains("is-on") ? 1 : 0.85})`;
-      raf = requestAnimationFrame(loop);
-    };
-
-    document.querySelectorAll("[data-preview]").forEach((a) => {
-      a.addEventListener("mouseenter", () => {
-        box.querySelectorAll("[data-slug]").forEach((el) => (el.style.opacity = el.dataset.slug === a.dataset.preview ? 1 : 0));
-        box.classList.add("is-on");
-        if (!raf) loop();
+    // Tap / Enter shows the note; one at a time.
+    const cards = document.querySelectorAll(".polaroid");
+    cards.forEach((li) => {
+      const btn = li.querySelector(".polaroid-card");
+      btn.addEventListener("click", () => {
+        const open = !li.classList.contains("is-open");
+        cards.forEach((o) => { o.classList.remove("is-open"); o.querySelector(".polaroid-card").setAttribute("aria-expanded", "false"); });
+        li.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", String(open));
       });
-      a.addEventListener("mouseleave", () => box.classList.remove("is-on"));
     });
-    addEventListener("mousemove", (e) => { x = e.clientX + 40; y = e.clientY; }, { passive: true });
-  }
 
-  /* ---------- Hero dot grid that swells near the pointer ---------- */
-  function heroDots() {
-    const canvas = $(".hero-dots");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    const gap = 26;
-    let w, h, dpr, mx = -999, my = -999, active = false;
+    // Playground
+    $("#play-grid").innerHTML = S.playground
+      .map((it, i) => {
+        const inner = `
+          <div style="--ratio:${Number(it.ratio) || 1}">${media(it.image, it.title, `${it.kind}`, ((i + 2) % 4) + 1)}</div>
+          <div class="mono play-cap"><span>${esc(it.title)}</span><span class="kind">${esc(it.kind)}</span></div>`;
+        return `<li class="play-item">${
+          it.href ? `<a class="play-link" href="${esc(it.href)}" data-cursor="view" data-cursor-label="Look">${inner}</a>` : `<div class="play-link">${inner}</div>`
+        }</li>`;
+      })
+      .join("");
 
-    const resize = () => {
-      dpr = Math.min(devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw();
+    // Contact
+    const toast = $("#toast");
+    let toastTimer;
+    const say = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add("is-on");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("is-on"), 2600);
     };
 
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let y = gap / 2; y < h; y += gap) {
-        for (let x = gap / 2; x < w; x += gap) {
-          const d = Math.hypot(x - mx, y - my);
-          const k = Math.max(0, 1 - d / 160);
-          ctx.beginPath();
-          ctx.arc(x, y, 1.1 + k * 2.6, 0, Math.PI * 2);
-          ctx.fillStyle = k > 0 ? `rgba(179, 54, 91, ${0.18 + k * 0.5})` : "rgba(35, 33, 58, 0.13)";
-          ctx.fill();
-        }
-      }
+    $("#email-text").textContent = S.email;
+    const hello = $("#say-hello");
+    if (isPlaceholder(S.email)) {
+      hello.addEventListener("click", (e) => { e.preventDefault(); say("Email coming soon. Add it in js/content.js."); });
+    } else {
+      hello.href = `mailto:${S.email}`;
     }
-
-    const hero = canvas.parentElement;
-    hero.addEventListener("pointermove", (e) => {
-      const r = canvas.getBoundingClientRect();
-      mx = e.clientX - r.left;
-      my = e.clientY - r.top;
-      if (!active) {
-        active = true;
-        requestAnimationFrame(() => { draw(); active = false; });
-      }
+    $("#copy-email").addEventListener("click", async () => {
+      if (isPlaceholder(S.email)) return say("No email yet. Add it in js/content.js.");
+      try { await navigator.clipboard.writeText(S.email); say("Copied. Talk soon!"); }
+      catch (e) { say(S.email); }
     });
-    hero.addEventListener("pointerleave", () => { mx = my = -999; draw(); });
-    addEventListener("resize", resize);
-    resize();
+
+    $("#socials").innerHTML = S.links
+      .map((l) => {
+        const ext = /^https?:/.test(l.href);
+        return `<li><a href="${esc(l.href)}"${ext ? ' target="_blank" rel="noopener"' : ""}>${esc(l.label)}</a></li>`;
+      })
+      .join("");
+    document.querySelectorAll("#socials a").forEach((a) => {
+      if (a.getAttribute("href") === "#") a.addEventListener("click", (e) => { e.preventDefault(); say("Link coming soon."); });
+    });
+
+    // Active nav item follows the section in view.
+    const links = document.querySelectorAll(".nav a[data-section]");
+    const sections = [...links].map((a) => document.getElementById(a.dataset.section));
+    const setActive = () => {
+      const y = scrollY + innerHeight * 0.35;
+      let current = null;
+      sections.forEach((s) => { if (s && s.offsetTop <= y) current = s.id; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) current = "contact";
+      links.forEach((a) => {
+        const on = a.dataset.section === current;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+      });
+    };
+    setActive();
+    addEventListener("scroll", setActive, { passive: true });
+    addEventListener("resize", setActive);
   }
 
-  /* ---------- Coordinates pin in the header ---------- */
-  const coords = $(".coords");
-  if (coords) coords.textContent = S.coordinates;
+  /* ---------- Case study ---------- */
 
-  /* ---------- Page transitions ----------
-     A panel sweeps up over the page with the destination's name and a kolam being drawn,
-     then sweeps away on the next page. Plays the part of the reference's transition films. */
-  const veil = document.createElement("div");
-  veil.className = "veil";
-  veil.setAttribute("aria-hidden", "true");
-  veil.innerHTML = `<div class="veil-inner"><svg class="kolam" viewBox="0 0 100 100"></svg><span class="veil-label"></span></div>`;
-  document.body.appendChild(veil);
-  drawKolam(veil.querySelector("svg"));
+  function renderProject() {
+    const slug = new URLSearchParams(location.search).get("p");
+    const idx = Math.max(0, S.projects.findIndex((p) => p.slug === slug));
+    const p = S.projects[idx];
+    const next = S.projects[(idx + 1) % S.projects.length];
+    document.title = `${p.title} — ${S.name}`;
 
-  const pageName = (url) => {
-    const f = url.pathname.split("/").pop() || "index.html";
-    if (f.startsWith("side")) return "Side projects";
-    if (f.startsWith("about")) return "About";
-    if (f.startsWith("project")) {
-      const p = S.projects.find((x) => x.slug === url.searchParams.get("p"));
-      return p ? p.title : "Project";
-    }
-    return url.hash === "#work" ? "Projects" : "Home";
-  };
+    const blocks = ["Context", "Problem", "Process", "Outcome"]
+      .map((h) => `
+        <section class="case-block">
+          <h2>${h}</h2>
+          <p>[Placeholder] Write the ${h.toLowerCase()} for ${esc(p.title)} here.</p>
+        </section>`)
+      .join("");
 
-  try {
-    const from = sessionStorage.getItem("veil");
-    if (from && !reduceMotion) {
-      veil.querySelector(".veil-label").textContent = from;
-      veil.classList.add("is-covering", "no-anim");
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        veil.classList.remove("no-anim");
-        veil.classList.replace("is-covering", "is-leaving");
-      }));
-    }
-    sessionStorage.removeItem("veil");
-  } catch (e) {}
-
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("a[href]");
-    if (!a || reduceMotion || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (a.target === "_blank" || a.hasAttribute("download")) return;
-    const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin || url.protocol === "mailto:") return;
-    const samePage = url.pathname === location.pathname && url.search === location.search;
-    if (samePage) return; // in-page anchors just scroll
-    e.preventDefault();
-    const label = pageName(url);
-    veil.querySelector(".veil-label").textContent = label;
-    veil.classList.remove("is-leaving");
-    veil.classList.add("is-covering");
-    try { sessionStorage.setItem("veil", label); } catch (err) {}
-    setTimeout(() => (location.href = url.href), 650);
-  });
-  // Coming back via the back button restores a covered page from cache; uncover it.
-  addEventListener("pageshow", (e) => { if (e.persisted) veil.classList.remove("is-covering"); });
-
-  /* ---------- Entrance ---------- */
-  requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add("is-ready")));
+    $("#case").innerHTML = `
+      <a class="mono case-back" href="index.html#work">← All work</a>
+      <span class="mono case-num">${pad(idx + 1)} / ${pad(S.projects.length)}</span>
+      <h1>${esc(p.title)}</h1>
+      <p class="case-summary">${esc(p.summary)}</p>
+      <dl class="mono case-meta">${metaList(p.meta)}</dl>
+      <figure class="case-hero">${media(p.image, p.title, `${p.title} hero image`, (idx % 4) + 1)}</figure>
+      ${blocks}
+      <a class="case-next" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
+        <span class="mono">Next project</span><strong>${esc(next.title)} →</strong>
+      </a>`;
+  }
 })();
