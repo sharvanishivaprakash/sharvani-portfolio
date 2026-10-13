@@ -3,7 +3,7 @@
   Like the reference, the pupil glances toward where the pointer is heading and settles back
   to the centre when you stop. It blinks now and then, and on click.
   States (set on <body>):
-    cursor-link  links and buttons: eye grows, iris turns kumkum
+    cursor-link  links and buttons: eye grows, iris turns sage
     cursor-view  anything with [data-cursor="view"]: eye fills and shows a label
                  (data-cursor-label overrides the default "View")
     cursor-text  paragraphs and headings: eye shrinks so it doesn't cover the words

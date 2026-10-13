@@ -3,33 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Project — Sharvani</title>
-  <meta name="description" content="A project by Sharvani.">
-  <meta name="theme-color" content="#f2eee6">
+  <title>Project — Sharvani SP</title>
+  <meta name="description" content="A case study by Sharvani SP, Interaction Designer.">
+  <meta name="theme-color" content="#fdfdfb">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Reenie+Beanie&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="project">
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="wordmark" href="index.html" aria-label="Sharvani, home">Sharvani<span class="bindi" aria-hidden="true"></span></a>
-      <span class="coords" aria-label="Location coordinates"></span>
-      <nav class="nav" aria-label="Main">
-        <a href="index.html#work" aria-current="page">Projects</a>
-        <a href="side-projects.html">Side projects</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
+  <a class="skip" href="#case">Skip to content</a>
+
+  <header class="nav-bar is-scrolled">
+    <a class="wordmark" href="index.html">Sharvani SP</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="index.html#work" class="is-active" aria-current="true">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#playground">Playground</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <span class="mono nav-meta" id="clock" aria-hidden="true"></span>
   </header>
-  <main id="main">
-    <article class="wrap" id="project"></article>
+
+  <main>
+    <!-- Filled from js/content.js. Case study text is placeholder until you write it. -->
+    <article class="case" id="case"></article>
   </main>
-  <footer class="site-footer" id="footer"></footer>
-  <noscript><p class="wrap">This site needs JavaScript to show its projects.</p></noscript>
+
+  <footer class="site-footer mono">
+    <span>© <span id="year"></span> Sharvani SP</span>
+    <span id="footer-coords"></span>
+    <a href="index.html">Home ↑</a>
+  </footer>
+
+  <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cursor.js"></script>
