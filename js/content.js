@@ -7,10 +7,12 @@
 window.SITE = {
   name: "Sharvani SP",
   role: "interaction designer",
-  statement: "Interaction Designer — making experiences understandable, engaging, and humane.",
+  descriptor: "A UX & Interdisciplinary Designer",
+  statement: "Turning human insights into thoughtful interactions and ideas into experiences.",
 
-  // Your hero doodle. Swap the file to replace it.
-  doodle: { src: "assets/doodle.webp", alt: "Doodle of Sharvani resting her chin on her hands, sticking her tongue out" },
+  // Hero character. Its pupils are separate layers (assets/character/iris-*.png) so they can follow the cursor;
+  // swapping in a new picture means preparing those layers again.
+  character: { alt: "Illustrated portrait of Sharvani with wavy hair and glasses" },
 
   // Shown small in the nav and footer. Replace with your city's coordinates.
   coordinates: "[00.0000°N 00.0000°E]",

@@ -1,7 +1,8 @@
 /*
-  Hero name: "Sharvani SP" rasterises into big pixels, swaps to "interaction designer",
-  then sharpens again. Hover or focus on desktop, tap on touch. Leaving swaps it back.
-  The real text is always in the DOM (and an .sr-only sentence for screen readers);
+  Hero name: "Sharvani SP" goes through a short, fine raster and resolves into
+  "Interaction Designer" (same size, weight and colour). Hover or keyboard focus on desktop,
+  tap on touch. Leaving brings the name back.
+  The real text is always in the DOM (plus an .sr-only sentence for screen readers);
   the canvas only draws while the swap is happening.
   Reduced motion gets a plain crossfade instead.
 */
@@ -14,87 +15,97 @@
   const ctx = canvas.getContext("2d");
   const off = document.createElement("canvas");
   const octx = off.getContext("2d", { willReadFrequently: true });
+  const blur = document.getElementById("round-blur");
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = matchMedia("(hover: hover)").matches;
-  const DURATION = 560; // ms for the whole swap
+  const DURATION = 760; // ms for the whole swap
 
   let showingB = false; // state the DOM text is in when idle
-  let anim = null;      // { from, to, t0, p }
+  let anim = null;      // { to, t0, p }
 
-  // Size "interaction designer" so it spans the same width as the name.
-  function fit() {
-    b.style.setProperty("--fit", "1em");
-    const wa = a.getBoundingClientRect().width;
-    const wb = b.getBoundingClientRect().width;
-    if (wa && wb) b.style.setProperty("--fit", (wa / wb).toFixed(4) + "em");
+  // The SVG filter that rounds the pixel corners scales with the type.
+  function tune() {
+    const fs = parseFloat(getComputedStyle(h1).fontSize);
+    if (blur) blur.setAttribute("stdDeviation", Math.max(0.8, fs * 0.014).toFixed(2));
   }
 
   function sizeCanvas() {
     const r = h1.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(r.width * dpr);
-    canvas.height = Math.round(r.height * dpr);
+    const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     return { r, dpr };
   }
 
-  // Draw one text span into the small offscreen canvas at 1/block scale, then blow it up.
-  function draw(span, block) {
+  // Draw one state (each line span) into a small offscreen canvas at 1/block scale.
+  function drawState(state, block, alpha) {
     const { r, dpr } = sizeCanvas();
-    const sr = span.getBoundingClientRect();
-    const cs = getComputedStyle(span);
-    const fontSize = parseFloat(cs.fontSize);
-    const lineH = parseFloat(cs.lineHeight) || fontSize;
     const scale = dpr / block;
-
     off.width = Math.max(1, Math.ceil(canvas.width / block));
     off.height = Math.max(1, Math.ceil(canvas.height / block));
     octx.clearRect(0, 0, off.width, off.height);
     octx.save();
     octx.scale(scale, scale);
-    octx.font = `${cs.fontWeight} ${fontSize}px ${cs.fontFamily}`;
-    if ("letterSpacing" in octx) octx.letterSpacing = cs.letterSpacing;
-    octx.fillStyle = cs.color;
-    octx.textBaseline = "alphabetic";
-    const m = octx.measureText(span.textContent);
-    const asc = m.fontBoundingBoxAscent || fontSize * 0.8;
-    const desc = m.fontBoundingBoxDescent || fontSize * 0.2;
-    // Same baseline maths CSS uses for a single line box
-    const baseline = sr.top - r.top + (lineH - (asc + desc)) / 2 + asc;
-    octx.fillText(span.textContent, sr.left - r.left, baseline);
+    state.querySelectorAll(".ln").forEach((ln) => {
+      const cs = getComputedStyle(ln);
+      const fontSize = parseFloat(cs.fontSize);
+      const lineH = parseFloat(cs.lineHeight) || fontSize;
+      const sr = ln.getBoundingClientRect();
+      const text = cs.textTransform === "uppercase" ? ln.textContent.toUpperCase() : ln.textContent;
+      octx.font = `${cs.fontWeight} ${fontSize}px ${cs.fontFamily}`;
+      if ("letterSpacing" in octx) octx.letterSpacing = cs.letterSpacing === "normal" ? "0px" : cs.letterSpacing;
+      octx.fillStyle = cs.color;
+      octx.textBaseline = "alphabetic";
+      const m = octx.measureText(text);
+      const asc = m.fontBoundingBoxAscent || fontSize * 0.8;
+      const desc = m.fontBoundingBoxDescent || fontSize * 0.2;
+      // Same baseline maths CSS uses for a line box
+      const baseline = sr.top - r.top + (sr.height - (asc + desc)) / 2 + asc;
+      octx.fillText(text, sr.left - r.left, baseline);
+    });
     octx.restore();
 
-    // Hard-edge the alpha so the blocks read as pixels, not blur.
+    // Hard-edge the alpha so the blocks read as a clean raster, not blur.
     if (block > 1.5) {
       const img = octx.getImageData(0, 0, off.width, off.height);
       const d = img.data;
-      for (let i = 3; i < d.length; i += 4) d[i] = d[i] > 90 ? 255 : 0;
+      for (let i = 3; i < d.length; i += 4) d[i] = d[i] > 110 ? 255 : 0;
       octx.putImageData(img, 0, 0);
     }
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.imageSmoothingEnabled = false;
+    ctx.globalAlpha = alpha;
     ctx.drawImage(off, 0, 0, off.width * block, off.height * block);
+    ctx.globalAlpha = 1;
   }
+
+  const smooth = (k) => k * k * (3 - 2 * k);
 
   function frame(now) {
     if (!anim) return;
-    let p = (now - anim.t0) / DURATION;
+    const p = (now - anim.t0) / DURATION;
     if (p >= 1) {
       anim = null;
       h1.classList.remove("is-pixelating");
       h1.classList.toggle("is-b", showingB);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       return;
     }
     anim.p = p;
     const fontSize = parseFloat(getComputedStyle(h1).fontSize);
-    const maxBlock = Math.max(6, fontSize / 7) * Math.min(window.devicePixelRatio || 1, 2);
-    // 0 → 0.5: source grows blocky; 0.5 → 1: target sharpens
-    const half = p < 0.5;
-    const k = half ? p / 0.5 : (1 - p) / 0.5;
-    const eased = k * k * (3 - 2 * k);
-    const block = Math.max(1, Math.round(1 + eased * (maxBlock - 1)));
-    draw(half ? (anim.to ? a : b) : (anim.to ? b : a), block);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // A fine raster: the peak block is a small fraction of the letter height.
+    const maxBlock = Math.max(2, (fontSize / 16) * dpr);
+    // Raster rises, peaks briefly at the middle, then resolves.
+    const k = smooth(1 - Math.abs(p - 0.5) * 2);
+    const block = Math.max(1, Math.round(1 + k * (maxBlock - 1)));
+    const from = anim.to ? a : b;
+    const to = anim.to ? b : a;
+    // Short crossfade around the peak so the swap never flashes.
+    const mix = smooth(Math.min(1, Math.max(0, (p - 0.38) / 0.24)));
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (mix < 1) drawState(from, block, 1 - mix);
+    if (mix > 0) drawState(to, block, mix);
     requestAnimationFrame(frame);
   }
 
@@ -106,7 +117,7 @@
     }
     if (anim) {
       if (anim.to === toB) return;
-      // Reverse mid-way from where we are.
+      // Reverse from where we are.
       const p = anim.p || 0;
       anim.to = toB;
       anim.t0 = performance.now() - (1 - p) * DURATION;
@@ -133,9 +144,7 @@
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(!showingB); }
   });
 
-  const ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  ready.then(fit);
-  fit();
+  tune();
   let rt;
-  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(fit, 120); });
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(tune, 120); });
 })();
