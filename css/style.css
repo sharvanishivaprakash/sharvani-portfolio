@@ -14,14 +14,19 @@
   --sage-ink: #52654a;         /* accent when used as text (meets contrast) */
   --sage-soft: #e7ece1;
 
-  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --serif: "Newsreader", Georgia, serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --name-color: #5d7253;       /* sage for the hero name: same hue, dark enough to read */
+
+  /* Outfit carries all supporting text; Pixelify Sans (with rounded corners) is the hero lettering only */
+  --display: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --serif: var(--display);
+  --mono: var(--display);
+  --lettering: "Pixelify Sans", "Outfit", sans-serif;
   --hand: "Reenie Beanie", "Comic Sans MS", cursive;
 
   --gutter: clamp(1rem, 4vw, 3.5rem);
   --max: 1320px;
   --nav-h: 56px;
+  --section-space: clamp(8rem, 16vw, 14rem); /* gap between sections */
   --grid-size: 40px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -54,7 +59,7 @@ button { font: inherit; color: inherit; }
 ul { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, p, figure { margin: 0; }
 
-.mono { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; text-transform: uppercase; }
+.mono { font-family: var(--mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
 .hand { font-family: var(--hand); font-size: 1.6rem; line-height: 1; color: var(--sage-ink); }
 
 .sr-only {
@@ -117,92 +122,122 @@ main { padding-top: var(--nav-h); }
 
 .section {
   max-width: var(--max); margin: 0 auto;
-  padding: clamp(5rem, 11vw, 9rem) var(--gutter) 0;
+  padding: var(--section-space) var(--gutter) 0;
 }
 
 .section-head {
   display: grid; grid-template-columns: 4rem 1fr; column-gap: 1rem; row-gap: 0.6rem;
-  align-items: baseline; margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  align-items: baseline; margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
 }
 .section-head .label, .contact > .label { color: var(--sage-ink); }
 .section-head h2 {
   font-weight: 500; font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -0.035em; line-height: 1;
 }
 .section-head .note, .section-head .about-intro { grid-column: 2; color: var(--muted); }
-.section-head .note { text-transform: none; font-size: 0.78rem; }
+.section-head .note { text-transform: none; letter-spacing: 0.01em; font-weight: 400; font-size: 0.9rem; }
 
 /* ---------- Hero ---------- */
+
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 .hero {
   position: relative;
   min-height: calc(100svh - var(--nav-h));
   max-width: var(--max); margin: 0 auto;
-  padding: clamp(5rem, 14vh, 8rem) var(--gutter) 4.5rem;
+  padding: clamp(2.5rem, 6vh, 4.5rem) var(--gutter) 5rem;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center;
 }
+.hero-stage {
+  position: relative; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 clamp(0rem, 4vw, 4rem);
+}
 
-.hero-hello { margin-bottom: 0.6rem; transform: rotate(-3deg); }
+/* Character with eyes that follow the pointer (js/character.js) */
+.character { position: relative; margin-bottom: 0.4rem; }
+.char-art { position: relative; width: clamp(150px, 15vw, 210px); }
+.char-base { width: 100%; height: auto; }
+.char-eye { position: absolute; display: block; overflow: hidden; mask-size: 100% 100%; -webkit-mask-size: 100% 100%; }
+.char-iris { position: absolute; max-width: none; will-change: transform; }
 
-.name-wrap { position: relative; display: inline-block; }
+/* "that's me", to the right with an arrow pointing back at the character */
+.char-note {
+  position: absolute; left: 100%; top: 34%; margin-left: 0.2rem;
+  display: flex; align-items: center; gap: 0.15rem;
+  font-size: 1.7rem; color: var(--ink); white-space: nowrap;
+  transform: rotate(-6deg);
+}
+.char-note svg { width: 2.4rem; height: auto; overflow: visible; }
+.char-note path { fill: none; stroke: var(--sage-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
+.hero-hello {
+  margin-bottom: 0.3rem;
+  font-size: clamp(1.9rem, 2.6vw, 2.4rem); color: var(--ink);
+  transform: rotate(-2deg);
+}
+
+/* Name / role: one grid cell holds both, so the area never changes size */
 .name {
   position: relative;
-  font-weight: 600;
-  font-size: clamp(3.4rem, 12.5vw, 11.5rem);
-  letter-spacing: -0.055em;
-  line-height: 1;
+  display: grid; place-items: center;
+  font-family: var(--lettering); font-weight: 700;
+  font-size: min(7.9vw, 7rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--name-color);
+  filter: url(#round-letters);
   cursor: default;
-  outline-offset: 10px;
-  white-space: nowrap;
+  outline-offset: 12px;
   -webkit-tap-highlight-color: transparent;
 }
-.name-a, .name-b { display: block; transition: opacity 0.12s linear; }
-/* "interaction designer" sits on top of the name, sized to the same width by JS (--fit). */
-.name-b {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: var(--fit, 0.5em); letter-spacing: -0.045em;
-  color: var(--sage-ink);
-  opacity: 0;
-}
+.name-state { grid-area: 1 / 1; white-space: nowrap; transition: opacity 0.2s linear; }
+.name-b { opacity: 0; }
 .name.is-b .name-a { opacity: 0; }
 .name.is-b .name-b { opacity: 1; }
-/* While the canvas animates, it draws both states; the real text hides underneath. */
-.name.is-pixelating .name-a, .name.is-pixelating .name-b { opacity: 0; transition: none; }
+/* While the canvas animates it draws both states; the real text hides underneath. */
+.name.is-pixelating .name-state { opacity: 0; transition: none; }
 .name-canvas {
   position: absolute; left: 0; top: 0; width: 100%; height: 100%;
   pointer-events: none; opacity: 0;
-  image-rendering: pixelated;
 }
 .name.is-pixelating .name-canvas { opacity: 1; }
-
-.name-hint {
-  position: absolute; right: 0; top: 100%; margin-top: 0.6rem;
-  color: var(--faint); text-transform: none;
-}
 .hint-tap { display: none; }
 
-/* The doodle peeks over the top right of the name */
-.doodle {
-  position: absolute;
-  right: -2%; bottom: 78%;
-  width: clamp(110px, 13vw, 180px);
-  pointer-events: none;
+.descriptor {
+  margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
+  font-weight: 500; font-size: clamp(1.15rem, 1.8vw, 1.45rem); letter-spacing: -0.01em;
 }
-.doodle img { width: 100%; transform-origin: 50% 90%; transition: transform 0.5s var(--ease); }
-.name-wrap:hover .doodle img { transform: rotate(-4deg) translateY(-4px); }
-.doodle figcaption {
-  position: absolute; right: 100%; top: 22%; margin-right: 0.2rem;
-  font-size: 1.5rem; transform: rotate(-8deg); white-space: nowrap;
+.statement {
+  margin-top: 0.7rem; max-width: 38ch;
+  font-weight: 300; font-size: clamp(1rem, 1.35vw, 1.15rem); line-height: 1.6; color: var(--muted);
 }
 
-.statement {
-  margin-top: clamp(2.6rem, 7vh, 4rem);
-  max-width: 40ch;
-  font-family: var(--serif); font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.35;
+/* Stickers: a few small handmade marks around the edges */
+.sticker { position: absolute; transition: transform 0.35s var(--ease); }
+.sticker:hover { transform: rotate(var(--hr, 0deg)) translateY(-3px); }
+.sticker-tag {
+  --hr: -4deg;
+  left: 2%; top: 30%; transform: rotate(-7deg);
+  background: var(--sage-soft); color: var(--sage-ink);
+  padding: 0.35rem 0.7rem 0.3rem; border: 1px solid rgba(82, 101, 74, 0.18);
+  border-radius: 2px;
 }
-.statement em { font-style: italic; color: var(--sage-ink); }
+.sticker-star { --hr: 22deg; right: 6%; top: 8%; width: 30px; transform: rotate(8deg); }
+.sticker-star path { fill: var(--sage); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
+.sticker-note {
+  --hr: 2deg;
+  left: 9%; top: 58%; transform: rotate(-3deg);
+  font-size: 1.45rem; color: var(--muted);
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.sticker-note svg { width: 3.2rem; margin: 0.1rem 0 0 2.2rem; overflow: visible; }
+.sticker-note path, .sticker-squiggle path {
+  fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.sticker-squiggle { --hr: -6deg; right: 4%; bottom: 16%; width: 64px; transform: rotate(-12deg); }
+.sticker-squiggle path { stroke: var(--sage-ink); stroke-width: 2.4; }
 
 .hero-foot {
   position: absolute; left: var(--gutter); right: var(--gutter); bottom: 1.5rem;
@@ -210,7 +245,7 @@ main { padding-top: var(--nav-h); }
   color: var(--faint);
 }
 .scroll-cue { text-decoration: none; color: var(--muted); display: inline-flex; gap: 0.4rem; }
-.scroll-cue span { display: inline-block; animation: nudge 2.4s var(--ease) infinite; }
+.scroll-cue span { display: inline-block; animation: nudge 2.4s var(--ease) 1.2s 3; }
 .scroll-cue:hover { color: var(--ink); }
 @keyframes nudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(4px); } }
 
@@ -382,15 +417,15 @@ a.play-link:hover .play-cap, a.play-link:focus-visible .play-cap { color: var(--
 
 .contact {
   text-align: center; display: flex; flex-direction: column; align-items: center;
-  padding-bottom: clamp(5rem, 10vw, 8rem);
+  padding-bottom: var(--section-space);
 }
-.contact > .label { margin-bottom: 1.5rem; }
+.contact > .label { margin-bottom: 2rem; }
 
 .say-hello {
   position: relative; display: inline-grid; grid-template-columns: auto auto; align-items: center;
   column-gap: 0.12em;
   text-decoration: none;
-  font-weight: 500; font-size: clamp(3rem, 11vw, 9.5rem); letter-spacing: -0.05em; line-height: 1.05;
+  font-weight: 600; font-size: clamp(3.6rem, 15vw, 13.5rem); letter-spacing: -0.045em; line-height: 1.02;
   padding: 0 0.05em 0.08em;
 }
 /* the two phrases stack in one cell and swap by sliding inside a clipped window */
@@ -482,7 +517,7 @@ a.play-link:hover .play-cap, a.play-link:focus-visible .play-cap { color: var(--
 html.has-cursor, html.has-cursor * { cursor: none !important; }
 
 .cursor-eye {
-  --size: 52px;
+  --size: 32px;
   position: fixed; top: 0; left: 0; z-index: 9999;
   width: var(--size); height: var(--size);
   margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
@@ -508,14 +543,14 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 }
 .cursor-eye.is-blinking svg { transform: scaleY(0.08); }
 
-body.cursor-link .cursor-eye { --size: 64px; border-color: var(--sage-ink); }
+body.cursor-link .cursor-eye { --size: 40px; border-color: var(--sage-ink); }
 body.cursor-link .cursor-eye .iris { stroke: var(--sage-ink); }
 body.cursor-link .cursor-eye .pupil { fill: var(--sage-ink); }
 
-body.cursor-view .cursor-eye { --size: 84px; background: var(--sage); border-color: var(--sage); color: #fff; }
+body.cursor-view .cursor-eye { --size: 58px; background: var(--sage); border-color: var(--sage); color: #fff; }
 body.cursor-view .cursor-eye .label { opacity: 1; transform: none; }
 
-body.cursor-text .cursor-eye { --size: 34px; }
+body.cursor-text .cursor-eye { --size: 24px; }
 body.cursor-down .cursor-eye svg { transform: scaleY(0.08); }
 body.cursor-out .cursor-eye { opacity: 0; }
 
@@ -571,11 +606,22 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .nav { gap: 0.85rem; }
   .nav a { font-size: 0.82rem; }
 
-  .name { font-size: clamp(2.6rem, 14.5vw, 4.2rem); }
-  .name-hint { right: 50%; transform: translateX(50%); }
-  .doodle { width: 104px; right: -3%; bottom: 84%; }
-  .doodle figcaption { display: none; }
-  .hero-hello { font-size: 1.5rem; align-self: flex-start; margin: 0 0 1rem 8%; }
+  :root { --section-space: 6.5rem; }
+  /* Both states break onto two lines on a phone, so they still share one size */
+  .name { font-size: 13.6vw; line-height: 1.04; }
+  .name .ln { display: block; }
+  .char-art { width: 132px; }
+  .char-note { font-size: 1.35rem; top: 30%; }
+  .char-note svg { width: 1.9rem; }
+  .hero-hello { font-size: 1.75rem; }
+  .sticker-tag, .sticker-squiggle { display: none; }
+  .sticker-star { left: 8%; right: auto; top: 2%; width: 24px; }
+  /* the note drops below the statement and points back up at the name */
+  .sticker-note {
+    position: relative; order: 10; left: auto; top: auto; margin-top: 2.2rem;
+    flex-direction: row; align-items: center; gap: 0.3rem; font-size: 1.3rem;
+  }
+  .sticker-note svg { width: 2rem; margin: 0; transform: rotate(-35deg); }
   .hero-foot #coords { display: none; }
   .hero-foot { justify-content: center; }
 
@@ -603,6 +649,6 @@ body.cursor-out .cursor-eye { opacity: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
   .reveal, .is-loaded .reveal { opacity: 1; transform: none; }
-  .name-a, .name-b { transition: opacity 0.25s linear !important; }
+  .name-state { transition: opacity 0.25s linear !important; }
   .polaroid:hover, .polaroid:focus-within, .polaroid.is-open { transform: rotate(0deg); }
 }

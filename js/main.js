@@ -60,14 +60,11 @@
   /* ---------- Home ---------- */
 
   function renderHome() {
-    // Statement: keep the words exactly, put the second half in italic.
-    const st = $("#statement");
-    const parts = S.statement.split(" — ");
-    st.innerHTML = parts.length === 2 ? `${esc(parts[0])} — <em>${esc(parts[1])}</em>` : esc(S.statement);
-
+    $("#descriptor").textContent = S.descriptor;
+    $("#statement").textContent = S.statement;
     $("#coords").textContent = S.coordinates;
-    const doodle = $("#doodle");
-    if (S.doodle) { doodle.src = S.doodle.src; doodle.alt = S.doodle.alt; }
+    $("#sticker-place").textContent = S.location;
+    $("#char-base").alt = S.character.alt;
 
     // Work
     $("#work-grid").innerHTML = S.projects
