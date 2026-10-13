@@ -1,31 +1,44 @@
 /*
-  Custom cursor: a small kumkum dot with a trailing ring.
+  Custom cursor: a round eye that follows the pointer and looks the way you move.
+  Like the reference, the pupil glances toward where the pointer is heading and settles back
+  to the centre when you stop. It blinks now and then, and on click.
   States (set on <body>):
-    cursor-link  links and buttons: ring grows, dot hides
-    cursor-view  anything with [data-cursor="view"]: ring fills and shows a label
+    cursor-link  links and buttons: eye grows, iris turns kumkum
+    cursor-view  anything with [data-cursor="view"]: eye fills and shows a label
                  (data-cursor-label overrides the default "View")
-    cursor-text  paragraphs and headings: thin caret
-    cursor-down  while pressing
+    cursor-text  paragraphs and headings: eye shrinks so it doesn't cover the words
+    cursor-down  while pressing (eye closes)
   Only runs on devices with a fine pointer that can hover; touch keeps the native behaviour.
 */
 (function () {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const dot = document.createElement("div");
-  const ring = document.createElement("div");
-  const label = document.createElement("span");
-  dot.className = "cursor-dot";
-  ring.className = "cursor-ring";
-  label.className = "label";
-  dot.setAttribute("aria-hidden", "true");
-  ring.setAttribute("aria-hidden", "true");
-  ring.appendChild(label);
-  document.body.append(ring, dot);
+  const eye = document.createElement("div");
+  eye.className = "cursor-eye";
+  eye.setAttribute("aria-hidden", "true");
+  eye.innerHTML = `
+    <svg viewBox="0 0 40 26">
+      <defs><clipPath id="eye-clip"><path d="M2 13 C 10 0.5, 30 0.5, 38 13 C 30 25.5, 10 25.5, 2 13 Z"/></clipPath></defs>
+      <g clip-path="url(#eye-clip)">
+        <g class="ball">
+          <circle class="iris" cx="20" cy="13" r="8.2"/>
+          <circle class="pupil" cx="20" cy="13" r="3.6"/>
+        </g>
+      </g>
+      <path class="lid" d="M2 13 C 10 0.5, 30 0.5, 38 13 C 30 25.5, 10 25.5, 2 13 Z"/>
+    </svg>
+    <span class="label"></span>`;
+  document.body.appendChild(eye);
   document.documentElement.classList.add("has-cursor");
 
+  const ball = eye.querySelector(".ball");
+  const label = eye.querySelector(".label");
   const body = document.body;
-  let x = -100, y = -100, rx = x, ry = y;
+
+  let x = -100, y = -100; // pointer
+  let ex = x, ey = y;     // eye position (eases toward the pointer)
+  let lx = 0, ly = 0;     // where the pupil is looking, in SVG units
 
   addEventListener(
     "mousemove",
@@ -52,11 +65,34 @@
     if (view) label.textContent = view.dataset.cursorLabel || "View";
   });
 
+  // An occasional blink, every few seconds.
+  if (!reduce) {
+    (function scheduleBlink() {
+      setTimeout(() => {
+        eye.classList.add("is-blinking");
+        setTimeout(() => eye.classList.remove("is-blinking"), 140);
+        scheduleBlink();
+      }, 2500 + Math.random() * 4000);
+    })();
+  }
+
   (function loop() {
-    rx += (x - rx) * (reduce ? 1 : 0.18);
-    ry += (y - ry) * (reduce ? 1 : 0.18);
-    dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+    const ease = reduce ? 1 : 0.22;
+    const dx = x - ex;
+    const dy = y - ey;
+    ex += dx * ease;
+    ey += dy * ease;
+
+    // The gap between pointer and eye is the direction of travel: look that way.
+    const dist = Math.hypot(dx, dy);
+    const reach = Math.min(1, dist / 40);
+    const tx = dist ? (dx / dist) * 6 * reach : 0;
+    const ty = dist ? (dy / dist) * 3.2 * reach : 0;
+    lx += (tx - lx) * 0.2;
+    ly += (ty - ly) * 0.2;
+
+    eye.style.transform = `translate3d(${ex}px, ${ey}px, 0)`;
+    ball.setAttribute("transform", `translate(${lx.toFixed(2)} ${ly.toFixed(2)})`);
     requestAnimationFrame(loop);
   })();
 })();
