@@ -9,11 +9,19 @@ window.SITE = {
   coordinates: "[00.0000°N 00.0000°E]",
   location: "[Your city, India]",
   email: "[your-email@example.com]",
+  // Short labels, like the reference (BE = Behance, IG = Instagram). Set href to your profiles.
   links: [
-    { label: "Instagram", href: "#" },
+    { label: "BE", href: "#" },
     { label: "LinkedIn", href: "#" },
-    { label: "Read.cv / Resume", href: "#" }
+    { label: "IG", href: "#" },
+    { label: "CV", href: "#" }
   ],
+  role: "Multidisciplinary designer",
+  availability: "[Available for freelance work]",
+  // One sentence for the home page's "About me".
+  headline: "I'm Sharvani, a multidisciplinary designer. [Placeholder: what you love making and exploring.]",
+  // Studios, companies or institutes you've worked with or studied at.
+  companies: ["[Company]", "[Company]", "[Studio]", "[Institute]"],
   intro:
     "[Placeholder intro] Multidisciplinary designer exploring how ideas move between screens, paper, objects and people.",
 

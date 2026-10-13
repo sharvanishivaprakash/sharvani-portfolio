@@ -17,7 +17,8 @@ Everything you'll want to change lives in `js/content.js`:
 Text in `[square brackets]` is placeholder. For images, put files in `assets/` and set `cover`, `images`, `image` or `portrait` to their paths (for example `"assets/project-one/cover.jpg"`). Empty image slots show a labelled placeholder.
 
 ## Structure
-- `index.html` — home: intro, projects, a few side projects
+- `index.html` — home: your name centred, companies, about line, contact
+- `projects.html` — grid of main projects
 - `side-projects.html`, `about.html`, `project.html`
 - `css/style.css` — design tokens at the top, then components
 - `js/main.js` — renders pages from content, preview and hero interactions

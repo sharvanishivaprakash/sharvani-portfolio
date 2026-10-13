@@ -3,63 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sharvani — multidisciplinary designer</title>
-  <meta name="description" content="Portfolio of Sharvani, a multidisciplinary designer.">
-  <meta name="theme-color" content="#f2eee6">
+  <title>Sharvani • Home</title>
+  <meta name="description" content="Sharvani, a multidisciplinary designer.">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="wrap">
-      <a class="wordmark" href="index.html" aria-label="Sharvani, home">Sharvani<span class="bindi" aria-hidden="true"></span></a>
-      <span class="coords" aria-label="Location coordinates"></span>
-      <nav class="nav" aria-label="Main">
-        <a href="index.html#work" aria-current="page">Projects</a>
-        <a href="side-projects.html">Side projects</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
+    <span class="coords" aria-label="Location coordinates"></span>
+    <nav class="nav" aria-label="Main">
+      <a class="u" href="index.html" aria-current="page">Home</a>
+      <a class="u" href="projects.html">Projects</a>
+      <a class="u" href="side-projects.html">Side projects</a>
+      <a class="u" href="about.html">About</a>
+    </nav>
+    <ul class="socials" aria-label="Elsewhere"></ul>
   </header>
   <main id="main">
-    <section class="hero" aria-labelledby="hero-name">
-      <canvas class="hero-dots" aria-hidden="true"></canvas>
-      <div class="wrap">
-        <h1 class="hero-name reveal" id="hero-name">Sharvani<svg class="kolam" viewBox="0 0 100 100" aria-hidden="true"></svg></h1>
-        <p class="hero-intro reveal" style="--i:1" id="intro"></p>
-        <div class="hero-jump reveal" style="--i:2">
-          <a class="pill" href="#work"><span class="dot"></span>Projects</a>
-          <a class="pill" href="side-projects.html">Side projects</a>
-          <a class="pill" href="about.html">About me</a>
+    <section class="home-hero">
+      <div>
+        <h1 class="name reveal">Sharvani</h1>
+        <div class="hero-sub reveal" style="--i:1">
+          <span id="role"></span>
+          <a class="see-detail u" href="projects.html" data-cursor="view" data-cursor-label="Projects">See detail</a>
         </div>
       </div>
+      <span class="scroll-hint reveal" style="--i:2">Scroll</span>
     </section>
-    <hr class="kolam-rule">
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 class="section-title" id="work-title">Projects</h2>
-          <p class="section-note">Selected design work. Open any project for the full story.</p>
-        </div>
-        <ul class="project-list" id="project-list"></ul>
+    <section class="home-info" aria-label="About">
+      <div>
+        <span class="label">Companies:</span>
+        <ul class="plain-list" id="companies"></ul>
+      </div>
+      <div>
+        <span class="label">About me</span>
+        <p class="about-line" id="headline"></p>
+      </div>
+      <div class="contact">
+        <span class="label">Contact</span>
+        <div id="contact"></div>
       </div>
     </section>
-    <section class="section" aria-labelledby="side-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 class="section-title" id="side-title">Side projects</h2>
-          <p class="section-note">Experiments and things made out of curiosity. <a href="side-projects.html">See them all</a></p>
-        </div>
-        <div class="home-side side-grid" id="home-side"></div>
-      </div>
-    </section>
+    <ul class="interests" id="interests" aria-label="Interests"></ul>
   </main>
   <footer class="site-footer" id="footer"></footer>
-  <noscript><p class="wrap">This site needs JavaScript to show its projects.</p></noscript>
+  <noscript><p style="padding:1rem">This site needs JavaScript to show its projects.</p></noscript>
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cursor.js"></script>
