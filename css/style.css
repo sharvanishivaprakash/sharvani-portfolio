@@ -625,64 +625,61 @@ p { margin: 0 0 1em; max-width: 62ch; }
 
 .sub-title { font-size: var(--step-2); margin: 3.5rem 0 1.25rem; }
 
-/* ---------- Custom cursor ---------- */
+/* ---------- Custom cursor: an eye that looks where you move ---------- */
 
 .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
 
-.cursor-dot, .cursor-ring {
+.cursor-eye {
+  --size: 52px;
   position: fixed;
   top: 0;
   left: 0;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  border-radius: 50%;
+  background: #e6e3dc;
+  border: 2px solid var(--ink);
+  color: var(--ink);
   pointer-events: none;
   z-index: 400;
-  border-radius: 50%;
-  will-change: transform;
-}
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  background: var(--kumkum);
-  transition: opacity 0.2s, width 0.3s, height 0.3s, margin 0.3s;
-}
-.cursor-ring {
-  width: 38px;
-  height: 38px;
-  margin: -19px 0 0 -19px;
-  border: 1.5px solid var(--ink);
   display: grid;
   place-items: center;
+  will-change: transform;
   transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out), margin 0.35s var(--ease-out),
-    background-color 0.3s, border-color 0.3s, opacity 0.3s;
+    background-color 0.3s, border-color 0.3s, color 0.3s, opacity 0.3s;
 }
-.cursor-ring .label {
+.cursor-eye svg { width: 68%; height: auto; overflow: visible; transition: transform 0.12s ease-in; }
+.cursor-eye .lid { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.cursor-eye .iris { fill: none; stroke: currentColor; stroke-width: 2.6; transition: stroke 0.3s; }
+.cursor-eye .pupil { fill: currentColor; transition: fill 0.3s; }
+.cursor-eye .label {
+  position: absolute;
+  top: 100%;
+  margin-top: 0.4rem;
   font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--paper);
-  opacity: 0;
-  transition: opacity 0.2s;
   white-space: nowrap;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, transform 0.3s var(--ease-out);
 }
 
-body.cursor-link .cursor-ring { width: 58px; height: 58px; margin: -29px 0 0 -29px; border-color: var(--kumkum); }
-body.cursor-link .cursor-dot { opacity: 0; }
+/* Blink: the whole eye squashes shut for a moment. */
+.cursor-eye.is-blinking svg { transform: scaleY(0.08); }
 
-body.cursor-view .cursor-ring {
-  width: 92px;
-  height: 92px;
-  margin: -46px 0 0 -46px;
-  background: var(--kumkum);
-  border-color: var(--kumkum);
-}
-body.cursor-view .cursor-ring .label { opacity: 1; }
-body.cursor-view .cursor-dot { opacity: 0; }
+body.cursor-link .cursor-eye { --size: 64px; border-color: var(--kumkum); }
+body.cursor-link .cursor-eye .iris { stroke: var(--kumkum); }
+body.cursor-link .cursor-eye .pupil { fill: var(--kumkum); }
 
-body.cursor-text .cursor-ring { opacity: 0; }
-body.cursor-text .cursor-dot { width: 3px; height: 26px; margin: -13px 0 0 -1.5px; border-radius: 2px; }
+body.cursor-view .cursor-eye { --size: 84px; background: var(--kumkum); border-color: var(--kumkum); color: var(--paper); }
+body.cursor-view .cursor-eye .label { opacity: 1; transform: none; }
 
-body.cursor-down .cursor-ring { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
-body.cursor-out .cursor-dot, body.cursor-out .cursor-ring { opacity: 0; }
+body.cursor-text .cursor-eye { --size: 34px; }
+body.cursor-down .cursor-eye svg { transform: scaleY(0.08); }
+body.cursor-out .cursor-eye { opacity: 0; }
 
 /* ---------- Page entrance (one orchestrated moment) ---------- */
 
