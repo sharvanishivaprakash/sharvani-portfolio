@@ -4,19 +4,21 @@
    ========================================================================== */
 
 :root {
-  --paper: #fdfdfb;            /* background: warm white */
-  --ink: #161616;              /* main text */
-  --muted: #62625e;            /* secondary text */
-  --faint: #8f8f8a;            /* small labels */
-  --line: rgba(22, 22, 22, 0.12);
-  --grid: rgba(22, 22, 22, 0.045); /* the chequered grid lines */
+  /* Dark theme from Figma page 2: near-black background, white text, Outfit throughout */
+  --paper: #0e0e0e;            /* background */
+  --ink: #ffffff;              /* main text */
+  --muted: rgba(255, 255, 255, 0.75); /* secondary text */
+  --faint: #8a8a85;            /* small labels */
+  --label: #62625e;            /* hero footer labels, as in the design */
+  --line: rgba(255, 255, 255, 0.14);
+  --grid: transparent;         /* no grid on the dark page */
   --sage: #8a9a7b;             /* accent */
-  --sage-ink: #52654a;         /* accent when used as text (meets contrast) */
+  --sage-ink: #b3c3a4;         /* accent when used as text on dark */
   --sage-soft: #e7ece1;
 
-  --name-color: #5d7253;       /* sage for the hero name: same hue, dark enough to read */
+  --name-color: #b3c3a4;       /* accent word in the name intro */
 
-  /* Outfit carries all supporting text; Pixelify Sans (with rounded corners) is the hero lettering only */
+  /* Outfit carries all text; Pixelify Sans is only used by the name intro */
   --display: "Outfit", "Helvetica Neue", Arial, sans-serif;
   --serif: var(--display);
   --mono: var(--display);
@@ -29,6 +31,9 @@
   --section-space: clamp(8rem, 16vw, 14rem); /* gap between sections */
   --grid-size: 40px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* One Figma pixel: the hero and design lens are laid out on the 1440px frame and scale down with it */
+  --u: min(1px, calc(100vw / 1440));
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -84,7 +89,7 @@ h1, h2, h3, p, figure { margin: 0; }
   height: var(--nav-h);
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 0 var(--gutter);
-  background: rgba(253, 253, 251, 0.86);
+  background: rgba(14, 14, 14, 0.86);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 1px solid transparent;
@@ -119,6 +124,7 @@ h1, h2, h3, p, figure { margin: 0; }
 /* ---------- Layout ---------- */
 
 main { padding-top: var(--nav-h); }
+.top-nav + main { padding-top: 0; } /* the homepage nav floats over the hero */
 
 .section {
   max-width: var(--max); margin: 0 auto;
@@ -136,118 +142,137 @@ main { padding-top: var(--nav-h); }
 .section-head .note, .section-head .about-intro { grid-column: 2; color: var(--muted); }
 .section-head .note { text-transform: none; letter-spacing: 0.01em; font-weight: 400; font-size: 0.9rem; }
 
-/* ---------- Hero ---------- */
+/* ---------- Top nav (homepage) ---------- */
+
+.top-nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; justify-content: center; align-items: center;
+  padding: calc(32 * var(--u)) var(--gutter);
+  pointer-events: none;
+}
+.top-nav > * { pointer-events: auto; }
+.top-nav::before {
+  content: ""; position: absolute; inset: 0 0 -24px; z-index: -1; pointer-events: none;
+  background: linear-gradient(#0e0e0e 55%, rgba(14, 14, 14, 0));
+  opacity: 0; transition: opacity 0.3s;
+}
+.top-nav.is-scrolled::before { opacity: 1; }
+.logo {
+  position: absolute; left: max(var(--gutter), calc(50% - 600 * var(--u)));
+  display: flex; align-items: center; text-decoration: none;
+  font-weight: 600; font-size: 16px; letter-spacing: -0.2px; line-height: 24px; color: var(--ink);
+}
+.logo img { width: 64px; height: auto; transform: rotate(8.5deg); }
+.pill {
+  display: flex; align-items: center; gap: 36px;
+  padding: 8px 30px;
+  border: 1px solid #2c2c2c; border-radius: 24px;
+  background: rgba(14, 14, 14, 0.72);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.pill a {
+  padding: 4px 12px; border-radius: 40px;
+  font-size: 16px; line-height: 22.1px; color: var(--ink); text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.pill a:hover { background: rgba(255, 255, 255, 0.08); }
+.pill a.is-active { background: rgba(255, 255, 255, 0.12); }
+
+/* ---------- Hero (Figma page 2) ---------- */
 
 .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 .hero {
   position: relative;
-  min-height: calc(100svh - var(--nav-h));
-  max-width: var(--max); margin: 0 auto;
-  padding: clamp(2.5rem, 6vh, 4.5rem) var(--gutter) 5rem;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center;
+  min-height: max(100svh, calc(900 * var(--u)));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: calc(113 * var(--u)) var(--gutter);
+  overflow: hidden;
 }
-.hero-stage {
-  position: relative; width: 100%;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 0 clamp(0rem, 4vw, 4rem);
-}
-
-/* Character with eyes that follow the pointer (js/character.js) */
-.character { position: relative; margin-bottom: 0.4rem; }
-.char-art { position: relative; width: clamp(150px, 15vw, 210px); }
-.char-base { width: 100%; height: auto; }
-.char-eye { position: absolute; display: block; overflow: hidden; mask-size: 100% 100%; -webkit-mask-size: 100% 100%; }
-.char-iris { position: absolute; max-width: none; will-change: transform; }
-
-/* "that's me", to the right with an arrow pointing back at the character */
-.char-note {
-  position: absolute; left: 100%; top: 34%; margin-left: 0.2rem;
-  display: flex; align-items: center; gap: 0.15rem;
-  font-size: 1.7rem; color: var(--ink); white-space: nowrap;
-  transform: rotate(-6deg);
-}
-.char-note svg { width: 2.4rem; height: auto; overflow: visible; }
-.char-note path { fill: none; stroke: var(--sage-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-
-.hero-hello {
-  margin-bottom: 0.3rem;
-  font-size: clamp(1.9rem, 2.6vw, 2.4rem); color: var(--ink);
-  transform: rotate(-2deg);
-}
-
-/* Name / role: one grid cell holds both, so the area never changes size */
-.name {
+/* The 722px centre column from the design; everything else is placed from its corner */
+.hero-center {
   position: relative;
-  display: grid; place-items: center;
-  font-family: var(--lettering); font-weight: 700;
-  font-size: min(7.9vw, 7rem);
-  line-height: 1.02;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--name-color);
-  filter: url(#round-letters);
-  cursor: default;
-  outline-offset: 12px;
-  -webkit-tap-highlight-color: transparent;
-}
-.name-state { grid-area: 1 / 1; white-space: nowrap; transition: opacity 0.2s linear; }
-.name-b { opacity: 0; }
-.name.is-b .name-a { opacity: 0; }
-.name.is-b .name-b { opacity: 1; }
-/* While the canvas animates it draws both states; the real text hides underneath. */
-.name.is-pixelating .name-state { opacity: 0; transition: none; }
-.name-canvas {
-  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-  pointer-events: none; opacity: 0;
-}
-.name.is-pixelating .name-canvas { opacity: 1; }
-.hint-tap { display: none; }
-
-.descriptor {
-  margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
-  font-weight: 500; font-size: clamp(1.15rem, 1.8vw, 1.45rem); letter-spacing: -0.01em;
-}
-.statement {
-  margin-top: 0.7rem; max-width: 38ch;
-  font-weight: 300; font-size: clamp(1rem, 1.35vw, 1.15rem); line-height: 1.6; color: var(--muted);
-}
-
-/* Stickers: a few small handmade marks around the edges */
-.sticker { position: absolute; transition: transform 0.35s var(--ease); }
-.sticker:hover { transform: rotate(var(--hr, 0deg)) translateY(-3px); }
-.sticker-tag {
-  --hr: -4deg;
-  left: 2%; top: 30%; transform: rotate(-7deg);
-  background: var(--sage-soft); color: var(--sage-ink);
-  padding: 0.35rem 0.7rem 0.3rem; border: 1px solid rgba(82, 101, 74, 0.18);
-  border-radius: 2px;
-}
-.sticker-star { --hr: 22deg; right: 6%; top: 8%; width: 30px; transform: rotate(8deg); }
-.sticker-star path { fill: var(--sage); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
-.sticker-note {
-  --hr: 2deg;
-  left: 9%; top: 58%; transform: rotate(-3deg);
-  font-size: 1.45rem; color: var(--muted);
+  width: calc(722 * var(--u));
   display: flex; flex-direction: column; align-items: flex-start;
 }
-.sticker-note svg { width: 3.2rem; margin: 0.1rem 0 0 2.2rem; overflow: visible; }
-.sticker-note path, .sticker-squiggle path {
-  fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+.hero-hey { width: calc(163.27 * var(--u)); height: auto; margin-bottom: calc(24 * var(--u)); }
+.hero-name {
+  width: 100%; text-align: center; white-space: pre;
+  font-weight: 600; font-size: calc(148 * var(--u)); line-height: calc(114.2 * var(--u));
+  letter-spacing: calc(1 * var(--u)); color: var(--ink);
 }
-.sticker-squiggle { --hr: -6deg; right: 4%; bottom: 16%; width: 64px; transform: rotate(-12deg); }
-.sticker-squiggle path { stroke: var(--sage-ink); stroke-width: 2.4; }
+.hero-line {
+  width: 100%; margin-top: calc(48 * var(--u)); text-align: center;
+  font-size: max(16px, calc(28 * var(--u))); line-height: 1.2; letter-spacing: calc(1 * var(--u));
+  color: var(--muted);
+}
+.hero-char, .hero-sticker { position: absolute; height: auto; max-width: none; }
+.hero-char { left: calc(346.5 * var(--u)); top: calc(69 * var(--u)); width: calc(208 * var(--u)); }
+.hero-sticker { transition: transform 0.35s var(--ease); }
+.st-coffee { left: calc(670.5 * var(--u)); top: calc(-90 * var(--u)); width: calc(189.14 * var(--u)); }
+.st-currently { left: calc(-208.5 * var(--u)); top: calc(239 * var(--u)); width: calc(144 * var(--u)); }
+.st-mysuru { left: calc(786.5 * var(--u)); top: calc(250 * var(--u)); width: calc(131 * var(--u)); }
+.is-loaded .hero-sticker:hover { transform: translateY(-4px) rotate(-3deg); }
 
 .hero-foot {
-  position: absolute; left: var(--gutter); right: var(--gutter); bottom: 1.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  color: var(--faint);
+  position: absolute; left: 50%; bottom: calc(43 * var(--u));
+  width: min(calc(1247 * var(--u)), calc(100% - 2 * var(--gutter)));
+  transform: translateX(-50%);
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  font-size: 14px; line-height: 17.8px; letter-spacing: 0.7px; color: var(--label);
 }
-.scroll-cue { text-decoration: none; color: var(--muted); display: inline-flex; gap: 0.4rem; }
+.is-loaded .hero-foot.reveal { transform: translateX(-50%); }
+.hero-foot.reveal { transform: translate(-50%, 14px); }
+.hero-foot a { color: inherit; text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.hero-foot a:hover { color: var(--ink); }
+.lens-link { display: inline-flex; align-items: center; gap: 8px; }
+.lens-link img { width: 16px; height: auto; }
+.scroll-cue { font-weight: 300; display: inline-flex; gap: 0.6rem; }
 .scroll-cue span { display: inline-block; animation: nudge 2.4s var(--ease) 1.2s 3; }
-.scroll-cue:hover { color: var(--ink); }
 @keyframes nudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(4px); } }
+
+/* ---------- My design lens (Figma page 2) ---------- */
+
+.lens {
+  position: relative;
+  min-height: calc(811 * var(--u));
+  display: flex; justify-content: center; align-items: flex-start;
+  padding-top: calc(238 * var(--u));
+  overflow: hidden;
+}
+.lens-center {
+  position: relative; width: calc(665 * var(--u));
+  display: flex; flex-direction: column; align-items: center; gap: calc(109 * var(--u));
+  text-align: center; color: var(--ink);
+}
+.lens-atom { position: absolute; left: calc(-140 * var(--u)); top: calc(-180 * var(--u)); width: calc(396 * var(--u)); max-width: none; height: auto; pointer-events: none; }
+.lens-title { position: relative; font-weight: 400; line-height: calc(73 * var(--u)); }
+.lens-title .ln { display: block; height: calc(73 * var(--u)); white-space: nowrap; }
+.lens-title .sm { font-size: calc(48 * var(--u)); }
+.lens-title .lg { font-size: calc(64 * var(--u)); letter-spacing: calc(-1 * var(--u)); margin: 0 calc(14 * var(--u)); }
+.lens-title .ln:first-child .lg { margin-right: 0; }
+/* The thin box with corner squares around "interactions." */
+.lens-frame {
+  position: relative; display: inline-block;
+  padding: 0 calc(6 * var(--u));
+  line-height: calc(71 * var(--u));
+  background:
+    linear-gradient(#434343, #434343) left top / calc(5 * var(--u)) calc(5 * var(--u)) no-repeat,
+    linear-gradient(#434343, #434343) right top / calc(5 * var(--u)) calc(5 * var(--u)) no-repeat,
+    linear-gradient(#434343, #434343) left bottom / calc(5 * var(--u)) calc(5 * var(--u)) no-repeat,
+    linear-gradient(#434343, #434343) right bottom / calc(5 * var(--u)) calc(5 * var(--u)) no-repeat;
+}
+.lens-frame::before {
+  content: ""; position: absolute; inset: calc(2 * var(--u));
+  border: max(1px, calc(1.2 * var(--u))) solid #434343; pointer-events: none;
+}
+.lens-body {
+  position: relative;
+  font-weight: 100; font-size: max(15px, calc(24 * var(--u))); line-height: 1.67; letter-spacing: calc(1 * var(--u));
+  white-space: nowrap;
+}
+.lens-body em { font-style: normal; font-weight: 200; }
+.lens-stamp { position: absolute; left: calc(657 * var(--u)); top: calc(324 * var(--u)); width: calc(115 * var(--u)); max-width: none; height: auto; }
 
 /* ---------- Work: editorial grid ---------- */
 
@@ -282,7 +307,7 @@ main { padding-top: var(--nav-h); }
 
 .project-num {
   position: absolute; top: 0.8rem; left: 0.9rem; z-index: 1;
-  color: var(--ink); background: var(--paper); padding: 0.15rem 0.4rem;
+  color: #161616; background: #fdfdfb; padding: 0.15rem 0.4rem;
 }
 
 .project-body {
@@ -364,12 +389,12 @@ main { padding-top: var(--nav-h); }
 .polaroid.is-wide .ph, .polaroid.is-wide img { aspect-ratio: 5 / 4; }
 .polaroid-caption {
   display: block; padding: 0.55rem 0.1rem 0.75rem;
-  font-family: var(--hand); font-size: 1.45rem; line-height: 1; color: var(--ink);
+  font-family: var(--hand); font-size: 1.45rem; line-height: 1; color: #161616;
 }
 .polaroid-note {
   position: absolute; left: 50%; top: -0.6rem; z-index: 3;
   transform: translate(-50%, -0.3rem) rotate(-3deg);
-  background: var(--sage-ink); color: #fff;
+  background: #52654a; color: #fff;
   font-family: var(--hand); font-size: 1.35rem; line-height: 1;
   padding: 0.25rem 0.6rem 0.15rem;
   opacity: 0; transition: opacity 0.25s, transform 0.3s var(--ease);
@@ -459,7 +484,7 @@ a.play-link:hover .play-cap, a.play-link:focus-visible .play-cap { color: var(--
   transition: border-color 0.2s, background 0.2s;
 }
 .copy-email .copy-label { color: var(--sage-ink); text-transform: uppercase; font-size: 0.7rem; }
-.copy-email:hover { border-color: var(--ink); background: #fff; }
+.copy-email:hover { border-color: var(--ink); background: rgba(255, 255, 255, 0.06); }
 
 .socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; }
 .socials a { text-decoration: none; color: var(--muted); }
@@ -523,7 +548,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
   display: grid; place-items: center;
   border: 1.5px solid var(--ink); border-radius: 50%;
-  background: rgba(253, 253, 251, 0.7);
+  background: rgba(14, 14, 14, 0.6);
   color: var(--ink);
   pointer-events: none;
   transition: width 0.3s var(--ease), height 0.3s var(--ease), margin 0.3s var(--ease),
@@ -547,7 +572,7 @@ body.cursor-link .cursor-eye { --size: 40px; border-color: var(--sage-ink); }
 body.cursor-link .cursor-eye .iris { stroke: var(--sage-ink); }
 body.cursor-link .cursor-eye .pupil { fill: var(--sage-ink); }
 
-body.cursor-view .cursor-eye { --size: 58px; background: var(--sage); border-color: var(--sage); color: #fff; }
+body.cursor-view .cursor-eye { --size: 58px; background: var(--sage); border-color: var(--sage); color: #0e0e0e; }
 body.cursor-view .cursor-eye .label { opacity: 1; transform: none; }
 
 body.cursor-text .cursor-eye { --size: 24px; }
@@ -562,11 +587,9 @@ body.cursor-out .cursor-eye { opacity: 0; }
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
   transition-delay: calc(var(--i, 0) * 110ms);
 }
-.hero-hello.reveal { transform: translateY(14px) rotate(-3deg); }
-.is-loaded .hero-hello.reveal { transform: rotate(-3deg); }
 
 /* ---------- Name intro (preloader) ----------
-   Same paper and grid as the page, same rounded pixel lettering as the hero name.
+   Same dark background as the page, white rounded pixel lettering, light sage accent word.
    "shar" never moves while the green word rolls ... → who → vani through a clipped window
    (always as wide as its widest word, so nothing shifts). Then the whole line rolls on to
    "hey, it's sharvani". The gap is the real space character, so it is a natural word-space. */
@@ -615,9 +638,6 @@ html.has-cursor .preloader { cursor: default !important; } /* plain pointer whil
 /* ---------- Touch devices ---------- */
 
 @media (hover: none) {
-  .hint-hover { display: none; }
-  .hint-tap { display: inline; }
-  .name { cursor: pointer; }
   .polaroid-card { cursor: pointer; }
 }
 
@@ -654,23 +674,24 @@ html.has-cursor .preloader { cursor: default !important; } /* plain pointer whil
   .nav a { font-size: 0.82rem; }
 
   :root { --section-space: 6.5rem; }
-  /* Both states break onto two lines on a phone, so they still share one size */
-  .name { font-size: 13.6vw; line-height: 1.04; }
-  .name .ln { display: block; }
-  .char-art { width: 132px; }
-  .char-note { font-size: 1.35rem; top: 30%; }
-  .char-note svg { width: 1.9rem; }
-  .hero-hello { font-size: 1.75rem; }
-  .sticker-tag, .sticker-squiggle { display: none; }
-  .sticker-star { left: 8%; right: auto; top: 2%; width: 24px; }
-  /* the note drops below the statement and points back up at the name */
-  .sticker-note {
-    position: relative; order: 10; left: auto; top: auto; margin-top: 2.2rem;
-    flex-direction: row; align-items: center; gap: 0.3rem; font-size: 1.3rem;
-  }
-  .sticker-note svg { width: 2rem; margin: 0; transform: rotate(-35deg); }
-  .hero-foot #coords { display: none; }
-  .hero-foot { justify-content: center; }
+  /* Hero and design lens: same layout, scaled to an 800px-wide frame so the name fills a phone */
+  :root { --u: calc(100vw / 800); }
+  .top-nav { justify-content: flex-end; padding: 12px var(--gutter); }
+  .logo { left: var(--gutter); }
+  .logo img { width: 44px; }
+  .logo span { display: none; }
+  .pill { gap: 0; padding: 4px 6px; }
+  .pill a { padding: 4px 7px; font-size: 13px; line-height: 18px; }
+  .hero { padding-top: 96px; padding-bottom: 96px; }
+  .st-coffee { left: calc(520 * var(--u)); top: calc(-250 * var(--u)); width: calc(220 * var(--u)); }
+  .st-currently { left: calc(20 * var(--u)); top: calc(420 * var(--u)); width: calc(210 * var(--u)); }
+  .st-mysuru { left: calc(520 * var(--u)); top: calc(400 * var(--u)); width: calc(180 * var(--u)); }
+  .hero-line { font-size: 15px; letter-spacing: 0; white-space: nowrap; }
+  .hero-foot { font-size: 12px; letter-spacing: 0.5px; bottom: 24px; }
+  .hero-credit { display: none; }
+  .lens { min-height: 0; padding: 140px 0 40px; }
+  .lens-center { gap: 56px; padding-bottom: 90px; }
+  .lens-stamp { left: auto; right: 0; top: auto; bottom: 0; width: 84px; }
 
   .section-head { grid-template-columns: 1fr; }
   .section-head .note, .section-head .about-intro { grid-column: 1; }
@@ -696,6 +717,5 @@ html.has-cursor .preloader { cursor: default !important; } /* plain pointer whil
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
   .reveal, .is-loaded .reveal { opacity: 1; transform: none; }
-  .name-state { transition: opacity 0.25s linear !important; }
   .polaroid:hover, .polaroid:focus-within, .polaroid.is-open { transform: rotate(0deg); }
 }
