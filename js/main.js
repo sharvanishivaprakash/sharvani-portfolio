@@ -44,7 +44,7 @@
     setInterval(tick, 30000);
   }
 
-  const bar = $(".nav-bar");
+  const bar = $(".nav-bar, .top-nav");
   if (bar) {
     const onScroll = () => bar.classList.toggle("is-scrolled", scrollY > 8);
     onScroll();
@@ -63,11 +63,10 @@
   /* ---------- Home ---------- */
 
   function renderHome() {
-    $("#descriptor").textContent = S.descriptor;
-    $("#statement").textContent = S.statement;
-    $("#coords").textContent = S.coordinates;
-    $("#sticker-place").textContent = S.location;
-    $("#char-base").alt = S.character.alt;
+    // Resume in the nav uses the Resume link from content.js
+    const resume = S.links.find((l) => /resume/i.test(l.label));
+    const navResume = $("#nav-resume");
+    if (navResume && resume) navResume.href = resume.href;
 
     // Work
     $("#work-grid").innerHTML = S.projects
@@ -157,6 +156,7 @@
     document.querySelectorAll("#socials a").forEach((a) => {
       if (a.getAttribute("href") === "#") a.addEventListener("click", (e) => { e.preventDefault(); say("Link coming soon."); });
     });
+    if (navResume && navResume.getAttribute("href") === "#") navResume.addEventListener("click", (e) => e.preventDefault());
 
     // Active nav item follows the section in view.
     const links = document.querySelectorAll(".nav a[data-section]");
