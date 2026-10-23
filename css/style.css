@@ -120,11 +120,11 @@ b { font-weight: 500; }
 .pill a:hover { color: var(--blue); }
 .pill a.is-active { background: rgba(255, 255, 255, 0.1); }
 
-/* ---------- ASCII field behind the hero and the statement (js/ascii-bg.js) ---------- */
+/* ---------- Moving dot grid behind the hero and the statement (js/dot-grid.js) ---------- */
 
-.ascii-zone { position: relative; isolation: isolate; }
-.ascii-bg {
-  /* window-tall; js/ascii-bg.js slides it down the section as you scroll */
+.dots-zone { position: relative; isolation: isolate; }
+.dots-bg {
+  /* window-tall; js/dot-grid.js slides it down the section as you scroll */
   position: absolute; top: 0; left: 0; z-index: -1;
   width: 100%; height: 100vh;
   pointer-events: none;
@@ -464,7 +464,7 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .pill a { padding: 4px 8px; font-size: 14px; line-height: 20px; }
 
   /* Hero: the sheet becomes a card on the paper texture; the tabs give way */
-  .ascii-zone { padding-top: 92px; }
+  .dots-zone { padding-top: 92px; }
   .hero {
     position: relative; max-width: 560px; margin: 0 16px 40px;
     padding: 64px 20px 150px; text-align: center;
