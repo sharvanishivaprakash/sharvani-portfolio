@@ -9,25 +9,21 @@ python3 -m http.server 8000
 Then open http://localhost:8000.
 
 ## Editing content
-Everything you'll want to change lives in `js/content.js`:
-- `statement`, `email`, `links`, `coordinates`, `location`, `timezone`
-- `projects`: the four case studies. Each opens at `project.html?p=<slug>`. `size: "large"` makes it a wide tile.
-- `about.collage`: the polaroids. `caption` is the handwritten line, `note` shows on hover or tap.
-- `playground`: add or remove items freely. `ratio` is width ÷ height; `href` makes it a link.
+The homepage is built from the Figma frame "Portfolio final" (page 2 of the Sharvani SP portfolio file).
+- Homepage copy (hero, statement, about card, design approach, what next) is written in `index.html`.
+- `js/content.js` holds the selected works (title, summary, tags, cover image, case study details), the email and links.
+  The Resume button uses the `[Resume]` link there; until it's set, it shows "coming soon".
+- Images exported from Figma live in `assets/final/`.
 
-Text in `[square brackets]` is placeholder. For images, put files in `assets/` and set `image` to the path
-(for example `"assets/andaaj/cover.jpg"`). Empty image slots show a labelled placeholder box.
-The hero character lives in `assets/character/`. Its pupils are separate layers (`iris-*.png`, clipped by `eye-mask-*.png`) so they can follow the cursor; a new picture needs those layers redone.
+Text in `[square brackets]` is placeholder. Projects without an `image` show a plain pale panel, as in the design.
 
 ## Structure
-- `index.html`: one page with Work, About, Playground and Contact
-- `project.html`: case study template
-- `css/style.css`: colours, fonts and spacing at the top in `:root`, then sections
-- `js/main.js`: renders everything from `content.js`
-- `js/preloader.js`: the name intro on the homepage (`shar` + a rolling sage word: … → who → vani, then the whole line rolls to “hey, it’s sharvani”). Timings are at the top of the file; the markup is at the top of `index.html`, styles under “Name intro” in `style.css`. It plays on a fresh visit or refresh, not when coming back from a case study.
-- `js/pixel-name.js`: the hero name that rasterises into "Interaction Designer"
-- `js/character.js`: the character's eyes following the pointer
-- `js/cursor.js`: the eye cursor (desktop only; touch keeps the normal behaviour)
+- `index.html`: the homepage. On desktop each block sits at its Figma position (`--x`, `--y`, `--w` in Figma pixels)
+  and the whole page scales with the window. Under 900px wide the same content stacks for tablets and phones.
+- `project.html`: case study template (`project.html?p=<slug>`)
+- `css/style.css`: colours and fonts at the top in `:root` (`--blue` is the accent), then sections
+- `js/main.js`: renders the selected works and case studies from `content.js`
+- `js/cursor.js`: the eye cursor (desktop only). It turns blue over anything clickable and over the nav bar.
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.

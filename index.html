@@ -4,149 +4,133 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sharvani SP — Interaction Designer</title>
-  <meta name="description" content="Sharvani SP, Interaction Designer — making experiences understandable, engaging, and humane.">
+  <meta name="description" content="Sharvani SP, an interaction designer exploring the intersection of human behaviour, technology, and meaningful experiences.">
   <meta name="theme-color" content="#0e0e0e">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&family=Pixelify+Sans:wght@700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script>
-    /* Runs before first paint: decides whether the name intro plays (js/preloader.js runs it).
-       It plays on a fresh visit or a refresh, not when coming back from another page of this site. */
-    (function () {
-      try {
-        var nav = performance.getEntriesByType("navigation")[0];
-        var type = nav ? nav.type : "navigate";
-        var internal = document.referrer && new URL(document.referrer).origin === location.origin;
-        if (type === "back_forward" || (internal && type !== "reload")) return;
-      } catch (e) {}
-      document.documentElement.classList.add("is-preloading");
-    })();
-  </script>
 </head>
 <body data-page="home">
-  <!-- Name intro: "shar" stays still while the green word rolls ... → who → vani,
-       then the whole line rolls on to "hey, it's sharvani" -->
-  <div class="preloader" id="preloader" aria-hidden="true">
-    <svg class="defs" focusable="false" width="0" height="0">
-      <filter id="pl-round" color-interpolation-filters="sRGB">
-        <feGaussianBlur id="pl-round-blur" stdDeviation="1.2"/>
-        <feComponentTransfer><feFuncA type="table" tableValues="0 0 0 1 1"/></feComponentTransfer>
-      </filter>
-    </svg>
-    <p class="pl-line"><span class="pl-stack"><span class="pl-row"><span class="pl-fixed">shar</span> <span class="pl-window"><span class="pl-sizer"><span>...</span><span>who</span><span>vani</span></span><span class="pl-reel"><span>...</span><span>who</span><span>vani</span></span></span></span><span class="pl-row pl-greet">hey, it’s sharvani</span></span></p>
-  </div>
-
   <a class="skip" href="#work">Skip to work</a>
 
-  <!-- Top nav (Figma page 2): character logo on the left, pill of links in the middle -->
+  <!-- Figma "Portfolio final" (page 2). On desktop every block is placed at its Figma
+       position: --x / --y / --w are Figma pixels inside the section, scaled by --u. -->
   <header class="top-nav">
     <a class="logo" href="#top" aria-label="Sharvani SP, back to top">
-      <img src="assets/hero/logo.webp" alt="" width="64" height="46">
+      <img src="assets/final/logo.webp" alt="" width="53" height="53">
       <span>SP.</span>
     </a>
-    <nav class="nav pill" aria-label="Sections">
+    <nav class="pill" aria-label="Sections">
       <a href="#work" data-section="work">Work</a>
       <a href="#about" data-section="about">About</a>
-      <a href="#playground" data-section="playground">Playground</a>
+      <a href="#" id="nav-playground">Playground</a>
       <a href="#contact" data-section="contact">Contact</a>
-      <a href="#" id="nav-resume">Resume</a>
+      <a href="#" class="js-resume">Resume</a>
     </nav>
   </header>
 
   <main id="top">
-    <!-- Hero (Figma page 2, "AL hERO") -->
-    <section class="hero" aria-labelledby="hero-name">
-      <div class="hero-center">
-        <img class="hero-hey reveal" src="assets/hero/hey-its.png" alt="" width="163" height="60">
-        <!-- The gap in "Sharv ni" is where the character sits, as in the design -->
-        <h1 class="hero-name reveal" id="hero-name" style="--i:1" aria-label="Sharvani.">Sharv<span class="gap" aria-hidden="true">    </span>ni .</h1>
-        <p class="hero-line reveal" style="--i:2">Curious about people. Intentional about experiences</p>
+    <!-- Hero: the paper sheet with tabs -->
+    <section class="frame hero" style="--h:900" aria-labelledby="hero-name">
+      <div class="sheet">
+        <img class="at paper" style="--x:367;--y:178;--w:762" src="assets/final/paper.webp" alt="" width="762" height="722">
+        <img class="at clip reveal" style="--x:358;--y:139;--w:91" src="assets/final/paperclip.webp" alt="" width="91" height="140">
 
-        <img class="hero-char reveal" style="--i:1" id="hero-char" src="assets/hero/character.webp" alt="" width="208" height="163">
-        <img class="hero-sticker st-coffee reveal" style="--i:3" src="assets/hero/sticker-coffee.webp" alt="" width="189" height="120">
-        <img class="hero-sticker st-currently reveal" style="--i:3" src="assets/hero/sticker-currently.webp" alt="" width="144" height="110">
-        <img class="hero-sticker st-mysuru reveal" style="--i:3" src="assets/hero/stamp-mysuru.webp" alt="" width="131" height="148">
-      </div>
+        <ul class="tabs" aria-label="Curious, observant, thoughtful, experimental">
+          <li class="at" style="--x:1086;--y:249;--w:35">Curious</li>
+          <li class="at" style="--x:1086;--y:354;--w:35">Observant</li>
+          <li class="at" style="--x:1086;--y:480;--w:35">Thoughtful</li>
+          <li class="at" style="--x:1085;--y:606;--w:35">Experimental</li>
+        </ul>
 
-      <div class="hero-foot reveal" style="--i:4">
-        <a class="lens-link" href="#lens"><img src="assets/hero/star.png" alt="" width="16" height="15"> My design lens</a>
-        <span class="hero-credit">(sharvanishivaprakash Ⓒ2026)</span>
-        <a class="scroll-cue" href="#lens">Scroll to explore <span aria-hidden="true">↓</span></a>
-      </div>
-    </section>
+        <img class="at hey reveal" style="--x:420;--y:299;--w:163" src="assets/final/hey-its.webp" alt="hey, it’s" width="163" height="60">
+        <h1 class="at hero-name reveal" style="--x:494;--y:378;--w:504;--i:1" id="hero-name">SHARVANI <span aria-hidden="true">*</span></h1>
+        <p class="at hero-role reveal" style="--x:621;--y:493;--w:237;--i:1">Interaction Designer</p>
+        <p class="at hero-line reveal" style="--x:473;--y:588;--w:533;--i:2">An interaction designer exploring the <br>intersection of <b>human behaviour, technology</b>, and <b>meaningful experiences.</b></p>
+        <div class="at hero-ctas reveal" style="--x:594;--y:743;--w:253;--i:3">
+          <a class="btn" href="#work">Explore my work</a>
+          <a class="btn js-resume" href="#">Resume</a>
+        </div>
 
-    <!-- My design lens (Figma page 2) -->
-    <section class="lens" id="lens" aria-labelledby="lens-title">
-      <div class="lens-center">
-        <img class="lens-atom" src="assets/hero/atom.png" alt="" width="396" height="411">
-        <h2 class="lens-title" id="lens-title">
-          <span class="ln"><span class="sm">From</span> <span class="lg">Molecules</span></span>
-          <span class="ln"><span class="sm">to</span> <span class="lg">Meaningful</span> <span class="sm lens-frame">interactions.</span></span>
-        </h2>
-        <p class="lens-body">I design <em>intuitive experiences</em> that feel<br><em>intentional</em>, <em>effortless</em>, and <em>human.</em></p>
-        <img class="lens-stamp" src="assets/hero/stamp-people.webp" alt="" width="115" height="90">
+        <img class="at sticker st-currently reveal" style="--x:307;--y:549;--w:145;--i:3" src="assets/final/sticker-currently.webp" alt="Sticker: currently, interaction design" width="145" height="110">
+        <img class="at sticker st-coffee reveal" style="--x:903;--y:764;--w:189;--i:3" src="assets/final/sticker-coffee.webp" alt="" width="189" height="120">
       </div>
     </section>
 
-    <!-- Work -->
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="section-head">
-        <span class="mono label">01</span>
-        <h2 id="work-title">Selected work</h2>
-        <p class="mono note">Four projects. Open any of them for the case study.</p>
+    <!-- Statement -->
+    <section class="frame statement" style="--h:800">
+      <p class="at" style="--x:234;--y:340;--w:1022">I <b>connect the dots, question the obvious</b>, <br>and look for meaning in the things we often take for granted. <br>Sometimes, a little observation reveals a <b>problem worth solving</b>. <br>Sometimes, <b>it sparks an idea worth exploring.</b></p>
+    </section>
+
+    <!-- Selected works -->
+    <section class="frame works" id="work" style="--h:1700" aria-labelledby="work-title">
+      <h2 class="at works-title" style="--x:472;--y:91;--w:534" id="work-title">Selected Works <span aria-hidden="true">*</span></h2>
+      <div class="at tape" style="--x:521;--y:179;--w:368">
+        <img src="assets/final/tape.webp" alt="" width="368" height="184">
+        <p>A collection of questions <br>I turned into experiences.</p>
       </div>
       <div class="work-grid" id="work-grid"></div>
     </section>
 
-    <!-- About -->
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <div class="section-head">
-        <span class="mono label">02</span>
-        <h2 id="about-title">About</h2>
-        <p class="about-intro" id="about-intro"></p>
+    <!-- About me -->
+    <section class="frame about" id="about" style="--h:1300" aria-labelledby="about-title">
+      <h2 class="at big-label" style="--x:102;--y:201;--w:242" id="about-title">About me <span aria-hidden="true">*</span></h2>
+      <img class="at collage" style="--x:117;--y:432;--w:480" src="assets/final/collage.webp" alt="A wire shopping basket holding little pieces of Sharvani’s world: a lemon, a Filter Kaapi stamp, a woodblock, googly eyes, a camera, a photo of Sharvani in sunglasses, chocolates and a question mark." width="480" height="660" loading="lazy">
+
+      <div class="at receipt" style="--x:679;--y:210;--w:691">
+        <p class="r-hey">Hey, I’m Sharvani .</p>
+        <p class="r-lead">A molecular biologist turned designer from Mysuru, curious about how the <br>world works and what makes people tick.</p>
+        <p class="r-small">I collect little pieces of the world wherever I go. <br><b>Stories, people, places, behaviours, questions,</b> and the <br>tiny details that are easy to miss.</p>
+        <p class="r-lead r-turn">That's where design comes in.</p>
+        <p class="r-small r-last">I'm interested in the <b>space between people and technology</b>, making things easier to navigate, more engaging to interact , and more thoughtful to experience.</p>
+        <ul class="chips">
+          <li>Still collecting</li>
+          <li>Still curious</li>
+          <li>Always making .</li>
+        </ul>
       </div>
-      <ul class="collage" id="collage"></ul>
     </section>
 
-    <!-- Playground -->
-    <section class="section" id="playground" aria-labelledby="play-title">
-      <div class="section-head">
-        <span class="mono label">03</span>
-        <h2 id="play-title">Playground</h2>
-        <p class="mono note">Sketches, experiments and things that don't need a case study.</p>
-      </div>
-      <ul class="play-grid" id="play-grid"></ul>
+    <!-- Design approach -->
+    <section class="frame approach" style="--h:1388" aria-labelledby="approach-title">
+      <h2 class="at small-label" style="--x:132;--y:85;--w:239" id="approach-title">My Design Approach *</h2>
+      <p class="at small-label" style="--x:1092;--y:93;--w:227">What sets me apart *</p>
+
+      <ol class="steps">
+        <li class="step" style="--x:99;--y:440">
+          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
+          <span class="at step-text" style="--x:21;--y:70;--w:360"><b>Understand</b><em>     the people.</em></span>
+        </li>
+        <li class="step" style="--x:508;--y:576">
+          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
+          <span class="at step-text" style="--x:49;--y:70;--w:356"><b>Unpack       </b><em>   the problem.</em></span>
+        </li>
+        <li class="step" style="--x:921;--y:711">
+          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
+          <span class="at step-text" style="--x:62;--y:70;--w:379"><b>Shape      </b><em>     the experience.</em></span>
+        </li>
+      </ol>
+      <span class="at star" style="--x:88;--y:620;--w:109" aria-hidden="true">*</span>
+      <span class="at star" style="--x:622;--y:591;--w:109" aria-hidden="true">*</span>
+      <span class="at star" style="--x:907;--y:886;--w:109" aria-hidden="true">*</span>
+
+      <p class="at closing" style="--x:121;--y:962;--w:576">I connect scattered insights to design products with clarity and direction.</p>
     </section>
 
-    <!-- Contact -->
-    <section class="section contact" id="contact" aria-labelledby="contact-title">
-      <span class="mono label">04</span>
-      <h2 class="sr-only" id="contact-title">Contact</h2>
-      <a class="say-hello" id="say-hello" href="#">
-        <span class="sh-a">Say hello</span>
-        <span class="sh-b" aria-hidden="true">Let's talk</span>
-        <span class="sh-arrow" aria-hidden="true">→</span>
-      </a>
-      <div class="contact-row">
-        <button class="mono copy-email" id="copy-email" type="button">
-          <span id="email-text"></span> <span class="copy-label">Copy</span>
-        </button>
-        <ul class="mono socials" id="socials"></ul>
+    <!-- What next -->
+    <section class="next" id="contact" aria-labelledby="next-title">
+      <div class="frame" style="--h:900">
+        <h2 class="at next-title" style="--x:121;--y:21;--w:400" id="next-title">What next ?</h2>
+        <p class="at next-line" style="--x:121;--y:213;--w:703">Let's make something meaningful together !</p>
       </div>
-      <p class="mono toast" id="toast" role="status" aria-live="polite"></p>
     </section>
   </main>
 
-  <footer class="site-footer mono">
-    <span>© <span id="year"></span> Sharvani SP</span>
-    <span id="footer-coords"></span>
-    <a href="#top">Back to top ↑</a>
-  </footer>
+  <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js"></script>
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cursor.js"></script>

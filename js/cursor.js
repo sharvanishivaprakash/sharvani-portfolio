@@ -3,8 +3,8 @@
   Like the reference, the pupil glances toward where the pointer is heading and settles back
   to the centre when you stop. It blinks now and then, and on click.
   States (set on <body>):
-    cursor-link  links and buttons: eye grows, iris turns sage
-    cursor-view  anything with [data-cursor="view"]: eye fills and shows a label
+    cursor-link  links, buttons and the whole nav bar: eye grows and turns blue
+    cursor-view  anything with [data-cursor="view"]: eye fills blue and shows a label
                  (data-cursor-label overrides the default "View")
     cursor-text  paragraphs and headings: eye shrinks so it doesn't cover the words
     cursor-down  while pressing (eye closes)
@@ -57,7 +57,7 @@
   document.addEventListener("mouseover", (e) => {
     const t = e.target;
     const view = t.closest("[data-cursor='view']");
-    const link = t.closest("a, button, [role='button'], label, input[type='submit']");
+    const link = t.closest("a, button, [role='button'], label, input[type='submit'], .top-nav");
     const text = t.closest("p, h1, h2, h3, li, dd") && !link;
     body.classList.toggle("cursor-view", !!view);
     body.classList.toggle("cursor-link", !view && !!link);
