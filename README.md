@@ -28,6 +28,10 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   Around the statement a few dots grow and get joined by lines, one after another.
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
 - `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
+- `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
+  (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
+  On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
+- The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.
