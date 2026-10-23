@@ -50,6 +50,17 @@
 
         <img class="at hey reveal" style="--x:454;--y:327;--w:188" src="assets/final/hey-its.webp" alt="hey, it’s" width="188" height="81">
         <h1 class="at hero-name reveal" style="--x:480;--y:378;--w:479;--i:1" id="hero-name">SHARVANI<span aria-hidden="true"> *</span></h1>
+        <!-- The name's slow liquid wobble (js/liquid-name.js); it settles while you hover the name -->
+        <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
+          <filter id="liquid" x="-8%" y="-25%" width="116%" height="150%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.011 0.02" numOctaves="1" seed="4" result="noise"/>
+            <feGaussianBlur in="noise" stdDeviation="3" result="soft"/>
+            <feDisplacementMap in="SourceGraphic" in2="soft" scale="0" xChannelSelector="R" yChannelSelector="G" result="bent"/>
+            <!-- smooth the bent edges: soften, then sharpen the outline again -->
+            <feGaussianBlur in="bent" stdDeviation="0.9" result="blurred"/>
+            <feColorMatrix in="blurred" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 14 -5"/>
+          </filter>
+        </svg>
         <p class="at hero-role reveal" style="--x:480;--y:493;--w:479;--i:1">Interaction Designer</p>
         <p class="at hero-line reveal" style="--x:453;--y:597;--w:533;--i:2">An interaction designer exploring the <br>intersection of <b>human behaviour, technology,</b> and <b>meaningful experiences.</b></p>
         <div class="at hero-ctas reveal" style="--x:604;--y:693;--w:240;--i:3">
@@ -134,5 +145,6 @@
   <script src="js/main.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/dot-grid.js"></script>
+  <script src="js/liquid-name.js"></script>
 </body>
 </html>
