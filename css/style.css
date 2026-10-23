@@ -124,12 +124,10 @@ b { font-weight: 500; }
 
 .ascii-zone { position: relative; isolation: isolate; }
 .ascii-bg {
-  position: absolute; inset: 0; z-index: -1;
-  width: 100%; height: 100%;
+  /* window-tall; js/ascii-bg.js slides it down the section as you scroll */
+  position: absolute; top: 0; left: 0; z-index: -1;
+  width: 100%; height: 100vh;
   pointer-events: none;
-  /* fade out before the works section */
-  -webkit-mask-image: linear-gradient(#000 82%, transparent);
-  mask-image: linear-gradient(#000 82%, transparent);
 }
 
 /* ---------- Hero: the paper sheet ---------- */
