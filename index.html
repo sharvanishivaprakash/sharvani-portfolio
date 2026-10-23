@@ -9,13 +9,13 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
   <a class="skip" href="#work">Skip to work</a>
 
-  <!-- Figma "Portfolio final" (page 2). On desktop every block is placed at its Figma
+  <!-- Figma "Portfolio final 1" (page 2). On desktop every block is placed at its Figma
        position: --x / --y / --w are Figma pixels inside the section, scaled by --u. -->
   <header class="top-nav">
     <a class="logo" href="#top" aria-label="Sharvani SP, back to top">
@@ -32,42 +32,51 @@
   </header>
 
   <main id="top">
-    <!-- Hero: the paper sheet with tabs -->
-    <section class="frame hero" style="--h:900" aria-labelledby="hero-name">
-      <div class="sheet">
-        <img class="at paper" style="--x:367;--y:178;--w:762" src="assets/final/paper.webp" alt="" width="762" height="722">
-        <img class="at clip reveal" style="--x:358;--y:139;--w:91" src="assets/final/paperclip.webp" alt="" width="91" height="140">
+    <!-- Hero and the statement share a live ASCII field behind them (js/ascii-bg.js) -->
+    <div class="ascii-zone">
+      <canvas class="ascii-bg" aria-hidden="true"></canvas>
+
+      <!-- Hero: the paper sheet with tabs -->
+      <section class="frame hero" style="--h:900" aria-labelledby="hero-name">
+        <img class="at paper" style="--x:348;--y:178;--w:762" src="assets/final/paper.webp" alt="" width="762" height="722">
+        <img class="at clip reveal" style="--x:341;--y:139;--w:91" src="assets/final/paperclip.webp" alt="" width="91" height="140">
 
         <ul class="tabs" aria-label="Curious, observant, thoughtful, experimental">
-          <li class="at" style="--x:1086;--y:249;--w:35">Curious</li>
-          <li class="at" style="--x:1086;--y:354;--w:35">Observant</li>
-          <li class="at" style="--x:1086;--y:480;--w:35">Thoughtful</li>
-          <li class="at" style="--x:1085;--y:606;--w:35">Experimental</li>
+          <li class="at" style="--x:1068;--y:249;--w:35">Curious</li>
+          <li class="at" style="--x:1068;--y:354;--w:35">Observant</li>
+          <li class="at" style="--x:1068;--y:480;--w:35">Thoughtful</li>
+          <li class="at" style="--x:1067;--y:606;--w:35">Experimental</li>
         </ul>
 
-        <img class="at hey reveal" style="--x:420;--y:299;--w:163" src="assets/final/hey-its.webp" alt="hey, it’s" width="163" height="60">
-        <h1 class="at hero-name reveal" style="--x:494;--y:378;--w:504;--i:1" id="hero-name">SHARVANI <span aria-hidden="true">*</span></h1>
-        <p class="at hero-role reveal" style="--x:621;--y:493;--w:237;--i:1">Interaction Designer</p>
-        <p class="at hero-line reveal" style="--x:473;--y:588;--w:533;--i:2">An interaction designer exploring the <br>intersection of <b>human behaviour, technology</b>, and <b>meaningful experiences.</b></p>
-        <div class="at hero-ctas reveal" style="--x:594;--y:743;--w:253;--i:3">
-          <a class="btn" href="#work">Explore my work</a>
-          <a class="btn js-resume" href="#">Resume</a>
+        <img class="at hey reveal" style="--x:454;--y:327;--w:188" src="assets/final/hey-its.webp" alt="hey, it’s" width="188" height="81">
+        <h1 class="at hero-name reveal" style="--x:480;--y:378;--w:479;--i:1" id="hero-name">SHARVANI<span aria-hidden="true"> *</span></h1>
+        <p class="at hero-role reveal" style="--x:480;--y:493;--w:479;--i:1">Interaction Designer</p>
+        <p class="at hero-line reveal" style="--x:453;--y:597;--w:533;--i:2">An interaction designer exploring the <br>intersection of <b>human behaviour, technology,</b> and <b>meaningful experiences.</b></p>
+        <div class="at hero-ctas reveal" style="--x:604;--y:693;--w:240;--i:3">
+          <a class="btn btn-solid" href="#work">Explore my work
+            <span class="btn-icon icon-down" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg></span>
+          </a>
+          <a class="btn js-resume" href="#">Resume
+            <span class="btn-icon icon-out" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg></span>
+          </a>
         </div>
 
-        <img class="at sticker st-currently reveal" style="--x:307;--y:549;--w:145;--i:3" src="assets/final/sticker-currently.webp" alt="Sticker: currently, interaction design" width="145" height="110">
-        <img class="at sticker st-coffee reveal" style="--x:903;--y:764;--w:189;--i:3" src="assets/final/sticker-coffee.webp" alt="" width="189" height="120">
-      </div>
-    </section>
+        <img class="at sticker st-currently reveal" style="--x:292;--y:629;--w:166;--i:3" src="assets/final/sticker-currently.webp" alt="Sticker: currently, interaction design" width="166" height="133">
+        <img class="at sticker st-star reveal" style="--x:904;--y:616;--w:350;--i:3" src="assets/final/star.webp" alt="" width="350" height="350">
+      </section>
 
-    <!-- Statement -->
-    <section class="frame statement" style="--h:800">
-      <p class="at" style="--x:234;--y:340;--w:1022">I <b>connect the dots, question the obvious</b>, <br>and look for meaning in the things we often take for granted. <br>Sometimes, a little observation reveals a <b>problem worth solving</b>. <br>Sometimes, <b>it sparks an idea worth exploring.</b></p>
-    </section>
+      <!-- Statement -->
+      <section class="frame statement" style="--h:800">
+        <div class="at statement-box" style="--x:272;--y:400;--w:895">
+          <p>I <b>connect the dots, question the obvious</b>, <br>and look for meaning in the things we often take for granted. <br>Sometimes, a little observation reveals a <b>problem worth solving</b>. <br>Sometimes, <b>it sparks an idea worth exploring.</b></p>
+        </div>
+      </section>
+    </div>
 
     <!-- Selected works -->
     <section class="frame works" id="work" style="--h:1700" aria-labelledby="work-title">
-      <h2 class="at works-title" style="--x:472;--y:91;--w:534" id="work-title">Selected Works <span aria-hidden="true">*</span></h2>
-      <div class="at tape" style="--x:521;--y:179;--w:368">
+      <h2 class="at works-title" style="--x:454;--y:126;--w:534" id="work-title">Selected Works<span aria-hidden="true">*</span></h2>
+      <div class="at tape" style="--x:537;--y:180;--w:368">
         <img src="assets/final/tape.webp" alt="" width="368" height="184">
         <p>A collection of questions <br>I turned into experiences.</p>
       </div>
@@ -75,15 +84,15 @@
     </section>
 
     <!-- About me -->
-    <section class="frame about" id="about" style="--h:1300" aria-labelledby="about-title">
-      <h2 class="at big-label" style="--x:102;--y:201;--w:242" id="about-title">About me <span aria-hidden="true">*</span></h2>
-      <img class="at collage" style="--x:117;--y:432;--w:480" src="assets/final/collage.webp" alt="A wire shopping basket holding little pieces of Sharvani’s world: a lemon, a Filter Kaapi stamp, a woodblock, googly eyes, a camera, a photo of Sharvani in sunglasses, chocolates and a question mark." width="480" height="660" loading="lazy">
+    <section class="frame about" id="about" style="--h:1120" aria-labelledby="about-title">
+      <h2 class="at big-label" style="--x:121;--y:80;--w:300" id="about-title">About me<span aria-hidden="true">*</span></h2>
+      <img class="at collage" style="--x:117;--y:269.5;--w:480" src="assets/final/collage.webp" alt="A wire shopping basket holding little pieces of Sharvani’s world: a lemon, a Filter Kaapi stamp, a woodblock, googly eyes, a camera, a photo of Sharvani in sunglasses, chocolates and a question mark." width="480" height="660" loading="lazy">
 
-      <div class="at receipt" style="--x:679;--y:210;--w:691">
+      <div class="at receipt" style="--x:677;--y:102.6;--w:678">
         <p class="r-hey">Hey, I’m Sharvani .</p>
         <p class="r-lead">A molecular biologist turned designer from Mysuru, curious about how the <br>world works and what makes people tick.</p>
         <p class="r-small">I collect little pieces of the world wherever I go. <br><b>Stories, people, places, behaviours, questions,</b> and the <br>tiny details that are easy to miss.</p>
-        <p class="r-lead r-turn">That's where design comes in.</p>
+        <p class="r-turn">That's where design comes in.</p>
         <p class="r-small r-last">I'm interested in the <b>space between people and technology</b>, making things easier to navigate, more engaging to interact , and more thoughtful to experience.</p>
         <ul class="chips">
           <li>Still collecting</li>
@@ -94,36 +103,26 @@
     </section>
 
     <!-- Design approach -->
-    <section class="frame approach" style="--h:1388" aria-labelledby="approach-title">
-      <h2 class="at small-label" style="--x:132;--y:85;--w:239" id="approach-title">My Design Approach *</h2>
-      <p class="at small-label" style="--x:1092;--y:93;--w:227">What sets me apart *</p>
+    <section class="frame approach" style="--h:1309" aria-labelledby="approach-title">
+      <h2 class="at approach-title" style="--x:120;--y:117;--w:640" id="approach-title">My Design Approach *</h2>
+      <p class="at approach-sub" style="--x:120;--y:193;--w:240">What sets me apart *</p>
+
+      <svg class="at big-star" style="--x:0;--y:814;--w:373" viewBox="0 0 373 533" aria-hidden="true"><path d="M-14.9786 35.8233L112.648 0.781325L113.194 0.631972L113.275 1.19133L142.993 204.927L298.161 71.5136L298.59 71.1449L298.904 71.6158L371.477 180.748L371.792 181.221L371.282 181.473L186.823 272.461L360.503 377.878L360.988 378.172L360.634 378.616L278.433 482.014L278.081 482.457L277.685 482.053L136.308 337.659L90.117 531.57L89.986 532.122L-33.9424 485.647L-33.6791 485.146L59.0246 308.676L-142.436 324.504L-143.003 324.549L-142.975 323.98L-136.376 193.217L-136.347 192.656L-135.793 192.749L63.838 226.345L-15.3078 36.4985L-15.5257 35.9743L-14.9786 35.8233Z"/></svg>
 
       <ol class="steps">
-        <li class="step" style="--x:99;--y:440">
-          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
-          <span class="at step-text" style="--x:21;--y:70;--w:360"><b>Understand</b><em>     the people.</em></span>
-        </li>
-        <li class="step" style="--x:508;--y:576">
-          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
-          <span class="at step-text" style="--x:49;--y:70;--w:356"><b>Unpack       </b><em>   the problem.</em></span>
-        </li>
-        <li class="step" style="--x:921;--y:711">
-          <img class="at" style="--x:0;--y:0;--w:206" src="assets/final/circle.webp" alt="" width="206" height="206" loading="lazy">
-          <span class="at step-text" style="--x:62;--y:70;--w:379"><b>Shape      </b><em>     the experience.</em></span>
-        </li>
+        <li class="card" style="--cx:329.4;--cy:542.4;--r:-9.18deg"><b>*Understand</b><em>the people</em><span class="badge" style="--bx:386;--by:-30">1.</span></li>
+        <li class="card" style="--cx:675.4;--cy:694.6;--r:10.37deg"><b>*Unpack</b><em>the problem</em><span class="badge" style="--bx:386;--by:-30">2.</span></li>
+        <li class="card" style="--cx:1087.7;--cy:540.2;--r:-3.73deg"><b>*Shape</b><em>the experience</em><span class="badge" style="--bx:386;--by:-30">3.</span></li>
       </ol>
-      <span class="at star" style="--x:88;--y:620;--w:109" aria-hidden="true">*</span>
-      <span class="at star" style="--x:622;--y:591;--w:109" aria-hidden="true">*</span>
-      <span class="at star" style="--x:907;--y:886;--w:109" aria-hidden="true">*</span>
 
-      <p class="at closing" style="--x:121;--y:962;--w:576">I connect scattered insights to design products with clarity and direction.</p>
+      <p class="at closing" style="--x:807;--y:1066;--w:514">I connect scattered insights to design products with clarity and direction.</p>
     </section>
 
     <!-- What next -->
     <section class="next" id="contact" aria-labelledby="next-title">
       <div class="frame" style="--h:900">
-        <h2 class="at next-title" style="--x:121;--y:21;--w:400" id="next-title">What next ?</h2>
-        <p class="at next-line" style="--x:121;--y:213;--w:703">Let's make something meaningful together !</p>
+        <h2 class="at next-title" style="--x:125;--y:153;--w:635" id="next-title">What next ?</h2>
+        <p class="at next-line" style="--x:125;--y:245;--w:700">Let's make something meaningful together !</p>
       </div>
     </section>
   </main>
@@ -134,5 +133,6 @@
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/ascii-bg.js"></script>
 </body>
 </html>
