@@ -274,6 +274,27 @@ b { font-weight: 500; }
 }
 .big-label span { font-weight: 700; }
 
+/* The basket with its stickers. Each piece sits at its Figma spot inside the 550.4 × 715 box (--sx, --sy, --sw). */
+.cart { aspect-ratio: 550.4 / 715; }
+.cart img {
+  position: absolute;
+  left: calc(var(--sx) / 550.4 * 100%); top: calc(var(--sy) / 715 * 100%);
+  width: calc(var(--sw) / 550.4 * 100%); max-width: none;
+  pointer-events: none; user-select: none;
+}
+
+/* Scroll story (desktop, set up by js/about-scroll.js): the section stays put while you scroll
+   through a taller track, the stickers fall in and the card text is uncovered.
+   --u is shrunk here so the part from the title to the bottom of the card (Figma y 60 to 1060)
+   fits on screen under the nav bar while it is pinned. */
+.js-about-pin .about-track { height: calc(var(--track-h, 1120px) + var(--travel, 240vh)); }
+.js-about-pin .about {
+  --u: min(1px, calc(100vw / 1440), calc((100svh - 84px) / 1000));
+  position: sticky; top: calc(76px - 60 * var(--u));
+}
+.js-about .cart-item { visibility: hidden; will-change: transform; }
+.js-about .uncover { clip-path: inset(0 0 100% 0); will-change: clip-path, transform; }
+
 .receipt {
   height: calc(918 * var(--u));
   padding: calc(136 * var(--u)) calc(30 * var(--u)) 0 calc(52 * var(--u));
@@ -317,6 +338,9 @@ b { font-weight: 500; }
 .approach-sub { font-weight: 300; font-size: calc(24 * var(--u)); line-height: calc(24 * var(--u)); white-space: nowrap; }
 
 .big-star { height: auto; overflow: visible; fill: none; stroke: var(--blue); stroke-width: 1; pointer-events: none; }
+/* the outlined star turns slowly, all the time */
+.big-star .spin { transform-box: fill-box; transform-origin: center; animation: spin 60s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
 
 /* Three tilted cards, placed by their Figma centre (--cx, --cy) and rotation (--r) */
 .card {
@@ -506,7 +530,7 @@ body.cursor-out .cursor-eye { opacity: 0; }
 
   .about { max-width: 600px; padding: 96px 16px 40px; }
   .big-label { font-size: 40px; line-height: 1.2; letter-spacing: -1px; }
-  .collage { width: min(100%, 380px); margin: 28px auto 0; }
+  .cart { width: min(100%, 420px); margin: 28px auto 0; position: relative; }
   .receipt { height: auto; margin-top: 40px; padding: 36px 22px 64px; --scallop: 22px; }
   .r-hey { font-size: 32px; line-height: 1.2; }
   .r-lead, .r-small, .r-last { width: auto; }
@@ -558,4 +582,6 @@ body.cursor-out .cursor-eye { opacity: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
   .reveal, .is-loaded .reveal { opacity: 1; translate: none; }
+  .js-about .cart-item { visibility: visible; }
+  .js-about .uncover { clip-path: none; }
 }
