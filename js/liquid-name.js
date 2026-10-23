@@ -23,10 +23,10 @@
 
     // how far the letters bend scales with the type, so it reads the same on a phone
     const size = parseFloat(getComputedStyle(name).fontSize) || 96;
-    const fx = 0.008 + Math.sin(t * 0.45) * 0.0025;
-    const fy = 0.016 + Math.cos(t * 0.33) * 0.005;
+    const fx = 0.012 + Math.sin(t * 1.1) * 0.004;
+    const fy = 0.024 + Math.cos(t * 0.8) * 0.008;
     noise.setAttribute("baseFrequency", `${(fx * 96 / size).toFixed(5)} ${(fy * 96 / size).toFixed(5)}`);
-    warp.setAttribute("scale", (amount * size * 0.13).toFixed(2));
+    warp.setAttribute("scale", (amount * size * (0.5 + Math.sin(t * 0.7) * 0.1)).toFixed(2));
 
     if (visible && (amount > 0.01 || target > 0)) raf = requestAnimationFrame(frame);
     else if (amount <= 0.01) warp.setAttribute("scale", "0");

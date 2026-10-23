@@ -52,9 +52,9 @@
         <h1 class="at hero-name reveal" style="--x:480;--y:378;--w:479;--i:1" id="hero-name">SHARVANI<span aria-hidden="true"> *</span></h1>
         <!-- The name's slow liquid wobble (js/liquid-name.js); it settles while you hover the name -->
         <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
-          <filter id="liquid" x="-8%" y="-25%" width="116%" height="150%" color-interpolation-filters="sRGB">
+          <filter id="liquid" x="-12%" y="-45%" width="124%" height="190%" color-interpolation-filters="sRGB">
             <feTurbulence type="fractalNoise" baseFrequency="0.011 0.02" numOctaves="1" seed="4" result="noise"/>
-            <feGaussianBlur in="noise" stdDeviation="3" result="soft"/>
+            <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
             <feDisplacementMap in="SourceGraphic" in2="soft" scale="0" xChannelSelector="R" yChannelSelector="G" result="bent"/>
             <!-- smooth the bent edges: soften, then sharpen the outline again -->
             <feGaussianBlur in="bent" stdDeviation="0.9" result="blurred"/>
