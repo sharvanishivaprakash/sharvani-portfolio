@@ -24,8 +24,9 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `css/style.css`: colours and fonts at the top in `:root` (`--blue` is the accent), then sections
 - `js/main.js`: renders the selected works and case studies from `content.js`
 - `js/cursor.js`: the eye cursor (desktop only). It turns blue over anything clickable and over the nav bar.
-- `js/ascii-bg.js`: the slowly morphing ASCII blobs behind the hero and the "I connect the dots" statement (matched to Alex's reference recording).
-  Characters swell and turn blue near the cursor, and a click sends out a ring. It stays still for visitors who ask for reduced motion.
+- `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I connect the dots" statement.
+  Around the statement a few dots grow and get joined by lines, one after another.
+  Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.
