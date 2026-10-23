@@ -147,6 +147,9 @@ b { font-weight: 500; }
   letter-spacing: calc(-7.68 * var(--u)); text-align: center; white-space: nowrap;
   color: var(--blue);
 }
+/* the liquid wobble filter lives in index.html; js/liquid-name.js switches it on */
+.liquid-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.hero-name.is-liquid { filter: url(#liquid); }
 .hero-role {
   font-size: calc(24 * var(--u)); line-height: calc(24 * var(--u)); letter-spacing: calc(-0.48 * var(--u));
   text-align: center; white-space: nowrap; color: var(--dark-ink);

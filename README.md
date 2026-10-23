@@ -27,6 +27,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I connect the dots" statement.
   Around the statement a few dots grow and get joined by lines, one after another.
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
+- `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.
