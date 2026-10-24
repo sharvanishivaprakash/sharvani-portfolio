@@ -45,3 +45,5 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.
+The CSS and JS links in `index.html` and `project.html` end in `?v=<number>`. Bump that number whenever the CSS or JS changes,
+so visitors' browsers load the new files instead of an old cached copy.
