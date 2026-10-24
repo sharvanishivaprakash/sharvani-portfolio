@@ -293,6 +293,10 @@ b { font-weight: 500; }
   position: sticky; top: calc(76px - 60 * var(--u));
 }
 .js-about .cart-item { visibility: hidden; will-change: transform; }
+/* once the basket is full the stickers can be picked up and put anywhere */
+.cart.is-full { z-index: 3; }
+.cart.is-full .cart-item { pointer-events: auto; touch-action: none; cursor: grab; }
+.cart .cart-item.is-held { cursor: grabbing; filter: drop-shadow(0 calc(14 * var(--u)) calc(18 * var(--u)) rgba(0, 0, 0, 0.45)); }
 .js-about .uncover { clip-path: inset(0 0 100% 0); will-change: clip-path, transform; }
 
 .receipt {
@@ -314,15 +318,14 @@ b { font-weight: 500; }
   width: calc(599 * var(--u)); margin-top: calc(24 * var(--u));
   font-size: calc(32 * var(--u)); line-height: calc(38.4 * var(--u)); letter-spacing: calc(-2 * var(--u));
 }
-.r-small { width: calc(613 * var(--u)); margin-top: calc(80 * var(--u)); font-weight: 300; font-size: calc(20 * var(--u)); line-height: calc(20 * var(--u)); }
-.r-small b { font-weight: 500; }
-.r-turn { margin-top: calc(80 * var(--u)); font-size: calc(32 * var(--u)); line-height: calc(32 * var(--u)); }
+.r-small { width: calc(613 * var(--u)); margin-top: calc(56 * var(--u)); font-weight: 300; font-size: calc(24 * var(--u)); line-height: calc(24 * var(--u)); }
+.r-turn { margin-top: calc(55 * var(--u)); font-size: calc(32 * var(--u)); line-height: calc(32 * var(--u)); }
 .r-last { width: calc(599 * var(--u)); margin-top: calc(12 * var(--u)); }
 .chips {
   display: flex; gap: calc(12 * var(--u));
-  /* the dashed line sits 98px under the last paragraph, the chips 56px under the line */
+  /* the dashed line sits 98px under the last paragraph, the chips 59px under the line */
   margin: calc(98 * var(--u)) 0 0 calc(-9 * var(--u));
-  padding: calc(56 * var(--u)) 0 0;
+  padding: calc(59 * var(--u)) 0 0;
   width: calc(631 * var(--u));
   background: repeating-linear-gradient(to right, #000 0 calc(6 * var(--u)), transparent calc(6 * var(--u)) calc(12 * var(--u))) 0 0 / 100% 2px no-repeat;
 }

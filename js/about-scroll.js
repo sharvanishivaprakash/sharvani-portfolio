@@ -3,6 +3,8 @@
   At first only the empty basket is there. As you scroll, the stickers fall into it one by one,
   starting with Sharvani's face, and the text on the blue card is uncovered line by line alongside.
   Scrolling back up takes them out again.
+  Once every sticker is in the basket, they can be picked up and dropped anywhere
+  (the eye cursor says "Drag"). After the first one is moved, the stickers stay out for good.
 
   On desktop the section stays pinned while you scroll through a taller track (see .about-track in the CSS).
   Under 900px wide the page is stacked, so the stickers follow the basket's position on screen
@@ -24,6 +26,8 @@
   const SPIN = items.map((_, i) => (i % 2 ? 1 : -1) * (10 + ((i * 7) % 9)));   // a little tilt while falling
 
   let p = 0, raf = 0, pinned = false;
+  let full = false, locked = false, z = 10;    // locked: someone has moved a sticker, so the story stays finished
+  items.forEach((el) => { el.dx = 0; el.dy = 0; });
   root.classList.add("js-about");
 
   function setup() {
@@ -48,7 +52,7 @@
     const step = (END - START) / items.length;
     const vh = innerHeight, cartTop = cart.getBoundingClientRect().top;
     items.forEach((el, i) => {
-      const t = clamp((progress - (START + i * step)) / (step * 1.5));
+      const t = locked ? 1 : clamp((progress - (START + i * step)) / (step * 1.5));
       if (t <= 0) { el.style.visibility = "hidden"; return; }
       el.style.visibility = "visible";
       // start just above the top of the screen
@@ -56,9 +60,51 @@
       const e = fall(t);
       const y = -(1 - e) * Math.max(drop, vh * 0.4);
       const r = SPIN[i] * (1 - Math.min(1, e));
-      el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg)`;
+      el.style.transform = `translate3d(${el.dx.toFixed(1)}px, ${(y + el.dy).toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg)` +
+        (el === held ? " scale(1.06)" : "");
+    });
+    setFull(locked || progress >= START + (items.length - 1 + 1.5) * step);
+  }
+
+  /* ---------- picking stickers up once the basket is full ---------- */
+
+  function setFull(on) {
+    if (on === full) return;
+    full = on;
+    cart.classList.toggle("is-full", on);
+    items.forEach((el) => {
+      if (on) { el.dataset.cursor = "view"; el.dataset.cursorLabel = "Drag"; }
+      else { delete el.dataset.cursor; delete el.dataset.cursorLabel; }
     });
   }
+
+  let held = null, sx = 0, sy = 0, ox = 0, oy = 0;
+  items.forEach((el) => {
+    el.draggable = false;
+    el.addEventListener("pointerdown", (e) => {
+      if (!full || e.button > 0) return;
+      e.preventDefault();
+      held = el; locked = true;
+      sx = e.clientX; sy = e.clientY; ox = el.dx; oy = el.dy;
+      el.style.zIndex = ++z;                     // the one in your hand comes to the front
+      el.classList.add("is-held");
+      el.setPointerCapture(e.pointerId);
+      kick();
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (held !== el) return;
+      el.dx = ox + e.clientX - sx; el.dy = oy + e.clientY - sy;
+      drawItems(p);
+    });
+    const drop = () => {
+      if (held !== el) return;
+      held = null;
+      el.classList.remove("is-held");
+      drawItems(p);
+    };
+    el.addEventListener("pointerup", drop);
+    el.addEventListener("pointercancel", drop);
+  });
 
   function drawText(el, t) {
     const e = 1 - (1 - t) ** 3;
@@ -86,7 +132,8 @@
     else raf = requestAnimationFrame(tick);
 
     drawItems(p);
-    if (pinned) {
+    if (locked) texts.forEach((el) => drawText(el, 1));
+    else if (pinned) {
       // the text keeps pace with the stickers: one block for every one and a half stickers
       const step = (END - START) / texts.length;
       texts.forEach((el, i) => drawText(el, clamp((p - (START + i * step)) / step)));
@@ -96,7 +143,7 @@
     }
   }
 
-  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  function kick() { if (!raf) raf = requestAnimationFrame(tick); }
   addEventListener("scroll", kick, { passive: true });
   addEventListener("resize", setup);
   wide.addEventListener("change", setup);
