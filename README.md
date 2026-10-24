@@ -14,7 +14,7 @@ The homepage is built from the Figma frame "Portfolio final 1" (page 2 of the Sh
 - `js/content.js` holds the selected works (title, summary, tags, cover image, case study details), the email and links.
   The Resume button uses the `[Resume]` link there; until it's set, it shows "coming soon".
 - Images exported from Figma live in `assets/final/`.
-- The browser-tab icon is the blue doodle (`assets/final/logo.webp`), the same mark shown next to SP in the nav.
+- The browser-tab icon is the blue doodle, the same mark shown next to SP in the nav (`assets/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, made from `assets/final/logo.webp`).
 
 Text in `[square brackets]` is placeholder. Projects without an `image` show a plain pale panel, as in the design.
 
