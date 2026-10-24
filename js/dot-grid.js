@@ -1,8 +1,9 @@
 /*
   A softly moving dot grid behind the hero and the "I connect the dots" statement.
   The grid sways a little and a slow wave runs through it; dots near the cursor grow and turn blue.
-  Around the statement, blue lines join the dots into a box around the words. The box is drawn
-  one line at a time as you scroll down to it, and undraws again if you scroll back up.
+  Around the statement, six dots (three above the words, three below) are joined into a box.
+  As you scroll down to it the top lines are drawn first, then the words appear line by line,
+  then the box closes. Scrolling back up takes it all away again.
 
   The canvas is only as tall as the window and follows the scroll inside its section,
   so it stays sharp on retina screens without a huge bitmap.
@@ -40,37 +41,40 @@
 
   /* ---------- the box around the statement ---------- */
 
-  // the grid dots at the corners of a box a little bigger than the words, plus a few dots
-  // along each side, so the box is drawn as a chain of short lines from dot to dot
+  const lines = box ? [...box.querySelectorAll(".s-line")] : [];
+
+  // three grid dots above the words and three below: the corners and the middle of each side
   function boxPath() {
     const z = zone.getBoundingClientRect(), b = box.getBoundingClientRect();
-    const step = W < 700 ? 3 : 4;                       // grid cells per line
     // keep the dots (and their rings, as the grid sways) inside the window
     const edge = gap * 0.35 + 9;
     const col = (x) => Math.max(Math.ceil((edge - gap / 2) / gap), Math.min(Math.floor((W - edge - gap / 2) / gap), x));
-    let iL = Math.floor((b.left - z.left - gap * 1.5) / gap), iR = Math.ceil((b.right - z.left + gap * 0.5) / gap);
-    // widen the box a touch so the top and bottom split into equal lines
-    const extra = Math.ceil((iR - iL) / step) * step - (iR - iL);
-    iL = col(iL - Math.floor(extra / 2)); iR = col(iR + Math.ceil(extra / 2));
-    const jT = Math.floor((b.top - z.top - gap * 1.5) / gap), jB = Math.ceil((b.bottom - z.top + gap * 0.5) / gap);
-    const pts = [];
-    const side = (a, c, n) => {                         // a to c, leaving c for the next side
-      const k = Math.max(1, Math.round(n / step));
-      for (let s = 0; s < k; s++) pts.push([Math.round(a[0] + (c[0] - a[0]) * s / k), Math.round(a[1] + (c[1] - a[1]) * s / k)]);
-    };
-    side([iL, jT], [iR, jT], iR - iL);
-    side([iR, jT], [iR, jB], jB - jT);
-    side([iR, jB], [iL, jB], iR - iL);
-    side([iL, jB], [iL, jT], jB - jT);
-    return pts;
+    const iL = col(Math.floor((b.left - z.left - gap * 1.5) / gap)), iR = col(Math.ceil((b.right - z.left + gap * 0.5) / gap));
+    const iM = Math.round((iL + iR) / 2);
+    const jT = Math.floor((b.top - z.top - gap * 2.5) / gap), jB = Math.ceil((b.bottom - z.top + gap * 1.5) / gap);
+    return [[iL, jT], [iM, jT], [iR, jT], [iR, jB], [iM, jB], [iL, jB]];
   }
 
-  // 0 when the words come up from the bottom of the window, 1 once they're near the top,
-  // so the lines keep appearing all the way through the scroll past the words
+  // 0 when the words come up from the bottom of the window, 1 once they're a bit above the middle
   function scrolled() {
     if (still) return 1;
-    const b = box.getBoundingClientRect();
-    return Math.max(0, Math.min(1, (innerHeight * 0.95 - b.top) / (innerHeight * 0.7)));
+    const b = box.getBoundingClientRect(), mid = (b.top + b.bottom) / 2;
+    return Math.max(0, Math.min(1, (innerHeight * 0.92 - mid) / (innerHeight * 0.5)));
+  }
+
+  // how much of each part is done at a given point of the scroll:
+  // the two top lines, then the words line by line, then the four lines that close the box
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const TOP = [0, 0.18], WORDS = [0.16, 0.74], CLOSE = [0.74, 1];
+  function showLines(p) {
+    const n = lines.length, span = (WORDS[1] - WORDS[0]) / n;
+    lines.forEach((el, k) => {
+      const t = clamp01((p - WORDS[0] - k * span) / (span * 1.2));
+      const e = 1 - (1 - t) ** 3;
+      el.style.opacity = e.toFixed(3);
+      el.style.transform = t >= 1 ? "" : `translateY(${((1 - e) * 18).toFixed(1)}px)`;
+      el.style.filter = t >= 1 ? "" : `blur(${((1 - e) * 6).toFixed(1)}px)`;
+    });
   }
 
   /* ---------- drawing ---------- */
@@ -136,28 +140,31 @@
     if (!box) return;
     const goal = scrolled();
     drawn += (goal - drawn) * 0.12;
-    if (Math.abs(goal - drawn) < 0.001) drawn = goal;
+    if (still || Math.abs(goal - drawn) < 0.001) drawn = goal;
+    showLines(drawn);
     if (drawn <= 0) return;
 
     const pts = boxPath().map(([i, j]) => pos(i, j, sx, sy));
-    const n = pts.length, done = drawn * n;             // lines finished so far (and a bit of the next)
+    // line k runs from dot k to dot k + 1: lines 0-1 along the top, 2-5 close the box
+    const part = (k) => k < 2 ? clamp01((drawn - TOP[0]) / (TOP[1] - TOP[0]) * 2 - k)
+                              : clamp01((drawn - CLOSE[0]) / (CLOSE[1] - CLOSE[0]) * 4 - (k - 2));
 
     ctx.lineCap = "round";
     ctx.lineWidth = 1.4;
     ctx.strokeStyle = `rgba(${BLUE}, 0.85)`;
     ctx.beginPath();
-    for (let k = 0; k < n; k++) {
-      const p = Math.max(0, Math.min(1, done - k));
-      if (!p) break;
-      const [ax, ay] = pts[k], [bx, by] = pts[(k + 1) % n];
+    for (let k = 0; k < 6; k++) {
+      const p = part(k);
+      if (!p) continue;
+      const [ax, ay] = pts[k], [bx, by] = pts[(k + 1) % 6];
       ctx.moveTo(ax, ay); ctx.lineTo(ax + (bx - ax) * p, ay + (by - ay) * p);
     }
     ctx.stroke();
 
-    // each dot pops as the line reaches it
-    for (let k = 0; k < n; k++) {
-      const p = Math.max(0, Math.min(1, (done - k + 0.15) / 0.3));
-      if (!p) break;
+    // each dot pops as the line reaches it (the first one as soon as drawing starts)
+    for (let k = 0; k < 6; k++) {
+      const p = k === 0 ? clamp01(drawn / 0.04) : clamp01(part(k - 1) * 1.6 - 0.6);
+      if (!p) continue;
       const [x, y] = pts[k];
       const pop = 1 + Math.sin(p * Math.PI) * 0.6;       // a little overshoot
       ctx.fillStyle = "#fff";

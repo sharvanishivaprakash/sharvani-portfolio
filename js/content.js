@@ -19,6 +19,7 @@ window.SITE = {
   ],
 
   // Selected works, in order (two per row). `tags` show under the summary.
+  // `hover` is a second image that fades in over the cover when someone hovers the card (null: no swap).
   projects: [
     {
       slug: "andaaj",
@@ -26,6 +27,7 @@ window.SITE = {
       summary: "Translating nutrition into the language of the kitchen.",
       tags: ["UI/UX", "Product Design", "Food Systems"],
       image: "assets/final/andaaj-cover.webp",
+      hover: "assets/final/andaaj-hover.webp",
       meta: { type: "Mobile App", discipline: "UI-UX Design", year: "2026", team: "[Individual / Team]" }
     },
     {
@@ -34,6 +36,7 @@ window.SITE = {
       summary: "Making the invisible weight of an environment visible.",
       tags: ["UI/UX", "Data Visualization", "Dashboard Design"],
       image: null,
+      hover: null,
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     },
     {
@@ -42,6 +45,7 @@ window.SITE = {
       summary: "What if you could uncover history instead of just reading it?",
       tags: ["Multimodal Interaction", "Coding", "Experiential Design"],
       image: null,
+      hover: null,
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     },
     {
@@ -50,6 +54,7 @@ window.SITE = {
       summary: "Bringing folk music culture to life through interaction.",
       tags: ["Physical Computing", "Arduino Prototyping", "Sound Interaction"],
       image: null,
+      hover: null,
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     }
   ]
