@@ -3,7 +3,8 @@
   When the section comes into view, the pill tabs drop in one after another and land in a loose pile
   along the bottom. Each one has its own fall speed, tilt and spot, lands with a small bounce and then stays.
   The pile is worked out like a stack: every tab rests on whatever is already under it, so tabs overlap
-  and lean on each other. The bottom row sits partly below the edge and is a little blurred for depth.
+  and lean on each other. The bottom row sits just below the edge and is a little blurred for depth.
+  Once they have landed, hovering a tab nudges it aside; it slides back when the pointer leaves.
   It plays once. Visitors who ask for reduced motion see the finished pile straight away.
 */
 (function () {
@@ -27,7 +28,7 @@
     const th = tabs[0].offsetHeight;
     const rand = rng(7);
     const COL = 4, n = Math.ceil(W / COL) + 1;
-    const ground = new Float32Array(n).fill(-th * 0.42);      // the first row sinks partly below the edge
+    const ground = new Float32Array(n).fill(-th * 0.12);      // the first row sits just below the edge
     const at = (x) => Math.max(0, Math.min(n - 1, Math.round(x / COL)));
     const highest = (x0, x1) => { let m = -1e9; for (let i = at(x0); i <= at(x1); i++) m = Math.max(m, ground[i]); return m; };
     const spots = [];
@@ -79,6 +80,7 @@
   function place(spots) {
     tabs.forEach((el, k) => {
       const s = spots[k], w = el.offsetWidth, h = el.offsetHeight;
+      el._s = s; el._w = w; el._h = h; el._z = k + 1;
       el.style.zIndex = k + 1;
       el.style.transform = rest(s, w, h);
       el.classList.toggle("is-deep", s.cy < h * 0.35);
@@ -87,8 +89,37 @@
   }
 
   // tab centre at (cx, cy) measured from the bottom left of the pile
-  const rest = (s, w, h, dy = 0, dr = 0) =>
-    `translate(${(s.cx - w / 2).toFixed(1)}px, ${(-(s.cy - h / 2) + dy).toFixed(1)}px) rotate(${(s.r + dr).toFixed(2)}deg)`;
+  const rest = (s, w, h, dx = 0, dy = 0, dr = 0) =>
+    `translate(${(s.cx - w / 2 + dx).toFixed(1)}px, ${(-(s.cy - h / 2) + dy).toFixed(1)}px) rotate(${(s.r + dr).toFixed(2)}deg)`;
+
+  /* ---------- nudging a tab aside on hover ---------- */
+
+  tabs.forEach((el) => {
+    const nudge = (e) => {
+      if (!landed || !el._s) return;
+      const b = el.getBoundingClientRect();
+      // push away from the pointer, but always with a clear upward-and-aside drift so it visibly flies
+      let dx = (b.left + b.width / 2) - e.clientX, dy = (b.top + b.height / 2) - e.clientY;
+      const side = (b.left + b.width / 2) < pile.getBoundingClientRect().width / 2 ? -1 : 1;
+      if (Math.abs(dx) < 10) dx = side * 20;
+      dy = -Math.abs(dy) - 24;                           // always lift, never push further down
+      const d = Math.hypot(dx, dy) || 1;
+      const reach = Math.max(42, el._h * 1.15);
+      el._hx = (dx / d) * reach; el._hy = Math.abs(dy / d) * reach;
+      el._hr = side * 7;
+      el.style.zIndex = 99;
+      el.style.transition = "transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1)";
+      el.style.transform = rest(el._s, el._w, el._h, el._hx, -el._hy, el._hr);
+    };
+    const back = () => {
+      if (!el._s) return;
+      el.style.transform = rest(el._s, el._w, el._h);
+      // drop back to its place in the stack once it has slid home
+      setTimeout(() => { if (el._z) el.style.zIndex = el._z; }, 400);
+    };
+    el.addEventListener("pointerenter", nudge);
+    el.addEventListener("pointerleave", back);
+  });
 
   /* ---------- the fall ---------- */
 
@@ -101,6 +132,7 @@
     let left = tabs.length;
     tabs.forEach((el, k) => {
       const s = spots[k], w = el.offsetWidth, h = el.offsetHeight;
+      el._s = s; el._w = w; el._h = h; el._z = k + 1;
       el.style.zIndex = k + 1;
       el.classList.toggle("is-deep", s.cy < h * 0.35);
       el.classList.add("is-placed");
@@ -108,9 +140,9 @@
       const spin = (rand() - 0.5) * 70;
       const bounce = 10 + rand() * 12;
       const a = el.animate([
-        { transform: rest(s, w, h, -drop, spin), easing: "cubic-bezier(0.45, 0, 0.9, 0.6)" },
+        { transform: rest(s, w, h, 0, -drop, spin), easing: "cubic-bezier(0.45, 0, 0.9, 0.6)" },
         { transform: rest(s, w, h), offset: 0.72, easing: "cubic-bezier(0.2, 0.6, 0.4, 1)" },
-        { transform: rest(s, w, h, -bounce, -spin * 0.04), offset: 0.86, easing: "cubic-bezier(0.6, 0, 0.8, 0.4)" },
+        { transform: rest(s, w, h, 0, -bounce, -spin * 0.04), offset: 0.86, easing: "cubic-bezier(0.6, 0, 0.8, 0.4)" },
         { transform: rest(s, w, h) }
       ], { duration: fall, delay: 120 + k * 170 + rand() * 90, fill: "backwards" });
       el.style.transform = rest(s, w, h);
