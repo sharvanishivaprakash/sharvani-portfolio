@@ -204,7 +204,7 @@ b { font-weight: 500; }
 
 /* ---------- Statement ---------- */
 
-.statement-box { padding: calc(8 * var(--u)) calc(16 * var(--u)); background: var(--paper); }
+.statement-box { padding: calc(8 * var(--u)) calc(16 * var(--u)); }
 .statement p {
   font-weight: 300; font-size: calc(32 * var(--u)); line-height: calc(40.32 * var(--u)); letter-spacing: calc(-0.64 * var(--u));
   text-align: center; white-space: nowrap;
@@ -560,8 +560,8 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .st-currently { left: -10px; bottom: 26px; width: 104px; }
   .st-star { right: -8px; bottom: -40px; width: 150px; }
 
-  .statement { padding: 72px 16px 80px; }
-  .statement-box { max-width: 640px; margin: 0 auto; padding: 12px 16px; }
+  .statement { padding: 72px 60px 80px; }   /* room for the box of dots on each side */
+  .statement-box { max-width: 640px; margin: 0 auto; padding: 12px 0; }
   .statement p { white-space: normal; font-size: clamp(19px, 4.6vw, 26px); line-height: 1.5; letter-spacing: 0; }
   .statement br { display: none; }
 
