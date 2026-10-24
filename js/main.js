@@ -151,11 +151,11 @@
       </a>`;
   }
 
-  // A case study exported from Figma: full-width image slices, plus the screens video in its spot.
+  // A case study exported from Figma: a centred stack of image slices, plus the screens video in its spot.
   function renderFigmaStudy(study, p, next) {
     const pct = (v, total) => `${(v / total) * 100}%`;
     const slices = study.slices
-      .map((s, i) => `<img src="${esc(s.src)}" srcset="${esc(s.src)} 1440w, ${esc(s.src2x)} 2880w" sizes="100vw"
+      .map((s, i) => `<img src="${esc(s.src)}" srcset="${esc(s.src)} 1440w, ${esc(s.src2x)} 2880w" sizes="(max-width: 900px) 100vw, 75vw"
           width="${study.width}" height="${s.h}" alt="${esc(s.alt)}"${i > 1 ? ' loading="lazy"' : ""} decoding="async">`)
       .join("");
     const v = study.video;
@@ -168,7 +168,6 @@
 
     const case_ = $("#case");
     case_.classList.add("case--figma");
-    document.body.classList.add("is-figma-study");
     case_.innerHTML = `
       <h1 class="sr-only">${esc(p.title)}</h1>
       <div class="figma-study" style="aspect-ratio:${study.width} / ${study.height}">${slices}${video}</div>
