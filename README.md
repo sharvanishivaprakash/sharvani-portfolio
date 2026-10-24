@@ -14,6 +14,7 @@ The homepage is built from the Figma frame "Portfolio final 1" (page 2 of the Sh
 - `js/content.js` holds the selected works (title, summary, tags, cover image, case study details), the email and links.
   The Resume button uses the `[Resume]` link there; until it's set, it shows "coming soon".
 - Images exported from Figma live in `assets/final/`.
+- The browser-tab icon is the blue doodle (`assets/final/logo.webp`), the same mark shown next to SP in the nav.
 
 Text in `[square brackets]` is placeholder. Projects without an `image` show a plain pale panel, as in the design.
 
@@ -34,7 +35,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
 - The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
 - `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
-  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`.
+  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab nudges it aside; it slides back when the pointer leaves.
 - The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
   Until they're filled in, clicking one shows "coming soon".
 
