@@ -9,6 +9,7 @@ window.SITE = {
   name: "Sharvani SP",
 
   // Contact. Leave as placeholders until you add the real ones.
+  // The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links below.
   email: "[your-email@example.com]",
   links: [
     { label: "[LinkedIn]", href: "#" },

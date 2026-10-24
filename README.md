@@ -33,6 +33,10 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
 - The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
+- `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
+  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`.
+- The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
+  Until they're filled in, clicking one shows "coming soon".
 
 ## Publishing
 Settings → Pages → deploy from the `main` branch, root folder.

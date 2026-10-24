@@ -383,6 +383,41 @@ b { font-weight: 500; }
   white-space: nowrap;
 }
 
+/* the three contact links under the line */
+.contact-links { display: flex; flex-wrap: wrap; gap: calc(14 * var(--u)) calc(40 * var(--u)); }
+.contact-links a {
+  display: inline-flex; gap: 0.35em; align-items: baseline;
+  padding-bottom: calc(4 * var(--u)); border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
+  font-weight: 400; font-size: calc(24 * var(--u)); line-height: 1.3; text-decoration: none;
+  transition: border-color 0.25s var(--ease);
+}
+.contact-links a span { display: inline-block; transition: transform 0.25s var(--ease); }
+.contact-links a:hover { border-color: #fff; }
+.contact-links a:hover span { transform: translate(2px, -2px); }
+
+/* Falling tabs: pill-shaped, thin outline, mono caps. js/falling-tabs.js places each one in the pile.
+   They sit behind the heading and links, so the words always stay readable. */
+.next { position: relative; overflow: hidden; isolation: isolate; }
+.next .frame { z-index: 1; }
+.tab-pile {
+  --tab: calc(52 * var(--u));                 /* tab height */
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 0;
+  height: calc(360 * var(--u)); pointer-events: none;
+}
+.tab-pile span {
+  position: absolute; left: 0; bottom: 0;
+  height: var(--tab); padding: 0 calc(var(--tab) * 0.52);
+  display: flex; align-items: center; white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-weight: 500;
+  font-size: calc(var(--tab) * 0.36); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);
+  visibility: hidden; will-change: transform;
+}
+.tab-pile span.is-placed { visibility: visible; }
+.tab-pile span.is-deep { filter: blur(1.6px); color: rgba(255, 255, 255, 0.7); }
+
 /* ---------- Toast ---------- */
 
 .toast {
@@ -568,6 +603,10 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .next .frame { max-width: 600px; padding: 56px 16px 200px; }
   .next-title { font-size: clamp(40px, 11vw, 56px); line-height: 1.2; }
   .next-line { margin-top: 12px; font-size: clamp(18px, 5vw, 26px); line-height: 1.5; letter-spacing: 0.3px; white-space: normal; }
+  .next .frame { padding-bottom: 300px; }
+  .contact-links { margin-top: 28px; gap: 14px 28px; }
+  .contact-links a { font-size: 18px; padding-bottom: 3px; }
+  .tab-pile { --tab: 26px; height: 250px; }
 
   .case { padding-top: 110px; }
   .case-meta { grid-template-columns: repeat(2, 1fr); }
