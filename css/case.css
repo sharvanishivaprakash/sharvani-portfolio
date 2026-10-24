@@ -1,0 +1,18 @@
+/* Case studies exported from Figma (see js/case-studies.js). */
+.case.case--figma { max-width: none; padding: 0; }
+.figma-study { position: relative; width: 100%; overflow: hidden; background: #fefefe; }
+.figma-study > img { display: block; width: 100%; height: auto; }
+.figma-video { position: absolute; }
+.figma-video video,
+.figma-video-over { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.figma-video video { object-fit: cover; }
+.figma-video-over { pointer-events: none; }
+.case--figma .case-end { max-width: 980px; margin: 0 auto; padding: 4rem var(--gutter) 2rem; }
+.case--figma .case-back { margin-bottom: 0; }
+.case--figma .case-next { margin-top: 2rem; }
+/* The page opens on white, so the "SP." wordmark is dark until the nav gets its dark backing. */
+.is-figma-study .top-nav:not(.is-scrolled) .logo span { color: #111; }
+/* On narrow screens the scaled-down page is short at the top, so give the nav room above it. */
+@media (max-width: 900px) {
+  .case.case--figma { padding-top: 64px; background: linear-gradient(#fefefe, #fefefe) top / 100% 64px no-repeat; }
+}

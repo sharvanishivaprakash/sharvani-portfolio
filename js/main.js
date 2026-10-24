@@ -127,6 +127,9 @@
     const next = S.projects[(idx + 1) % S.projects.length];
     document.title = `${p.title} — ${S.name}`;
 
+    const study = (window.CASE_STUDIES || {})[p.slug];
+    if (study) return renderFigmaStudy(study, p, next);
+
     const blocks = ["Context", "Problem", "Process", "Outcome"]
       .map((h) => `
         <section class="case-block">
@@ -146,5 +149,40 @@
       <a class="case-next" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
         <span>Next project</span><strong>${esc(next.title)} →</strong>
       </a>`;
+  }
+
+  // A case study exported from Figma: full-width image slices, plus the screens video in its spot.
+  function renderFigmaStudy(study, p, next) {
+    const pct = (v, total) => `${(v / total) * 100}%`;
+    const slices = study.slices
+      .map((s, i) => `<img src="${esc(s.src)}" srcset="${esc(s.src)} 1440w, ${esc(s.src2x)} 2880w" sizes="100vw"
+          width="${study.width}" height="${s.h}" alt="${esc(s.alt)}"${i > 1 ? ' loading="lazy"' : ""} decoding="async">`)
+      .join("");
+    const v = study.video;
+    const at = v ? `left:${pct(v.x, study.width)};top:${pct(v.y, study.height)};width:${pct(v.w, study.width)};height:${pct(v.h, study.height)}` : "";
+    const video = v ? `
+        <div class="figma-video" style="${at}">
+          <video src="${esc(v.src)}" poster="${esc(v.poster)}" autoplay muted loop playsinline preload="metadata" aria-label="${esc(v.label)}"></video>
+          ${v.overlay ? `<img class="figma-video-over" src="${esc(v.overlay)}" alt="" loading="lazy">` : ""}
+        </div>` : "";
+
+    const case_ = $("#case");
+    case_.classList.add("case--figma");
+    document.body.classList.add("is-figma-study");
+    case_.innerHTML = `
+      <h1 class="sr-only">${esc(p.title)}</h1>
+      <div class="figma-study" style="aspect-ratio:${study.width} / ${study.height}">${slices}${video}</div>
+      <div class="case-end">
+        <a class="case-back" href="index.html#work">← All work</a>
+        <a class="case-next" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
+          <span>Next project</span><strong>${esc(next.title)} →</strong>
+        </a>
+      </div>`;
+
+    // Play the screens only while they're on screen (and not at all for reduced motion).
+    const vid = $(".figma-video video", case_);
+    if (!vid) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { vid.removeAttribute("autoplay"); vid.pause(); vid.controls = true; return; }
+    new IntersectionObserver(([e]) => (e.isIntersecting ? vid.play().catch(() => {}) : vid.pause()), { rootMargin: "200px" }).observe(vid);
   }
 })();
