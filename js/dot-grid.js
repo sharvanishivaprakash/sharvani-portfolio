@@ -65,11 +65,12 @@
     return pts;
   }
 
-  // 0 when the words come up from the bottom of the window, 1 once they're a bit above the middle
+  // 0 when the words come up from the bottom of the window, 1 once they're near the top,
+  // so the lines keep appearing all the way through the scroll past the words
   function scrolled() {
     if (still) return 1;
     const b = box.getBoundingClientRect();
-    return Math.max(0, Math.min(1, (innerHeight * 0.95 - b.top) / (innerHeight * 0.55)));
+    return Math.max(0, Math.min(1, (innerHeight * 0.95 - b.top) / (innerHeight * 0.7)));
   }
 
   /* ---------- drawing ---------- */
