@@ -4,7 +4,8 @@
   along the bottom. Each one has its own fall speed, tilt and spot, lands with a small bounce and then stays.
   The pile is worked out like a stack: every tab rests on whatever is already under it, so tabs overlap
   and lean on each other. The bottom row sits just below the edge and is a little blurred for depth.
-  Once they have landed they can be played with: hovering pushes a tab aside (it springs back),
+  Once they have landed they can be played with: hovering pushes a tab aside (it springs back once
+  the pointer has moved off its spot),
   and pressing and dragging moves it anywhere in the section.
   It plays once. Visitors who ask for reduced motion see the finished pile straight away.
 */
@@ -100,29 +101,42 @@
   const SPRING = "transform 0.55s cubic-bezier(0.25, 1.6, 0.4, 1)";   // overshoots a little, like a flick
   let held = null, top = tabs.length + 1;
 
+  // A pushed tab only comes back once the pointer is clear of the spot it left, otherwise it would
+  // slide back under the pointer, get pushed again, and keep shaking.
+  function settle(el) {
+    el._pushed = false;
+    el.style.transition = SPRING;
+    el.style.transform = rest(el._s, el._w, el._h);
+  }
+  function clearOf(el, x, y) {
+    const p = pile.getBoundingClientRect();
+    const cx = p.left + el._s.cx, cy = p.bottom - el._s.cy;
+    return Math.hypot(x - cx, y - cy) > el._w / 2 + el._h;
+  }
+  addEventListener("pointermove", (e) => {
+    tabs.forEach((el) => { if (el._pushed && held !== el && clearOf(el, e.clientX, e.clientY)) settle(el); });
+  }, { passive: true });
+  document.addEventListener("pointerleave", () => tabs.forEach((el) => { if (el._pushed && held !== el) settle(el); }));
+
   tabs.forEach((el) => {
     el.addEventListener("pointerenter", (e) => {
-      if (!landed || !el._s || held) return;
+      if (!landed || !el._s || held || el._pushed) return;
       const b = el.getBoundingClientRect();
       let dx = (b.left + b.width / 2) - e.clientX, dy = (b.top + b.height / 2) - e.clientY;
       if (Math.abs(dx) < b.width * 0.15) dx = (dx < 0 ? -1 : 1) * b.width * 0.15;
       dy = Math.min(dy, -el._h * 0.6);                    // always pop up a bit, never sink into the floor
       const d = Math.hypot(dx, dy) || 1, reach = el._h * 1.6;
+      el._pushed = true;
       el.style.zIndex = ++top;
       el.style.transition = SPRING;
       el.style.transform = rest(el._s, el._w, el._h, (dx / d) * reach, (dy / d) * reach, (dx > 0 ? 1 : -1) * 14);
-    });
-    el.addEventListener("pointerleave", () => {
-      if (!el._s || held === el) return;
-      el.style.transition = SPRING;
-      el.style.transform = rest(el._s, el._w, el._h);
     });
 
     let sx = 0, sy = 0, cx0 = 0, cy0 = 0;
     el.addEventListener("pointerdown", (e) => {
       if (!landed || !el._s || e.button > 0) return;
       e.preventDefault();
-      held = el; el.setPointerCapture(e.pointerId);
+      held = el; el._pushed = false; el.setPointerCapture(e.pointerId);
       sx = e.clientX; sy = e.clientY; cx0 = el._s.cx; cy0 = el._s.cy;
       el.style.zIndex = ++top;
       el.style.transition = "transform 0.12s ease-out";

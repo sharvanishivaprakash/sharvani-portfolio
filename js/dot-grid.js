@@ -1,8 +1,8 @@
 /*
   A softly moving dot grid behind the hero and the "I connect the dots" statement.
   The grid sways a little and a slow wave runs through it; dots near the cursor grow and turn blue.
-  Around the statement, a handful of dots grow one after another and blue lines are drawn
-  between them, joining the dots around the words. Then they fade and a new set is joined.
+  Around the statement, blue lines join the dots into a box around the words. The box is drawn
+  one line at a time as you scroll down to it, and undraws again if you scroll back up.
 
   The canvas is only as tall as the window and follows the scroll inside its section,
   so it stays sharp on retina screens without a huge bitmap.
@@ -16,14 +16,11 @@
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const BLUE = "0, 134, 250";             // --blue
-  const LINK_TIME = 0.55;                 // seconds to draw one line
-  const HOLD = 2.6;                       // seconds the finished shape stays
-  const FADE = 0.9;                       // seconds to fade it away
 
   let dpr = 1, W = 0, H = 0, VH = 0, gap = 32, visible = false, raf = 0;
   const t0 = performance.now();
   const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999, on: false };
-  let path = [], pathStart = 0;           // the dots being joined: grid indices [i, j]
+  let drawn = 0;                          // how much of the box is drawn, 0 to 1 (follows the scroll)
 
   function size() {
     dpr = Math.min(2, devicePixelRatio || 1);
@@ -32,7 +29,6 @@
     gap = W < 700 ? 26 : 32;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(VH * dpr);
     canvas.style.height = VH + "px";
-    path = [];
     draw(performance.now());
   }
 
@@ -42,37 +38,38 @@
   const sway = (t) => [Math.sin(t * 0.21) * gap * 0.35, Math.cos(t * 0.17) * gap * 0.35];
   const pos = (i, j, sx, sy) => [i * gap + gap / 2 + sx, j * gap + gap / 2 + sy];
 
-  /* ---------- picking dots to join around the statement ---------- */
+  /* ---------- the box around the statement ---------- */
 
-  function pickPath() {
-    if (!box) return [];
+  // the grid dots at the corners of a box a little bigger than the words, plus a few dots
+  // along each side, so the box is drawn as a chain of short lines from dot to dot
+  function boxPath() {
     const z = zone.getBoundingClientRect(), b = box.getBoundingClientRect();
-    const L = b.left - z.left, T = b.top - z.top, R = b.right - z.left, B = b.bottom - z.top;
-    const cx = (L + R) / 2, cy = (T + B) / 2;
-    const padX = Math.min(220, W * 0.12), padY = Math.min(170, (b.height || 100) * 0.9);
-    const spots = [];
-    for (let j = Math.floor((T - padY) / gap); j <= Math.ceil((B + padY) / gap); j++) {
-      for (let i = Math.floor((L - padX) / gap); i <= Math.ceil((R + padX) / gap); i++) {
-        const [x, y] = pos(i, j, 0, 0);
-        if (x < gap || x > W - gap || y < 0 || y > H) continue;
-        const inside = x > L - 24 && x < R + 24 && y > T - 24 && y < B + 24;
-        if (!inside) spots.push([i, j, Math.atan2((y - cy) / (B - T + 2 * padY), (x - cx) / (R - L + 2 * padX))]);
-      }
-    }
-    if (spots.length < 6) return [];
-    // one dot from each slice of the circle around the words, so the lines go round them
-    const n = W < 700 ? 6 : 8, picked = [];
-    const turn = Math.random() * Math.PI * 2;
-    for (let k = 0; k < n; k++) {
-      const a0 = -Math.PI + ((k / n) * Math.PI * 2 + turn) % (Math.PI * 2);
-      const slice = spots.filter(([, , a]) => {
-        const d = (a - a0 + Math.PI * 4) % (Math.PI * 2);
-        return d < (Math.PI * 2) / n;
-      });
-      if (slice.length) picked.push(slice[(Math.random() * slice.length) | 0]);
-    }
-    picked.sort((p, q) => p[2] - q[2]);
-    return picked.map(([i, j]) => [i, j]);
+    const step = W < 700 ? 3 : 4;                       // grid cells per line
+    // keep the dots (and their rings, as the grid sways) inside the window
+    const edge = gap * 0.35 + 9;
+    const col = (x) => Math.max(Math.ceil((edge - gap / 2) / gap), Math.min(Math.floor((W - edge - gap / 2) / gap), x));
+    let iL = Math.floor((b.left - z.left - gap * 1.5) / gap), iR = Math.ceil((b.right - z.left + gap * 0.5) / gap);
+    // widen the box a touch so the top and bottom split into equal lines
+    const extra = Math.ceil((iR - iL) / step) * step - (iR - iL);
+    iL = col(iL - Math.floor(extra / 2)); iR = col(iR + Math.ceil(extra / 2));
+    const jT = Math.floor((b.top - z.top - gap * 1.5) / gap), jB = Math.ceil((b.bottom - z.top + gap * 0.5) / gap);
+    const pts = [];
+    const side = (a, c, n) => {                         // a to c, leaving c for the next side
+      const k = Math.max(1, Math.round(n / step));
+      for (let s = 0; s < k; s++) pts.push([Math.round(a[0] + (c[0] - a[0]) * s / k), Math.round(a[1] + (c[1] - a[1]) * s / k)]);
+    };
+    side([iL, jT], [iR, jT], iR - iL);
+    side([iR, jT], [iR, jB], jB - jT);
+    side([iR, jB], [iL, jB], iR - iL);
+    side([iL, jB], [iL, jT], jB - jT);
+    return pts;
+  }
+
+  // 0 when the words come up from the bottom of the window, 1 once they're a bit above the middle
+  function scrolled() {
+    if (still) return 1;
+    const b = box.getBoundingClientRect();
+    return Math.max(0, Math.min(1, (innerHeight * 0.95 - b.top) / (innerHeight * 0.55)));
   }
 
   /* ---------- drawing ---------- */
@@ -95,7 +92,7 @@
 
     const [sx, sy] = still ? [0, 0] : sway(t);
     const R = W < 700 ? 110 : 160;
-    const fadeEdge = H * 0.16;                          // grid fades out before the works section
+    const fadeEdge = gap * 3;                           // grid fades out just before the works section
     const i0 = -1, i1 = Math.ceil(W / gap) + 1;
     const j0 = Math.floor(off / gap) - 1, j1 = Math.ceil((off + VH) / gap) + 1;
 
@@ -133,45 +130,38 @@
     joinDots(t, sx, sy, off);
   }
 
-  // the "connect the dots" drawing around the statement
+  // the "connect the dots" box around the statement
   function joinDots(t, sx, sy, off) {
     if (!box) return;
-    const b = box.getBoundingClientRect(), z = zone.getBoundingClientRect();
-    const near = b.bottom > 0 && b.top < innerHeight;  // only when the words are on screen
-    if (!near && !still) { path = []; return; }
-    if (!path.length) { path = pickPath(); pathStart = t; }
-    if (!path.length) return;
+    const goal = scrolled();
+    drawn += (goal - drawn) * 0.12;
+    if (Math.abs(goal - drawn) < 0.001) drawn = goal;
+    if (drawn <= 0) return;
 
-    const n = path.length;
-    const drawTime = n * LINK_TIME;                     // last line closes the loop
-    let age = still ? drawTime + 1 : t - pathStart;
-    if (age > drawTime + HOLD + FADE) { path = pickPath(); pathStart = t; age = 0; }
-    const alpha = age > drawTime + HOLD ? 1 - (age - drawTime - HOLD) / FADE : 1;
-    const pts = path.map(([i, j]) => pos(i, j, sx, sy));
+    const pts = boxPath().map(([i, j]) => pos(i, j, sx, sy));
+    const n = pts.length, done = drawn * n;             // lines finished so far (and a bit of the next)
 
     ctx.lineCap = "round";
     ctx.lineWidth = 1.4;
-    ctx.strokeStyle = `rgba(${BLUE}, ${0.85 * alpha})`;
+    ctx.strokeStyle = `rgba(${BLUE}, 0.85)`;
     ctx.beginPath();
     for (let k = 0; k < n; k++) {
-      const p = Math.max(0, Math.min(1, (age - k * LINK_TIME) / LINK_TIME));
+      const p = Math.max(0, Math.min(1, done - k));
       if (!p) break;
       const [ax, ay] = pts[k], [bx, by] = pts[(k + 1) % n];
-      const e = 1 - (1 - p) ** 3;                       // ease out
-      ctx.moveTo(ax, ay); ctx.lineTo(ax + (bx - ax) * e, ay + (by - ay) * e);
+      ctx.moveTo(ax, ay); ctx.lineTo(ax + (bx - ax) * p, ay + (by - ay) * p);
     }
     ctx.stroke();
 
-    // each dot grows as its line arrives
+    // each dot pops as the line reaches it
     for (let k = 0; k < n; k++) {
-      const arrive = k === 0 ? 0 : k * LINK_TIME;
-      const p = Math.max(0, Math.min(1, (age - arrive) / 0.35));
-      if (!p) continue;
+      const p = Math.max(0, Math.min(1, (done - k + 0.15) / 0.3));
+      if (!p) break;
       const [x, y] = pts[k];
       const pop = 1 + Math.sin(p * Math.PI) * 0.6;       // a little overshoot
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.fillStyle = "#fff";
       ctx.beginPath(); ctx.arc(x, y, 4.5 * p * pop, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = `rgba(${BLUE}, ${alpha})`;
+      ctx.strokeStyle = `rgb(${BLUE})`;
       ctx.lineWidth = 1.5;
       ctx.beginPath(); ctx.arc(x, y, 8 * p, 0, Math.PI * 2); ctx.stroke();
     }
