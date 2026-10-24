@@ -31,6 +31,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
   On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
+  Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
 - The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
 
 ## Publishing
