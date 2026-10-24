@@ -29,8 +29,12 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   the glasses drop on, "sharvani" types in and the screen slides up. A click or key press skips it. It doesn't play for reduced motion
   or when you come back from another page of the site (the small script in the `<head>` of `index.html` decides).
 - `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I connect the dots" statement.
-  Around the statement, lines join the dots into a box, drawn one line at a time as you scroll down to it.
+  Around the statement, six dots (three above, three below) are joined into a box as you scroll to it: the top lines first,
+  then the statement's lines appear one by one (the `.s-line` spans in `index.html`), then the box closes.
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
+- `js/sections.js`: as you scroll, the parts of Selected Works, My Design Approach and What next ? rise in one after another,
+  and sections you've scrolled past blur and dim a little so the one in view gets the attention.
+- Work cards: the `hover` image in `js/content.js` fades in over the cover on hover (Andaaj has one; the others are `null` for now).
 - `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
 - `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
