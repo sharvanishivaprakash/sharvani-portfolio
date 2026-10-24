@@ -398,7 +398,16 @@ b { font-weight: 500; }
 /* Falling tabs: pill-shaped, thin outline, mono caps. js/falling-tabs.js places each one in the pile.
    They sit behind the heading and links, so the words always stay readable. */
 .next { position: relative; overflow: hidden; isolation: isolate; }
-.next .frame { z-index: 1; }
+.next .frame { z-index: 1; pointer-events: none; }   /* let the pointer reach the tabs underneath */
+.next .frame a { pointer-events: auto; }
+/* the doodle, big and very light, about three quarters showing in the bottom right corner */
+.next-doodle {
+  position: absolute; z-index: 0; right: calc(-70 * var(--u)); bottom: 0;
+  width: calc(760 * var(--u)); max-width: none; height: auto;
+  transform: translateY(25%);
+  filter: brightness(0) invert(1); opacity: 0.1;
+  pointer-events: none; user-select: none;
+}
 .tab-pile {
   --tab: calc(52 * var(--u));                 /* tab height */
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 0;
@@ -415,7 +424,8 @@ b { font-weight: 500; }
   font-size: calc(var(--tab) * 0.36); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);
   visibility: hidden; will-change: transform;
 }
-.tab-pile span.is-placed { visibility: visible; pointer-events: auto; }
+.tab-pile span.is-placed { visibility: visible; pointer-events: auto; cursor: grab; touch-action: none; user-select: none; }
+.tab-pile span.is-held { cursor: grabbing; background: rgba(255, 255, 255, 0.22); box-shadow: 0 calc(12 * var(--u)) calc(24 * var(--u)) rgba(0, 40, 90, 0.35); }
 .tab-pile span.is-deep { filter: blur(1.6px); color: rgba(255, 255, 255, 0.7); }
 
 /* ---------- Toast ---------- */
@@ -607,6 +617,7 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .contact-links { margin-top: 28px; gap: 16px; }
   .contact-links a { font-size: 18px; padding-bottom: 3px; }
   .tab-pile { --tab: 26px; height: 300px; }
+  .next-doodle { width: 360px; right: -40px; }
 
   .case { padding-top: 110px; }
   .case-meta { grid-template-columns: repeat(2, 1fr); }
@@ -626,4 +637,47 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .reveal, .is-loaded .reveal { opacity: 1; translate: none; }
   .js-about .cart-item { visibility: visible; }
   .js-about .uncover { clip-path: none; }
+}
+
+/* on touch screens a finger on a tab still scrolls the page; tapping a tab pushes it */
+@media (hover: none) { .tab-pile span.is-placed { touch-action: auto; } }
+
+/* ---------- Intro (js/preloader.js) ---------- */
+/* The black screen with moving dots. The doodle looks left and right, its glasses drop on,
+   "sharvani" types in and the screen slides up to open the page. */
+.preloader { display: none; }
+html.is-preloading, html.is-preloading body { overflow: hidden; }
+html.is-preloading .preloader, .preloader.is-open {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  background: var(--paper);
+}
+.pl-dots { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pl-stage { position: relative; display: grid; justify-items: center; gap: 22px; }
+.pl-doodle {
+  width: clamp(120px, 14vw, 190px); height: auto; overflow: visible;
+  opacity: 0; transform: scale(0.85);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 1.4, 0.4, 1);
+}
+.preloader.is-in .pl-doodle { opacity: 1; transform: none; }
+.pl-eyes { transition: transform 0.35s cubic-bezier(0.5, 0, 0.3, 1); }
+.pl-glasses { opacity: 0; transform: translateY(-14px); }
+.preloader.has-glasses .pl-glasses {
+  opacity: 1; transform: none;
+  transition: opacity 0.15s ease, transform 0.55s cubic-bezier(0.3, 1.7, 0.5, 1);
+}
+.pl-name {
+  margin: 0; min-height: 1.2em;
+  font: 500 clamp(28px, 3vw, 40px)/1.2 var(--display); letter-spacing: -0.01em; color: var(--ink);
+}
+.pl-caret {
+  display: inline-block; width: 0.08em; height: 0.95em; margin-left: 0.06em;
+  vertical-align: -0.12em; background: var(--blue);
+  opacity: 0; animation: pl-blink 0.9s steps(1) infinite;
+}
+.preloader.is-typing .pl-caret { opacity: 1; }
+@keyframes pl-blink { 50% { visibility: hidden; } }
+.preloader.is-open {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s cubic-bezier(0.7, 0, 0.2, 1);
 }

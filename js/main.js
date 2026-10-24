@@ -75,7 +75,10 @@
     }
   });
 
-  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+  // the hero comes in once the intro has opened (or straight away when there is no intro)
+  const loaded = () => requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+  if (document.documentElement.classList.contains("is-preloading")) document.addEventListener("preloader:done", loaded, { once: true });
+  else loaded();
 
   const page = document.body.dataset.page;
   if (page === "home") renderHome();

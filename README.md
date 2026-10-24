@@ -25,6 +25,9 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `css/style.css`: colours and fonts at the top in `:root` (`--blue` is the accent), then sections
 - `js/main.js`: renders the selected works and case studies from `content.js`
 - `js/cursor.js`: the eye cursor (desktop only). It turns blue over anything clickable and over the nav bar.
+- `js/preloader.js`: the intro on the homepage. On black with moving dots, the doodle (without its glasses) looks left, then right,
+  the glasses drop on, "sharvani" types in and the screen slides up. A click or key press skips it. It doesn't play for reduced motion
+  or when you come back from another page of the site (the small script in the `<head>` of `index.html` decides).
 - `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I connect the dots" statement.
   Around the statement a few dots grow and get joined by lines, one after another.
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
@@ -35,7 +38,8 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
 - The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
 - `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
-  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab nudges it aside; it slides back when the pointer leaves.
+  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab pushes it aside (it springs back), and pressing and dragging moves it anywhere in the section.
+- The big faint doodle at the bottom right of "What next ?" is `assets/doodle/doodle.svg` (the vector doodle from Figma), shown white at 10% opacity (`.next-doodle`).
 - The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
   Until they're filled in, clicking one shows "coming soon".
 
