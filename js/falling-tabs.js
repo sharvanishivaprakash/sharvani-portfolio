@@ -4,7 +4,8 @@
   along the bottom. Each one has its own fall speed, tilt and spot, lands with a small bounce and then stays.
   The pile is worked out like a stack: every tab rests on whatever is already under it, so tabs overlap
   and lean on each other. The bottom row sits just below the edge and is a little blurred for depth.
-  Once they have landed, hovering a tab nudges it aside; it slides back when the pointer leaves.
+  Once they have landed they can be played with: hovering pushes a tab aside (it springs back),
+  and pressing and dragging moves it anywhere in the section.
   It plays once. Visitors who ask for reduced motion see the finished pile straight away.
 */
 (function () {
@@ -92,41 +93,70 @@
   const rest = (s, w, h, dx = 0, dy = 0, dr = 0) =>
     `translate(${(s.cx - w / 2 + dx).toFixed(1)}px, ${(-(s.cy - h / 2) + dy).toFixed(1)}px) rotate(${(s.r + dr).toFixed(2)}deg)`;
 
-  /* ---------- nudging a tab aside on hover ---------- */
+  /* ---------- playing with the tabs once they've landed ---------- */
+  // Hover pushes a tab out of the way (it springs back when the pointer leaves).
+  // Press and drag picks a tab up; it stays wherever it is dropped.
+
+  const SPRING = "transform 0.55s cubic-bezier(0.25, 1.6, 0.4, 1)";   // overshoots a little, like a flick
+  let held = null, top = tabs.length + 1;
 
   tabs.forEach((el) => {
-    const nudge = (e) => {
-      if (!landed || !el._s) return;
+    el.addEventListener("pointerenter", (e) => {
+      if (!landed || !el._s || held) return;
       const b = el.getBoundingClientRect();
-      // push away from the pointer, but always with a clear upward-and-aside drift so it visibly flies
       let dx = (b.left + b.width / 2) - e.clientX, dy = (b.top + b.height / 2) - e.clientY;
-      const side = (b.left + b.width / 2) < pile.getBoundingClientRect().width / 2 ? -1 : 1;
-      if (Math.abs(dx) < 10) dx = side * 20;
-      dy = -Math.abs(dy) - 24;                           // always lift, never push further down
-      const d = Math.hypot(dx, dy) || 1;
-      const reach = Math.max(42, el._h * 1.15);
-      el._hx = (dx / d) * reach; el._hy = Math.abs(dy / d) * reach;
-      el._hr = side * 7;
-      el.style.zIndex = 99;
-      el.style.transition = "transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1)";
-      el.style.transform = rest(el._s, el._w, el._h, el._hx, -el._hy, el._hr);
-    };
-    const back = () => {
-      if (!el._s) return;
+      if (Math.abs(dx) < b.width * 0.15) dx = (dx < 0 ? -1 : 1) * b.width * 0.15;
+      dy = Math.min(dy, -el._h * 0.6);                    // always pop up a bit, never sink into the floor
+      const d = Math.hypot(dx, dy) || 1, reach = el._h * 1.6;
+      el.style.zIndex = ++top;
+      el.style.transition = SPRING;
+      el.style.transform = rest(el._s, el._w, el._h, (dx / d) * reach, (dy / d) * reach, (dx > 0 ? 1 : -1) * 14);
+    });
+    el.addEventListener("pointerleave", () => {
+      if (!el._s || held === el) return;
+      el.style.transition = SPRING;
       el.style.transform = rest(el._s, el._w, el._h);
-      // drop back to its place in the stack once it has slid home
-      setTimeout(() => { if (el._z) el.style.zIndex = el._z; }, 400);
+    });
+
+    let sx = 0, sy = 0, cx0 = 0, cy0 = 0;
+    el.addEventListener("pointerdown", (e) => {
+      if (!landed || !el._s || e.button > 0) return;
+      e.preventDefault();
+      held = el; el.setPointerCapture(e.pointerId);
+      sx = e.clientX; sy = e.clientY; cx0 = el._s.cx; cy0 = el._s.cy;
+      el.style.zIndex = ++top;
+      el.style.transition = "transform 0.12s ease-out";
+      el.classList.add("is-held");
+      el.classList.remove("is-deep");
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (held !== el) return;
+      el._s = Object.assign({}, el._s, { cx: cx0 + e.clientX - sx, cy: cy0 - (e.clientY - sy) });
+      el.style.transform = rest(el._s, el._w, el._h, 0, 0, Math.max(-12, Math.min(12, (e.movementX || 0) * 1.5)));
+    });
+    const drop = () => {
+      if (held !== el) return;
+      held = null;
+      el.classList.remove("is-held");
+      el.style.transition = SPRING;
+      el.style.transform = rest(el._s, el._w, el._h);
     };
-    el.addEventListener("pointerenter", nudge);
-    el.addEventListener("pointerleave", back);
+    el.addEventListener("pointerup", drop);
+    el.addEventListener("pointercancel", drop);
   });
+
+  // once everything has landed the tabs can be picked up; the eye cursor says so
+  function ready() {
+    landed = true;
+    tabs.forEach((el) => { el.dataset.cursor = "view"; el.dataset.cursorLabel = "Drag"; });
+  }
 
   /* ---------- the fall ---------- */
 
   function play() {
     played = true;
     const spots = layout();
-    if (still) { place(spots); landed = true; return; }
+    if (still) { place(spots); ready(); return; }
     const rand = rng(11);
     const drop = section.offsetHeight + 80;
     let left = tabs.length;
@@ -146,7 +176,7 @@
         { transform: rest(s, w, h) }
       ], { duration: fall, delay: 120 + k * 170 + rand() * 90, fill: "backwards" });
       el.style.transform = rest(s, w, h);
-      a.onfinish = () => { if (--left === 0) landed = true; };
+      a.onfinish = () => { if (--left === 0) ready(); };
     });
   }
 
