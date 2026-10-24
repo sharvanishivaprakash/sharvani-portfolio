@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=20">
+  <link rel="stylesheet" href="css/style.css?v=21">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -104,10 +104,15 @@
         <img class="at sticker st-star reveal" style="--x:904;--y:616;--w:350;--i:3" src="assets/final/star.webp" alt="" width="350" height="350">
       </section>
 
-      <!-- Statement -->
-      <section class="frame statement" style="--h:560">
-        <div class="at statement-box" style="--x:272;--y:240;--w:895">
-          <p>I <b>connect the dots, question the obvious</b>, <br>and look for meaning in the things we often take for granted. <br>Sometimes, a little observation reveals a <b>problem worth solving</b>. <br>Sometimes, <b>it sparks an idea worth exploring.</b></p>
+      <!-- Statement: the lines appear one by one as you scroll, inside a box of six joined dots (js/dot-grid.js) -->
+      <section class="frame statement" style="--h:1000">
+        <div class="at statement-box" style="--x:170;--y:370;--w:1100">
+          <p>
+            <span class="s-line">I’m drawn to the <b>little things</b>,</span>
+            <span class="s-line">the patterns and behaviours that make us pause and wonder why.</span>
+            <span class="s-line">Sometimes, they reveal a <b>problem worth solving</b>;</span>
+            <span class="s-line">other times, <b>an idea worth exploring !</b></span>
+          </p>
         </div>
       </section>
     </div>
@@ -210,13 +215,14 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=20"></script>
-  <script src="js/content.js?v=20"></script>
-  <script src="js/main.js?v=20"></script>
-  <script src="js/cursor.js?v=20"></script>
-  <script src="js/dot-grid.js?v=20"></script>
-  <script src="js/liquid-name.js?v=20"></script>
-  <script src="js/about-scroll.js?v=20"></script>
-  <script src="js/falling-tabs.js?v=20"></script>
+  <script src="js/preloader.js?v=21"></script>
+  <script src="js/content.js?v=21"></script>
+  <script src="js/main.js?v=21"></script>
+  <script src="js/cursor.js?v=21"></script>
+  <script src="js/dot-grid.js?v=21"></script>
+  <script src="js/liquid-name.js?v=21"></script>
+  <script src="js/about-scroll.js?v=21"></script>
+  <script src="js/falling-tabs.js?v=21"></script>
+  <script src="js/sections.js?v=21"></script>
 </body>
 </html>

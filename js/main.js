@@ -91,7 +91,7 @@
       .map((p) => `
         <article class="project">
           <a class="project-link" href="project.html?p=${encodeURIComponent(p.slug)}" data-cursor="view" data-cursor-label="Open">
-            <div class="project-media">${media(p.image, `${p.title} cover`, `${p.title} cover image`)}</div>
+            <div class="project-media">${media(p.image, `${p.title} cover`, `${p.title} cover image`)}${p.hover ? `<img class="project-hover" src="${esc(p.hover)}" alt="" loading="lazy">` : ""}</div>
             <h3>${esc(p.title)}</h3>
             <p class="project-summary">${esc(p.summary)}</p>
             <ul class="project-tags">${(p.tags || []).map((t) => `<li>[ ${esc(t)} ]</li>`).join("")}</ul>
