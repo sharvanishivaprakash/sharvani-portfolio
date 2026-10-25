@@ -12,10 +12,10 @@ window.SITE = {
   // The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links below.
   email: "sharvanishivaprakash@gmail.com",
   links: [
-    { label: "[LinkedIn]", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/sharvanishivaprakash" },
     { label: "[Behance]", href: "#" },
     { label: "[Instagram]", href: "#" },
-    { label: "[Resume]", href: "#" }
+    { label: "Resume", href: "assets/Sharvani_Shivaprakash_Resume.pdf" }
   ],
 
   // Selected works, in order (two per row). `tags` show under the summary.
