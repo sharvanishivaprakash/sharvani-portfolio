@@ -49,7 +49,7 @@
   document.querySelectorAll(".js-resume").forEach((a) => {
     if (resume && resume.href !== "#") {
       a.href = resume.href;
-      if (/^https?:/.test(resume.href)) { a.target = "_blank"; a.rel = "noopener"; }
+      a.target = "_blank"; a.rel = "noopener";          // the PDF opens in a new tab, the site stays open
     } else {
       a.addEventListener("click", (e) => { e.preventDefault(); say("Resume coming soon."); });
     }
