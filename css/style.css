@@ -229,16 +229,14 @@ b { font-weight: 500; }
 }
 
 .work-grid {
-  position: absolute; left: calc(121 * var(--u)); top: calc(396 * var(--u)); width: calc(1200 * var(--u));
+  position: absolute; left: calc(121 * var(--u)); top: calc(404 * var(--u)); width: calc(1200 * var(--u));
   display: grid; grid-template-columns: 1fr 1fr; align-items: start;
-  column-gap: calc(128 * var(--u)); row-gap: calc(141 * var(--u));
+  column-gap: calc(21 * var(--u)); row-gap: calc(97 * var(--u));
 }
-/* Figma staggers the right-hand column a touch lower */
-.project:nth-child(2) { margin-top: calc(12 * var(--u)); }
 .project-link { display: block; text-decoration: none; }
 .project-media {
   position: relative; overflow: hidden;
-  aspect-ratio: 536 / 368; background: #232323; border: 1px solid rgba(22, 22, 22, 0.12);
+  aspect-ratio: 588 / 403; background: #232323; border: 1px solid rgba(22, 22, 22, 0.12);
 }
 .project-media img, .project-media .ph {
   width: 100%; height: 100%; object-fit: cover;
@@ -263,7 +261,7 @@ b { font-weight: 500; }
 }
 .project-tags {
   display: flex; flex-wrap: wrap; gap: 4px calc(23 * var(--u));
-  margin-top: calc(17 * var(--u));
+  margin-top: calc(16 * var(--u));
   font-weight: 500; font-size: max(10px, calc(11.8 * var(--u))); line-height: 1.5; letter-spacing: 0.7px;
   color: var(--tag);
 }
