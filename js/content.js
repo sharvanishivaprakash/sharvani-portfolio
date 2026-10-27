@@ -26,7 +26,7 @@ window.SITE = {
       title: "Andaaj",
       summary: "Translating nutrition into the language of the kitchen.",
       tags: ["UI/UX", "Product Design", "Food Systems"],
-      image: "assets/final/andaaj-cover.webp",
+      image: "assets/final/andaaj-card.webp",
       hover: "assets/final/andaaj-hover.webp",
       meta: { type: "Mobile App", discipline: "UI-UX Design", year: "2026", team: "[Individual / Team]" }
     },
@@ -35,8 +35,8 @@ window.SITE = {
       title: "Sense.lo",
       summary: "Making the invisible weight of an environment visible.",
       tags: ["UI/UX", "Data Visualization", "Dashboard Design"],
-      image: null,
-      hover: null,
+      image: "assets/final/senselo-cover.webp",
+      hover: "assets/final/senselo-hover.webp",
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     },
     {
@@ -44,8 +44,8 @@ window.SITE = {
       title: "Time Wanderers",
       summary: "What if you could uncover history instead of just reading it?",
       tags: ["Multimodal Interaction", "Coding", "Experiential Design"],
-      image: null,
-      hover: null,
+      image: "assets/final/timewanderers-cover.webp",
+      hover: "assets/final/timewanderers-hover.webp",
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     },
     {
@@ -53,7 +53,7 @@ window.SITE = {
       title: "Janapada Bhoomi",
       summary: "Bringing folk music culture to life through interaction.",
       tags: ["Physical Computing", "Arduino Prototyping", "Sound Interaction"],
-      image: null,
+      image: "assets/final/janapada-cover.webp",
       hover: null,
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     }
