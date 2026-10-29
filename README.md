@@ -51,7 +51,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
 - `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
   once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab pushes it aside (it springs back once the pointer has moved off its spot), and pressing and dragging moves it anywhere in the section.
-- The big faint doodle at the bottom right of "What next ?" is `assets/doodle/doodle.svg` (the vector doodle from Figma), shown white at 10% opacity (`.next-doodle`).
+- The big faint doodle at the bottom right of "What next ?" is `assets/doodle/doodle.svg` (the vector doodle from Figma), shown dark blue (`.next-doodle`). It floats gently up and down (CSS animation, off for reduced motion).
 - The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
   Until they're filled in, clicking one shows "coming soon".
 
