@@ -105,7 +105,8 @@
     const setActive = () => {
       const y = scrollY + innerHeight * 0.35;
       let current = null;
-      sections.forEach((s) => { if (s && s.offsetTop <= y) current = s.id; });
+      // measured on the page (About is pinned inside its scroll track, so its own offsetTop is near 0)
+      sections.forEach((s) => { if (s && (s.closest(".about-track") || s).getBoundingClientRect().top + scrollY <= y) current = s.id; });
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) current = "contact";
       links.forEach((a) => {
         const on = a.dataset.section === current;

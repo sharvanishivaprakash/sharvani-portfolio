@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&family=Peralta&family=Kranky&family=Silkscreen:wght@700&family=Mountains+of+Christmas:wght@700&family=Pacifico&family=Pangolin&family=Playwrite+US+Trad&family=Over+the+Rainbow&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=31">
+  <link rel="stylesheet" href="css/style.css?v=32">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -67,13 +67,12 @@
       <!-- Hero (Figma "Portfolio final 3", node 264:478) -->
       <section class="frame hero" style="--h:900" aria-labelledby="hero-name">
         <img class="at hey reveal" style="--x:387;--y:262;--w:188" src="assets/final/hey-its.webp" alt="hey, it’s" width="188" height="81">
-        <!-- Every letter has its own font and keeps swapping to another one, letter by letter,
-             like the frames of a GIF (js/name-fonts.js) -->
-        <h1 class="at hero-name reveal" style="--x:413;--y:325;--w:641;--i:1" id="hero-name" aria-label="Sharvani">
-          <span class="nl" aria-hidden="true">S</span><span class="nl" aria-hidden="true">H</span><span class="nl" aria-hidden="true">A</span><span class="nl" aria-hidden="true">R</span><span class="nl" aria-hidden="true">V</span><span class="nl" aria-hidden="true">A</span><span class="nl" aria-hidden="true">N</span><span class="nl" aria-hidden="true">i</span><span class="nl nl-star" aria-hidden="true">*</span>
+        <!-- Every letter has its own font (as in Figma) and the letters jiggle lightly, each on its own beat -->
+        <h1 class="at hero-name reveal" style="--x:418;--y:316;--w:641;--i:1" id="hero-name" aria-label="Sharvani">
+          <span class="nl f-peralta" aria-hidden="true">S</span><span class="nl f-kranky" aria-hidden="true">H</span><span class="nl f-silk" aria-hidden="true">A</span><span class="nl f-mountains" aria-hidden="true">R</span><span class="nl f-pacifico" aria-hidden="true">V</span><span class="nl f-silk" aria-hidden="true">A</span><span class="nl f-pangolin" aria-hidden="true">N</span><span class="nl f-playwrite" aria-hidden="true">i</span><span class="nl f-rainbow nl-star" aria-hidden="true">*</span>
         </h1>
-        <p class="at hero-role reveal" style="--x:419;--y:434;--w:533;--i:1">Interaction Designer</p>
-        <p class="at hero-line reveal" style="--x:422;--y:567;--w:533;--i:2">Turning insights about <b>people</b> and <b>behaviour</b> into <br><b>thoughtful digital experiences.</b></p>
+        <p class="at hero-role reveal" style="--x:418;--y:434;--w:533;--i:1">Interaction Designer</p>
+        <p class="at hero-line reveal" style="--x:420;--y:567;--w:533;--i:2">Turning insights about <b>people</b> and <b>behaviour</b> into <br><b>thoughtful digital experiences.</b></p>
         <div class="at hero-ctas reveal" style="--x:418;--y:642;--w:400;--i:3">
           <a class="btn btn-solid" href="#work">Explore my work
             <span class="btn-icon icon-down" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg></span>
@@ -84,12 +83,14 @@
         </div>
         <!-- Sharvani's doodle, big and dark blue, tilted and running off the bottom right -->
         <div class="at hero-doodle reveal" style="--x:1105.3;--y:409.4;--w:517.8;--i:3" aria-hidden="true"><span></span></div>
+        <!-- The yellow star over the doodle's glasses (Figma 264:554) -->
+        <img class="at hero-star reveal" style="--x:1335.8;--y:549;--w:266.4;--i:3" src="assets/final/hero-star.svg" alt="" width="267" height="271" aria-hidden="true">
       </section>
 
       <!-- I'm drawn to: six cards that turn over to a white card on hover (tap on touch screens), js/drawn-cards.js -->
-      <section class="frame drawn" style="--h:913" aria-labelledby="drawn-title">
-        <h2 class="at drawn-title" style="--x:117;--y:109;--w:420" id="drawn-title">I’m drawn to,</h2>
-        <ul class="at drawn-cards" style="--x:199;--y:286;--w:1041">
+      <section class="frame drawn" style="--h:802" aria-labelledby="drawn-title">
+        <h2 class="at drawn-title" style="--x:121;--y:136;--w:420" id="drawn-title">I’m drawn to,</h2>
+        <ul class="at drawn-cards" style="--x:199;--y:313;--w:1041">
           <li><button class="flip" type="button" aria-label="the little things"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-1.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-1.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
           <li><button class="flip" type="button" aria-label="the patterns"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-2.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-2.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
           <li><button class="flip" type="button" aria-label="and behaviours"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-3.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-3.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
@@ -97,7 +98,7 @@
           <li><button class="flip" type="button" aria-label="sometimes they reveal a problem worth solving"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-5.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-5.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
           <li><button class="flip" type="button" aria-label="other times, an idea worth exploring !"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-6.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-6.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
         </ul>
-        <p class="at drawn-note" style="--x:1064;--y:643;--w:187">( <span class="on-hover">Hover over</span><span class="on-touch">Tap</span> the cards )</p>
+        <p class="at drawn-note" style="--x:1040;--y:670;--w:200">( <span class="on-hover">Hover over</span><span class="on-touch">Tap</span> the cards )</p>
       </section>
     </div>
 
@@ -224,16 +225,15 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=31"></script>
-  <script src="js/content.js?v=31"></script>
-  <script src="js/main.js?v=31"></script>
-  <script src="js/cursor.js?v=31"></script>
-  <script src="js/dot-grid.js?v=31"></script>
-  <script src="js/name-fonts.js?v=31"></script>
-  <script src="js/drawn-cards.js?v=31"></script>
-  <script src="js/about-scroll.js?v=31"></script>
-  <script src="js/falling-tabs.js?v=31"></script>
-  <script src="js/outside.js?v=31"></script>
-  <script src="js/sections.js?v=31"></script>
+  <script src="js/preloader.js?v=32"></script>
+  <script src="js/content.js?v=32"></script>
+  <script src="js/main.js?v=32"></script>
+  <script src="js/cursor.js?v=32"></script>
+  <script src="js/dot-grid.js?v=32"></script>
+  <script src="js/drawn-cards.js?v=32"></script>
+  <script src="js/about-scroll.js?v=32"></script>
+  <script src="js/falling-tabs.js?v=32"></script>
+  <script src="js/outside.js?v=32"></script>
+  <script src="js/sections.js?v=32"></script>
 </body>
 </html>
