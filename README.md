@@ -33,8 +33,8 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/sections.js`: as you scroll, the parts of Selected Works, Outside the briefs and What next ? rise in one after another,
   and sections you've scrolled past blur and dim a little so the one in view gets the attention.
 - Work cards: the `hover` image in `js/content.js` fades in over the cover on hover (Andaaj has one; the others are `null` for now).
-- `js/name-fonts.js`: every letter of the hero name "SHARVANi *" is set in its own Google font (as in Figma) and the letters
-  keep swapping fonts one after another, like the frames of a GIF. Still for reduced motion.
+- Hero name: every letter of "SHARVANi *" is set in its own Google font (as in Figma, classes `f-*` in `index.html`) and
+  jiggles lightly on its own beat (CSS `name-jiggle`, stop-motion style). Still for reduced motion.
 - `js/drawn-cards.js` + "I'm drawn to" in `index.html`: six cards (`assets/final/drawn/front-N.webp`) that turn over to their
   white back (`back-N.webp`) on hover; on touch screens a tap turns a card. Replace a file in place to update a card.
 - `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
