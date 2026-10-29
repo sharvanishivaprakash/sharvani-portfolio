@@ -274,12 +274,26 @@ b { font-weight: 500; }
 
 .peeks { aspect-ratio: 1; pointer-events: none; }
 .peek {
-  position: absolute; inset: 0; width: 100%;
+  position: absolute; inset: 0;
   opacity: 0; translate: calc(-36 * var(--u)) calc(18 * var(--u)); rotate: -2.5deg; scale: 0.96;
   filter: drop-shadow(0 calc(18 * var(--u)) calc(30 * var(--u)) rgba(0, 0, 0, 0.55));
   transition: opacity 0.3s var(--ease), translate 0.45s var(--ease), rotate 0.45s var(--ease), scale 0.45s var(--ease);
 }
-.peek.is-on { opacity: 1; translate: 0 0; rotate: 0deg; scale: 1; }
+.peek img:first-child { width: 100%; }
+/* an open card can be pointed at too (for the video), so it stays while the pointer is on it */
+.peek.is-on { opacity: 1; translate: 0 0; rotate: 0deg; scale: 1; pointer-events: auto; }
+/* the blue frame on the fish card: 396 × 223 at 249, 129 of the 704 card */
+.peek-video {
+  position: absolute; left: calc(249 / 704 * 100%); top: calc(129 / 704 * 100%);
+  width: calc(396 / 704 * 100%); aspect-ratio: 396 / 223;
+  border-radius: calc(8 * var(--u)); overflow: hidden;
+}
+/* the animated ns studio logo on the folk card: 308 square at 304, 138 */
+.peek-gif {
+  position: absolute; left: calc(304 / 704 * 100%); top: calc(138 / 704 * 100%);
+  width: calc(308 / 704 * 100%); border-radius: calc(8 * var(--u));
+}
+.peek-video iframe { display: block; width: 100%; height: 100%; border: 0; }
 
 /* the record and its stickers, each placed at its Figma spot inside the 497.3 × 549.3 box (--sx, --sy, --sw) */
 .record { aspect-ratio: 497.3 / 549.3; z-index: 1; }
@@ -292,10 +306,8 @@ b { font-weight: 500; }
 .vinyl { --sx: 81; --sy: 60; --sw: 403; animation: spin 18s linear infinite; }
 .sticker { display: block; padding: 0; border: 0; background: none; cursor: pointer; }
 .sticker img { width: 100%; transition: scale 0.25s var(--ease); }
-/* the hovered sticker blinks */
-.sticker.is-hot img { scale: 1.06; animation: sticker-blink 0.7s steps(1) infinite; }
+.sticker.is-hot img { scale: 1.05; }
 @keyframes spin { to { rotate: 360deg; } }
-@keyframes sticker-blink { 50% { opacity: 0.35; } }
 .sticker:focus-visible { outline: none; }
 .sticker:focus-visible img { filter: drop-shadow(0 0 calc(6 * var(--u)) var(--blue)); }
 
@@ -303,6 +315,9 @@ b { font-weight: 500; }
   font-size: calc(16 * var(--u)); line-height: calc(19 * var(--u)); letter-spacing: calc(1 * var(--u));
   text-align: center;
 }
+/* while a sticker is hovered, the note under the record blinks */
+.outside.is-peeking .outside-note { animation: note-blink 0.8s steps(1) infinite; }
+@keyframes note-blink { 50% { opacity: 0.25; } }
 /* touch screens are told to tap instead of hover */
 .on-touch { display: none; }
 @media (hover: none) { .on-hover { display: none; } .on-touch { display: inline; } }
@@ -400,12 +415,11 @@ b { font-weight: 500; }
 .next { position: relative; overflow: hidden; isolation: isolate; }
 .next .frame { z-index: 1; pointer-events: none; }   /* let the pointer reach the tabs underneath */
 .next .frame a { pointer-events: auto; }
-/* the doodle, big and very light, about three quarters showing in the bottom right corner */
+/* the doodle as a dark blue shape in the bottom right corner, raised so the falling tabs don't hide it */
 .next-doodle {
-  position: absolute; z-index: 0; right: calc(-70 * var(--u)); bottom: 0;
-  width: calc(760 * var(--u)); max-width: none; height: auto;
-  transform: translateY(25%);
-  filter: brightness(0) invert(1); opacity: 0.1;
+  position: absolute; z-index: 0; right: calc(-30 * var(--u)); bottom: calc(150 * var(--u));
+  width: calc(540 * var(--u)); max-width: none; height: auto;
+  filter: brightness(0); opacity: 0.28;
   pointer-events: none; user-select: none;
 }
 .tab-pile {
@@ -607,7 +621,7 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .contact-links { margin-top: 28px; gap: 16px; }
   .contact-links a { font-size: 18px; padding-bottom: 3px; }
   .tab-pile { --tab: 26px; height: 300px; }
-  .next-doodle { width: 360px; right: -40px; }
+  .next-doodle { width: 260px; right: -20px; bottom: 150px; }
 
   .case { padding-top: 110px; }
   .case-meta { grid-template-columns: repeat(2, 1fr); }

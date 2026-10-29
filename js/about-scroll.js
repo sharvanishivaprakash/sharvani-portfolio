@@ -10,6 +10,10 @@
   Under 900px wide the page is stacked, so the stickers follow the basket's position on screen
   and each text block uncovers as it comes into view.
   Visitors who ask for reduced motion see everything in place.
+
+  On desktop the face sticker in the middle of the record (Outside the briefs) is the first one in:
+  as you scroll from the record down to About me it leaves the record and drops into the basket,
+  then the other stickers and the text follow.
 */
 (function () {
   const track = document.querySelector(".about-track");
@@ -21,9 +25,15 @@
   const root = document.documentElement;
   const wide = matchMedia("(min-width: 901px)");
 
-  const START = 0.06, END = 0.9;               // the story runs between these points of the track
+  const START = 0.03, END = 0.9;               // the story runs between these points of the track
   const clamp = (v) => Math.max(0, Math.min(1, v));
   const SPIN = items.map((_, i) => (i % 2 ? 1 : -1) * (10 + ((i * 7) % 9)));   // a little tilt while falling
+
+  // the face on the record travels into the basket instead of falling in (desktop only)
+  const face = items[0];
+  const recordFace = document.querySelector(".record .face");
+  let travel = 0;                              // 0: face still on the record, 1: face in the basket
+  const travels = () => pinned && !!recordFace;
 
   let p = 0, raf = 0, pinned = false;
   let full = false, locked = false, z = 10;    // locked: someone has moved a sticker, so the story stays finished
@@ -49,9 +59,12 @@
   }
 
   function drawItems(progress) {
-    const step = (END - START) / items.length;
+    const fallers = travels() ? items.slice(1) : items;
+    const step = (END - START) / fallers.length;
     const vh = innerHeight, cartTop = cart.getBoundingClientRect().top;
-    items.forEach((el, i) => {
+    if (travels()) drawFace();
+    else if (recordFace) recordFace.style.visibility = "";
+    fallers.forEach((el, i) => {
       const t = locked ? 1 : clamp((progress - (START + i * step)) / (step * 1.5));
       if (t <= 0) { el.style.visibility = "hidden"; return; }
       el.style.visibility = "visible";
@@ -63,7 +76,45 @@
       el.style.transform = `translate3d(${el.dx.toFixed(1)}px, ${(y + el.dy).toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg)` +
         (el === held ? " scale(1.06)" : "");
     });
-    setFull(locked || progress >= START + (items.length - 1 + 1.5) * step);
+    setFull(locked || progress >= START + (fallers.length - 1 + 1.5) * step);
+  }
+
+  // the face flies from the middle of the record to its spot in the basket, shrinking or growing to fit,
+  // with a little tilt on the way
+  function drawFace() {
+    const hand = face === held ? " scale(1.06)" : "";
+    if (locked || travel >= 1) {
+      recordFace.style.visibility = "hidden";
+      face.style.visibility = "visible";
+      face.style.transform = `translate3d(${face.dx.toFixed(1)}px, ${face.dy.toFixed(1)}px, 0)` + hand;
+      return;
+    }
+    if (travel <= 0) {
+      recordFace.style.visibility = "";
+      face.style.visibility = "hidden";
+      return;
+    }
+    const a = recordFace.getBoundingClientRect(), c = cart.getBoundingClientRect();
+    const bx = c.left + face.offsetLeft + face.offsetWidth / 2, by = c.top + face.offsetTop + face.offsetHeight / 2;
+    const e = travel < 0.5 ? 4 * travel ** 3 : 1 - (-2 * travel + 2) ** 3 / 2;
+    const s0 = a.width / face.offsetWidth;
+    const x = (a.left + a.width / 2 - bx) * (1 - e);
+    const y = (a.top + a.height / 2 - by) * (1 - e);
+    const s = s0 + (1 - s0) * e, r = Math.sin(e * Math.PI) * -14;
+    recordFace.style.visibility = "hidden";
+    face.style.visibility = "visible";
+    face.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+  }
+
+  // 0 until the face on the record reaches the middle of the screen, 1 once About me is pinned in place
+  function travelTarget() {
+    if (!travels()) return 0;
+    const a = recordFace.getBoundingClientRect(), r = track.getBoundingClientRect();
+    const top = parseFloat(getComputedStyle(section).top) || 0;
+    const start = a.top + a.height / 2 - innerHeight * 0.5;   // scroll left until the face reaches mid-screen
+    const end = r.top - top;                                  // scroll left until About me is pinned
+    if (end <= start) return end <= 0 ? 1 : 0;
+    return clamp(-start / (end - start));
   }
 
   /* ---------- picking stickers up once the basket is full ---------- */
@@ -126,9 +177,10 @@
 
   function tick() {
     raf = 0;
-    const goal = target();
+    const goal = target(), tGoal = travelTarget();
     p += (goal - p) * 0.2;
-    if (Math.abs(goal - p) < 0.0005) p = goal;
+    travel += (tGoal - travel) * 0.2;
+    if (Math.abs(goal - p) < 0.0005 && Math.abs(tGoal - travel) < 0.0005) { p = goal; travel = tGoal; }
     else raf = requestAnimationFrame(tick);
 
     drawItems(p);

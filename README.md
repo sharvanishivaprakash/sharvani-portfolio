@@ -40,8 +40,12 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
   On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
-- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Hovering a sticker makes it
-  blink and brings in the paper card with the same name on the left (only where the sticker is actually drawn counts).
+- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Hovering a sticker makes the
+  note under the record blink and brings in the paper card with the same name on the left (only where the sticker is actually
+  drawn counts); clicking a sticker keeps its card open. The fish card plays a YouTube video in its blue frame
+  (`data-youtube` in index.html) and the folk card an animated logo (`folk-ns-studio.webp`, from Alex's GIF).
+- The dot grid (`js/dot-grid.js`) runs behind every `.dots-zone`: hero + statement, and Outside the briefs + About me.
+- On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).
   On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
 - `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,

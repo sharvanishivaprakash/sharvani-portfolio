@@ -1,5 +1,6 @@
 /*
-  A softly moving dot grid behind the hero and the "I connect the dots" statement.
+  A softly moving dot grid behind the hero and the "I connect the dots" statement,
+  and again behind Outside the briefs and About me (every .dots-zone gets its own).
   The grid sways a little and a slow wave runs through it; dots near the cursor grow and turn blue.
   Around the statement, six dots (three above the words, three below) are joined into a box.
   As you scroll down to it the top lines are drawn first, then the words appear line by line,
@@ -8,10 +9,9 @@
   The canvas is only as tall as the window and follows the scroll inside its section,
   so it stays sharp on retina screens without a huge bitmap.
 */
-(function () {
-  const canvas = document.querySelector(".dots-bg");
-  if (!canvas) return;
+document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   const zone = canvas.parentElement;
+  const fadeIn = n > 0;                   // a later grid also fades in at its top, after the section above
   const box = zone.querySelector(".statement-box");
   const ctx = canvas.getContext("2d");
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -97,7 +97,7 @@
 
     const [sx, sy] = still ? [0, 0] : sway(t);
     const R = W < 700 ? 110 : 160;
-    const fadeEdge = gap * 3;                           // grid fades out just before the works section
+    const fadeEdge = gap * 3;                           // grid fades out just before the next section
     const i0 = -1, i1 = Math.ceil(W / gap) + 1;
     const j0 = Math.floor(off / gap) - 1, j1 = Math.ceil((off + VH) / gap) + 1;
 
@@ -107,7 +107,7 @@
       for (let i = i0; i <= i1; i++) {
         let [x, y] = pos(i, j, sx, sy);
         if (y < -gap || y > H) continue;
-        const edge = Math.min(1, (H - y) / fadeEdge);
+        const edge = Math.min(1, (H - y) / fadeEdge, fadeIn ? y / fadeEdge : 1);
         if (edge <= 0) continue;
         // a slow diagonal wave makes the grid breathe
         const wave = still ? 0 : (Math.sin((i + j) * 0.35 - t * 1.4) + 1) / 2;
@@ -199,4 +199,4 @@
   }).observe(zone);
 
   new ResizeObserver(size).observe(zone);
-})();
+});

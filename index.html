@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=26">
+  <link rel="stylesheet" href="css/style.css?v=27">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -127,20 +127,32 @@
       <div class="work-grid" id="work-grid"></div>
     </section>
 
+    <!-- Outside the briefs and About me share the same moving dot grid as the hero (js/dot-grid.js) -->
+    <div class="dots-zone">
+      <canvas class="dots-bg" aria-hidden="true"></canvas>
+
     <!-- Outside the briefs -->
-    <section class="frame outside" id="outside" style="--h:1052" aria-labelledby="outside-title">
+    <section class="frame outside" id="outside" style="--h:1252" aria-labelledby="outside-title">
       <h2 class="at big-label" style="--x:121;--y:80;--w:500" id="outside-title">Outside the briefs<span aria-hidden="true">*</span></h2>
       <div class="at tape" style="--x:172;--y:93;--w:368">
         <img src="assets/final/tape.webp" alt="" width="368" height="184">
         <p>Everything I do beyond design <br>briefs, deadlines, and screens.</p>
       </div>
-      <!-- The paper cards. Each one comes in while its sticker on the record is hovered (js/outside.js). -->
+      <!-- The paper cards. Each one comes in while its sticker on the record is hovered, and stays while the pointer is on it (js/outside.js). -->
       <div class="at peeks" style="--x:103;--y:270;--w:704">
-        <img class="peek" id="peek-theatre" src="assets/final/outside/card-theatre.webp" alt="Drama, On &amp; Off Stage. Performing under the lights, taking theatre to the streets, painting backdrops, and crafting props. I love being part of the whole production, not just the performance." width="1408" height="1408" loading="lazy">
-        <img class="peek" id="peek-folk" src="assets/final/outside/card-folk.webp" alt="Giving Folk a Face. Designed a logo for folk artist Naveen Sajju, exploring a visual identity rooted in his musical personality." width="1408" height="1408" loading="lazy">
-        <img class="peek" id="peek-paint" src="assets/final/outside/card-paint.webp" alt="Paws, Paint &amp; Purpose. Picked up a paintbrush to help brighten a dog shelter. A small way to give a space a little more love." width="1408" height="1408" loading="lazy">
-        <img class="peek" id="peek-clay" src="assets/final/outside/card-clay.webp" alt="Tiny Things Department. I make tiny clay charms because, well, why not? My favourite form of hyperfocus, one miniature at a time." width="1408" height="1408" loading="lazy">
-        <img class="peek" id="peek-fish" src="assets/final/outside/card-fish.webp" alt="Once Upon a Fish. Created a short animated video featuring Elu Meenu for a film. A little storytelling experiment, one frame at a time." width="1408" height="1408" loading="lazy">
+        <div class="peek" id="peek-theatre"><img src="assets/final/outside/card-theatre.webp" alt="Drama, On &amp; Off Stage. Performing under the lights, taking theatre to the streets, painting backdrops, and crafting props. I love being part of the whole production, not just the performance." width="1408" height="1408" loading="lazy"></div>
+        <div class="peek" id="peek-folk">
+          <img src="assets/final/outside/card-folk.webp" alt="Giving Folk a Face. Designed a logo for folk artist Naveen Sajju, exploring a visual identity rooted in his musical personality." width="1408" height="1408" loading="lazy">
+          <!-- the ns studio logo is animated -->
+          <img class="peek-gif" src="assets/final/outside/folk-ns-studio.webp" alt="" width="616" height="616" loading="lazy">
+        </div>
+        <div class="peek" id="peek-paint"><img src="assets/final/outside/card-paint.webp" alt="Paws, Paint &amp; Purpose. Picked up a paintbrush to help brighten a dog shelter. A small way to give a space a little more love." width="1408" height="1408" loading="lazy"></div>
+        <div class="peek" id="peek-clay"><img src="assets/final/outside/card-clay.webp" alt="Tiny Things Department. I make tiny clay charms because, well, why not? My favourite form of hyperfocus, one miniature at a time." width="1408" height="1408" loading="lazy"></div>
+        <div class="peek" id="peek-fish">
+          <img src="assets/final/outside/card-fish.webp" alt="Once Upon a Fish. Created a short animated video featuring Elu Meenu for a film. A little storytelling experiment, one frame at a time." width="1408" height="1408" loading="lazy">
+          <!-- the YouTube video sits in the blue frame; js/outside.js loads it when the card opens -->
+          <div class="peek-video" data-youtube="AbfyD6rdFBY"></div>
+        </div>
       </div>
       <!-- The blue record turns; the stickers on it stay still -->
       <div class="at record" style="--x:807;--y:345;--w:497.3">
@@ -173,7 +185,7 @@
         <img class="cart-item" data-drop="1" style="--sx:188;--sy:322;--sw:222.1" src="assets/final/about/camera.webp" alt="" width="445" height="383" loading="lazy">
       </div>
 
-      <div class="at receipt" style="--x:677;--y:102.6;--w:678">
+      <div class="at receipt" style="--x:753;--y:100.6;--w:678">
         <p class="r-hey uncover">Hey, I’m Sharvani .</p>
         <p class="r-lead uncover">A molecular biologist turned designer from Mysuru, currently studying Interaction design at NID Bengaluru.</p>
         <p class="r-collect uncover">I collect little pieces of the world wherever I go. <br>Stories, people, places, behaviours, questions, and the <br>tiny details that are easy to miss.</p>
@@ -184,6 +196,8 @@
         </ul>
       </div>
     </section>
+    </div>
+
     </div>
 
     <!-- What next -->
@@ -198,7 +212,7 @@
           <li><a class="js-contact" data-kind="instagram" href="#">Instagram <span aria-hidden="true">↗</span></a></li>
         </ul>
       </div>
-      <!-- Sharvani's doodle, big and faint, tucked into the bottom right corner -->
+      <!-- Sharvani's doodle as a dark blue shape in the bottom right corner, above the falling tabs -->
       <img class="next-doodle" src="assets/doodle/doodle.svg" alt="" width="404" height="396" aria-hidden="true">
       <!-- Falling tabs: they drop into a pile along the bottom once the section comes into view (js/falling-tabs.js) -->
       <div class="tab-pile" aria-hidden="true">
@@ -225,15 +239,15 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=26"></script>
-  <script src="js/content.js?v=26"></script>
-  <script src="js/main.js?v=26"></script>
-  <script src="js/cursor.js?v=26"></script>
-  <script src="js/dot-grid.js?v=26"></script>
-  <script src="js/liquid-name.js?v=26"></script>
-  <script src="js/about-scroll.js?v=26"></script>
-  <script src="js/falling-tabs.js?v=26"></script>
-  <script src="js/outside.js?v=26"></script>
-  <script src="js/sections.js?v=26"></script>
+  <script src="js/preloader.js?v=27"></script>
+  <script src="js/content.js?v=27"></script>
+  <script src="js/main.js?v=27"></script>
+  <script src="js/cursor.js?v=27"></script>
+  <script src="js/dot-grid.js?v=27"></script>
+  <script src="js/liquid-name.js?v=27"></script>
+  <script src="js/about-scroll.js?v=27"></script>
+  <script src="js/falling-tabs.js?v=27"></script>
+  <script src="js/outside.js?v=27"></script>
+  <script src="js/sections.js?v=27"></script>
 </body>
 </html>
