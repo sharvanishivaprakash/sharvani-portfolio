@@ -348,7 +348,13 @@ b { font-weight: 500; }
 .js-about-pin .about-track { height: calc(var(--track-h, 1120px) + var(--travel, 240vh)); }
 .js-about-pin .about {
   --u: min(1px, calc(100vw / 1440), calc((100svh - 84px) / 1000));
+  --pu: min(1px, calc(100vw / 1440));         /* the rest of the page's scale */
   position: sticky; top: calc(76px - 60 * var(--u));
+}
+/* the "About me" title keeps the page's scale, so it lines up with "Outside the briefs" above it */
+.js-about-pin .about .big-label {
+  left: calc(121 * var(--pu) - (1440 * var(--pu) - 1440 * var(--u)) / 2);
+  font-size: calc(48 * var(--pu)); line-height: calc(48 * var(--pu)); letter-spacing: calc(-1.92 * var(--pu));
 }
 .js-about .cart-item { visibility: hidden; will-change: transform; }
 /* a very small bounce as a sticker lands in the basket (translate is separate from the JS transform) */
