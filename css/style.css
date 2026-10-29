@@ -108,12 +108,12 @@ b { font-weight: 500; }
 .pill {
   display: flex; align-items: center; gap: 12px;
   padding: 4.5px 19px;
-  border: 1px solid #2c2c2c; border-radius: 24px;
+  border: 1px solid #2c2c2c; border-radius: 4px;
   background: rgba(14, 14, 14, 0.72);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .pill a {
-  padding: 4px 12px; border-radius: 40px;
+  padding: 4px 12px; border-radius: 3px;
   font-size: 16px; line-height: 22.1px; color: var(--ink); text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
@@ -170,15 +170,16 @@ b { font-weight: 500; }
   font-weight: 600; font-size: calc(36 * var(--u)); line-height: calc(36 * var(--u)); letter-spacing: calc(0.72 * var(--u));
   white-space: nowrap; color: #fff;
 }
+.hero-role, .hero-line { text-align: center; }
 .hero-line { font-size: calc(20 * var(--u)); line-height: calc(25 * var(--u)); letter-spacing: -0.01em; color: #fff; }
 .hero-line b { font-weight: 700; }
 
-/* The two buttons, with their arrows inside (sizes from Figma: 14px text, 4px / 16px padding) */
-.hero-ctas { display: flex; align-items: center; gap: calc(12 * var(--u)); }
+/* The two buttons, centred, with their arrows inside (Figma 291:1629: 14px text, 8px / 30px padding, 4px corners) */
+.hero-ctas { display: flex; align-items: center; justify-content: center; gap: calc(12 * var(--u)); }
 .btn {
   display: inline-flex; align-items: center; gap: calc(8 * var(--u));
-  padding: calc(4 * var(--u)) calc(14 * var(--u)) calc(4 * var(--u)) calc(16 * var(--u));
-  border: 0.8px solid #fff; border-radius: 49px;
+  padding: calc(8 * var(--u)) calc(20 * var(--u)) calc(8 * var(--u)) calc(22 * var(--u));   /* the same width as Figma once the arrow is in */
+  border: 0.8px solid #fff; border-radius: 4px;
   font-size: calc(14 * var(--u)); line-height: calc(21 * var(--u)); color: #fff; text-decoration: none; white-space: nowrap;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -615,9 +616,10 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .nl-star { margin-left: 0.25em; }
   .hero-role { margin-top: 10px; font-size: clamp(22px, 6.4vw, 30px); line-height: 1.2; }
   .hero-line { margin-top: 36px; max-width: 34ch; font-size: 16px; line-height: 1.4; }
+  .hero-role, .hero-line { text-align: left; }
   .hero-line br { display: none; }
-  .hero-ctas { position: relative; z-index: 3; gap: 12px; margin-top: 24px; }
-  .btn { gap: 8px; padding: 5px 14px 5px 16px; font-size: 14px; line-height: 21px; }
+  .hero-ctas { position: relative; z-index: 3; justify-content: flex-start; gap: 12px; margin-top: 24px; }
+  .btn { gap: 8px; padding: 8px 18px 8px 20px; font-size: 14px; line-height: 21px; }
   .hero-doodle { position: absolute; left: auto; right: -70px; bottom: -60px; width: 280px; }
   .hero-star { position: absolute; left: auto; right: -59px; bottom: -2px; width: 144px; }
   .sticker { position: absolute; }
