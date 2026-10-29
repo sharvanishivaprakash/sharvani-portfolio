@@ -13,8 +13,8 @@
 
   On desktop the face sticker in the middle of the record (Outside the briefs) is the first one in:
   as you scroll from the record down to About me it leaves the record and drops into the basket.
-  "Hey, I'm Sharvani" and the other stickers start coming in at the same time, so everything is in
-  within a short scroll (about a screen and a half after the face sets off).
+  It stays on the record until it's a quarter of the way down the screen, then lands a little after
+  About me is pinned. "Hey, I'm Sharvani" and the other stickers start coming in at the same time.
   Each sticker gives a very small bounce when it lands in the basket (CSS: .cart-item.is-landed).
 */
 (function () {
@@ -48,7 +48,7 @@
     if (pinned) {
       track.style.setProperty("--track-h", section.offsetHeight + "px");
       // a short pinned stretch: most of the story already plays while the face is on its way down
-      track.style.setProperty("--travel", "70vh");
+      track.style.setProperty("--travel", "100vh");
     }
     tick();
   }
@@ -109,19 +109,23 @@
     face.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
   }
 
-  // How much scrolling is left until: the face on the record reaches the middle of the screen (start),
-  // About me is pinned in place (pin), and the pinned stretch is over (end).
+  // How much scrolling is left until: the face on the record nears the top of the screen (start),
+  // About me is pinned in place (pin), the face is in the basket (land, a little into the pinned stretch)
+  // and the pinned stretch is over (end).
+  // The face waits on the record until it is a quarter of the way down the screen, so you have
+  // the whole of Outside the briefs to look at it before it sets off.
+  const LEAVE = 0.25, LAND = 0.3;              // as parts of the screen height
   function marks() {
     const a = recordFace.getBoundingClientRect(), r = track.getBoundingClientRect();
     const top = parseFloat(getComputedStyle(section).top) || 0;
     const pin = r.top - top;
-    return { start: Math.min(a.top + a.height / 2 - innerHeight * 0.5, pin - 1), pin, end: pin + r.height - section.offsetHeight };
+    return { start: Math.min(a.top + a.height / 2 - innerHeight * LEAVE, pin - 1), pin, land: pin + innerHeight * LAND, end: pin + r.height - section.offsetHeight };
   }
-  // the face's journey: 0 until it reaches the middle of the screen, 1 once About me is pinned in place
+  // the face's journey: 0 until it nears the top of the screen, 1 a little after About me is pinned in place
   function travelTarget() {
     if (!travels()) return 0;
     const m = marks();
-    return clamp(-m.start / (m.pin - m.start));
+    return clamp(-m.start / (m.land - m.start));
   }
 
   /* ---------- picking stickers up once the basket is full ---------- */
