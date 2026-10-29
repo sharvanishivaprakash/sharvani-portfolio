@@ -12,8 +12,8 @@
 
   // the parts of each section, in the order they come in
   const groups = [
-    [".works-title", ".tape", ".project"],
-    [".approach-title", ".approach-sub", ".steps .card", ".closing"],
+    [".works-title", ".works .tape", ".project"],
+    ["#outside-title", ".outside .tape", ".record", ".outside-note"],
     [".next-title", ".next-line", ".contact-links li"]
   ];
   const io = new IntersectionObserver((entries) => {
@@ -38,7 +38,7 @@
 
   /* ---------- blurring what's behind you ---------- */
 
-  const blocks = $$(".hero, .statement, .works, .about-track, .approach");
+  const blocks = $$(".hero, .statement, .works, .outside, .about-track");
   let raf = 0;
   function blur() {
     raf = 0;
