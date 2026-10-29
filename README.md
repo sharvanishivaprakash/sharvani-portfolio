@@ -28,9 +28,8 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/preloader.js`: the intro on the homepage. On black with moving dots, the doodle (without its glasses) looks left, then right,
   the glasses drop on, "sharvani" types in and the screen slides up. A click or key press skips it. It doesn't play for reduced motion
   or when you come back from another page of the site (the small script in the `<head>` of `index.html` decides).
-- `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I connect the dots" statement.
-  Around the statement, six dots (three above, three below) are joined into a box as you scroll to it: the top lines first,
-  then the statement's lines appear one by one (the `.s-line` spans in `index.html`), then the box closes.
+- `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I'm drawn to the little things" statement.
+  The statement's lines appear one by one as you scroll to it (the `.s-line` spans in `index.html`).
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
 - `js/sections.js`: as you scroll, the parts of Selected Works, Outside the briefs and What next ? rise in one after another,
   and sections you've scrolled past blur and dim a little so the one in view gets the attention.
@@ -38,11 +37,13 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
 - `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
-  On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
+  On desktop the story starts as the face leaves the record, so "Hey, I'm Sharvani" and the other stickers come in with it,
+  and the section is only pinned for a short stretch. Each sticker gives a very small bounce as it lands (`.cart-item.is-landed`).
+  The stickers live in `assets/final/about/`.
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
-- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Hovering a sticker makes the
-  note under the record blink and brings in the paper card with the same name on the left (only where the sticker is actually
-  drawn counts); clicking a sticker keeps its card open. The fish card plays a YouTube video in its blue frame
+- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Pointing at a sticker makes the
+  note under the record blink; clicking it brings in the paper card with the same name on the left (only where the sticker is
+  actually drawn counts), and clicking again, clicking elsewhere or Escape puts it away. Clicking the face scrolls to About me. The fish card plays a YouTube video in its blue frame
   (`data-youtube` in index.html) and the folk card an animated logo (`folk-ns-studio.webp`, from Alex's GIF).
 - The dot grid (`js/dot-grid.js`) runs behind every `.dots-zone`: hero + statement, and Outside the briefs + About me.
 - On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).

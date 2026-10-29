@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=27">
+  <link rel="stylesheet" href="css/style.css?v=28">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -104,7 +104,7 @@
         <img class="at sticker st-star reveal" style="--x:904;--y:616;--w:350;--i:3" src="assets/final/star.webp" alt="" width="350" height="350">
       </section>
 
-      <!-- Statement: the lines appear one by one as you scroll, inside a box of six joined dots (js/dot-grid.js) -->
+      <!-- Statement: the lines appear one by one as you scroll, (js/dot-grid.js) -->
       <section class="frame statement" style="--h:1000">
         <div class="at statement-box" style="--x:170;--y:370;--w:1100">
           <p>
@@ -138,7 +138,7 @@
         <img src="assets/final/tape.webp" alt="" width="368" height="184">
         <p>Everything I do beyond design <br>briefs, deadlines, and screens.</p>
       </div>
-      <!-- The paper cards. Each one comes in while its sticker on the record is hovered, and stays while the pointer is on it (js/outside.js). -->
+      <!-- The paper cards. Clicking a sticker on the record brings in the card with the same name (js/outside.js). -->
       <div class="at peeks" style="--x:103;--y:270;--w:704">
         <div class="peek" id="peek-theatre"><img src="assets/final/outside/card-theatre.webp" alt="Drama, On &amp; Off Stage. Performing under the lights, taking theatre to the streets, painting backdrops, and crafting props. I love being part of the whole production, not just the performance." width="1408" height="1408" loading="lazy"></div>
         <div class="peek" id="peek-folk">
@@ -157,14 +157,15 @@
       <!-- The blue record turns; the stickers on it stay still -->
       <div class="at record" style="--x:807;--y:345;--w:497.3">
         <img class="vinyl" src="assets/final/outside/vinyl.webp" alt="" width="806" height="802" loading="lazy">
-        <img class="face" src="assets/final/outside/face.webp" alt="" width="265" height="243" loading="lazy" style="--sx:211;--sy:200;--sw:132.5">
+        <!-- clicking the face goes to About me, where it drops into the basket -->
+        <a class="face-link" href="#about" aria-label="About me" data-cursor="view" data-cursor-label="About" style="--sx:211;--sy:200;--sw:132.5"><img class="face" src="assets/final/outside/face.webp" alt="" width="265" height="243" loading="lazy"></a>
         <button class="sticker" type="button" data-peek="fish" aria-controls="peek-fish" aria-label="Once Upon a Fish" data-cursor="view" data-cursor-label="Peek" style="--sx:322;--sy:34;--sw:167"><img src="assets/final/outside/sticker-fish.webp" alt="" width="334" height="389" loading="lazy"></button>
         <button class="sticker" type="button" data-peek="folk" aria-controls="peek-folk" aria-label="Giving Folk a Face" data-cursor="view" data-cursor-label="Peek" style="--sx:383;--sy:231;--sw:114.5"><img src="assets/final/outside/sticker-folk.webp" alt="" width="229" height="361" loading="lazy"></button>
         <button class="sticker" type="button" data-peek="theatre" aria-controls="peek-theatre" aria-label="Drama, On &amp; Off Stage" data-cursor="view" data-cursor-label="Peek" style="--sx:98;--sy:0;--sw:200"><img src="assets/final/outside/sticker-theatre.webp" alt="" width="400" height="400" loading="lazy"></button>
         <button class="sticker" type="button" data-peek="paint" aria-controls="peek-paint" aria-label="Paws, Paint &amp; Purpose" data-cursor="view" data-cursor-label="Peek" style="--sx:155;--sy:321;--sw:228.5"><img src="assets/final/outside/sticker-paint.webp" alt="" width="457" height="457" loading="lazy"></button>
         <button class="sticker" type="button" data-peek="clay" aria-controls="peek-clay" aria-label="Tiny Things Department" data-cursor="view" data-cursor-label="Peek" style="--sx:0;--sy:177;--sw:196.5"><img src="assets/final/outside/sticker-clay.webp" alt="" width="393" height="388" loading="lazy"></button>
       </div>
-      <p class="at outside-note" style="--x:959;--y:894;--w:288">( <span class="on-hover">Hover</span><span class="on-touch">Tap</span> on the stickers to take a sneak peek ! )</p>
+      <p class="at outside-note" style="--x:959;--y:894;--w:288">( <span class="on-hover">Click</span><span class="on-touch">Tap</span> on the stickers to take a sneak peek ! )</p>
     </section>
 
     <!-- About me -->
@@ -239,15 +240,15 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=27"></script>
-  <script src="js/content.js?v=27"></script>
-  <script src="js/main.js?v=27"></script>
-  <script src="js/cursor.js?v=27"></script>
-  <script src="js/dot-grid.js?v=27"></script>
-  <script src="js/liquid-name.js?v=27"></script>
-  <script src="js/about-scroll.js?v=27"></script>
-  <script src="js/falling-tabs.js?v=27"></script>
-  <script src="js/outside.js?v=27"></script>
-  <script src="js/sections.js?v=27"></script>
+  <script src="js/preloader.js?v=28"></script>
+  <script src="js/content.js?v=28"></script>
+  <script src="js/main.js?v=28"></script>
+  <script src="js/cursor.js?v=28"></script>
+  <script src="js/dot-grid.js?v=28"></script>
+  <script src="js/liquid-name.js?v=28"></script>
+  <script src="js/about-scroll.js?v=28"></script>
+  <script src="js/falling-tabs.js?v=28"></script>
+  <script src="js/outside.js?v=28"></script>
+  <script src="js/sections.js?v=28"></script>
 </body>
 </html>

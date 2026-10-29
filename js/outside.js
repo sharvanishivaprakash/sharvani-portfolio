@@ -1,15 +1,13 @@
 /*
   Outside the briefs.
-  The blue record turns (CSS) while the stickers on it stay still. Pointing at a sticker makes the note
-  under the record blink and brings in the paper card with the same name on the left; moving off it puts
-  the card away, unless the pointer goes onto the card itself (so the video on the fish card can be used).
-  Clicking a sticker keeps its card open (the pointer can then cross the other stickers on the way to it);
-  clicking it again, clicking elsewhere or Escape closes it.
-  The fish card's YouTube video is only loaded while its card is open, starting muted.
+  The blue record turns (CSS) while the stickers on it stay still.
+  Pointing at a sticker lifts it a touch and makes the note under the record blink.
+  Clicking (or tapping) a sticker brings in the paper card with the same name on the left;
+  clicking it again, clicking somewhere else or Escape puts the card away.
   A sticker only counts where it is actually drawn (not the empty corners of its picture),
-  so neighbouring stickers don't steal each other's hover.
-  On touch screens a tap shows that sticker's card under the record and a second tap hides it.
-  Keyboard focus works the same way as hovering.
+  so neighbouring stickers don't steal each other's clicks.
+  Clicking the face in the middle of the record scrolls down to About me, where it drops into the basket.
+  The fish card's YouTube video is only loaded while its card is open, starting muted.
 */
 (function () {
   const record = document.querySelector(".record");
@@ -19,21 +17,28 @@
   const cards = {};
   document.querySelectorAll(".peek").forEach((el) => { cards[el.id.replace("peek-", "")] = el; });
 
-  let hot = null, hideTimer = 0, pinned = null;
+  let open = null, pointed = null;
 
   function show(st) {
-    clearTimeout(hideTimer);
-    if (st === hot) return;
-    if (hot) hot.classList.remove("is-hot");
-    Object.values(cards).forEach((c) => c.classList.remove("is-on"));
-    hot = st;
-    stickers.forEach((s) => s.setAttribute("aria-expanded", String(s === st)));
-    section.classList.toggle("is-peeking", !!st);
-    Object.values(cards).forEach((c) => video(c, c === (st && cards[st.dataset.peek])));
-    if (!st) return;
-    st.classList.add("is-hot");
-    const card = cards[st.dataset.peek];
-    if (card) card.classList.add("is-on");
+    if (st === open) return;
+    open = st;
+    stickers.forEach((s) => {
+      s.classList.toggle("is-open", s === st);
+      s.setAttribute("aria-expanded", String(s === st));
+    });
+    Object.entries(cards).forEach(([name, card]) => {
+      const on = !!st && st.dataset.peek === name;
+      card.classList.toggle("is-on", on);
+      video(card, on);
+    });
+  }
+
+  function point(st) {
+    if (st === pointed) return;
+    if (pointed) pointed.classList.remove("is-pointed");
+    pointed = st;
+    if (st) st.classList.add("is-pointed");
+    section.classList.toggle("is-pointing", !!st);
   }
 
   // put the YouTube player in a card's frame while it is open, and take it out again so it stops
@@ -49,16 +54,6 @@
     f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     f.allowFullscreen = true;
     slot.appendChild(f);
-  }
-  // a short pause before putting a card away, so sliding to the next sticker or onto the card doesn't flicker
-  function hideSoon() {
-    clearTimeout(hideTimer);
-    if (pinned) return;
-    hideTimer = setTimeout(() => {
-      const open = hot && cards[hot.dataset.peek];
-      if (open && open.matches(":hover")) return;   // the pointer made it onto the card (or its video)
-      show(null);
-    }, 450);
   }
 
   /* ---------- where each sticker is actually drawn ---------- */
@@ -93,40 +88,41 @@
     return null;
   }
 
-  /* ---------- mouse and pen ---------- */
+  /* ---------- pointing ---------- */
 
   record.addEventListener("pointermove", (e) => {
-    if (e.pointerType === "touch" || pinned) return;
-    const st = stickerAt(e.clientX, e.clientY);
-    if (st) show(st); else if (hot) hideSoon();
+    if (e.pointerType === "touch") return;
+    point(stickerAt(e.clientX, e.clientY));
   });
-  record.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") hideSoon(); });
-  // the open card keeps itself open while the pointer is on it
-  Object.values(cards).forEach((card) => {
-    card.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch" && card.classList.contains("is-on")) clearTimeout(hideTimer); });
-    card.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") hideSoon(); });
-  });
+  record.addEventListener("pointerleave", () => point(null));
 
-  /* ---------- taps and keyboard ---------- */
+  /* ---------- clicks, taps and keyboard ---------- */
 
   stickers.forEach((st) => {
+    st.setAttribute("aria-expanded", "false");
     st.addEventListener("click", (e) => {
-      // a click on an empty corner goes to whatever sticker is drawn there
+      // a click on an empty corner goes to whatever sticker is drawn there (keyboard clicks have no position)
       const target = e.detail ? stickerAt(e.clientX, e.clientY) : st;
       if (!target) return;
-      const touch = matchMedia("(hover: none)").matches;
-      // a second click (or tap) on the open sticker closes its card
-      const closing = target === pinned || (touch && e.detail && target === hot);
-      pinned = closing ? null : target;
-      show(closing ? null : target);
+      show(target === open ? null : target);
     });
-    st.setAttribute("aria-expanded", "false");
-    st.addEventListener("focus", () => { if (st.matches(":focus-visible")) show(st); });
-    st.addEventListener("blur", () => { if (hot === st) hideSoon(); });
   });
-  function unpin() { pinned = null; show(null); }
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") unpin(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") show(null); });
   document.addEventListener("click", (e) => {
-    if (pinned && !e.target.closest(".record, .peek.is-on")) unpin();
+    if (open && !e.target.closest(".record, .peek.is-on")) show(null);
   });
+
+  // the face goes to About me: scroll to where everything there has come in
+  const faceLink = record.querySelector(".face-link");
+  const track = document.querySelector(".about-track");
+  if (faceLink && track) {
+    faceLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const about = track.querySelector(".about");
+      const pinned = getComputedStyle(about).position === "sticky";
+      const pinTop = parseFloat(getComputedStyle(about).top) || 0;
+      const y = track.getBoundingClientRect().top + scrollY + (pinned ? track.offsetHeight - about.offsetHeight - pinTop : -80);
+      scrollTo({ top: y, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+  }
 })();
