@@ -130,57 +130,51 @@ b { font-weight: 500; }
   pointer-events: none;
 }
 
-/* ---------- Hero: the paper sheet ---------- */
+/* ---------- Hero ---------- */
 
-.paper { z-index: 0; }
-.clip { z-index: 3; }
 .hey { z-index: 1; }
 
-.tabs li {
-  writing-mode: vertical-rl;
-  font-size: calc(16 * var(--u)); line-height: calc(33 * var(--u)); letter-spacing: calc(-0.16 * var(--u));
-  color: var(--paper);
-}
-
+/* Each letter of the name is in its own font (Figma), and js/name-fonts.js keeps swapping them */
 .hero-name {
-  font-weight: 700; font-size: calc(96 * var(--u)); line-height: calc(114.2 * var(--u));
-  letter-spacing: calc(-7.68 * var(--u)); text-align: center; white-space: nowrap;
-  color: var(--blue);
+  display: flex; align-items: baseline; white-space: nowrap;
+  font-weight: 400; font-size: calc(96 * var(--u)); line-height: calc(96 * var(--u));
+  letter-spacing: calc(2.88 * var(--u)); color: var(--blue);
 }
-/* the liquid wobble filter lives in index.html; js/liquid-name.js switches it on */
-.liquid-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
-.hero-name.is-liquid { filter: url(#liquid); }
+.nl { display: inline-block; text-align: center; }
+.nl-star { margin-left: calc(28 * var(--u)); }
+.hero-name .f-peralta   { font-family: "Peralta", serif; }
+.hero-name .f-kranky    { font-family: "Kranky", cursive; }
+.hero-name .f-silk      { font-family: "Silkscreen", monospace; font-weight: 700; }
+.hero-name .f-mountains { font-family: "Mountains of Christmas", cursive; font-weight: 700; }
+.hero-name .f-pacifico  { font-family: "Pacifico", cursive; }
+.hero-name .f-pangolin  { font-family: "Pangolin", cursive; }
+.hero-name .f-playwrite { font-family: "Playwrite US Trad", cursive; }
+.hero-name .f-rainbow   { font-family: "Over the Rainbow", cursive; }
+
 .hero-role {
-  font-size: calc(24 * var(--u)); line-height: calc(24 * var(--u)); letter-spacing: calc(-0.48 * var(--u));
-  text-align: center; white-space: nowrap; color: var(--dark-ink);
+  font-weight: 600; font-size: calc(36 * var(--u)); line-height: calc(36 * var(--u)); letter-spacing: calc(0.72 * var(--u));
+  white-space: nowrap; color: #fff;
 }
-.hero-line {
-  font-family: var(--serif);
-  font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); letter-spacing: calc(-0.2 * var(--u));
-  text-align: center; color: var(--dark-ink);
-}
+.hero-line { font-size: calc(20 * var(--u)); line-height: calc(25 * var(--u)); color: #fff; }
 .hero-line b { font-weight: 700; }
 
-/* The two buttons stay centred on the sheet now that they carry arrows */
-.hero-ctas {
-  left: calc(453 * var(--u)); width: calc(533 * var(--u));
-  display: flex; justify-content: center; align-items: center; gap: calc(12 * var(--u));
-}
+/* The two buttons, with their arrows inside (sizes from Figma: 14px text, 4px / 16px padding) */
+.hero-ctas { display: flex; align-items: center; gap: calc(12 * var(--u)); }
 .btn {
   display: inline-flex; align-items: center; gap: calc(8 * var(--u));
-  padding: calc(4.8 * var(--u)) calc(14 * var(--u)) calc(4.8 * var(--u)) calc(16.8 * var(--u));
-  border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 49px;
-  font-size: calc(14 * var(--u)); line-height: 1.5; color: var(--dark-ink); text-decoration: none; white-space: nowrap;
+  padding: calc(4 * var(--u)) calc(14 * var(--u)) calc(4 * var(--u)) calc(16 * var(--u));
+  border: 0.8px solid #fff; border-radius: 49px;
+  font-size: calc(14 * var(--u)); line-height: calc(21 * var(--u)); color: #fff; text-decoration: none; white-space: nowrap;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.btn:hover { background: var(--dark-ink); border-color: var(--dark-ink); color: #fff; }
+.btn:hover { background: #fff; color: var(--ink); }
 .btn-solid { background: var(--blue); border-color: var(--blue); color: #fff; }
-.btn-solid:hover { background: #006fd0; border-color: #006fd0; }
+.btn-solid:hover { background: #006fd0; border-color: #006fd0; color: #fff; }
 
 /* Arrow icons: two copies in a small window, so one can leave as the other arrives */
 .btn-icon {
   position: relative; overflow: hidden; flex: none;
-  width: max(10px, calc(12 * var(--u))); height: max(10px, calc(12 * var(--u)));
+  width: max(9px, calc(11 * var(--u))); height: max(9px, calc(11 * var(--u)));
 }
 .btn-icon svg {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -198,19 +192,44 @@ b { font-weight: 500; }
 .btn:hover .icon-out svg { translate: 100% -100%; }
 .btn:hover .icon-out svg + svg { translate: 0 0; }
 
+/* The big dark blue doodle, tilted 12° and running off the bottom right (Figma 264:558) */
+.hero { z-index: 1; }
+.hero-doodle { aspect-ratio: 1; z-index: 0; rotate: 12.16deg; transform-origin: 0 0; pointer-events: none; }
+.hero-doodle span {
+  position: absolute; left: calc(69 / 517.8 * 100%); top: calc(73.8 / 517.8 * 100%);
+  width: calc(388.2 / 517.8 * 100%); aspect-ratio: 40.4 / 39.6;
+  background: #004988;
+  -webkit-mask: url("../assets/doodle/doodle.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/doodle/doodle.svg") center / 100% 100% no-repeat;
+}
 .sticker { z-index: 2; transition: transform 0.4s var(--ease); }
 .sticker:hover { transform: rotate(-4deg) scale(1.03); }
-.st-star { z-index: 1; pointer-events: none; }
 
-/* ---------- Statement ---------- */
+/* ---------- I'm drawn to: six cards that turn over ---------- */
 
-.statement-box { padding: calc(8 * var(--u)) calc(16 * var(--u)); }
-.statement p {
-  display: grid; gap: calc(22 * var(--u));
-  font-weight: 300; font-size: calc(32 * var(--u)); line-height: calc(40.32 * var(--u)); letter-spacing: calc(-0.64 * var(--u));
-  text-align: center;
+.drawn-title {
+  font-weight: 600; font-size: calc(48 * var(--u)); line-height: calc(114.2 * var(--u)); letter-spacing: calc(2 * var(--u));
+  white-space: nowrap; color: var(--blue);
 }
-.s-line { display: block; }
+.drawn-cards { display: flex; gap: calc(15 * var(--u)); list-style: none; }
+.drawn-cards li { flex: 1; }
+.flip {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer;
+  aspect-ratio: 161 / 341; perspective: calc(1200 * var(--u));
+}
+.flip-in {
+  position: relative; display: block; width: 100%; height: 100%;
+  transform-style: preserve-3d; transition: transform 0.7s var(--ease);
+}
+.flip-in img { position: absolute; inset: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { transform: rotateY(180deg); }
+@media (hover: hover) { .flip:hover .flip-in { transform: rotateY(180deg); } }
+.flip:focus-visible .flip-in, .flip.is-turned .flip-in { transform: rotateY(180deg); }
+.flip:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.drawn-note {
+  font-size: calc(16 * var(--u)); line-height: calc(19 * var(--u)); letter-spacing: calc(1 * var(--u));
+  text-align: center; white-space: nowrap;
+}
 
 /* ---------- Selected works ---------- */
 
@@ -571,31 +590,25 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .pill { gap: 0; padding: 4px 6px; }
   .pill a { padding: 4px 8px; font-size: 14px; line-height: 20px; }
 
-  /* Hero: the sheet becomes a card on the paper texture; the tabs give way */
+  /* Hero: stacked and left-aligned; the doodle peeks in at the bottom right */
   .dots-zone { padding-top: 92px; }
-  .hero {
-    position: relative; max-width: 560px; margin: 0 16px 40px;
-    padding: 64px 20px 150px; text-align: center;
-    background: var(--sheet) url("../assets/final/paper.webp") left top / cover;
-    border-radius: 3px;
-  }
-  @media (min-width: 592px) { .hero { margin-inline: auto; } }
-  .paper, .tabs { display: none; }
-  .clip { position: absolute; top: -18px; left: 10px; width: 46px; }
-  .hey { width: 120px; margin: 0 0 4px 6%; }
-  .hero-name { font-size: clamp(44px, 14vw, 80px); line-height: 1.15; letter-spacing: -0.07em; }
-  .hero-role { margin-top: 4px; font-size: 18px; line-height: 1.4; letter-spacing: 0; }
-  .hero-line { margin: 28px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.4; letter-spacing: 0; }
+  .hero { position: relative; max-width: 560px; margin: 0 auto; padding: 56px 20px 200px; overflow: hidden; }
+  .hey { width: 120px; margin: 0 0 6px -6px; }
+  .hero-name { font-size: clamp(40px, 12.5vw, 72px); line-height: 1.1; letter-spacing: 0.02em; }
+  .nl-star { margin-left: 0.25em; }
+  .hero-role { margin-top: 10px; font-size: clamp(22px, 6.4vw, 30px); line-height: 1.2; }
+  .hero-line { margin-top: 36px; max-width: 34ch; font-size: 16px; line-height: 1.4; }
   .hero-line br { display: none; }
-  .hero-ctas { position: relative; z-index: 3; justify-content: center; gap: 12px; margin-top: 28px; }
-  .btn { gap: 8px; padding: 6px 14px 6px 16px; font-size: 14px; }
+  .hero-ctas { position: relative; z-index: 3; gap: 12px; margin-top: 24px; }
+  .btn { gap: 8px; padding: 5px 14px 5px 16px; font-size: 14px; line-height: 21px; }
+  .hero-doodle { position: absolute; left: auto; right: -70px; bottom: -60px; width: 280px; }
   .sticker { position: absolute; }
-  .st-currently { left: -10px; bottom: 26px; width: 104px; }
-  .st-star { right: -8px; bottom: -40px; width: 150px; }
 
-  .statement { padding: 160px 60px 180px; }   /* room for the box of dots on each side */
-  .statement-box { max-width: 640px; margin: 0 auto; padding: 12px 0; }
-  .statement p { gap: 14px; font-size: clamp(19px, 4.6vw, 26px); line-height: 1.45; letter-spacing: 0; }
+  /* I'm drawn to: three cards a row */
+  .drawn { max-width: 600px; margin: 0 auto; padding: 72px 16px 96px; }
+  .drawn-title { font-size: clamp(32px, 9vw, 44px); line-height: 1.3; letter-spacing: 1px; }
+  .drawn-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
+  .drawn-note { margin-top: 18px; font-size: 14px; line-height: 1.4; letter-spacing: 0.5px; text-align: right; }
 
   .works { padding: 96px 16px 40px; text-align: center; }
   .works-title { font-size: clamp(34px, 9vw, 52px); line-height: 1.3; letter-spacing: 0; white-space: normal; }
@@ -713,4 +726,4 @@ html.is-preloading .preloader, .preloader.is-open {
 @keyframes rise-in {
   from { opacity: 0; translate: 0 48px; filter: blur(8px); }
 }
-.hero, .statement, .works, .outside, .about-track { transition: filter 0.2s linear, opacity 0.2s linear; }
+.hero, .drawn, .works, .outside, .about-track { transition: filter 0.2s linear, opacity 0.2s linear; }

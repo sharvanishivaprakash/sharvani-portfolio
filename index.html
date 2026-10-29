@@ -11,9 +11,9 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&family=Peralta&family=Kranky&family=Silkscreen:wght@700&family=Mountains+of+Christmas:wght@700&family=Pacifico&family=Pangolin&family=Playwrite+US+Trad&family=Over+the+Rainbow&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=30">
+  <link rel="stylesheet" href="css/style.css?v=31">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -43,7 +43,7 @@
 
   <a class="skip" href="#work">Skip to work</a>
 
-  <!-- Figma "Portfolio final 1" (page 2). On desktop every block is placed at its Figma
+  <!-- Figma "Portfolio final 3" (page 2). On desktop every block is placed at its Figma
        position: --x / --y / --w are Figma pixels inside the section, scaled by --u. -->
   <header class="top-nav">
     <a class="logo" href="#top" aria-label="Sharvani SP, back to top">
@@ -60,38 +60,21 @@
   </header>
 
   <main id="top">
-    <!-- Hero and the statement share a moving dot grid; around the statement some dots get connected (js/dot-grid.js) -->
+    <!-- Hero and "I'm drawn to" share a moving dot grid (js/dot-grid.js) -->
     <div class="dots-zone">
       <canvas class="dots-bg" aria-hidden="true"></canvas>
 
-      <!-- Hero: the paper sheet with tabs -->
+      <!-- Hero (Figma "Portfolio final 3", node 264:478) -->
       <section class="frame hero" style="--h:900" aria-labelledby="hero-name">
-        <img class="at paper" style="--x:348;--y:178;--w:762" src="assets/final/paper.webp" alt="" width="762" height="722">
-        <img class="at clip reveal" style="--x:341;--y:139;--w:91" src="assets/final/paperclip.webp" alt="" width="91" height="140">
-
-        <ul class="tabs" aria-label="Curious, observant, thoughtful, experimental">
-          <li class="at" style="--x:1068;--y:249;--w:35">Curious</li>
-          <li class="at" style="--x:1068;--y:354;--w:35">Observant</li>
-          <li class="at" style="--x:1068;--y:480;--w:35">Thoughtful</li>
-          <li class="at" style="--x:1067;--y:606;--w:35">Experimental</li>
-        </ul>
-
-        <img class="at hey reveal" style="--x:454;--y:327;--w:188" src="assets/final/hey-its.webp" alt="hey, it’s" width="188" height="81">
-        <h1 class="at hero-name reveal" style="--x:480;--y:378;--w:479;--i:1" id="hero-name">SHARVANI<span aria-hidden="true"> *</span></h1>
-        <!-- The name's slow liquid wobble (js/liquid-name.js); it settles while you hover the name -->
-        <svg class="liquid-defs" width="0" height="0" aria-hidden="true" focusable="false">
-          <filter id="liquid" x="-8%" y="-25%" width="116%" height="150%" color-interpolation-filters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.011 0.02" numOctaves="1" seed="4" result="noise"/>
-            <feGaussianBlur in="noise" stdDeviation="3" result="soft"/>
-            <feDisplacementMap in="SourceGraphic" in2="soft" scale="0" xChannelSelector="R" yChannelSelector="G" result="bent"/>
-            <!-- smooth the bent edges: soften, then sharpen the outline again -->
-            <feGaussianBlur in="bent" stdDeviation="0.9" result="blurred"/>
-            <feColorMatrix in="blurred" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 14 -5"/>
-          </filter>
-        </svg>
-        <p class="at hero-role reveal" style="--x:480;--y:493;--w:479;--i:1">Interaction Designer</p>
-        <p class="at hero-line reveal" style="--x:453;--y:597;--w:533;--i:2">An interaction designer exploring the <br>intersection of <b>human behaviour, technology,</b> and <b>meaningful experiences.</b></p>
-        <div class="at hero-ctas reveal" style="--x:604;--y:693;--w:240;--i:3">
+        <img class="at hey reveal" style="--x:387;--y:262;--w:188" src="assets/final/hey-its.webp" alt="hey, it’s" width="188" height="81">
+        <!-- Every letter has its own font and keeps swapping to another one, letter by letter,
+             like the frames of a GIF (js/name-fonts.js) -->
+        <h1 class="at hero-name reveal" style="--x:413;--y:325;--w:641;--i:1" id="hero-name" aria-label="Sharvani">
+          <span class="nl" aria-hidden="true">S</span><span class="nl" aria-hidden="true">H</span><span class="nl" aria-hidden="true">A</span><span class="nl" aria-hidden="true">R</span><span class="nl" aria-hidden="true">V</span><span class="nl" aria-hidden="true">A</span><span class="nl" aria-hidden="true">N</span><span class="nl" aria-hidden="true">i</span><span class="nl nl-star" aria-hidden="true">*</span>
+        </h1>
+        <p class="at hero-role reveal" style="--x:419;--y:434;--w:533;--i:1">Interaction Designer</p>
+        <p class="at hero-line reveal" style="--x:422;--y:567;--w:533;--i:2">Turning insights about <b>people</b> and <b>behaviour</b> into <br><b>thoughtful digital experiences.</b></p>
+        <div class="at hero-ctas reveal" style="--x:418;--y:642;--w:400;--i:3">
           <a class="btn btn-solid" href="#work">Explore my work
             <span class="btn-icon icon-down" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg><svg viewBox="0 0 12 12"><path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5"/></svg></span>
           </a>
@@ -99,21 +82,22 @@
             <span class="btn-icon icon-out" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg></span>
           </a>
         </div>
-
-        <img class="at sticker st-currently reveal" style="--x:292;--y:629;--w:166;--i:3" src="assets/final/sticker-currently.webp" alt="Sticker: currently, interaction design" width="166" height="133">
-        <img class="at sticker st-star reveal" style="--x:904;--y:616;--w:350;--i:3" src="assets/final/star.webp" alt="" width="350" height="350">
+        <!-- Sharvani's doodle, big and dark blue, tilted and running off the bottom right -->
+        <div class="at hero-doodle reveal" style="--x:1105.3;--y:409.4;--w:517.8;--i:3" aria-hidden="true"><span></span></div>
       </section>
 
-      <!-- Statement: the lines appear one by one as you scroll, (js/dot-grid.js) -->
-      <section class="frame statement" style="--h:1000">
-        <div class="at statement-box" style="--x:170;--y:370;--w:1100">
-          <p>
-            <span class="s-line">I’m drawn to the <b>little things</b>,</span>
-            <span class="s-line">the patterns and behaviours that make us pause and wonder why.</span>
-            <span class="s-line">Sometimes, they reveal a <b>problem worth solving</b>;</span>
-            <span class="s-line">other times, <b>an idea worth exploring !</b></span>
-          </p>
-        </div>
+      <!-- I'm drawn to: six cards that turn over to a white card on hover (tap on touch screens), js/drawn-cards.js -->
+      <section class="frame drawn" style="--h:913" aria-labelledby="drawn-title">
+        <h2 class="at drawn-title" style="--x:117;--y:109;--w:420" id="drawn-title">I’m drawn to,</h2>
+        <ul class="at drawn-cards" style="--x:199;--y:286;--w:1041">
+          <li><button class="flip" type="button" aria-label="the little things"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-1.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-1.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+          <li><button class="flip" type="button" aria-label="the patterns"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-2.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-2.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+          <li><button class="flip" type="button" aria-label="and behaviours"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-3.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-3.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+          <li><button class="flip" type="button" aria-label="that make us pause and wonder why,"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-4.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-4.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+          <li><button class="flip" type="button" aria-label="sometimes they reveal a problem worth solving"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-5.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-5.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+          <li><button class="flip" type="button" aria-label="other times, an idea worth exploring !"><span class="flip-in"><img class="flip-front" src="assets/final/drawn/front-6.webp" alt="" width="322" height="682" loading="lazy"><img class="flip-back" src="assets/final/drawn/back-6.webp" alt="" width="322" height="682" loading="lazy"></span></button></li>
+        </ul>
+        <p class="at drawn-note" style="--x:1064;--y:643;--w:187">( <span class="on-hover">Hover over</span><span class="on-touch">Tap</span> the cards )</p>
       </section>
     </div>
 
@@ -240,15 +224,16 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=30"></script>
-  <script src="js/content.js?v=30"></script>
-  <script src="js/main.js?v=30"></script>
-  <script src="js/cursor.js?v=30"></script>
-  <script src="js/dot-grid.js?v=30"></script>
-  <script src="js/liquid-name.js?v=30"></script>
-  <script src="js/about-scroll.js?v=30"></script>
-  <script src="js/falling-tabs.js?v=30"></script>
-  <script src="js/outside.js?v=30"></script>
-  <script src="js/sections.js?v=30"></script>
+  <script src="js/preloader.js?v=31"></script>
+  <script src="js/content.js?v=31"></script>
+  <script src="js/main.js?v=31"></script>
+  <script src="js/cursor.js?v=31"></script>
+  <script src="js/dot-grid.js?v=31"></script>
+  <script src="js/name-fonts.js?v=31"></script>
+  <script src="js/drawn-cards.js?v=31"></script>
+  <script src="js/about-scroll.js?v=31"></script>
+  <script src="js/falling-tabs.js?v=31"></script>
+  <script src="js/outside.js?v=31"></script>
+  <script src="js/sections.js?v=31"></script>
 </body>
 </html>

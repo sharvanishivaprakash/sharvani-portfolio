@@ -1,8 +1,7 @@
 /*
-  A softly moving dot grid behind the hero and the "I connect the dots" statement,
+  A softly moving dot grid behind the hero and "I'm drawn to",
   and again behind Outside the briefs and About me (every .dots-zone gets its own).
   The grid sways a little and a slow wave runs through it; dots near the cursor grow and turn blue.
-  As you scroll down to the statement its words appear line by line; scrolling back up takes them away again.
 
   The canvas is only as tall as the window and follows the scroll inside its section,
   so it stays sharp on retina screens without a huge bitmap.
@@ -10,7 +9,6 @@
 document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   const zone = canvas.parentElement;
   const fadeIn = n > 0;                   // a later grid also fades in at its top, after the section above
-  const box = zone.querySelector(".statement-box");
   const ctx = canvas.getContext("2d");
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -19,7 +17,6 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   let dpr = 1, W = 0, H = 0, VH = 0, gap = 32, visible = false, raf = 0;
   const t0 = performance.now();
   const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999, on: false };
-  let drawn = 0;                          // how far the statement has come in, 0 to 1 (follows the scroll)
 
   function size() {
     dpr = Math.min(2, devicePixelRatio || 1);
@@ -36,31 +33,6 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   // the whole grid sways gently instead of sliding away, so joined dots stay near the words
   const sway = (t) => [Math.sin(t * 0.21) * gap * 0.35, Math.cos(t * 0.17) * gap * 0.35];
   const pos = (i, j, sx, sy) => [i * gap + gap / 2 + sx, j * gap + gap / 2 + sy];
-
-  /* ---------- the statement's lines ---------- */
-
-  const lines = box ? [...box.querySelectorAll(".s-line")] : [];
-
-  // 0 when the words come up from the bottom of the window, 1 once they're a bit above the middle
-  function scrolled() {
-    if (still) return 1;
-    const b = box.getBoundingClientRect(), mid = (b.top + b.bottom) / 2;
-    return Math.max(0, Math.min(1, (innerHeight * 0.92 - mid) / (innerHeight * 0.5)));
-  }
-
-  // the words come in line by line over this part of the scroll
-  const clamp01 = (v) => Math.max(0, Math.min(1, v));
-  const WORDS = [0.05, 0.9];
-  function showLines(p) {
-    const n = lines.length, span = (WORDS[1] - WORDS[0]) / n;
-    lines.forEach((el, k) => {
-      const t = clamp01((p - WORDS[0] - k * span) / (span * 1.2));
-      const e = 1 - (1 - t) ** 3;
-      el.style.opacity = e.toFixed(3);
-      el.style.transform = t >= 1 ? "" : `translateY(${((1 - e) * 18).toFixed(1)}px)`;
-      el.style.filter = t >= 1 ? "" : `blur(${((1 - e) * 6).toFixed(1)}px)`;
-    });
-  }
 
   /* ---------- drawing ---------- */
 
@@ -117,16 +89,6 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
       ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
     }
 
-    joinDots();
-  }
-
-  // the statement's lines follow the scroll
-  function joinDots() {
-    if (!box) return;
-    const goal = scrolled();
-    drawn += (goal - drawn) * 0.12;
-    if (still || Math.abs(goal - drawn) < 0.001) drawn = goal;
-    showLines(drawn);
   }
 
   /* ---------- input ---------- */

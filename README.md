@@ -10,7 +10,7 @@ Then open http://localhost:8000.
 
 ## Editing content
 The homepage is built from the Figma frame "Portfolio final 1" (page 2 of the Sharvani SP portfolio file).
-- Homepage copy (hero, statement, outside the briefs, about card, what next) is written in `index.html`.
+- Homepage copy (hero, I'm drawn to, outside the briefs, about card, what next) is written in `index.html`.
 - `js/content.js` holds the selected works (title, summary, tags, cover image, case study details), the email and links.
   The Resume button uses the `[Resume]` link there; until it's set, it shows "coming soon".
 - Images exported from Figma live in `assets/final/`.
@@ -28,13 +28,15 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - `js/preloader.js`: the intro on the homepage. On black with moving dots, the doodle (without its glasses) looks left, then right,
   the glasses drop on, "sharvani" types in and the screen slides up. A click or key press skips it. It doesn't play for reduced motion
   or when you come back from another page of the site (the small script in the `<head>` of `index.html` decides).
-- `js/dot-grid.js`: the softly moving dot grid behind the hero and the "I'm drawn to the little things" statement.
-  The statement's lines appear one by one as you scroll to it (the `.s-line` spans in `index.html`).
+- `js/dot-grid.js`: the softly moving dot grid behind the hero and "I'm drawn to".
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
 - `js/sections.js`: as you scroll, the parts of Selected Works, Outside the briefs and What next ? rise in one after another,
   and sections you've scrolled past blur and dim a little so the one in view gets the attention.
 - Work cards: the `hover` image in `js/content.js` fades in over the cover on hover (Andaaj has one; the others are `null` for now).
-- `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
+- `js/name-fonts.js`: every letter of the hero name "SHARVANi *" is set in its own Google font (as in Figma) and the letters
+  keep swapping fonts one after another, like the frames of a GIF. Still for reduced motion.
+- `js/drawn-cards.js` + "I'm drawn to" in `index.html`: six cards (`assets/final/drawn/front-N.webp`) that turn over to their
+  white back (`back-N.webp`) on hover; on touch screens a tap turns a card. Replace a file in place to update a card.
 - `js/about-scroll.js`: the About me scroll story. The basket starts empty; as you scroll, the stickers drop in one by one
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
   On desktop the story starts as the face leaves the record, so "Hey, I'm Sharvani" and the other stickers come in with it,
@@ -45,7 +47,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   note under the record blink; clicking it brings in the paper card with the same name on the left (only where the sticker is
   actually drawn counts), and clicking again, clicking elsewhere or Escape puts it away. Clicking the face scrolls to About me. The fish card plays a YouTube video in its blue frame
   (`data-youtube` in index.html) and the folk card an animated logo (`folk-ns-studio.webp`, from Alex's GIF).
-- The dot grid (`js/dot-grid.js`) runs behind every `.dots-zone`: hero + statement, and Outside the briefs + About me.
+- The dot grid (`js/dot-grid.js`) runs behind every `.dots-zone`: hero + I'm drawn to, and Outside the briefs + About me.
 - On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).
   On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).

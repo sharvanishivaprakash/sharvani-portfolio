@@ -38,7 +38,7 @@
 
   /* ---------- blurring what's behind you ---------- */
 
-  const blocks = $$(".hero, .statement, .works, .outside, .about-track");
+  const blocks = $$(".hero, .drawn, .works, .outside, .about-track");
   let raf = 0;
   function blur() {
     raf = 0;
