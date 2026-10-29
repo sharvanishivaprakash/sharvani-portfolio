@@ -282,10 +282,10 @@ b { font-weight: 500; }
 .peek img:first-child { width: 100%; }
 /* an open card can be pointed at too (for the video), so it stays while the pointer is on it */
 .peek.is-on { opacity: 1; translate: 0 0; rotate: 0deg; scale: 1; pointer-events: auto; }
-/* the blue frame on the fish card: 396 × 223 at 249, 129 of the 704 card */
+/* the blue frame on the fish card: 474 × 267 at 102, 174 of the 704 card */
 .peek-video {
-  position: absolute; left: calc(249 / 704 * 100%); top: calc(129 / 704 * 100%);
-  width: calc(396 / 704 * 100%); aspect-ratio: 396 / 223;
+  position: absolute; left: calc(102 / 704 * 100%); top: calc(174 / 704 * 100%);
+  width: calc(474 / 704 * 100%); aspect-ratio: 474 / 267;
   border-radius: calc(8 * var(--u)); overflow: hidden;
 }
 /* the animated ns studio logo on the folk card: 308 square at 304, 138 */
@@ -306,7 +306,9 @@ b { font-weight: 500; }
 .vinyl { --sx: 81; --sy: 60; --sw: 403; animation: spin 18s linear infinite; }
 .sticker { display: block; padding: 0; border: 0; background: none; cursor: pointer; }
 .sticker img { width: 100%; transition: scale 0.25s var(--ease); }
-.sticker.is-hot img { scale: 1.05; }
+.sticker.is-pointed img, .sticker.is-open img { scale: 1.05; }
+.face-link { display: block; }
+.face-link img { width: 100%; }
 @keyframes spin { to { rotate: 360deg; } }
 .sticker:focus-visible { outline: none; }
 .sticker:focus-visible img { filter: drop-shadow(0 0 calc(6 * var(--u)) var(--blue)); }
@@ -315,8 +317,8 @@ b { font-weight: 500; }
   font-size: calc(16 * var(--u)); line-height: calc(19 * var(--u)); letter-spacing: calc(1 * var(--u));
   text-align: center;
 }
-/* while a sticker is hovered, the note under the record blinks */
-.outside.is-peeking .outside-note { animation: note-blink 0.8s steps(1) infinite; }
+/* while a sticker is pointed at, the note under the record blinks */
+.outside.is-pointing .outside-note { animation: note-blink 0.8s steps(1) infinite; }
 @keyframes note-blink { 50% { opacity: 0.25; } }
 /* touch screens are told to tap instead of hover */
 .on-touch { display: none; }
@@ -349,6 +351,10 @@ b { font-weight: 500; }
   position: sticky; top: calc(76px - 60 * var(--u));
 }
 .js-about .cart-item { visibility: hidden; will-change: transform; }
+/* a very small bounce as a sticker lands in the basket (translate is separate from the JS transform) */
+.cart-item.is-landed { animation: cart-land 0.45s ease-out; }
+@keyframes cart-land { 35% { translate: 0 calc(-6 * var(--u)); } 65% { translate: 0 0; } 82% { translate: 0 calc(-2 * var(--u)); } }
+@media (prefers-reduced-motion: reduce) { .cart-item.is-landed { animation: none; } }
 /* once the basket is full the stickers can be picked up and put anywhere */
 .cart.is-full { z-index: 3; }
 .cart.is-full .cart-item { pointer-events: auto; touch-action: none; cursor: grab; }

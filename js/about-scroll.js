@@ -12,8 +12,10 @@
   Visitors who ask for reduced motion see everything in place.
 
   On desktop the face sticker in the middle of the record (Outside the briefs) is the first one in:
-  as you scroll from the record down to About me it leaves the record and drops into the basket,
-  then the other stickers and the text follow.
+  as you scroll from the record down to About me it leaves the record and drops into the basket.
+  "Hey, I'm Sharvani" and the other stickers start coming in at the same time, so everything is in
+  within a short scroll (about a screen and a half after the face sets off).
+  Each sticker gives a very small bounce when it lands in the basket (CSS: .cart-item.is-landed).
 */
 (function () {
   const track = document.querySelector(".about-track");
@@ -25,7 +27,7 @@
   const root = document.documentElement;
   const wide = matchMedia("(min-width: 901px)");
 
-  const START = 0.03, END = 0.9;               // the story runs between these points of the track
+  const START = 0.04, END = 0.92;              // the story runs between these points of its scroll
   const clamp = (v) => Math.max(0, Math.min(1, v));
   const SPIN = items.map((_, i) => (i % 2 ? 1 : -1) * (10 + ((i * 7) % 9)));   // a little tilt while falling
 
@@ -45,17 +47,16 @@
     root.classList.toggle("js-about-pin", pinned);
     if (pinned) {
       track.style.setProperty("--track-h", section.offsetHeight + "px");
-      // about a third of a screen of scrolling per sticker
-      track.style.setProperty("--travel", Math.round(items.length * 0.3 * 100) + "vh");
+      // a short pinned stretch: most of the story already plays while the face is on its way down
+      track.style.setProperty("--travel", "70vh");
     }
     tick();
   }
 
-  // a fall: speeds up like it's dropped, lands, bounces a touch and settles
-  function fall(t) {
-    if (t < 0.7) return (t / 0.7) ** 2;
-    const b = (t - 0.7) / 0.3;
-    return 1 + Math.sin(b * Math.PI) * 0.035 * (1 - b);
+  // a fall: speeds up like it's dropped (the little bounce on landing is a CSS animation)
+  const fall = (t) => t * t;
+  function landed(el, on) {
+    if (el.classList.contains("is-landed") !== on) el.classList.toggle("is-landed", on);
   }
 
   function drawItems(progress) {
@@ -66,6 +67,7 @@
     else if (recordFace) recordFace.style.visibility = "";
     fallers.forEach((el, i) => {
       const t = locked ? 1 : clamp((progress - (START + i * step)) / (step * 1.5));
+      landed(el, t >= 1);
       if (t <= 0) { el.style.visibility = "hidden"; return; }
       el.style.visibility = "visible";
       // start just above the top of the screen
@@ -83,7 +85,8 @@
   // with a little tilt on the way
   function drawFace() {
     const hand = face === held ? " scale(1.06)" : "";
-    if (locked || travel >= 1) {
+    landed(face, locked || travel >= 0.999);
+    if (locked || travel >= 0.999) {
       recordFace.style.visibility = "hidden";
       face.style.visibility = "visible";
       face.style.transform = `translate3d(${face.dx.toFixed(1)}px, ${face.dy.toFixed(1)}px, 0)` + hand;
@@ -96,7 +99,7 @@
     }
     const a = recordFace.getBoundingClientRect(), c = cart.getBoundingClientRect();
     const bx = c.left + face.offsetLeft + face.offsetWidth / 2, by = c.top + face.offsetTop + face.offsetHeight / 2;
-    const e = travel < 0.5 ? 4 * travel ** 3 : 1 - (-2 * travel + 2) ** 3 / 2;
+    const e = travel < 0.5 ? 2 * travel ** 2 : 1 - (-2 * travel + 2) ** 2 / 2;
     const s0 = a.width / face.offsetWidth;
     const x = (a.left + a.width / 2 - bx) * (1 - e);
     const y = (a.top + a.height / 2 - by) * (1 - e);
@@ -106,15 +109,19 @@
     face.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
   }
 
-  // 0 until the face on the record reaches the middle of the screen, 1 once About me is pinned in place
-  function travelTarget() {
-    if (!travels()) return 0;
+  // How much scrolling is left until: the face on the record reaches the middle of the screen (start),
+  // About me is pinned in place (pin), and the pinned stretch is over (end).
+  function marks() {
     const a = recordFace.getBoundingClientRect(), r = track.getBoundingClientRect();
     const top = parseFloat(getComputedStyle(section).top) || 0;
-    const start = a.top + a.height / 2 - innerHeight * 0.5;   // scroll left until the face reaches mid-screen
-    const end = r.top - top;                                  // scroll left until About me is pinned
-    if (end <= start) return end <= 0 ? 1 : 0;
-    return clamp(-start / (end - start));
+    const pin = r.top - top;
+    return { start: Math.min(a.top + a.height / 2 - innerHeight * 0.5, pin - 1), pin, end: pin + r.height - section.offsetHeight };
+  }
+  // the face's journey: 0 until it reaches the middle of the screen, 1 once About me is pinned in place
+  function travelTarget() {
+    if (!travels()) return 0;
+    const m = marks();
+    return clamp(-m.start / (m.pin - m.start));
   }
 
   /* ---------- picking stickers up once the basket is full ---------- */
@@ -165,6 +172,11 @@
 
   function target() {
     const vh = innerHeight;
+    if (travels()) {
+      // the story starts with the face's journey and ends with the pinned stretch
+      const m = marks();
+      return clamp(-m.start / Math.max(1, m.end - m.start));
+    }
     if (pinned) {
       const r = track.getBoundingClientRect(), h = section.offsetHeight;
       const top = parseFloat(getComputedStyle(section).top) || 0;   // where the pinned section sits
@@ -186,9 +198,9 @@
     drawItems(p);
     if (locked) texts.forEach((el) => drawText(el, 1));
     else if (pinned) {
-      // the text keeps pace with the stickers: one block for every one and a half stickers
+      // the text keeps pace with the stickers, starting with "Hey, I'm Sharvani" as the face sets off
       const step = (END - START) / texts.length;
-      texts.forEach((el, i) => drawText(el, clamp((p - (START + i * step)) / step)));
+      texts.forEach((el, i) => drawText(el, clamp((p - (START + i * step)) / (step * 0.9))));
     } else {
       const vh = innerHeight;
       texts.forEach((el) => drawText(el, clamp((vh * 0.92 - el.getBoundingClientRect().top) / (vh * 0.25))));

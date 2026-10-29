@@ -2,9 +2,7 @@
   A softly moving dot grid behind the hero and the "I connect the dots" statement,
   and again behind Outside the briefs and About me (every .dots-zone gets its own).
   The grid sways a little and a slow wave runs through it; dots near the cursor grow and turn blue.
-  Around the statement, six dots (three above the words, three below) are joined into a box.
-  As you scroll down to it the top lines are drawn first, then the words appear line by line,
-  then the box closes. Scrolling back up takes it all away again.
+  As you scroll down to the statement its words appear line by line; scrolling back up takes them away again.
 
   The canvas is only as tall as the window and follows the scroll inside its section,
   so it stays sharp on retina screens without a huge bitmap.
@@ -21,7 +19,7 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   let dpr = 1, W = 0, H = 0, VH = 0, gap = 32, visible = false, raf = 0;
   const t0 = performance.now();
   const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999, on: false };
-  let drawn = 0;                          // how much of the box is drawn, 0 to 1 (follows the scroll)
+  let drawn = 0;                          // how far the statement has come in, 0 to 1 (follows the scroll)
 
   function size() {
     dpr = Math.min(2, devicePixelRatio || 1);
@@ -39,21 +37,9 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
   const sway = (t) => [Math.sin(t * 0.21) * gap * 0.35, Math.cos(t * 0.17) * gap * 0.35];
   const pos = (i, j, sx, sy) => [i * gap + gap / 2 + sx, j * gap + gap / 2 + sy];
 
-  /* ---------- the box around the statement ---------- */
+  /* ---------- the statement's lines ---------- */
 
   const lines = box ? [...box.querySelectorAll(".s-line")] : [];
-
-  // three grid dots above the words and three below: the corners and the middle of each side
-  function boxPath() {
-    const z = zone.getBoundingClientRect(), b = box.getBoundingClientRect();
-    // keep the dots (and their rings, as the grid sways) inside the window
-    const edge = gap * 0.35 + 9;
-    const col = (x) => Math.max(Math.ceil((edge - gap / 2) / gap), Math.min(Math.floor((W - edge - gap / 2) / gap), x));
-    const iL = col(Math.floor((b.left - z.left - gap * 1.5) / gap)), iR = col(Math.ceil((b.right - z.left + gap * 0.5) / gap));
-    const iM = Math.round((iL + iR) / 2);
-    const jT = Math.floor((b.top - z.top - gap * 2.5) / gap), jB = Math.ceil((b.bottom - z.top + gap * 1.5) / gap);
-    return [[iL, jT], [iM, jT], [iR, jT], [iR, jB], [iM, jB], [iL, jB]];
-  }
 
   // 0 when the words come up from the bottom of the window, 1 once they're a bit above the middle
   function scrolled() {
@@ -62,10 +48,9 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
     return Math.max(0, Math.min(1, (innerHeight * 0.92 - mid) / (innerHeight * 0.5)));
   }
 
-  // how much of each part is done at a given point of the scroll:
-  // the two top lines, then the words line by line, then the four lines that close the box
+  // the words come in line by line over this part of the scroll
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
-  const TOP = [0, 0.18], WORDS = [0.16, 0.74], CLOSE = [0.74, 1];
+  const WORDS = [0.05, 0.9];
   function showLines(p) {
     const n = lines.length, span = (WORDS[1] - WORDS[0]) / n;
     lines.forEach((el, k) => {
@@ -132,47 +117,16 @@ document.querySelectorAll(".dots-bg").forEach((canvas, n) => {
       ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
     }
 
-    joinDots(t, sx, sy, off);
+    joinDots();
   }
 
-  // the "connect the dots" box around the statement
-  function joinDots(t, sx, sy, off) {
+  // the statement's lines follow the scroll
+  function joinDots() {
     if (!box) return;
     const goal = scrolled();
     drawn += (goal - drawn) * 0.12;
     if (still || Math.abs(goal - drawn) < 0.001) drawn = goal;
     showLines(drawn);
-    if (drawn <= 0) return;
-
-    const pts = boxPath().map(([i, j]) => pos(i, j, sx, sy));
-    // line k runs from dot k to dot k + 1: lines 0-1 along the top, 2-5 close the box
-    const part = (k) => k < 2 ? clamp01((drawn - TOP[0]) / (TOP[1] - TOP[0]) * 2 - k)
-                              : clamp01((drawn - CLOSE[0]) / (CLOSE[1] - CLOSE[0]) * 4 - (k - 2));
-
-    ctx.lineCap = "round";
-    ctx.lineWidth = 1.4;
-    ctx.strokeStyle = `rgba(${BLUE}, 0.85)`;
-    ctx.beginPath();
-    for (let k = 0; k < 6; k++) {
-      const p = part(k);
-      if (!p) continue;
-      const [ax, ay] = pts[k], [bx, by] = pts[(k + 1) % 6];
-      ctx.moveTo(ax, ay); ctx.lineTo(ax + (bx - ax) * p, ay + (by - ay) * p);
-    }
-    ctx.stroke();
-
-    // each dot pops as the line reaches it (the first one as soon as drawing starts)
-    for (let k = 0; k < 6; k++) {
-      const p = k === 0 ? clamp01(drawn / 0.04) : clamp01(part(k - 1) * 1.6 - 0.6);
-      if (!p) continue;
-      const [x, y] = pts[k];
-      const pop = 1 + Math.sin(p * Math.PI) * 0.6;       // a little overshoot
-      ctx.fillStyle = "#fff";
-      ctx.beginPath(); ctx.arc(x, y, 4.5 * p * pop, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = `rgb(${BLUE})`;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.arc(x, y, 8 * p, 0, Math.PI * 2); ctx.stroke();
-    }
   }
 
   /* ---------- input ---------- */
