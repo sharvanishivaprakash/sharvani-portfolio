@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=25">
+  <link rel="stylesheet" href="css/style.css?v=26">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -127,6 +127,34 @@
       <div class="work-grid" id="work-grid"></div>
     </section>
 
+    <!-- Outside the briefs -->
+    <section class="frame outside" id="outside" style="--h:1052" aria-labelledby="outside-title">
+      <h2 class="at big-label" style="--x:121;--y:80;--w:500" id="outside-title">Outside the briefs<span aria-hidden="true">*</span></h2>
+      <div class="at tape" style="--x:172;--y:93;--w:368">
+        <img src="assets/final/tape.webp" alt="" width="368" height="184">
+        <p>Everything I do beyond design <br>briefs, deadlines, and screens.</p>
+      </div>
+      <!-- The paper cards. Each one comes in while its sticker on the record is hovered (js/outside.js). -->
+      <div class="at peeks" style="--x:103;--y:270;--w:704">
+        <img class="peek" id="peek-theatre" src="assets/final/outside/card-theatre.webp" alt="Drama, On &amp; Off Stage. Performing under the lights, taking theatre to the streets, painting backdrops, and crafting props. I love being part of the whole production, not just the performance." width="1408" height="1408" loading="lazy">
+        <img class="peek" id="peek-folk" src="assets/final/outside/card-folk.webp" alt="Giving Folk a Face. Designed a logo for folk artist Naveen Sajju, exploring a visual identity rooted in his musical personality." width="1408" height="1408" loading="lazy">
+        <img class="peek" id="peek-paint" src="assets/final/outside/card-paint.webp" alt="Paws, Paint &amp; Purpose. Picked up a paintbrush to help brighten a dog shelter. A small way to give a space a little more love." width="1408" height="1408" loading="lazy">
+        <img class="peek" id="peek-clay" src="assets/final/outside/card-clay.webp" alt="Tiny Things Department. I make tiny clay charms because, well, why not? My favourite form of hyperfocus, one miniature at a time." width="1408" height="1408" loading="lazy">
+        <img class="peek" id="peek-fish" src="assets/final/outside/card-fish.webp" alt="Once Upon a Fish. Created a short animated video featuring Elu Meenu for a film. A little storytelling experiment, one frame at a time." width="1408" height="1408" loading="lazy">
+      </div>
+      <!-- The blue record turns; the stickers on it stay still -->
+      <div class="at record" style="--x:807;--y:345;--w:497.3">
+        <img class="vinyl" src="assets/final/outside/vinyl.webp" alt="" width="806" height="802" loading="lazy">
+        <img class="face" src="assets/final/outside/face.webp" alt="" width="265" height="243" loading="lazy" style="--sx:211;--sy:200;--sw:132.5">
+        <button class="sticker" type="button" data-peek="fish" aria-controls="peek-fish" aria-label="Once Upon a Fish" data-cursor="view" data-cursor-label="Peek" style="--sx:322;--sy:34;--sw:167"><img src="assets/final/outside/sticker-fish.webp" alt="" width="334" height="389" loading="lazy"></button>
+        <button class="sticker" type="button" data-peek="folk" aria-controls="peek-folk" aria-label="Giving Folk a Face" data-cursor="view" data-cursor-label="Peek" style="--sx:383;--sy:231;--sw:114.5"><img src="assets/final/outside/sticker-folk.webp" alt="" width="229" height="361" loading="lazy"></button>
+        <button class="sticker" type="button" data-peek="theatre" aria-controls="peek-theatre" aria-label="Drama, On &amp; Off Stage" data-cursor="view" data-cursor-label="Peek" style="--sx:98;--sy:0;--sw:200"><img src="assets/final/outside/sticker-theatre.webp" alt="" width="400" height="400" loading="lazy"></button>
+        <button class="sticker" type="button" data-peek="paint" aria-controls="peek-paint" aria-label="Paws, Paint &amp; Purpose" data-cursor="view" data-cursor-label="Peek" style="--sx:155;--sy:321;--sw:228.5"><img src="assets/final/outside/sticker-paint.webp" alt="" width="457" height="457" loading="lazy"></button>
+        <button class="sticker" type="button" data-peek="clay" aria-controls="peek-clay" aria-label="Tiny Things Department" data-cursor="view" data-cursor-label="Peek" style="--sx:0;--sy:177;--sw:196.5"><img src="assets/final/outside/sticker-clay.webp" alt="" width="393" height="388" loading="lazy"></button>
+      </div>
+      <p class="at outside-note" style="--x:959;--y:894;--w:288">( <span class="on-hover">Hover</span><span class="on-touch">Tap</span> on the stickers to take a sneak peek ! )</p>
+    </section>
+
     <!-- About me -->
     <div class="about-track">
     <section class="frame about" id="about" style="--h:1120" aria-labelledby="about-title">
@@ -147,10 +175,8 @@
 
       <div class="at receipt" style="--x:677;--y:102.6;--w:678">
         <p class="r-hey uncover">Hey, I’m Sharvani .</p>
-        <p class="r-lead uncover">A molecular biologist turned designer from Mysuru, curious about how the <br>world works and what makes people tick.</p>
-        <p class="r-small uncover">I collect little pieces of the world wherever I go. <br>Stories, people, places, behaviours, questions, and the <br>tiny details that are easy to miss.</p>
-        <p class="r-turn uncover">That's where design comes in.</p>
-        <p class="r-small r-last uncover">I'm interested in the space between people and technology, making things easier to navigate, more engaging to interact , and more thoughtful to experience.</p>
+        <p class="r-lead uncover">A molecular biologist turned designer from Mysuru, currently studying Interaction design at NID Bengaluru.</p>
+        <p class="r-collect uncover">I collect little pieces of the world wherever I go. <br>Stories, people, places, behaviours, questions, and the <br>tiny details that are easy to miss.</p>
         <ul class="chips uncover">
           <li>Still collecting</li>
           <li>Still curious</li>
@@ -159,22 +185,6 @@
       </div>
     </section>
     </div>
-
-    <!-- Design approach -->
-    <section class="frame approach" style="--h:1309" aria-labelledby="approach-title">
-      <h2 class="at approach-title" style="--x:120;--y:117;--w:640" id="approach-title">My Design Approach *</h2>
-      <p class="at approach-sub" style="--x:120;--y:193;--w:240">What sets me apart *</p>
-
-      <svg class="at big-star" style="--x:0;--y:814;--w:373" viewBox="0 0 373 533" aria-hidden="true"><path class="spin" d="M-14.9786 35.8233L112.648 0.781325L113.194 0.631972L113.275 1.19133L142.993 204.927L298.161 71.5136L298.59 71.1449L298.904 71.6158L371.477 180.748L371.792 181.221L371.282 181.473L186.823 272.461L360.503 377.878L360.988 378.172L360.634 378.616L278.433 482.014L278.081 482.457L277.685 482.053L136.308 337.659L90.117 531.57L89.986 532.122L-33.9424 485.647L-33.6791 485.146L59.0246 308.676L-142.436 324.504L-143.003 324.549L-142.975 323.98L-136.376 193.217L-136.347 192.656L-135.793 192.749L63.838 226.345L-15.3078 36.4985L-15.5257 35.9743L-14.9786 35.8233Z"/></svg>
-
-      <ol class="steps">
-        <li class="card" style="--cx:329.4;--cy:542.4;--r:-9.18deg"><b>*Understand</b><em>the people</em><span class="badge" style="--bx:386;--by:-30">1.</span></li>
-        <li class="card" style="--cx:675.4;--cy:694.6;--r:10.37deg"><b>*Unpack</b><em>the problem</em><span class="badge" style="--bx:386;--by:-30">2.</span></li>
-        <li class="card" style="--cx:1087.7;--cy:540.2;--r:-3.73deg"><b>*Shape</b><em>the experience</em><span class="badge" style="--bx:386;--by:-30">3.</span></li>
-      </ol>
-
-      <p class="at closing" style="--x:807;--y:1066;--w:514">I connect scattered insights to design products with clarity and direction.</p>
-    </section>
 
     <!-- What next -->
     <section class="next" id="contact" aria-labelledby="next-title">
@@ -215,14 +225,15 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=25"></script>
-  <script src="js/content.js?v=25"></script>
-  <script src="js/main.js?v=25"></script>
-  <script src="js/cursor.js?v=25"></script>
-  <script src="js/dot-grid.js?v=25"></script>
-  <script src="js/liquid-name.js?v=25"></script>
-  <script src="js/about-scroll.js?v=25"></script>
-  <script src="js/falling-tabs.js?v=25"></script>
-  <script src="js/sections.js?v=25"></script>
+  <script src="js/preloader.js?v=26"></script>
+  <script src="js/content.js?v=26"></script>
+  <script src="js/main.js?v=26"></script>
+  <script src="js/cursor.js?v=26"></script>
+  <script src="js/dot-grid.js?v=26"></script>
+  <script src="js/liquid-name.js?v=26"></script>
+  <script src="js/about-scroll.js?v=26"></script>
+  <script src="js/falling-tabs.js?v=26"></script>
+  <script src="js/outside.js?v=26"></script>
+  <script src="js/sections.js?v=26"></script>
 </body>
 </html>

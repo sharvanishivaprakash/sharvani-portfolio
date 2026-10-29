@@ -10,7 +10,7 @@ Then open http://localhost:8000.
 
 ## Editing content
 The homepage is built from the Figma frame "Portfolio final 1" (page 2 of the Sharvani SP portfolio file).
-- Homepage copy (hero, statement, about card, design approach, what next) is written in `index.html`.
+- Homepage copy (hero, statement, outside the briefs, about card, what next) is written in `index.html`.
 - `js/content.js` holds the selected works (title, summary, tags, cover image, case study details), the email and links.
   The Resume button uses the `[Resume]` link there; until it's set, it shows "coming soon".
 - Images exported from Figma live in `assets/final/`.
@@ -32,7 +32,7 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   Around the statement, six dots (three above, three below) are joined into a box as you scroll to it: the top lines first,
   then the statement's lines appear one by one (the `.s-line` spans in `index.html`), then the box closes.
   Dots near the cursor grow and turn blue. Everything holds still for visitors who ask for reduced motion.
-- `js/sections.js`: as you scroll, the parts of Selected Works, My Design Approach and What next ? rise in one after another,
+- `js/sections.js`: as you scroll, the parts of Selected Works, Outside the briefs and What next ? rise in one after another,
   and sections you've scrolled past blur and dim a little so the one in view gets the attention.
 - Work cards: the `hover` image in `js/content.js` fades in over the cover on hover (Andaaj has one; the others are `null` for now).
 - `js/liquid-name.js`: the slow liquid wobble on the hero name (an SVG turbulence filter). It settles while you hover the name.
@@ -40,7 +40,10 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   (face first, the order is the `data-drop` number on each sticker in `index.html`) and the text on the blue card is uncovered alongside.
   On desktop the section stays pinned while this plays. The stickers live in `assets/final/about/`.
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
-- The big outlined star in "My Design Approach" turns slowly all the time (CSS, `.big-star .spin`).
+- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Hovering a sticker makes it
+  blink and brings in the paper card with the same name on the left (only where the sticker is actually drawn counts).
+  On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
+  (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
 - `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
   once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab pushes it aside (it springs back once the pointer has moved off its spot), and pressing and dragging moves it anywhere in the section.
 - The big faint doodle at the bottom right of "What next ?" is `assets/doodle/doodle.svg` (the vector doodle from Figma), shown white at 10% opacity (`.next-doodle`).
