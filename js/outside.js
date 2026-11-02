@@ -1,8 +1,8 @@
 /*
   Outside the briefs.
   The blue record turns (CSS) while the stickers on it stay still.
-  Pointing at a sticker lifts it a touch and makes the hint above the record blink;
-  the hint fades away once a sticker has been clicked.
+  Pointing at a sticker lifts it a touch. The "click on the stickers" hint floats on the left
+  and fades away once a sticker has been clicked.
   Clicking (or tapping) a sticker brings in the paper card with the same name on the left;
   clicking it again, clicking somewhere else or Escape puts the card away.
   A sticker only counts where it is actually drawn (not the empty corners of its picture),
