@@ -51,10 +51,10 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).
   On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
-- "What next ?" (contact): the site blue with a moving grain (`.next::before`), the email address as a button that opens a new
-  Gmail email plus a copy button next to it (`.next-mail`), "Let's make something meaningful together" running sideways at the
-  bottom (`.next-run`), and a pile of cream stickers (`.c-pile` in `index.html`): three round ones (the doodle with a folded corner, the
-  lemon, the cat card) and LinkedIn / Instagram / Behance / Dribbble link stickers. `js/contact-stickers.js` lets you pick any of them up
+- "What next ?" (contact): the site blue with a moving grain (`.next::before`), the email address as a rounded button that opens a new
+  Gmail email plus a round copy button next to it (`.next-mail`), "Let's make something meaningful together" running sideways at the
+  bottom (`.next-run`), and a pile of cream stickers (`.c-pile` in `index.html`): four round ones (the fish from Outside the briefs, the doodle
+  with a folded corner, the lemon with a spiky seal edge, the cat card) and LinkedIn / Instagram / Behance / Dribbble link stickers. `js/contact-stickers.js` lets you pick any of them up
   and drop it anywhere; a plain click on a link sticker opens it. Add the Instagram, Behance and Dribbble addresses in
   `js/content.js` (until then they say "coming soon").
 - The LinkedIn and Instagram links in "What next ?" use the LinkedIn / Instagram links in `js/content.js`.

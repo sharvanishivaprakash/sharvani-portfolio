@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@200;300;400;500;600;700&family=Peralta&family=Kranky&family=Silkscreen:wght@700&family=Mountains+of+Christmas:wght@700&family=Pacifico&family=Pangolin&family=Playwrite+US+Trad&family=Over+the+Rainbow&display=swap" rel="stylesheet">
   <!-- ?v= makes browsers fetch the new CSS and JS after each update; bump it whenever they change -->
-  <link rel="stylesheet" href="css/style.css?v=36">
+  <link rel="stylesheet" href="css/style.css?v=37">
   <script>
     // decide before the first paint whether the intro plays, so the page never flashes underneath it
     (function () {
@@ -192,35 +192,39 @@
       <div class="frame" style="--h:900">
         <h2 class="at next-title" style="--x:125;--y:96;--w:635" id="next-title">What next ?</h2>
         <!-- The email, up top: clicking it starts a new email in Gmail, the copy button puts the address on the clipboard -->
-        <div class="at next-mail" style="--x:125;--y:206;--w:1190">
+        <div class="at next-mail" style="--x:125;--y:231;--w:1190">
           <a class="next-gmail js-contact" data-kind="gmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=sharvanishivaprakash@gmail.com" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Write">sharvanishivaprakash@gmail.com <span class="btn-icon icon-out" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg><svg viewBox="0 0 12 12"><path d="M3 9 9.5 2.5M4 2.5h5.5V8"/></svg></span></a>
           <button class="next-copy" type="button" data-copy="sharvanishivaprakash@gmail.com" aria-label="Copy email address" data-cursor="view" data-cursor-label="Copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
         </div>
-        <!-- Stickers: three round ones (the doodle, the lemon from the basket, the cat card) and the social links.
+        <!-- Stickers: four round ones (the fish, the doodle, the lemon from the basket, the cat card) and the social links.
              They can all be picked up and moved; a click on a link sticker opens it. Links come from js/content.js. -->
-        <div class="at c-pile" style="--x:340;--y:320;--w:760" aria-label="Elsewhere">
-          <div class="c-sticker c-badge cs-doodle" style="--sx:0;--sy:30;--sw:190;--r:-8deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
+        <div class="at c-pile" style="--x:300;--y:380;--w:800" aria-label="Elsewhere">
+          <div class="c-sticker c-badge cs-fish" style="--sx:461;--sy:18;--sw:167;--r:6deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
+            <svg viewBox="0 0 200 200"><circle class="cs-base" cx="100" cy="100" r="94"/><circle class="cs-ring" cx="100" cy="100" r="80"/><path id="cs-p4" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0" fill="none"/><text class="cs-say"><textPath lengthAdjust="spacing" href="#cs-p4" textLength="426">Drag me • Drag me • Drag me • Drag me •</textPath></text></svg>
+            <img class="cs-art" src="assets/final/contact-fish.webp" alt="" width="301" height="141" loading="lazy">
+          </div>
+          <div class="c-sticker c-badge cs-doodle" style="--sx:44;--sy:34;--sw:180;--r:-8deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
             <!-- a round sticker with its bottom right corner peeled up and folded back (like the reference) -->
             <svg viewBox="0 0 200 200"><defs><clipPath id="cs-cut"><path d="M194 99.3 A94 94 0 1 0 99.3 194 Z"/></clipPath></defs><g clip-path="url(#cs-cut)"><circle class="cs-base" cx="100" cy="100" r="94"/><circle class="cs-ring" cx="100" cy="100" r="80"/><path id="cs-p1" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0" fill="none"/><text class="cs-say"><textPath lengthAdjust="spacing" href="#cs-p1" textLength="426">Drag me • Drag me • Drag me • Drag me •</textPath></text></g></svg>
             <span class="cs-art cs-doodle-art"></span>
             <svg class="cs-flap" viewBox="0 0 200 200"><defs><linearGradient id="cs-fold" x1="0.2" y1="0.2" x2="0.85" y2="0.85"><stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#ece6d8"/><stop offset="1" stop-color="#cfc7b6"/></linearGradient></defs><path d="M99.3 194 A94 94 0 0 1 194 99.3 Z" fill="url(#cs-fold)"/></svg>
           </div>
-          <a class="c-sticker c-pill js-contact" data-kind="instagram" href="#" style="--sx:190;--sy:20;--sw:260;--r:-9deg" data-cursor="view" data-cursor-label="Open">Instagram</a>
-          <a class="c-sticker c-pill js-contact" data-kind="dribbble" href="#" style="--sx:560;--sy:46;--sw:240;--r:11deg" data-cursor="view" data-cursor-label="Open">Dribbble</a>
-          <a class="c-sticker c-pill js-contact" data-kind="behance" href="#" style="--sx:390;--sy:118;--sw:240;--r:5deg" data-cursor="view" data-cursor-label="Open">Behance</a>
-          <div class="c-sticker c-badge cs-lemon" style="--sx:228;--sy:142;--sw:176;--r:6deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
-            <svg viewBox="0 0 200 200"><circle class="cs-base" cx="100" cy="100" r="94"/><circle class="cs-ring" cx="100" cy="100" r="80"/><path id="cs-p2" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0" fill="none"/><text class="cs-say"><textPath lengthAdjust="spacing" href="#cs-p2" textLength="426">Drag me • Drag me • Drag me • Drag me •</textPath></text></svg>
+          <a class="c-sticker c-pill js-contact" data-kind="instagram" href="#" style="--sx:631;--sy:49;--sw:247;--r:11.82deg" data-cursor="view" data-cursor-label="Open">Instagram</a>
+          <a class="c-sticker c-pill js-contact" data-kind="behance" href="#" style="--sx:464;--sy:206;--sw:228;--r:5deg" data-cursor="view" data-cursor-label="Open">Behance</a>
+          <div class="c-sticker c-badge cs-lemon" style="--sx:269;--sy:145;--sw:167;--r:6deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
+            <svg viewBox="0 0 200 200"><path class="cs-base cs-spiky" d="M100.0 5.0 L111.2 14.7 L124.6 8.2 L132.9 20.5 L147.5 17.7 L152.4 31.8 L167.2 32.8 L168.2 47.6 L182.3 52.5 L179.5 67.1 L191.8 75.4 L185.3 88.8 L195.0 100.0 L185.3 111.2 L191.8 124.6 L179.5 132.9 L182.3 147.5 L168.2 152.4 L167.2 167.2 L152.4 168.2 L147.5 182.3 L132.9 179.5 L124.6 191.8 L111.2 185.3 L100.0 195.0 L88.8 185.3 L75.4 191.8 L67.1 179.5 L52.5 182.3 L47.6 168.2 L32.8 167.2 L31.8 152.4 L17.7 147.5 L20.5 132.9 L8.2 124.6 L14.7 111.2 L5.0 100.0 L14.7 88.8 L8.2 75.4 L20.5 67.1 L17.7 52.5 L31.8 47.6 L32.8 32.8 L47.6 31.8 L52.5 17.7 L67.1 20.5 L75.4 8.2 L88.8 14.7Z"/><circle class="cs-ring" cx="100" cy="100" r="80"/><path id="cs-p2" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0" fill="none"/><text class="cs-say"><textPath lengthAdjust="spacing" href="#cs-p2" textLength="426">Drag me • Drag me • Drag me • Drag me •</textPath></text></svg>
             <img class="cs-art" src="assets/final/about/lemon.webp" alt="" width="304" height="306" loading="lazy">
           </div>
-          <a class="c-sticker c-pill js-contact" data-kind="linkedin" href="#" style="--sx:20;--sy:226;--sw:230;--r:-7deg" data-cursor="view" data-cursor-label="Open">LinkedIn</a>
-          <div class="c-sticker c-badge cs-cat" style="--sx:700;--sy:120;--sw:190;--r:9deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
+          <a class="c-sticker c-pill js-contact" data-kind="linkedin" href="#" style="--sx:235;--sy:34;--sw:219;--r:-7.76deg" data-cursor="view" data-cursor-label="Open">LinkedIn</a>
+          <div class="c-sticker c-badge cs-cat" style="--sx:720;--sy:153;--sw:181;--r:9deg" aria-hidden="true" data-cursor="view" data-cursor-label="Drag">
             <svg viewBox="0 0 200 200"><path class="cs-base" d="M191.2 91.4 Q196.0 100.0 191.2 108.6 Q186.3 117.2 187.5 127.0 Q188.7 136.7 180.9 142.8 Q173.2 148.9 170.5 158.4 Q167.9 167.9 158.4 170.5 Q148.9 173.2 142.8 180.9 Q136.7 188.7 127.0 187.5 Q117.2 186.3 108.6 191.2 Q100.0 196.0 91.4 191.2 Q82.8 186.3 73.0 187.5 Q63.3 188.7 57.2 180.9 Q51.1 173.2 41.6 170.5 Q32.1 167.9 29.5 158.4 Q26.8 148.9 19.1 142.8 Q11.3 136.7 12.5 127.0 Q13.7 117.2 8.8 108.6 Q4.0 100.0 8.8 91.4 Q13.7 82.8 12.5 73.0 Q11.3 63.3 19.1 57.2 Q26.8 51.1 29.5 41.6 Q32.1 32.1 41.6 29.5 Q51.1 26.8 57.2 19.1 Q63.3 11.3 73.0 12.5 Q82.8 13.7 91.4 8.8 Q100.0 4.0 108.6 8.8 Q117.2 13.7 127.0 12.5 Q136.7 11.3 142.8 19.1 Q148.9 26.8 158.4 29.5 Q167.9 32.1 170.5 41.6 Q173.2 51.1 180.9 57.2 Q188.7 63.3 187.5 73.0 Q186.3 82.8 191.2 91.4Z"/><circle class="cs-ring" cx="100" cy="100" r="80"/><path id="cs-p3" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0" fill="none"/><text class="cs-say"><textPath lengthAdjust="spacing" href="#cs-p3" textLength="426">Drag me • Drag me • Drag me • Drag me •</textPath></text></svg>
             <img class="cs-art" src="assets/final/drawn/front-1.webp" alt="" width="322" height="682" loading="lazy">
           </div>
+          <a class="c-sticker c-pill js-contact" data-kind="dribbble" href="#" style="--sx:24;--sy:228;--sw:228;--r:-6.05deg" data-cursor="view" data-cursor-label="Open">Dribbble</a>
         </div>
-        <hr class="at next-rule" style="--x:125;--y:666;--w:1190">
+        <hr class="at next-rule" style="--x:125;--y:693;--w:1190">
         <!-- the line runs sideways, round and round (two copies so it never ends) -->
-        <div class="at next-marquee" style="--x:0;--y:700;--w:1440">
+        <div class="at next-marquee" style="--x:0;--y:715;--w:1440">
           <p class="next-run"><span>Let's make something meaningful together</span><i aria-hidden="true">✦</i><span aria-hidden="true">Let's make something meaningful together</span><i aria-hidden="true">✦</i></p>
           <p class="next-run" aria-hidden="true"><span>Let's make something meaningful together</span><i>✦</i><span>Let's make something meaningful together</span><i>✦</i></p>
         </div>
@@ -231,15 +235,15 @@
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
 
   <noscript><p class="noscript">This site needs JavaScript to show its projects.</p></noscript>
-  <script src="js/preloader.js?v=36"></script>
-  <script src="js/content.js?v=36"></script>
-  <script src="js/main.js?v=36"></script>
-  <script src="js/cursor.js?v=36"></script>
-  <script src="js/dot-grid.js?v=36"></script>
-  <script src="js/drawn-cards.js?v=36"></script>
-  <script src="js/about-scroll.js?v=36"></script>
-  <script src="js/contact-stickers.js?v=36"></script>
-  <script src="js/outside.js?v=36"></script>
-  <script src="js/sections.js?v=36"></script>
+  <script src="js/preloader.js?v=37"></script>
+  <script src="js/content.js?v=37"></script>
+  <script src="js/main.js?v=37"></script>
+  <script src="js/cursor.js?v=37"></script>
+  <script src="js/dot-grid.js?v=37"></script>
+  <script src="js/drawn-cards.js?v=37"></script>
+  <script src="js/about-scroll.js?v=37"></script>
+  <script src="js/contact-stickers.js?v=37"></script>
+  <script src="js/outside.js?v=37"></script>
+  <script src="js/sections.js?v=37"></script>
 </body>
 </html>

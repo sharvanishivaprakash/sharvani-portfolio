@@ -495,6 +495,10 @@ b { font-weight: 500; }
 }
 .cs-cat .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; border-radius: 50%; object-fit: cover; object-position: 50% 55%; }
 .cs-lemon .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; }
+/* the lemon sticker has a little spiky (seal) edge, softened with a round stroke */
+.cs-spiky { stroke: #f4efe4; stroke-width: 6; stroke-linejoin: round; }
+/* the fish from Outside the briefs, tilted a little more than its sticker */
+.cs-fish .cs-art { left: 16.2%; top: 35.3%; width: 70.3%; height: 32.8%; rotate: 21.96deg; }
 .c-pill {
   display: flex; align-items: center; justify-content: center; aspect-ratio: 260 / 72;
   border-radius: 999px; background: #f4efe4; color: #121212; text-decoration: none;
@@ -508,7 +512,7 @@ b { font-weight: 500; }
 .next-mail { display: flex; align-items: center; gap: calc(12 * var(--u)); }
 .next-gmail {
   display: inline-flex; align-items: center; gap: calc(14 * var(--u));
-  height: calc(68 * var(--u)); padding: 0 calc(28 * var(--u)); border-radius: 4px; background: #fff; color: var(--blue);
+  height: calc(68 * var(--u)); padding: 0 calc(28 * var(--u)); border-radius: 999px; background: #fff; color: var(--blue);
   font-weight: 500; font-size: calc(28 * var(--u)); text-decoration: none; white-space: nowrap;
   box-shadow: 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(0, 30, 70, 0.3);
   transition: background 0.2s, color 0.2s, scale 0.2s var(--ease);
@@ -520,7 +524,7 @@ b { font-weight: 500; }
 .next-gmail:hover .icon-out svg + svg { translate: 0 0; }
 .next-copy {
   display: grid; place-items: center; flex: none; width: calc(68 * var(--u)); height: calc(68 * var(--u));
-  border: 1.5px solid #fff; border-radius: 4px; background: transparent; color: #fff; cursor: pointer;
+  border: 1.5px solid #fff; border-radius: 50%; background: transparent; color: #fff; cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
 .next-copy svg { width: 42%; height: 42%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
