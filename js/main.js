@@ -77,6 +77,29 @@
     }
   });
 
+  // Copy button next to the email in "What next ?"
+  document.querySelectorAll(".next-copy").forEach((btn) => {
+    let t;
+    const done = () => {
+      btn.classList.add("is-done");
+      say("Email copied.");
+      clearTimeout(t);
+      t = setTimeout(() => btn.classList.remove("is-done"), 1800);
+    };
+    btn.addEventListener("click", () => {
+      const text = btn.dataset.copy;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, () => say(text));
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) { say(text); }
+        ta.remove();
+      }
+    });
+  });
+
   // the hero comes in once the intro has opened (or straight away when there is no intro)
   const loaded = () => requestAnimationFrame(() => document.body.classList.add("is-loaded"));
   if (document.documentElement.classList.contains("is-preloading")) document.addEventListener("preloader:done", loaded, { once: true });

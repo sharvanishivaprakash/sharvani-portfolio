@@ -43,20 +43,21 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
   and the section is only pinned for a short stretch. Each sticker gives a very small bounce as it lands (`.cart-item.is-landed`).
   The stickers live in `assets/final/about/`.
   Once the basket is full, visitors can pick the stickers up and drop them anywhere (the eye cursor says "Drag").
-- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. Pointing at a sticker makes the
-  note under the record blink; clicking it brings in the paper card with the same name on the left (only where the sticker is
+- `js/outside.js`: Outside the briefs. The blue record turns (CSS) while its stickers stay still. A "click on the stickers" note floats
+  gently in the empty space on the left until the first click; clicking a sticker brings in the paper card with the same name on the left (only where the sticker is
   actually drawn counts), and clicking again, clicking elsewhere or Escape puts it away. Clicking the face scrolls to About me. The fish card plays a YouTube video in its blue frame
   (`data-youtube` in index.html) and the folk card an animated logo (`folk-ns-studio.webp`, from Alex's GIF).
 - The dot grid (`js/dot-grid.js`) runs behind every `.dots-zone`: hero + I'm drawn to, and Outside the briefs + About me.
 - On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).
   On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
-- "What next ?" (contact): the site blue with a fine grain (`.next::before`), "Let's make something meaningful together" running
-  sideways (`.next-run`), and a pile of cream stickers (`.c-pile` in `index.html`): three round ones (the doodle, the lemon, the
-  cat card) and LinkedIn / Instagram / Behance / Dribbble link stickers. `js/contact-stickers.js` lets you pick any of them up
+- "What next ?" (contact): the site blue with a moving grain (`.next::before`), the email address as a button that opens a new
+  Gmail email plus a copy button next to it (`.next-mail`), "Let's make something meaningful together" running sideways at the
+  bottom (`.next-run`), and a pile of cream stickers (`.c-pile` in `index.html`): three round ones (the doodle with a folded corner, the
+  lemon, the cat card) and LinkedIn / Instagram / Behance / Dribbble link stickers. `js/contact-stickers.js` lets you pick any of them up
   and drop it anywhere; a plain click on a link sticker opens it. Add the Instagram, Behance and Dribbble addresses in
-  `js/content.js` (until then they say "coming soon"). The big Gmail button opens a new email to Sharvani in Gmail.
-- The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
+  `js/content.js` (until then they say "coming soon").
+- The LinkedIn and Instagram links in "What next ?" use the LinkedIn / Instagram links in `js/content.js`.
   Until they're filled in, clicking one shows "coming soon".
 
 ## Publishing
