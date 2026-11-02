@@ -59,18 +59,20 @@
     playground.addEventListener("click", (e) => { e.preventDefault(); say("Playground coming soon."); });
   }
 
-  // Contact links in "What next ?": Gmail opens a new email, LinkedIn and Instagram open in a new tab.
+  // Contact links in "What next ?": the Gmail button opens a new email in Gmail (its link is in index.html);
+  // the LinkedIn, Instagram, Behance and Dribbble stickers open in a new tab once their address is in js/content.js.
   const placeholder = (v) => !v || v === "#" || /^\[.*\]$/.test(v);
   const social = (name) => S.links.find((l) => new RegExp(name, "i").test(l.label)) || {};
   document.querySelectorAll(".js-contact").forEach((a) => {
     const kind = a.dataset.kind;
+    if (kind === "gmail") return;
     const href = kind === "email" ? (placeholder(S.email) ? "" : `mailto:${S.email}`)
       : (placeholder(social(kind).href) ? "" : social(kind).href);
     if (href) {
       a.href = href;
       if (kind !== "email") { a.target = "_blank"; a.rel = "noopener"; }
     } else {
-      const name = kind === "email" ? "Email" : kind === "linkedin" ? "LinkedIn" : "Instagram";
+      const name = a.textContent.trim() || kind;
       a.addEventListener("click", (e) => { e.preventDefault(); say(`${name} link coming soon.`); });
     }
   });

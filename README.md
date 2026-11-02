@@ -51,9 +51,11 @@ Text in `[square brackets]` is placeholder. Projects without an `image` show a p
 - On desktop the face sticker on the record flies down into the About basket as you scroll (`js/about-scroll.js`).
   On touch screens a tap shows the card under the record. Images are in `assets/final/outside/`
   (`sticker-<name>.webp` goes with `card-<name>.webp`; replace a card file in place to update it).
-- `js/falling-tabs.js`: in "What next ?", the pill tabs drop in one after another and land in a pile along the bottom,
-  once, when the section comes into view. The tab labels are the `<span>`s inside `.tab-pile` in `index.html`. Once they have landed, hovering a tab pushes it aside (it springs back once the pointer has moved off its spot), and pressing and dragging moves it anywhere in the section.
-- The big faint doodle at the bottom right of "What next ?" is `assets/doodle/doodle.svg` (the vector doodle from Figma), shown dark blue (`.next-doodle`). It floats gently up and down (CSS animation, off for reduced motion).
+- "What next ?" (contact): the site blue with a fine grain (`.next::before`), "Let's make something meaningful together" running
+  sideways (`.next-run`), and a pile of cream stickers (`.c-pile` in `index.html`): three round ones (the doodle, the lemon, the
+  cat card) and LinkedIn / Instagram / Behance / Dribbble link stickers. `js/contact-stickers.js` lets you pick any of them up
+  and drop it anywhere; a plain click on a link sticker opens it. Add the Instagram, Behance and Dribbble addresses in
+  `js/content.js` (until then they say "coming soon"). The big Gmail button opens a new email to Sharvani in Gmail.
 - The Gmail, LinkedIn and Instagram links in "What next ?" use `email` and the LinkedIn / Instagram links in `js/content.js`.
   Until they're filled in, clicking one shows "coming soon".
 

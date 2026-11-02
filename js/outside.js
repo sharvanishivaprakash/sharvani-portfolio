@@ -1,7 +1,8 @@
 /*
   Outside the briefs.
   The blue record turns (CSS) while the stickers on it stay still.
-  Pointing at a sticker lifts it a touch and makes the note under the record blink.
+  Pointing at a sticker lifts it a touch and makes the hint above the record blink;
+  the hint fades away once a sticker has been clicked.
   Clicking (or tapping) a sticker brings in the paper card with the same name on the left;
   clicking it again, clicking somewhere else or Escape puts the card away.
   A sticker only counts where it is actually drawn (not the empty corners of its picture),
@@ -104,6 +105,7 @@
       // a click on an empty corner goes to whatever sticker is drawn there (keyboard clicks have no position)
       const target = e.detail ? stickerAt(e.clientX, e.clientY) : st;
       if (!target) return;
+      section.classList.add("has-peeked");      // the "click on the stickers" hint has done its job
       show(target === open ? null : target);
     });
   });
