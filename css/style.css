@@ -350,10 +350,12 @@ b { font-weight: 500; }
 .sticker:focus-visible { outline: none; }
 .sticker:focus-visible img { filter: drop-shadow(0 0 calc(6 * var(--u)) var(--blue)); }
 
+/* the hint sits in the empty space on the right, above the record, and fades away once a sticker is clicked */
 .outside-note {
   font-size: calc(16 * var(--u)); line-height: calc(19 * var(--u)); letter-spacing: calc(1 * var(--u));
-  text-align: center;
+  text-align: center; transition: opacity 0.5s var(--ease), translate 0.5s var(--ease);
 }
+.outside.has-peeked .outside-note { opacity: 0; translate: 0 calc(-8 * var(--u)); animation: none; pointer-events: none; }
 /* while a sticker is pointed at, the note under the record blinks */
 .outside.is-pointing .outside-note { animation: note-blink 0.8s steps(1) infinite; }
 @keyframes note-blink { 50% { opacity: 0.25; } }
@@ -440,63 +442,73 @@ b { font-weight: 500; }
 
 /* ---------- What next ---------- */
 
-.next { background: var(--blue); }
+/* the site blue with a fine grain over it (an SVG noise tile) */
+.next { position: relative; overflow: hidden; isolation: isolate; background: var(--blue); }
+.next::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay; opacity: 0.32;
+}
+.next .frame { z-index: 1; }
 .next-title { font-weight: 500; font-size: calc(64 * var(--u)); line-height: calc(100 * var(--u)); white-space: nowrap; }
-.next-line {
-  font-weight: 500; font-size: calc(32 * var(--u)); line-height: calc(57 * var(--u)); letter-spacing: calc(0.32 * var(--u));
-  white-space: nowrap;
+
+/* "Let's make something meaningful together" runs sideways, big, round and round */
+.next-marquee { display: flex; overflow: hidden; }
+.next-run {
+  flex: none; display: flex; align-items: center; margin: 0;
+  font-weight: 500; font-size: calc(128 * var(--u)); line-height: calc(150 * var(--u)); letter-spacing: calc(-1.5 * var(--u));
+  white-space: nowrap; animation: next-run 38s linear infinite;
+}
+.next-run span { padding: 0 calc(36 * var(--u)); }
+.next-run i { font-style: normal; font-size: 0.42em; }
+@keyframes next-run { to { transform: translateX(-100%); } }
+.next-rule { height: 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.55); margin: 0; }
+
+/* Stickers: cream, like real ones, with a soft shadow. js/contact-stickers.js lets you pick them up. */
+.c-pile { aspect-ratio: 940 / 340; }
+.c-sticker {
+  position: absolute; left: calc(var(--sx) / 940 * 100%); top: calc(var(--sy) / 340 * 100%);
+  width: calc(var(--sw) / 940 * 100%);
+  rotate: var(--r, 0deg); translate: var(--dx, 0px) var(--dy, 0px);
+  filter: drop-shadow(0 calc(6 * var(--u)) calc(10 * var(--u)) rgba(0, 30, 70, 0.28));
+  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: scale 0.2s var(--ease), filter 0.2s var(--ease);
+}
+.c-sticker:hover { scale: 1.04; }
+.c-sticker.is-held { cursor: grabbing; scale: 1.08; filter: drop-shadow(0 calc(16 * var(--u)) calc(22 * var(--u)) rgba(0, 30, 70, 0.35)); }
+.c-badge { aspect-ratio: 1; }
+.c-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cs-base { fill: #f4efe4; }
+.cs-ring { fill: none; stroke: #1a1a1a; stroke-width: 1; }
+.cs-say { font-family: "Outfit", sans-serif; font-size: 14px; fill: #1a1a1a; }
+.cs-art { position: absolute; left: 30%; top: 30%; width: 40%; height: 40%; object-fit: contain; pointer-events: none; }
+.cs-doodle-art {
+  background: #004988;
+  -webkit-mask: url("../assets/doodle/doodle.svg") center / contain no-repeat;
+  mask: url("../assets/doodle/doodle.svg") center / contain no-repeat;
+}
+.cs-cat .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; border-radius: 50%; object-fit: cover; object-position: 50% 55%; }
+.cs-lemon .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; }
+.c-pill {
+  display: flex; align-items: center; justify-content: center; aspect-ratio: 260 / 72;
+  border-radius: 999px; background: #f4efe4; color: #121212; text-decoration: none;
+  font-family: "Outfit", sans-serif; font-weight: 500; font-size: calc(28 * var(--u)); letter-spacing: calc(0.5 * var(--u)); text-transform: uppercase;
 }
 
-/* the contact links under the line: full Gmail, then LinkedIn and Instagram below */
-.contact-links { display: flex; flex-direction: column; align-items: flex-start; gap: calc(18 * var(--u)); }
-.contact-links a {
-  display: inline-flex; gap: 0.35em; align-items: baseline;
-  padding-bottom: calc(4 * var(--u)); border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
-  font-weight: 400; font-size: calc(24 * var(--u)); line-height: 1.3; text-decoration: none;
-  transition: border-color 0.25s var(--ease);
+/* the Gmail button: big and white, the one thing to press */
+.next-gmail {
+  display: flex; align-items: center; justify-content: center; gap: calc(14 * var(--u));
+  height: calc(84 * var(--u)); border-radius: 4px; background: #fff; color: var(--blue);
+  font-weight: 600; font-size: calc(36 * var(--u)); text-decoration: none;
+  box-shadow: 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(0, 30, 70, 0.3);
+  transition: background 0.2s, color 0.2s, scale 0.2s var(--ease);
 }
-.contact-links a span { display: inline-block; transition: transform 0.25s var(--ease); }
-.contact-links a:hover { border-color: #fff; }
-.contact-links a:hover span { transform: translate(2px, -2px); }
-
-/* Falling tabs: pill-shaped, thin outline, mono caps. js/falling-tabs.js places each one in the pile.
-   They sit behind the heading and links, so the words always stay readable. */
-.next { position: relative; overflow: hidden; isolation: isolate; }
-.next .frame { z-index: 1; pointer-events: none; }   /* let the pointer reach the tabs underneath */
-.next .frame a { pointer-events: auto; }
-/* the doodle as a dark blue shape in the bottom right corner, raised so the falling tabs don't hide it */
-.next-doodle {
-  position: absolute; z-index: 0; right: calc(-30 * var(--u)); bottom: calc(120 * var(--u));
-  width: calc(540 * var(--u)); max-width: none; height: auto;
-  filter: brightness(0); opacity: 0.28;
-  pointer-events: none; user-select: none;
-  /* floats gently up and down with a slight sway */
-  animation: doodle-float 7s ease-in-out infinite;
-}
-@keyframes doodle-float {
-  0%, 100% { translate: 0 0; rotate: 0deg; }
-  50% { translate: 0 calc(-14 * var(--u)); rotate: -1.5deg; }
-}
-@media (prefers-reduced-motion: reduce) { .next-doodle { animation: none; } }
-.tab-pile {
-  --tab: calc(52 * var(--u));                 /* tab height */
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 0;
-  height: calc(432 * var(--u)); pointer-events: none;
-}
-.tab-pile span {
-  position: absolute; left: 0; bottom: 0;
-  height: var(--tab); padding: 0 calc(var(--tab) * 0.52);
-  display: flex; align-items: center; white-space: nowrap;
-  border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-  font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-weight: 500;
-  font-size: calc(var(--tab) * 0.36); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);
-  visibility: hidden; will-change: transform;
-}
-.tab-pile span.is-placed { visibility: visible; pointer-events: auto; cursor: grab; touch-action: none; user-select: none; }
-.tab-pile span.is-held { cursor: grabbing; background: rgba(255, 255, 255, 0.22); box-shadow: 0 calc(12 * var(--u)) calc(24 * var(--u)) rgba(0, 40, 90, 0.35); }
-.tab-pile span.is-deep { filter: blur(1.6px); color: rgba(255, 255, 255, 0.7); }
+.next-gmail .btn-icon { width: calc(26 * var(--u)); height: calc(26 * var(--u)); }
+.next-gmail .btn-icon svg { stroke-width: 1.4; }
+.next-gmail:hover { background: #0e0e0e; color: #fff; scale: 1.03; }
+.next-gmail:hover .icon-out svg { translate: 100% -100%; }
+.next-gmail:hover .icon-out svg + svg { translate: 0 0; }
+@media (prefers-reduced-motion: reduce) { .next-run { animation: none; } }
 
 /* ---------- Toast ---------- */
 
@@ -666,14 +678,17 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .chips li { padding: 6px 14px; font-size: 15px; }
 
 
-  .next .frame { max-width: 600px; padding: 56px 16px 200px; }
+  .next .frame { max-width: 600px; padding: 56px 16px 72px; }
   .next-title { font-size: clamp(40px, 11vw, 56px); line-height: 1.2; }
-  .next-line { margin-top: 12px; font-size: clamp(18px, 5vw, 26px); line-height: 1.5; letter-spacing: 0.3px; white-space: normal; }
-  .next .frame { padding-bottom: 300px; }
-  .contact-links { margin-top: 28px; gap: 16px; }
-  .contact-links a { font-size: 18px; padding-bottom: 3px; }
-  .tab-pile { --tab: 26px; height: 300px; }
-  .next-doodle { width: 260px; right: -20px; bottom: 130px; }
+  .next-marquee { margin: 12px -16px 0; }
+  .next-run { font-size: clamp(44px, 13vw, 64px); line-height: 1.3; letter-spacing: -0.5px; }
+  .next-run span { padding: 0 16px; }
+  .next-rule { margin-top: 16px; }
+  .c-pile { position: relative; margin-top: 36px; }
+  .c-pill { font-size: clamp(12px, 3.4vw, 16px); }
+  .cs-say { font-size: 15px; }
+  .next-gmail { margin-top: 44px; height: 64px; font-size: 26px; gap: 10px; }
+  .next-gmail .btn-icon { width: 18px; height: 18px; }
 
   .case { padding-top: 110px; }
   .case-meta { grid-template-columns: repeat(2, 1fr); }
@@ -696,7 +711,7 @@ body.cursor-out .cursor-eye { opacity: 0; }
 }
 
 /* on touch screens a finger on a tab still scrolls the page; tapping a tab pushes it */
-@media (hover: none) { .tab-pile span.is-placed { touch-action: auto; } }
+@media (hover: none) { .c-sticker { touch-action: auto; } }
 
 /* ---------- Intro (js/preloader.js) ---------- */
 /* The black screen with moving dots. The doodle looks left and right, its glasses drop on,
