@@ -243,6 +243,35 @@ b { font-weight: 500; }
 @media (hover: hover) { .flip:hover .flip-in { transform: rotateY(180deg); } }
 .flip:focus-visible .flip-in, .flip.is-turned .flip-in { transform: rotateY(180deg); }
 .flip:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+/* Cinematic entrance (js/drawn-cards.js, desktop): the six cards rise out of the dark as one tilted deck in the
+   middle, then deal out to their places from the centre, while the title slides up out of a mask. */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .drawn.will-deal .drawn-cards li { opacity: 0; }
+  .drawn.will-deal .drawn-title { clip-path: inset(0 0 100% 0); translate: 0 calc(40 * var(--u)); }
+  .drawn.will-deal .drawn-note { opacity: 0; }
+  .drawn.is-dealt .drawn-title { clip-path: inset(0 0 -20% 0); translate: 0 0; transition: clip-path 0.9s var(--ease), translate 0.9s var(--ease); }
+  .drawn.is-dealt .drawn-note { opacity: 1; transition: opacity 0.6s ease 1.9s; }
+  .drawn.is-dealt .drawn-cards { perspective: calc(1600 * var(--u)); }
+  .drawn.is-dealt .drawn-cards li {
+    animation: deal 1.9s cubic-bezier(0.65, 0, 0.25, 1) both;
+    animation-delay: calc(0.15s + var(--far) * 0.09s);
+    z-index: calc(10 - var(--far) * 2);
+  }
+}
+@keyframes deal {
+  0% {
+    opacity: 0; filter: blur(10px) brightness(0.4);
+    transform: translate(calc(var(--k) * (100% + 15 * var(--u))), calc(220 * var(--u))) rotateX(38deg) rotate(calc(var(--k) * -1.5deg)) scale(0.86);
+  }
+  38% {
+    opacity: 1; filter: blur(0) brightness(0.85);
+    transform: translate(calc(var(--k) * (100% + 15 * var(--u))), 0) rotate(calc(var(--k) * -2.5deg)) scale(0.94);
+  }
+  46% {
+    transform: translate(calc(var(--k) * (100% + 15 * var(--u))), calc(-10 * var(--u))) rotate(calc(var(--k) * -3deg)) scale(0.95);
+  }
+  100% { opacity: 1; filter: none; transform: none; }
+}
 .drawn-note {
   font-size: calc(16 * var(--u)); line-height: calc(19 * var(--u)); letter-spacing: calc(1 * var(--u));
   text-align: right; white-space: nowrap;   /* ends flush with the last card */
@@ -605,7 +634,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .cursor-eye .label {
   position: absolute; top: 100%; margin-top: 0.4rem;
   font-size: 0.66rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
-  background: var(--blue); color: #fff; padding: 0.15rem 0.4rem;
+  background: var(--blue); color: #fff; padding: 0.2rem 0.5rem; border-radius: 6px;
   opacity: 0; transform: translateY(-4px); transition: opacity 0.2s, transform 0.2s;
   white-space: nowrap;
 }
