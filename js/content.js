@@ -9,14 +9,14 @@ window.SITE = {
   name: "Sharvani SP",
 
   // Contact. Leave as placeholders until you add the real ones.
-  // The LinkedIn, Instagram, Behance and Dribbble stickers in "What next ?" use the links below
+  // The LinkedIn, Instagram, Behance and Medium stickers in "What next ?" use the links below
   // (a "#" one says "coming soon" when clicked). The Gmail button there always writes to `email`.
   email: "sharvanishivaprakash@gmail.com",
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/sharvanishivaprakash" },
-    { label: "[Behance]", href: "#" },
-    { label: "[Instagram]", href: "#" },
-    { label: "[Dribbble]", href: "#" },
+    { label: "Behance", href: "https://www.behance.net/sharvanshivapr" },
+    { label: "Instagram", href: "https://www.instagram.com/sharvaniac" },
+    { label: "Medium", href: "https://sharvanishivaprakash.medium.com" },
     { label: "Resume", href: "assets/Sharvani_Shivaprakash_Resume.pdf" }
   ],
 

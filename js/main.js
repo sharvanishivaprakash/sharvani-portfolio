@@ -60,7 +60,7 @@
   }
 
   // Contact links in "What next ?": the Gmail button opens a new email in Gmail (its link is in index.html);
-  // the LinkedIn, Instagram, Behance and Dribbble stickers open in a new tab once their address is in js/content.js.
+  // the LinkedIn, Instagram, Behance and Medium stickers open in a new tab once their address is in js/content.js.
   const placeholder = (v) => !v || v === "#" || /^\[.*\]$/.test(v);
   const social = (name) => S.links.find((l) => new RegExp(name, "i").test(l.label)) || {};
   document.querySelectorAll(".js-contact").forEach((a) => {
@@ -205,17 +205,18 @@
   function renderFigmaStudy(study, p, next) {
     const pct = (v, total) => `${(v / total) * 100}%`;
     const at = (o) => `left:${pct(o.x, study.width)};top:${pct(o.y, study.height)};width:${pct(o.w, study.width)};height:${pct(o.h, study.height)}`;
+    const round = (v) => (v.radius ? `;border-radius:${(v.radius / v.w) * 100}% / ${(v.radius / v.h) * 100}%` : "");
     const slices = study.slices
       .map((s, i) => `<img src="${esc(s.src)}" srcset="${esc(s.src)} 1440w, ${esc(s.src2x)} 2880w" sizes="(max-width: 900px) 100vw, 75vw"
           width="${study.width}" height="${s.h}" alt="${esc(s.alt)}"${i > 1 ? ' loading="lazy"' : ""} decoding="async">`)
       .join("");
     const videos = (study.videos || (study.video ? [study.video] : []))
       .map((v) => v.youtube ? `
-        <div class="figma-video figma-video--youtube" style="${at(v)}${v.radius ? `;border-radius:${(v.radius / v.w) * 100}% / ${(v.radius / v.h) * 100}%` : ""}">
+        <div class="figma-video figma-video--youtube" style="${at(v)}${round(v)}">
           <iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.youtube)}?rel=0&playsinline=1" title="${esc(v.label)}"
             allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
         </div>` : `
-        <div class="figma-video${v.controls ? " figma-video--player" : ""}" style="${at(v)}">
+        <div class="figma-video${v.controls ? " figma-video--player" : ""}" style="${at(v)}${round(v)}">
           <video src="${esc(v.src)}" poster="${esc(v.poster)}" ${v.controls ? "controls" : "autoplay muted loop"} playsinline preload="${v.controls ? "none" : "metadata"}" aria-label="${esc(v.label)}"></video>
           ${v.overlay ? `<img class="figma-video-over" src="${esc(v.overlay)}" alt="" loading="lazy">` : ""}
         </div>`)
