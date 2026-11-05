@@ -211,13 +211,12 @@ b { font-weight: 500; }
 /* The big dark blue doodle, tilted 12° and running off the bottom right (Figma 264:558) */
 .hero { z-index: 1; }
 .hero-doodle { aspect-ratio: 1; z-index: 0; rotate: 12.16deg; transform-origin: 0 0; pointer-events: none; }
-.hero-doodle span {
+.hero-doodle svg {
   position: absolute; left: calc(69 / 517.8 * 100%); top: calc(73.8 / 517.8 * 100%);
-  width: calc(388.2 / 517.8 * 100%); aspect-ratio: 40.4 / 39.6;
-  background: #004988;
-  -webkit-mask: url("../assets/doodle/doodle.svg") center / 100% 100% no-repeat;
-  mask: url("../assets/doodle/doodle.svg") center / 100% 100% no-repeat;
+  width: calc(388.2 / 517.8 * 100%); height: auto; aspect-ratio: 40.4 / 39.6;
+  color: #004988; overflow: visible;
 }
+.hero-doodle .hd-eyes { will-change: transform; }
 /* The yellow star over the doodle's glasses, tilted 22° (Figma 264:554) */
 .hero-star { z-index: 1; rotate: 22.38deg; transform-origin: 0 0; pointer-events: none; }
 .sticker { z-index: 2; transition: transform 0.4s var(--ease); }

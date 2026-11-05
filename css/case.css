@@ -7,7 +7,7 @@
   border-radius: clamp(16px, 4vw, 60px); background: #fefefe;
 }
 .figma-study > img { display: block; width: 100%; height: auto; }
-.figma-video { position: absolute; }
+.figma-video { position: absolute; overflow: hidden; }
 .figma-video video,
 .figma-video-over { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .figma-video video { object-fit: cover; }
