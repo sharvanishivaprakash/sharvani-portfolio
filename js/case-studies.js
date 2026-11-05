@@ -325,25 +325,25 @@ window.CASE_STUDIES = {
         "src": "assets/senselo/case/05.webp",
         "src2x": "assets/senselo/case/05@2x.webp",
         "h": 1200,
-        "alt": "Mind · For some, it's the noise. For others, harsh lighting, crowded spaces, or the combination of several sensory inputs causing Sensory Overload. The challenge isn't simply identifying a busy environment. It's understanding what makes that environment feel overwhelming and recognising that the experience is personal. · People · Light · Noise · Crowd · Overload doesn’t look the same for everyone. · An exploratory survey of 10 people helped me understand where sensory overload occurs, what contributes to it, and how people respond. · 9/10 · 9/10 · 7/10 · selected too many people · selected heat or stuffy air · step outside for a short break"
+        "alt": "Mind · For some, it's the noise. For others, harsh lighting, crowded spaces, or the combination of several sensory inputs causing Sensory Overload. The challenge isn't simply identifying a busy environment. It's understanding what makes that environment feel overwhelming and recognising that the experience is personal. · People · Light · Noise · Crowd · Overload doesn’t look the same for everyone. · An exploratory survey of 10 people helped me understand where sensory overload occurs, what contributes to it, and how people respond. · 9/10 · 9/10 · 7/10 · selected too many people · selected hea"
       },
       {
         "src": "assets/senselo/case/06.webp",
         "src2x": "assets/senselo/case/06@2x.webp",
         "h": 1200,
-        "alt": "What makes it too much · What people do about it · Too many people · 9/10 · Step outside for a break · 7/10 · Heat or stuffy air · 9/10 · Push through it · 6/10 · Loud noise or music · 6/10 · Where · What they want · Metro or bus · 6/10 · Alerts, without opening the app · 7/10 · Markets · 5/10 · A map of calmer places (most-used pick) · 5/10 · Events or concerts · 5/10 · 01 · 02 · 03 · Environmental triggers · Personal thresholds · Coping behaviours · Crowds and heat came up almost every time, ahead of noise. · An ordinary place can tip into too much, depending on the day. · Most people step away or push through, and rarely reach for an app."
+        "alt": "What makes it too much · What people do about it · Too many people · 9/10 · Step outside for a break · 7/10 · Heat or stuffy air · 9/10 · Push through it · 6/10 · Loud noise or music · 6/10 · Where · What they want · Metro or bus · Alerts, without opening the app · 7/10 · 6/10 · Markets · A map of calmer places (most-used pick) · 5/10 · 5/10 · Events or concerts · 5/10 · 01 · 02 · 03 · Environmental triggers · Personal thresholds · Coping behaviours"
       },
       {
         "src": "assets/senselo/case/07.webp",
         "src2x": "assets/senselo/case/07@2x.webp",
         "h": 1200,
-        "alt": "“Markets. Too hot. Too sticky. Too many people. I try to go indoors into air conditioned shops. That kinda helps.” · “I was at a normal metro station, it was too much, maybe I was anxious about something in my head, I’m not sure why…” · “…when I’m overstimulated I’m mostly not going to be on my phone.” · Most people cope. Some people pay for it. · For many people, a loud metro is just a loud metro. For people with sensory sensitivities, the same place can mean leaving early, avoiding it next time, or a headache that lasts all evening. Sense-Lo is designed around them, and stays useful for anyone on a heavy day."
+        "alt": "Crowds and heat came up almost every time, ahead of noise. · An ordinary place can tip into too much, depending on the day. · Most people step away or push through, and rarely reach for an app. · “Markets. Too hot. Too sticky. Too many people. I try to go indoors into air conditioned shops. That kinda helps.” · “I was at a normal metro station, it was too much, maybe I was anxious about something in my head, I’m not sure why…” · “…when I’m overstimulated I’m mostly not going to be on my phone.” · Most people cope. Some people pay for it. · For many people, a loud metro is just a loud metro. Fo"
       },
       {
         "src": "assets/senselo/case/08.webp",
         "src2x": "assets/senselo/case/08@2x.webp",
         "h": 1200,
-        "alt": "9/10 · Sensitive to noise · 6/10 · Migraines or headaches · 6/10 · Anxiety · 5/10 · ADHD · 3/10 · respondents ticked at least one sensitivity in the optional question. · Autism · 2/10 · Primary · Secondary · For spaces · People with sensory sensitivities · Anyone on a heavy day · Venues that want to be welcoming · Autistic people, people with ADHD, migraine, anxiety or sensory processing differences — for whom overload has a real cost. · The optional busy-mind check-in covers days when anyone’s threshold is lower than usual. · Sensory-friendly hours already exist in some stores and museums. Spaces helps decide when and where they matter. · Not diagnostic, not medical · Designed with neurodivergent people in mind, useful to anyone · Next: co-design and test with autistic and ADHD participants · The · GAP · We can measure sound, light and crowd density. But the readings are technical, disc"
+        "alt": "9/10 · Sensitive to noise · 6/10 · Migraines or headaches · 6/10 · Anxiety · 5/10 · ADHD · 3/10 · respondents ticked at least one sensitivity in the optional question. · Autism · 2/10 · Primary · Secondary · For spaces · People with sensory sensitivities · Anyone on a heavy day · Venues that want to be welcoming · Autistic people, people with ADHD, migraine, anxiety or sensory processing differences — for whom overload has a real cost. · The optional busy-mind check-in covers days when anyone’s threshold is lower than usual. · Sensory-friendly hours already exist in some stores and museums. Sp"
       },
       {
         "src": "assets/senselo/case/09.webp",
@@ -355,43 +355,43 @@ window.CASE_STUDIES = {
         "src": "assets/senselo/case/10.webp",
         "src2x": "assets/senselo/case/10@2x.webp",
         "h": 1200,
-        "alt": "/ Mapping the Sensory Load · Before Sense-Lo — concept exploration · Environmental factors · Existing responses · Too many people · 9/10 · Heat or stuffy air · 9/10 · Overthinking meter · Social battery · Daydream meter · “Almost did it” meter · Attention fragmentation · Step outside for a break · experienced · not a phone sensor input · 7/10 · Push through it · 6/10 · Data-leakage meter · Classroom CO₂ · Circadian light · Acoustic calm finder · Loud noise or music · 6/10 · Sudden sounds · 4/10 · Leave early · 5/10 · Headphones or earbuds · 4/10 · Sensory load — selected · → · Bright or flickering lights · 3/10 · Strong smells · 3/10 · measurable with existing tech · deeply personal · rich for visualisation · Avoid that place next time · 2/10 · Move somewhere quieter · described in Q5 answers (AC shop, another classroom) · Visual clutter · Several inputs at once · design interpretation ·"
+        "alt": "/ Mapping the Sensory Load · Before Sense-Lo — concept exploration · Environmental factors · Existing responses · Heat or stuffy air · 9/10 · Overthinking meter · Social battery · Daydream meter · “Almost did it” meter · Attention fragmentation · Too many people · Step outside for a break · 9/10 · 7/10 · Push through it · 6/10 · experienced · not a phone sensor input · Data-leakage meter · Classroom CO₂ · Circadian light · Acoustic calm finder · Loud noise or music · Leave early · 6/10 · 5/10 · Sudden sounds · Headphones or earbuds · 4/10 · 4/10 · Sensory load — selected · → · Strong smells ·"
       },
       {
         "src": "assets/senselo/case/11.webp",
         "src2x": "assets/senselo/case/11@2x.webp",
         "h": 1200,
-        "alt": "Restaurants or cafés · 2/10 · Design scenarios · Space-management opportunity · No technical units to interpret · Supermarkets & retail · Zones with the highest load · Contributing signals · design interpretation · Office or workplace · 2/10 · from project docs · Peak-hour crowding · hypothesis · hypothesis · What is contributing to it · Changes across the day · design interpretation · Congested checkout · design scenario · Intended vs current atmosphere · Freedom to stay or leave · design scenario illustrative · hypothesis · hypothesis · design interpretation · Sense-Lo for Spaces dashboard · → · The design opportunity · Legend · “Translate the sensory conditions of a place into information people can understand and act on, while helping spaces become more considerate.” · Finding · Found in survey · Feature · → · Taken forward into design → marker · Both · → · Found and taken forward ·"
+        "alt": "Needs · Design scenarios · Space-management opportunity · Restaurants or cafés · 2/10 · No technical units to interpret · design interpretation · Supermarkets & retail · Zones with the highest load · Contributing signals · from project docs · hypothesis · What is contributing to it · Office or workplace · 2/10 · hypothesis · Peak-hour crowding · design interpretation · design scenario · Changes across the day · Intended vs current atmosphere · Freedom to stay or leave · Congested checkout · hypothesis · hypothesis · design interpretation · design scenario illustrative · Sense-Lo for Spaces das"
       },
       {
         "src": "assets/senselo/case/12.webp",
         "src2x": "assets/senselo/case/12@2x.webp",
         "h": 1200,
-        "alt": "Sense-Lo explores how environmental signals can be combined into a sensory-load estimate and communicated through a visual orb, familiar language and gentle actions. · you · a gentle hum ↻ · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig · 01 · 02 · Sense · Personalise · Noise, crowd, light and clutter. · A chosen intensity, and an optional inner-noise check-in. · 83 · Heavy · mostly crowd · MORE · NOISE · Loud 84 · CROWD · Packed 95 · LIGHT · Bright 58 · And your head? · Settled · Busy mind · Overloaded · 03 · Meter · GENTLE NUDGE · 6:12 PM"
+        "alt": "Sense-Lo explores how environmental signals can be combined into a sensory-load estimate and communicated through a visual orb, familiar language and gentle actions. · you · a gentle hum ↻ · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig · 01 · 02 · Sense · Personalise · Noise, crowd, light and clutter. · A chosen intensity, and an optional inner-noise check-in. · 83 · Heavy · mostly crowd · MORE · Loud 84 · NOISE · Packed 95 · CROWD · Bright 58 · LIGHT · And your head? · Settled · Busy mind · Overloaded · 03 · Meter · GENTLE NUDGE · 6:12 PM"
       },
       {
         "src": "assets/senselo/case/13.webp",
         "src2x": "assets/senselo/case/13@2x.webp",
         "h": 1200,
-        "alt": "Translate · LOAD RISING · 64 → 79 · Mostly crowded. The platform is packed shoulder to shoulder. · One orb, one word, numbers second. · you · a gentle hum ↻ · LESS · Metro · platform 2, 6 pm · A gentle hum · Library · Café · Metro rush · Night market · Live gig · A busy café would feel lively but okay to you. · 79 · HEAVY · 04 · Act · Breathe, a calmer place, or stay. · 83 · NOISE · CROWD · LIGHT · MIND · Heavy · mostly crowd · Loud 84 · Packed 95 · Bright 58 · Busy 52 · NOISE · Loud 84 · Breathe with me for 1 min · CROWD · Packed 95 · LIGHT · Bright 58 · Calmer spot nearby · I'm okay here · And your head? · Settled · Busy mind · Overloaded · Meter · / Designing for People · Find your own · Volume · The mobile experience helps people understand their surroundings without asking them to interpret technical data."
+        "alt": "Translate · LOAD RISING · 64 → 79 · Mostly crowded. The platform is packed shoulder to shoulder. · LESS · you · a gentle hum ↻ · One orb, one word, numbers second. · A gentle hum · Metro · platform 2, 6 pm · A busy café would feel lively but okay to you. · Library · Café · Metro rush · Night market · Live gig · 79 · HEAVY · 04 · Act · Breathe, a calmer place, or stay. · CROWD · MIND · 83 · NOISE · LIGHT · Packed 95 · Busy 52 · Loud 84 · Bright 58 · Heavy · mostly crowd · Loud 84 · NOISE · Breathe with me for 1 min · Packed 95 · CROWD · Bright 58 · LIGHT · Calmer spot nearby · I'm okay here · A"
       },
       {
         "src": "assets/senselo/case/14.webp",
         "src2x": "assets/senselo/case/14@2x.webp",
         "h": 1200,
-        "alt": "How loud do you like your world? · Slide to set your level. You can change it anytime. · tune in · MORE · Set the sensory intensity that feels comfortable. · four stops less → more · / Designing for People · A gentle hum · LESS · A busy café would feel lively but okay to you. · Also count my inner noise → · Open my meter · check in · Optionally reflect on your internal state through the inner-noise interaction."
+        "alt": "How loud do you like your world? · Slide to set your level. You can change it anytime. · tune in · MORE · Set the sensory intensity that feels comfortable. · four stops less → more · / Designing for People · LESS · A gentle hum · A busy café would feel lively but okay to you. · Also count my inner noise → · Open my meter · check in · Optionally reflect on your internal state through the inner-noise interaction."
       },
       {
         "src": "assets/senselo/case/15.webp",
         "src2x": "assets/senselo/case/15@2x.webp",
         "h": 1200,
-        "alt": "you · a gentle hum ↻ · read the meter · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig · Understand the estimated load through the orb, a score, a descriptive label, and supporting indicators."
+        "alt": "you · a gentle hum ↻ · read the meter · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig"
       },
       {
         "src": "assets/senselo/case/16.webp",
         "src2x": "assets/senselo/case/16@2x.webp",
         "h": 1200,
-        "alt": "Orb · size and warmth = load · 83 | Heavy · an adjective first · Mostly crowd · the main driver · Loud | Packed | Bright · signal words + numbers · 83 · Heavy · mostly crowd · NOISE · Loud 84 · CROWD · Packed 95 · LIGHT · Bright 58 · And your head? · Settled · Busy mind · Overloaded · gentle nudge · Meter · When the reading crosses a chosen threshold, explore an action rather than receiving an alarm."
+        "alt": "Understand the estimated load through the orb, a score, a descriptive label, and supporting indicators. · Orb · size and warmth = load · 83 | Heavy · an adjective first · Mostly crowd · the main driver · Loud | Packed | Bright · signal words + numbers · 83 · Heavy · mostly crowd · Loud 84 · NOISE · Packed 95 · CROWD · Bright 58 · LIGHT · And your head? · Settled · Busy mind · Overloaded · gentle nudge · Meter · When the reading crosses a chosen threshold, explore an action rather than receiving an alarm."
       },
       {
         "src": "assets/senselo/case/17.webp",
@@ -403,31 +403,31 @@ window.CASE_STUDIES = {
         "src": "assets/senselo/case/18.webp",
         "src2x": "assets/senselo/case/18@2x.webp",
         "h": 1200,
-        "alt": "Less information. More understanding. · How much should the world hum for you? · How loud do you like your world? · The same café can feel calm to one person and loud to another. Your meter reads every place through this. · Slide to set your level. You can change it anytime. · 01. Tuning · MORE"
+        "alt": "Less information. More understanding. · How much should the world hum for you? · How loud do you like your world? · The same café can feel calm to one person and loud to another. Your meter reads every place through this. · Slide to set your level. You can change it anytime. · MORE · 01. Tuning"
       },
       {
         "src": "assets/senselo/case/19.webp",
         "src2x": "assets/senselo/case/19@2x.webp",
         "h": 1200,
-        "alt": "From · Quiet & soft · A gentle hum · A 2 × 2 grid of tuning cards. · Libraries, early mornings, one friend · Cafés with low music, slow markets · → · To · One orb, one slider, one result line. · A bit happening · Full buzz · Four cards and six blocks felt busy and templated. One control is calmer, and the orb itself shows the feeling. · Busy streets, weekend malls · Gigs, festivals, packed rooms · LESS · A gentle hum · A café at 68 dB will feel lively but okay to you · A busy café would feel lively but okay to you. · Also notice my inner noise · Racing thoughts, being talked over. One tap check-in, never tracked. · What's inner noise? → · Also count my inner noise → · Open my meter · Open my meter · Skip · How much should the world hum for you? · The same café can feel calm to one person and loud to another. Your meter reads every place through this. · What is inner noise? · 02. Inner no"
+        "alt": "Quiet & soft · A gentle hum · From · Libraries, early mornings, one friend · Cafés with low music, slow markets · A 2 × 2 grid of tuning cards. · → · To · One orb, one slider, one result line. · A bit happening · Full buzz · Busy streets, weekend malls · Gigs, festivals, packed rooms · LESS · Four cards and six blocks felt busy and templated. One control is calmer, and the orb itself shows the feeling. · A gentle hum · A café at 68 dB will feel lively but okay to you · A busy café would feel lively but okay to you. · Also notice my inner noise · Racing thoughts, being talked over. One tap chec"
       },
       {
         "src": "assets/senselo/case/20.webp",
         "src2x": "assets/senselo/case/20@2x.webp",
         "h": 1200,
-        "alt": "Meera Rao · STORE MANAGER · Meera Rao · STORE MANAGER · TODAY, 10 AM — 10 PM · NOISE · WHAT WOULD CALM IT DOWN · CROWD · Turn music down by about 6 dB near checkout after 4 pm. · LIGHT · Open a second counter when the queue passes 6 people. Crowd load drops fastest there. · CLUTTER · 10 AM · 1 PM · 4 PM · 7 PM · 10 PM · Try a weekly quiet hour on Tuesday 10–11 am: dim produce lights and pause announcements. · Customer mood is estimated from anonymous dwell time and walking pace. No cameras on faces, no audio recorded. All figures here are sample data. · Privacy shaped the UI · Feasibility shaped the signals · Words before numbers · No one in the survey gave a plain yes to the mic; 7 of 10 would, with proof. Loudness is measured on the device and never recorded, with a visible “not recording” state. · Heat or stuffy air was named by 9 of 10, but a phone can’t sense it. Air comfort moved t"
+        "alt": "Managers lost their place when the overview changed under them. A focused view answers one question at a time. · Store: 34. One counter open, queue builds after 6 PM. · Meera Rao · Meera Rao · STORE MANAGER · STORE MANAGER · TODAY, 10 AM — 10 PM · WHAT WOULD CALM IT DOWN · Turn music down by about 6 dB near checkout after 4 pm. · NOISE · CROWD · Open a second counter when the queue passes 6 people. Crowd load drops fastest there. · LIGHT · Try a weekly quiet hour on Tuesday 10–11 am: dim produce lights and pause announcements. · CLUTTER · 10 AM · 1 PM · 4 PM · 7 PM · 10 PM · Customer mood is e"
       },
       {
         "src": "assets/senselo/case/21.webp",
         "src2x": "assets/senselo/case/21@2x.webp",
         "h": 1200,
-        "alt": "01 · Environmental signals · describe the conditions. · ↓ · Technical layer · 02 · Scoring model · combines available inputs into an estimate. · ↓ · 03 · Personalised interpretation · considers individual preferences and chosen thresholds. · ↓ · 04 · Orb + adjective + indicators · translates the estimate into an orb, descriptive language, and supporting indicators. · ↓ · Human layer · 05 · Optional action · help people explore what to do next. · / How it measures · What a phone can sense, and what it can’t. · Signal · Technology · Output · limits · Noise · Microphone, loudness only, never recording · dB(A), in short samples · Varies by phone; needs calibration. In NIOSH tests only 4 of 192 apps came within ±2 dB(A) of a pro meter."
+        "alt": "Environmental signals · 01 · ↓ · describe the conditions. · Technical layer · Scoring model · 02 · ↓ · combines available inputs into an estimate. · Personalised interpretation · 03 · ↓ · considers individual preferences and chosen thresholds. · Orb + adjective + indicators · 04 · ↓ · Human layer · translates the estimate into an orb, descriptive language, and supporting indicators. · Optional action · 05 · help people explore what to do next. · / How it measures · What a phone can sense, and what it can’t. · Signal · Technology · Output · limits · Noise · Microphone, loudness only, never reco"
       },
       {
         "src": "assets/senselo/case/22.webp",
         "src2x": "assets/senselo/case/22@2x.webp",
         "h": 1200,
-        "alt": "Light · Ambient light sensor · Lux, plus flicker · Only reliable when the phone is out of a pocket or bag. · Crowd · Bluetooth LE + Wi-Fi scan — counts devices, identifies no one · Estimated people per area · Rough: some people carry two devices, some none. · Place · GPS / location · Which venue you’re in · Drifts indoors; venues can add beacons. · Movement · Accelerometer · Still or walking - when to sample · Indirect; mainly saves battery. · Inner noise · Your own check-in · Settled · Busy mind · Overloaded · Self-reported, by design. · Clutter · Not measurable by the phone · A venue rating from Spaces, or your own · See “Visual clutter, honestly”. · Heat / air · Not measurable by the phone · Venue sensors in Spaces · The 9/10 finding — answered on the venue side. · For spaces - fixed sensors per zone, far steadier than a phone · Calibrated sound sensor · Lux + flicker sensor · Thermal"
+        "alt": "Light · Ambient light sensor · Lux, plus flicker · Only reliable when the phone is out of a pocket or bag. · Crowd · Bluetooth LE + Wi-Fi scan — counts devices, identifies no one · Estimated people per area · Rough: some people carry two devices, some none. · Place · GPS / location · Which venue you’re in · Drifts indoors; venues can add beacons. · Movement · Accelerometer · Still or walking - when to sample · Indirect; mainly saves battery. · Inner noise · Your own check-in · Settled · Busy mind · Overloaded · Self-reported, by design. · Clutter · Not measurable by the phone · A venue rating"
       },
       {
         "src": "assets/senselo/case/23.webp",
@@ -439,13 +439,13 @@ window.CASE_STUDIES = {
         "src": "assets/senselo/case/24.webp",
         "src2x": "assets/senselo/case/24@2x.webp",
         "h": 1200,
-        "alt": "/ Designing for Spaces · What if the space could · /change · too? · Light · Sense-Lo for Spaces is a companion dashboard concept for café, restaurant and retail operators. · Sound · Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · STORE · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · Overview · Zones · Produce · 62 · Café corner · 66 · Checkout · 94 · Packed and loud · ↑ 15 · Very heavy · Trends"
+        "alt": "/ Designing for Spaces · What if the space could · /change · too? · Light · Sense-Lo for Spaces is a companion dashboard concept for café, restaurant and retail operators. · Sound · Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · STORE · Overview · Produce · 62 · Café corner · 66 · 94 · Checkout · Zones · Packed and loud · Very heavy · ↑ 15"
       },
       {
         "src": "assets/senselo/case/25.webp",
         "src2x": "assets/senselo/case/25@2x.webp",
         "h": 1200,
-        "alt": "Entrance · 84 · Actions · Checkout · 94 · Entrance · 84 · Packed · ↑ 6 · Heavy · Alerts · 2 · Grain aisle · 38 · Crowd density · Café corner · 66 · Reports · Chatty · → · Busy · Produce · 62 · Busy, a little bright · ↑ 3 · Busy · Grain aisle · 38 · Calm · ↓ 2 · Light · CALM · OVERLOAD · Visual clutter · Zones view · Sense-Lo for Spaces · LAST 6 HOURS · EACH ZONE AGAINST ITS GOAL · Checkout · Entrance · Café corner · Produce · Grain aisle · From experiencing a space to understanding it. · Very heavy · 94 · Heavy · 84 · Busy · 66 · Busy · 62 · Light · 38 · Store profile · goal 70 · goal 65 · goal 65 · goal 60 · Settings · goal 50 · Help · Meera Rao · STORE MANAGER · Someone in an overcrowded café can move to another table. They cannot control the music volume, improve the ventilation, or reorganise a congested queue. These conditions are often shaped by decisions made by the people who man"
+        "alt": "Trends · Entrance · 84 · 84 · Entrance · Checkout · 94 · Actions · Packed · Heavy · ↑ 6 · Alerts · Grain aisle · 38 · 2 · 66 · Café corner · Crowd density · Chatty · Reports · Busy · → · 62 · Produce · Busy, a little bright · Busy · ↑ 3 · 38 · Grain aisle · Calm · Light · ↓ 2 · CALM · OVERLOAD · Visual clutter · Zones view · Sense-Lo for Spaces · LAST 6 HOURS · EACH ZONE AGAINST ITS GOAL · Checkout · Entrance · Café corner · Produce · Grain aisle · Very heavy · 94 · Heavy · 84 · Busy · 66 · Busy · 62 · Light · 38 · From experiencing a space to understanding it. · Store profile · goal 70 · goal"
       },
       {
         "src": "assets/senselo/case/26.webp",
@@ -457,67 +457,67 @@ window.CASE_STUDIES = {
         "src": "assets/senselo/case/27.webp",
         "src2x": "assets/senselo/case/27@2x.webp",
         "h": 1200,
-        "alt": "/ The dashboard · Sense-Lo for Spaces · How does your store feel right now? · Live · updated 2 min ago · 10 AM · 1 PM · 4 PM · 7 PM · Export · Green Basket Market · GROUND FLOOR · STORE · STORE SENSE-LO · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · Overview · Zones · Trends · Actions · Alerts · 2 · Reports · 79 · Heavy · Comfortable for 25% of shoppers who use Sense-Lo, based on their own tuning. · NOW 79 · Entrance · 84 · Produce · 62 · Grain aisle · 38 · Checkout · 94 · Café corner · 66 · Each dot is one shopper’s limit. Green dots are still comfortable. · Tap a zone to see what is driving its load. Checkout is heaviest at 7 pm. · NOISE · LIGHTING · VISUAL CLUTTER · CROWD · CUSTOMERS · Store profile · Loud · Too bright · Busy to the eye · Getting busy · Mostly rushed · 78 dBA · like a vacuum nearby · 610 lux · brighter than an office · 61 / 100 visual clutter · 34 per 10"
+        "alt": "/ The dashboard · Sense-Lo for Spaces · How does your store feel right now? · Live · updated 2 min ago · 10 AM · 1 PM · 4 PM · 7 PM · Export · Green Basket Market · GROUND FLOOR · STORE SENSE-LO · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · STORE · Overview · Zones · Trends · Actions · Alerts · 2 · Reports · 79 · Heavy · Comfortable for 25% of shoppers who use Sense-Lo, based on their own tuning. · NOW 79 · Entrance · 84 · Produce · 62 · Grain aisle · 38 · Checkout · 94 · Café corner · 66 · Tap a zone to see what is driving its load. Checkout is heaviest at 7 pm. · Each dot is o"
       },
       {
         "src": "assets/senselo/case/28.webp",
         "src2x": "assets/senselo/case/28@2x.webp",
         "h": 1200,
-        "alt": "STORE · STORE SENSE-LO · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · Overview · Zones · Trends · Actions · 01 — Overview · Alerts · 2 · Reports · 79 · Understand the estimated sensory load across the space without having to interpret every individual measurement. · Heavy · Comfortable for 25% of shoppers who use Sense-Lo, based on their own tuning. · NOW 79 · Entrance · 84 · Produce · 62 · Grain aisle · 38 · Checkout · 94 · Café corner · 66 · Each dot is one shopper’s limit. Green dots are still comfortable. · Tap a zone to see what is driving its load. Checkout is heaviest at 7 pm. · NOISE · LIGHTING · VISUAL CLUTTER · CROWD · CUSTOMERS · Sense-Lo for Spaces · Store profile · Loud · Too bright · Five zones, one floor · Busy to the eye · Getting busy · Mostly rushed · Live · Today · This week · 78 dBA · like a vacuum nearby · Green Basket Market · GROUND FLOOR · 610 lux ·"
+        "alt": "STORE SENSE-LO · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · STORE · Overview · Zones · Trends · Actions · 01 — Overview · Alerts · 2 · Reports · Understand the estimated sensory load across the space without having to interpret every individual measurement. · 79 · Heavy · Comfortable for 25% of shoppers who use Sense-Lo, based on their own tuning. · NOW 79 · Entrance · 84 · Produce · 62 · Grain aisle · 38 · Checkout · 94 · Café corner · 66 · Tap a zone to see what is driving its load. Checkout is heaviest at 7 pm. · Each dot is one shopper’s limit. Green dots are still comforta"
       },
       {
         "src": "assets/senselo/case/29.webp",
         "src2x": "assets/senselo/case/29@2x.webp",
         "h": 1200,
-        "alt": "STORE · AVERAGE LOAD · CALM SHOPPERS · HEAVY HOURS · QUIETEST TIME · Overview · 64 · Help · 46% · 11 · Tue 10 am · Zones · Busy · Meera Rao · Up from 40% · Hours above 75 · Quiet hour works · ↓ 4 vs last week · STORE MANAGER · ↑ 6 points · ↓ 3 vs last week · Load 31 · Light · Trends · Actions · EVERY HOUR THIS WEEK · DAILY AVERAGE · THIS WEEK VS LAST · Alerts · 2 · Mon · 03 — Trends · Reports · Tue · Quiet hour · 80 · Wed · Explore how environmental conditions change throughout the day and across different periods. · 60 · Thu · Fri · 40 · Sat · Sun · Mon · Tue · Wed · Thu · Fri · Sat · Sun · This week · Last week · 8 am · 10 am · 12 pm · 2 pm · 4 pm · 6 pm · 8 pm · WHAT DROVE THE LOAD, DAY BY DAY · DID THE QUIET HOUR WORK? · Mon · Store profile · Tue · Settings · Wed · Help · Thu · Sense-Lo for Spaces · Meera Rao · Small changes, calmer store · STORE MANAGER · Tuesdays before · With quie"
+        "alt": "Settings · QUIETEST TIME · AVERAGE LOAD · CALM SHOPPERS · HEAVY HOURS · STORE · 64 · 46% · 11 · Tue 10 am · Help · Overview · Busy · Up from 40% · Hours above 75 · Quiet hour works · Zones · Meera Rao · ↓ 4 vs last week · ↑ 6 points · ↓ 3 vs last week · Load 31 · Light · STORE MANAGER · Trends · EVERY HOUR THIS WEEK · DAILY AVERAGE · THIS WEEK VS LAST · Actions · 03 — Trends · Alerts · 2 · Mon · Reports · 80 · Tue · Quiet hour · Explore how environmental conditions change throughout the day and across different periods. · Wed · 60 · Thu · Fri · 40 · Sat · Mon · Tue · Wed · Thu · Fri · Sat · Su"
       },
       {
         "src": "assets/senselo/case/30.webp",
         "src2x": "assets/senselo/case/30@2x.webp",
         "h": 1200,
-        "alt": "/ Visual clutter · Busy isn’t the same as bad. · A maximalist café can be full of objects, colour and pattern, and still feel joyful and intentional. So Sense-Lo shouldn’t treat “lots of things” as a problem by default. · How it could be measured · What it actually measures · Image-based clutter measures from vision science ( Feature Congestion, Subband Entropy and Edge Density (Rosenholtz et al., MIT, 2007) ) computed from a periodic photo of each zone taken by staff, not a live camera. · How visually dense a scene is, and how hard it is to find things in it. Not whether a space looks good, and not how a particular person will feel in it. · The reframe · 01 · 02 · 03 · Call it visual density · Judge it against the zone’s own goal · Let people tune it · A description of the space, not a judgement about it. · Each zone already has a goal in the store profile. Flag a mismatch with intent,"
+        "alt": "/ Visual clutter · Busy isn’t the same as bad. · A maximalist café can be full of objects, colour and pattern, and still feel joyful and intentional. So Sense-Lo shouldn’t treat “lots of things” as a problem by default. · How it could be measured · What it actually measures · Image-based clutter measures from vision science ( Feature Congestion, Subband Entropy and Edge Density (Rosenholtz et al., MIT, 2007) ) computed from a periodic photo of each zone taken by staff, not a live camera. · How visually dense a scene is, and how hard it is to find things in it. Not whether a space looks good, a"
       },
       {
         "src": "assets/senselo/case/31.webp",
         "src2x": "assets/senselo/case/31@2x.webp",
         "h": 1200,
-        "alt": "Visual density · 78 · Visual density · 74 · Zone goal · 80 · Zone goal · 40 · As intended: “Lively and full on purpose, a place to linger.” · Check: “Meant to be the store’s quiet aisle, but promo stands have crept in.” · / A scenario · Make the pattern visible. · Leave the decision to · /people. · Imagine a café designed to offer a calm atmosphere. During the evening rush, its checkout area begins to show a higher estimated sensory load than the seating area. The operator can investigate contributing conditions, from crowd density to noise and movement around the counter, before considering a change. · Sense-Lo for Spaces · How does your store feel right now? · Live · updated 2 min ago · 10 AM · 1 PM · 4 PM · 7 PM · Export · Green Basket Market"
+        "alt": "Visual density · 78 · Visual density · 74 · Zone goal · 80 · Zone goal · 40 · As intended: “Lively and full on purpose, a place to linger.” · Check: “Meant to be the store’s quiet aisle, but promo stands have crept in.” · / A scenario · Make the pattern visible. · /people. · Leave the decision to · Imagine a café designed to offer a calm atmosphere. During the evening rush, its checkout area begins to show a higher estimated sensory load than the seating area. The operator can investigate contributing conditions, from crowd density to noise and movement around the counter, before considering a"
       },
       {
         "src": "assets/senselo/case/32.webp",
         "src2x": "assets/senselo/case/32@2x.webp",
         "h": 1200,
-        "alt": "GROUND FLOOR · STORE · ZONE · CHECKOUT · 18 M² · ← Whole store · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · Overview · 94 · Sense-Lo for Spaces · Very heavy · How does your store feel right now? · Live · updated 2 min ago · 10 AM · 1 PM · 4 PM · 7 PM · Export · Zones · ↑ 15 since 4 PM, rising fastest in the store · Green Basket Market · GROUND FLOOR · Trends · Checkout · 94 · STORE · ZONE · CHECKOUT · 18 M² · ← Whole store · WHAT'S DRIVING IT · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · Actions · Overview · 94 · Crowd · 48% · Packed · 82 / 100 m² · 2.4× store · Very heavy · Alerts · 2 · Noise · 30% · Very loud · 84 dBA · +6 dBA · Zones · ↑ 15 since 4 PM, rising fastest in the store · Reports · Light · 12% · Glaring · 640 lux · +30 lux · Trends · Clutter · 10% · Chaotic · 70 / 100 · +9 · Checkout · 94 · WHAT'S DRIVING IT · LAST 3 HOURS · 6:40 · queue passed"
+        "alt": "GROUND FLOOR · ← Whole store · STORE SENSE-LO · ZONE · CHECKOUT · 18 M² · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · STORE · Sense-Lo for Spaces · 94 · Overview · How does your store feel right now? · Live · updated 2 min ago · 10 AM · 1 PM · 4 PM · 7 PM · Export · Very heavy · Green Basket Market · Zones · ↑ 15 since 4 PM, rising fastest in the store · GROUND FLOOR · Trends · Checkout · 94 · ← Whole store · STORE SENSE-LO · ZONE · CHECKOUT · 18 M² · FLOOR HEATMAP · 1 SQUARE ≈ 1 M² · Heaviest now: Checkout · STORE · WHAT'S DRIVING IT · 94 · Overview · Actions · Very heavy · Cro"
       },
       {
         "src": "assets/senselo/case/33.webp",
         "src2x": "assets/senselo/case/33@2x.webp",
         "h": 1200,
-        "alt": "A place can be understood from · /more than one · perspective. · Sense-Lo brings together personal interpretation and environmental understanding through two complementary experiences. · you · a gentle hum ↻ · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig · Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · STORE · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · Overview · Zones · Produce · 62 · Café corner · 66 · Checkout · Packed and loud · 94 · Trends · ↑ 15 · Very heavy · Entrance · 84 · Actions · Checkout · 94 · Entrance · Packed · 84 · ↑ 6 · Heavy · Alerts · 2 · Grain aisle · 38 · Café corner · 66 · Reports · Chatty · → · Busy · Produce · Busy, a little bright · 62 · ↑ 3 · Busy · Grain aisle · Calm · 38 · 83 · ↓ 2 · Light · CALM · OVERLOAD · Heavy · mostly crowd · LAST 6 HOURS · EACH Z"
+        "alt": "A place can be understood from · /more than one · perspective. · Sense-Lo brings together personal interpretation and environmental understanding through two complementary experiences. · you · a gentle hum ↻ · Metro · platform 2, 6 pm · Library · Café · Metro rush · Night market · Live gig · Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · STORE · Overview · Produce · 62 · Café corner · 66 · 94 · Checkout · Zones · Packed and loud · Very heavy · ↑ 15 · Trends · Entrance · 84 · 84 ·"
       },
       {
         "src": "assets/senselo/case/34.webp",
         "src2x": "assets/senselo/case/34@2x.webp",
         "h": 1200,
-        "alt": "Help · Settled · Busy mind · Overloaded · Meera Rao · STORE MANAGER · Meter · Sense-Lo for Spaces · for operators · Sense-Lo · for people · For people · Interpret. · you · a gentle hum ↻ · GENTLE NUDGE · 6:12 PM · Metro · platform 2, 6 pm · LOAD RISING · 64 → 79 · Library · Café · Metro rush · Night market · Live gig · Mostly crowded. The platform is packed shoulder to shoulder. · Skip · On busy days, I listen closer · Same café, same noise · Settled day · 79 · The mobile experience translates environmental inputs into a sensory-load estimate, using the orb, descriptive language, personal preferences, and optional next steps to make the reading easier to understand. · 62 · Feels fine · HEAVY · Busy-mind day · 83 · 70 · I nudge you sooner · Heavy · mostly crowd · NOISE · Loud 84 · CROWD · Packed 95 · LIGHT · Bright 58 · Your check-ins stay on this phone. Only you see them. · NOISE · Loud"
+        "alt": "And your head? · Help · Meera Rao · Settled · Busy mind · Overloaded · STORE MANAGER · Meter · Sense-Lo for Spaces · for operators · Sense-Lo · for people · For people · you · a gentle hum ↻ · Interpret. · GENTLE NUDGE · 6:12 PM · Metro · platform 2, 6 pm · LOAD RISING · 64 → 79 · Mostly crowded. The platform is packed shoulder to shoulder. · Library · Café · Metro rush · Night market · Live gig · Skip · On busy days, I listen closer · Same café, same noise · 79 · Settled day · 62 · Feels fine · The mobile experience translates environmental inputs into a sensory-load estimate, using the orb,"
       },
       {
         "src": "assets/senselo/case/35.webp",
         "src2x": "assets/senselo/case/35@2x.webp",
         "h": 1200,
-        "alt": "Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · For spaces · STORE · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · Investigate. · Overview · Produce · 62 · Café corner · 66 · Checkout · 94 · Zones · Packed and loud · ↑ 15 · Very heavy · Trends · Entrance · 84 · Entrance · 84 · Actions · Checkout · 94 · Packed · ↑ 6 · Heavy · Alerts · Grain aisle · 38 · The dashboard organises environmental information across zones and time, allowing operators to examine potential hotspots, explore trends, and consider interventions. · 2 · Café corner · 66 · Reports · Chatty · → · Busy · Produce · 62 · Busy, a little bright · ↑ 3 · Busy · Grain aisle · 38 · Calm · ↓ 2 · Light · Understand spatial patterns. · Sense-Lo for Spaces · How the week felt · CALM · This week · This month · Compare stores · OVERLOAD · Green Basket Market · GROUND F"
+        "alt": "Sense-Lo for Spaces · Five zones, one floor · Live · Today · This week · Green Basket Market · GROUND FLOOR · For spaces · FLOOR MAP · TAP A ZONE · RIGHT NOW, BUSIEST FIRST · Investigate. · STORE · Overview · Produce · 62 · Café corner · 66 · 94 · Checkout · Zones · Packed and loud · Very heavy · ↑ 15 · Trends · Entrance · 84 · 84 · Entrance · Checkout · 94 · Actions · Packed · Heavy · ↑ 6 · The dashboard organises environmental information across zones and time, allowing operators to examine potential hotspots, explore trends, and consider interventions. · Alerts · Grain aisle · 38 · 2 · 66 ·"
       },
       {
         "src": "assets/senselo/case/36.webp",
         "src2x": "assets/senselo/case/36@2x.webp",
         "h": 1200,
-        "alt": "The connection is not simply a matching visual identity. It is a shared approach to interpreting environmental conditions. The mobile interface offers an accessible entry point into personal interpretation. Spatial views and trend visualisations offer a more analytical entry point for operators. Both translate environmental signals into information that can support reflection and investigation, without pretending that a measurement tells the whole story. · Environmental signals · Interpretation · Meaningful next steps · / What comes next · From concept to something"
+        "alt": "/language. · One shared · The connection is not simply a matching visual identity. It is a shared approach to interpreting environmental conditions. The mobile interface offers an accessible entry point into personal interpretation. Spatial views and trend visualisations offer a more analytical entry point for operators. Both translate environmental signals into information that can support reflection and investigation, without pretending that a measurement tells the whole story. · Environmental signals · Interpretation · Meaningful next steps · / What comes next"
       },
       {
         "src": "assets/senselo/case/37.webp",
         "src2x": "assets/senselo/case/37@2x.webp",
         "h": 1200,
-        "alt": "/tested. · that can be · Sense-Lo is currently a design exploration. Its next stage would need to move beyond interface usability and test the assumptions beneath the experience. · 01 · 02 · Validate the sensing model · Evaluate the scoring approach · Assess whether the selected environmental inputs can be measured reliably in real settings. · Test how inputs are combined, how thresholds are established, and how uncertainty is communicated. · 03 · 04 · Test personalisation · Evaluate the dashboard · Understand whether individual preferences make the reading more useful without creating a false sense of precision. · Investigate whether operators can identify meaningful patterns and make informed decisions from the information presented. · 05 · 06 · Test with the people it’s for · Validate visual density · Co-design and test with autistic and ADHD participants before anything else, their t"
+        "alt": "From concept to something · /tested. · that can be · Sense-Lo is currently a design exploration. Its next stage would need to move beyond interface usability and test the assumptions beneath the experience. · 01 · 02 · Validate the sensing model · Evaluate the scoring approach · Assess whether the selected environmental inputs can be measured reliably in real settings. · Test how inputs are combined, how thresholds are established, and how uncertainty is communicated. · 03 · 04 · Test personalisation · Evaluate the dashboard · Understand whether individual preferences make the reading more use"
       },
       {
         "src": "assets/senselo/case/38.webp",
@@ -536,18 +536,18 @@ window.CASE_STUDIES = {
       {
         "href": "https://www.figma.com/proto/OP4rNWbnQHYGmelbsTsIis/Sense-LO?node-id=585-23547&t=HNNp17Vd4qzriKaX-1&scaling=scale-down&content-scaling=fixed&page-id=585%3A2055&starting-point-node-id=585%3A23771",
         "label": "Open the Sense.lo mobile app prototype in Figma",
-        "x": 110,
-        "y": 46671,
-        "w": 551,
-        "h": 50
+        "x": 114,
+        "y": 46677,
+        "w": 541,
+        "h": 38
       },
       {
         "href": "https://www.figma.com/proto/OP4rNWbnQHYGmelbsTsIis/Sense-LO?node-id=585-30504&t=gTSwU3Z1XL7yrwLj-1&scaling=scale-down&content-scaling=fixed&page-id=585%3A24977&starting-point-node-id=585%3A30504",
         "label": "Open the Sense.lo dashboard prototype in Figma",
-        "x": 110,
-        "y": 46755,
-        "w": 553,
-        "h": 50
+        "x": 114,
+        "y": 46761,
+        "w": 543,
+        "h": 38
       }
     ]
   },
