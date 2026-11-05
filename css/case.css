@@ -13,6 +13,8 @@
 .figma-video video { object-fit: cover; }
 .figma-video-over { pointer-events: none; }
 .figma-video--player video { object-fit: contain; background: #000; }
+.figma-video--youtube { overflow: hidden; background: #000; }
+.figma-video--youtube iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .figma-link { position: absolute; display: block; border-radius: 6px; }
 .figma-link:focus-visible { outline: 2px solid #0086fa; outline-offset: 2px; }
 .case--figma .case-end { max-width: 980px; margin: 0 auto; padding: 4rem var(--gutter) 0; }
