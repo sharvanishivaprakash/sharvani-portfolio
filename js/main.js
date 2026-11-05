@@ -177,6 +177,30 @@
       </a>`;
   }
 
+  // Section dots for a Figma case study: click to jump, and the dot of the part on screen lights up.
+  function wireCaseDots(nav, box, study) {
+    const links = [...nav.querySelectorAll("a")];
+    const top = (i) => box.getBoundingClientRect().top + scrollY + (study.sections[i].y / study.height) * box.offsetHeight;
+    const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+    links.forEach((a, i) => a.addEventListener("click", (e) => {
+      e.preventDefault();
+      scrollTo({ top: Math.max(0, top(i) - (i ? 90 : 120)), behavior: smooth ? "smooth" : "auto" });
+    }));
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const line = scrollY + innerHeight * 0.35;
+      let cur = 0;
+      links.forEach((_, i) => { if (top(i) <= line) cur = i; });
+      links.forEach((a, i) => a.toggleAttribute("aria-current", i === cur));
+      const r = box.getBoundingClientRect();
+      nav.classList.toggle("is-hidden", r.bottom < innerHeight * 0.5);
+    };
+    addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    addEventListener("resize", update);
+    update();
+  }
+
   // A case study exported from Figma: a centred stack of image slices, with clips and links laid over their spots.
   function renderFigmaStudy(study, p, next) {
     const pct = (v, total) => `${(v / total) * 100}%`;
@@ -200,17 +224,27 @@
       .map((l) => `<a class="figma-link" href="${esc(l.href)}" target="_blank" rel="noopener" style="${at(l)}" aria-label="${esc(l.label)}"></a>`)
       .join("");
 
+    // Dots in the black space on the right: one per section, they jump straight to it.
+    const sections = study.sections || [];
+    const dots = sections.length > 1 ? `
+      <nav class="case-dots" aria-label="Sections of this case study">
+        ${sections.map((s, i) => `<a href="#" data-i="${i}" aria-label="${esc(s.label)}"><span class="case-dots-label">${esc(s.label)}</span></a>`).join("")}
+      </nav>` : "";
+
     const case_ = $("#case");
     case_.classList.add("case--figma");
     case_.innerHTML = `
       <h1 class="sr-only">${esc(p.title)}</h1>
       <div class="figma-study" style="aspect-ratio:${study.width} / ${study.height}">${slices}${videos}${links}</div>
+      ${dots}
       <div class="case-end">
         <a class="case-back" href="index.html#work">← All work</a>
         <a class="case-next" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
           <span>Next project</span><strong>${esc(next.title)} →</strong>
         </a>
       </div>`;
+
+    if (dots) wireCaseDots(case_.querySelector(".case-dots"), case_.querySelector(".figma-study"), study);
 
     // Looping clips play only while they're on screen (and not at all for reduced motion).
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -6,6 +6,7 @@
   `videos`: clips placed over their spot. A clip with `controls` plays with sound when pressed;
   a clip with `youtube` (a video id) is a YouTube player in that spot;
   the others loop silently while on screen. `overlay` is an image drawn above the clip.
+  `sections`: the dots on the right that jump to each part (y in Figma px, just above its heading).
   `links`: clickable areas over the links that are drawn in the slices (e.g. prototypes).
 */
 window.CASE_STUDIES = {
@@ -281,6 +282,56 @@ window.CASE_STUDIES = {
         "w": 1200,
         "h": 676
       }
+    ],
+    "sections": [
+      {
+        "label": "Intro",
+        "y": 0
+      },
+      {
+        "label": "The question",
+        "y": 1963
+      },
+      {
+        "label": "Research",
+        "y": 7922
+      },
+      {
+        "label": "Context & brief",
+        "y": 14514
+      },
+      {
+        "label": "User interviews",
+        "y": 15617
+      },
+      {
+        "label": "What gets in the way",
+        "y": 18622
+      },
+      {
+        "label": "The idea",
+        "y": 21303
+      },
+      {
+        "label": "Decisions",
+        "y": 28125
+      },
+      {
+        "label": "Information architecture",
+        "y": 29185
+      },
+      {
+        "label": "App walkthrough",
+        "y": 33152
+      },
+      {
+        "label": "Testing",
+        "y": 44316
+      },
+      {
+        "label": "Thank you",
+        "y": 48179
+      }
     ]
   },
   "sense-lo": {
@@ -547,6 +598,60 @@ window.CASE_STUDIES = {
         "w": 543,
         "h": 38
       }
+    ],
+    "sections": [
+      {
+        "label": "Intro",
+        "y": 0
+      },
+      {
+        "label": "The feeling",
+        "y": 2142
+      },
+      {
+        "label": "Overload",
+        "y": 6495
+      },
+      {
+        "label": "The gap",
+        "y": 10239
+      },
+      {
+        "label": "The meter",
+        "y": 14088
+      },
+      {
+        "label": "Find your volume",
+        "y": 16352
+      },
+      {
+        "label": "Less information",
+        "y": 22362
+      },
+      {
+        "label": "What a phone can sense",
+        "y": 26027
+      },
+      {
+        "label": "The space could change",
+        "y": 29214
+      },
+      {
+        "label": "Busy isn't bad",
+        "y": 36244
+      },
+      {
+        "label": "Perspectives",
+        "y": 39609
+      },
+      {
+        "label": "Tested",
+        "y": 44335
+      },
+      {
+        "label": "Closing",
+        "y": 46045
+      }
     ]
   },
   "time-wanderers": {
@@ -755,6 +860,52 @@ window.CASE_STUDIES = {
         "w": 397,
         "h": 38
       }
+    ],
+    "sections": [
+      {
+        "label": "Intro",
+        "y": 0
+      },
+      {
+        "label": "The question",
+        "y": 903
+      },
+      {
+        "label": "Where it started",
+        "y": 3103
+      },
+      {
+        "label": "The problem",
+        "y": 7328
+      },
+      {
+        "label": "The idea",
+        "y": 11652
+      },
+      {
+        "label": "From ruins",
+        "y": 15177
+      },
+      {
+        "label": "Gestures",
+        "y": 18001
+      },
+      {
+        "label": "Interaction",
+        "y": 22812
+      },
+      {
+        "label": "System flow",
+        "y": 25358
+      },
+      {
+        "label": "Testing",
+        "y": 31949
+      },
+      {
+        "label": "Reflections",
+        "y": 33277
+      }
     ]
   },
   "janapada-bhoomi": {
@@ -941,6 +1092,64 @@ window.CASE_STUDIES = {
         "y": 1809,
         "w": 1200,
         "h": 675
+      }
+    ],
+    "sections": [
+      {
+        "label": "Intro",
+        "y": 0
+      },
+      {
+        "label": "Close your eyes",
+        "y": 2857
+      },
+      {
+        "label": "Janapada",
+        "y": 5651
+      },
+      {
+        "label": "Fading songs",
+        "y": 7401
+      },
+      {
+        "label": "The brief",
+        "y": 9667
+      },
+      {
+        "label": "Research",
+        "y": 11710
+      },
+      {
+        "label": "Four regions",
+        "y": 14454
+      },
+      {
+        "label": "Touching the land",
+        "y": 15943
+      },
+      {
+        "label": "Tokens & map",
+        "y": 18624
+      },
+      {
+        "label": "The journey",
+        "y": 20084
+      },
+      {
+        "label": "Fabrication",
+        "y": 23988
+      },
+      {
+        "label": "Testing",
+        "y": 29073
+      },
+      {
+        "label": "What's next",
+        "y": 31239
+      },
+      {
+        "label": "Thank you",
+        "y": 32916
       }
     ]
   }
