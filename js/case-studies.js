@@ -855,9 +855,9 @@ window.CASE_STUDIES = {
       {
         "href": "https://rushabhm-blip.github.io/Time_Wanderers_MMI/",
         "label": "Open the Time Wanderers working prototype",
-        "x": 99,
-        "y": 35066,
-        "w": 397,
+        "x": 106,
+        "y": 35030,
+        "w": 401,
         "h": 38
       }
     ],
@@ -1092,6 +1092,15 @@ window.CASE_STUDIES = {
         "y": 1809,
         "w": 1200,
         "h": 675
+      },
+      {
+        "src": "assets/janapada/close-your-eyes.mp4",
+        "poster": "assets/janapada/close-your-eyes-poster.webp",
+        "label": "Animation: eyes closing",
+        "x": 784,
+        "y": 2909,
+        "w": 563,
+        "h": 312
       },
       {
         "src": "assets/janapada/janapada-testing.mp4",
