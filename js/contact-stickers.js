@@ -1,6 +1,6 @@
 /*
   The stickers in "What next ?": the three round ones (the doodle, the lemon, the cat card) and the
-  link stickers (LinkedIn, Instagram, Behance, Dribbble). Each one can be picked up and dropped anywhere
+  link stickers (LinkedIn, Instagram, Behance, Medium). Each one can be picked up and dropped anywhere
   in the section; the one in your hand comes to the front.
   A link sticker still opens its link on a plain click; once it has been dragged, letting go doesn't open it.
 */

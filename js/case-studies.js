@@ -1092,6 +1092,16 @@ window.CASE_STUDIES = {
         "y": 1809,
         "w": 1200,
         "h": 675
+      },
+      {
+        "src": "assets/janapada/janapada-testing.mp4",
+        "poster": "assets/janapada/janapada-testing-poster.webp",
+        "label": "Visitors trying the Janapada Bhoomi installation (silent video)",
+        "x": 653,
+        "y": 29601,
+        "w": 685,
+        "h": 385,
+        "radius": 24
       }
     ],
     "sections": [
