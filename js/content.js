@@ -16,7 +16,7 @@ window.SITE = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/sharvanishivaprakash" },
     { label: "Behance", href: "https://www.behance.net/sharvanshivapr" },
     { label: "Instagram", href: "https://www.instagram.com/sharvaniac" },
-    { label: "Medium", href: "https://sharvanishivaprakash.medium.com" },
+    { label: "Medium", href: "https://medium.com/@sharvanishivaprakash" },
     { label: "Resume", href: "assets/Sharvani_Shivaprakash_Resume.pdf" }
   ],
 
