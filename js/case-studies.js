@@ -4,6 +4,7 @@
   Each slice is 1200 Figma px tall at 1440 wide (plus a 2x copy); `alt` carries the slice's text
   for screen readers. Positions below are in Figma px inside the frame.
   `videos`: clips placed over their spot. A clip with `controls` plays with sound when pressed;
+  a clip with `youtube` (a video id) is a YouTube player in that spot;
   the others loop silently while on screen. `overlay` is an image drawn above the clip.
   `links`: clickable areas over the links that are drawn in the slices (e.g. prototypes).
 */
@@ -737,6 +738,16 @@ window.CASE_STUDIES = {
         "alt": "/ Click here to see the working prototype"
       }
     ],
+    "videos": [
+      {
+        "youtube": "Yj909EQGlDs",
+        "label": "Quick view of the Time Wanderers project (YouTube video)",
+        "x": 120,
+        "y": 2202,
+        "w": 1200,
+        "h": 676
+      }
+    ],
     "links": [
       {
         "href": "https://rushabhm-blip.github.io/Time_Wanderers_MMI/",
@@ -750,9 +761,9 @@ window.CASE_STUDIES = {
   },
   "janapada-bhoomi": {
     "title": "Janapada Bhoomi",
-    "source": "Figma file Sense-LO, page \"Case study\", frame \"Janapada bhoomi\" (665:6019)",
+    "source": "Figma file Sense-LO, page \"Case study\", frame \"Janapada bhoomi\" (695:5331)",
     "width": 1440,
-    "height": 33067,
+    "height": 33144,
     "slices": [
       {
         "src": "assets/janapada/case/00.webp",
@@ -782,7 +793,7 @@ window.CASE_STUDIES = {
         "src": "assets/janapada/case/04.webp",
         "src2x": "assets/janapada/case/04@2x.webp",
         "h": 1200,
-        "alt": "4 · 8 · 5 · 30+ · regions of Karnataka · Songs represented · RFID tokens · Took 4 most prominent regions to showcase the diversity of the folk songs. · 4 folk songs , 4 reprised versions of them to build the bridge between the two. · 4 folk songs , 4 reprised versions of them to build the bridge between the two. · 4 RFID cards and sensors used , along with a RFID Tag for a Modern mix · Visitors tested in the exhibition · Before I could design anything, I had to understand what the word itself was holding. · ಜನ + ಪದ · = · ಜನಪದ · People · Foot / A word of song · “The foothold of people”"
+        "alt": "4 · 8 · 5 · 30+ · regions of Karnataka · Songs represented · RFID tokens · Visitors tested in the exhibition · Took 4 most prominent regions to showcase the diversity of the folk songs. · 4 folk songs , 4 reprised versions of them to build the bridge between the two. · 4 folk songs , 4 reprised versions of them to build the bridge between the two. · 4 RFID cards and sensors used , along with a RFID Tag for a Modern mix · / the spark · It began with a single word - Janapada. · Before I could design anything, I had to understand what the word itself was holding. · ಜನ + ಪದ · = · ಜನಪದ · People · F"
       },
       {
         "src": "assets/janapada/case/05.webp",
@@ -794,55 +805,55 @@ window.CASE_STUDIES = {
         "src": "assets/janapada/case/06.webp",
         "src2x": "assets/janapada/case/06@2x.webp",
         "h": 1200,
-        "alt": "/ the spark · It began with a single word - Janapada. · / the problem · Most of these songs were never recorded. They lived in people, in rituals and in daily work and as those change, the songs slip away with them. · The songs that raised a land are quietly falling silent. · But something else is happening… · Regional artists are picking these songs up again, reworking them with guitars, drums and film scores, and carrying them to listeners who would never have searched for a folk song."
+        "alt": "/ the problem · The songs that raised a land are quietly falling silent. · Most of these songs were never recorded. They lived in people, in rituals and in daily work and as those change, the songs slip away with them. · But something else is happening… · Regional artists are picking these songs up again, reworking them with guitars, drums and film scores, and carrying them to listeners who would never have searched for a folk song."
       },
       {
         "src": "assets/janapada/case/07.webp",
         "src2x": "assets/janapada/case/07@2x.webp",
         "h": 1200,
-        "alt": "Kodagana Koli Nungitha · Taare Bindigeya · Varaha Roopam · RAGHU DIXIT · SANJITH HEGDE · KANTARA (2022) · Shishunala Sharif’s 19th-century tatva pada, rearranged as folk-rock on the album Jag Changa. · A beloved Kannada folk song about setting out to fetch water, brought back with a contemporary sound. · A film song rooted in the daiva worship of coastal Karnataka that travelled across the country. · Folk original · Reimagined · No place where the two meet ? · SUNG · PASSED ON · ROCK · INDIE · FILM · The songs are not lost, what is missing is a bridge: one place to meet the old voice and its new echo, side by side."
+        "alt": "Kodagana Koli Nungitha · Taare Bindigeya · Varaha Roopam · RAGHU DIXIT · SANJITH HEGDE · KANTARA (2022) · Shishunala Sharif’s 19th-century tatva pada, rearranged as folk-rock on the album Jag Changa. · A beloved Kannada folk song about setting out to fetch water, brought back with a contemporary sound. · A film song rooted in the daiva worship of coastal Karnataka that travelled across the country. · Folk original · Reimagined · No place where the two meet ? · SUNG · PASSED ON · ROCK · INDIE · FILM · The songs are not lost, what is missing is a bridge: one place to meet the old voice and its n"
       },
       {
         "src": "assets/janapada/case/08.webp",
         "src2x": "assets/janapada/case/08@2x.webp",
         "h": 1200,
-        "alt": "/ How Might We · Let people travel across Karnataka through its folk songs and hear how those same songs live on today? · BRIEF · WHY · To design an interactive installation that reveals folk voices from different regions of Karnataka through simple physical interaction, shifting engagement from quick action to attentive presence. · The thought was simple: bring out the folk music of the land people are standing on. By moving across regions, visitors listen, compare and discover the diversity held within a single landscape. · / Design Goals"
+        "alt": "/ How Might We · Let people travel across Karnataka through its folk songs and hear how those same songs live on today? · / the brief · Design an installation that asks people to pause — and listen. · BRIEF · WHY · To design an interactive installation that reveals folk voices from different regions of Karnataka through simple physical interaction, shifting engagement from quick action to attentive presence. · The thought was simple: bring out the folk music of the land people are standing on. By moving across regions, visitors listen, compare and discover the diversity held within a single la"
       },
       {
         "src": "assets/janapada/case/09.webp",
         "src2x": "assets/janapada/case/09@2x.webp",
         "h": 1200,
-        "alt": "01 · 02 · 03 · Listen, not scroll · Travel the land · Old voice, new echo · Slow people down. One song at a time, with nothing to swipe past. · Let the map itself be the interface, so geography and sound are felt together. · Place a folk song and its modern reimagining side by side, so tradition feels alive rather than archived. · / Who is it for · Before deciding how my installation should behave, I visited the Indian Music Experience museum to watch how visitors meet music in a public space, where they stop, what they touch, and what makes them stay."
+        "alt": "01 · 02 · 03 · Listen, not scroll · Travel the land · Old voice, new echo · Slow people down. One song at a time, with nothing to swipe past. · Let the map itself be the interface, so geography and sound are felt together. · Place a folk song and its modern reimagining side by side, so tradition feels alive rather than archived. · / Who is it for · / field visit · Learning how people listen, at the Indian Music Experience, Bengaluru."
       },
       {
         "src": "assets/janapada/case/10.webp",
         "src2x": "assets/janapada/case/10@2x.webp",
         "h": 1200,
-        "alt": "01 · 02 · 03 · 04 · Sound needs a frame · Objects invite hands · Context gives meaning · Curiosity beats instructions · Dedicated listening stations held people longer than open, overlapping sound. · Instruments and physical props drew the biggest crowds, people wanted to touch. · A short line about where a song comes from changed how closely people listened. · The best exhibits needed no manual — the action explained itself. · → One region, one song at a time. · → Make the interaction tangible. · → Show the song’s meaning on screen. · → Place a card, hear a song. · / The Mapping · What makes each region sound like itself · Karnataka does not have one sound. The land decides how people live, how they live decides how they work and pray, and that decides what and how they sing. I chose four regions whose songs differ in instrument, tone and thought."
+        "alt": "Before deciding how my installation should behave, I visited the Indian Music Experience museum to watch how visitors meet music in a public space, where they stop, what they touch, and what makes them stay. · 01 · 02 · 03 · 04 · Sound needs a frame · Objects invite hands · Context gives meaning · Curiosity beats instructions · Dedicated listening stations held people longer than open, overlapping sound. · Instruments and physical props drew the biggest crowds, people wanted to touch. · A short line about where a song comes from changed how closely people listened. · The best exhibits needed n"
       },
       {
         "src": "assets/janapada/case/11.webp",
         "src2x": "assets/janapada/case/11@2x.webp",
         "h": 1200,
-        "alt": "Land · Livelihood · Work & ritual · Song · Instrument & tone · ಉತ್ತರ ಕರ್ನಾಟಕ · Uttara Karnataka · NORTH · REGION 01 · ದಕ್ಷಿಣ ಕರ್ನಾಟಕ · Dakshina Karnataka · SOUTH · REGION 02 · ಮಲೆನಾಡು · Malenadu · WESTERN GHATS · REGION 03 · ಕರಾವಳಿ · Karavali · COAST · REGION 04"
+        "alt": "Karnataka does not have one sound. The land decides how people live, how they live decides how they work and pray, and that decides what and how they sing. I chose four regions whose songs differ in instrument, tone and thought. · Land · Livelihood · Work & ritual · Song · Instrument & tone · ಉತ್ತರ ಕರ್ನಾಟಕ · Uttara Karnataka · NORTH · REGION 01 · ದಕ್ಷಿಣ ಕರ್ನಾಟಕ · Dakshina Karnataka · SOUTH · REGION 02 · ಮಲೆನಾಡು · Malenadu · WESTERN GHATS · REGION 03 · ಕರಾವಳಿ · Karavali · COAST · REGION 04"
       },
       {
         "src": "assets/janapada/case/12.webp",
         "src2x": "assets/janapada/case/12@2x.webp",
         "h": 1200,
-        "alt": "/ mapping the land · Four regions. Four landscapes. Four ways of singing. · Uttara Karnataka · Dakshina Karnataka · Malenadu · Karavali · LANDSCAPE · / the brief · Dry Deccan plateau, black soil, wide open skies · Kaveri river plains, paddy and sugarcane fields · Rainforests, coffee estates and misty hills of the Western Ghats · The Arabian Sea coast, rivers, paddy and coconut groves · Design an installation that asks people to pause — and listen. · LIFE & LIVELIHOOD · Rain-fed farming; a strong saint-poet tradition · Agrarian village life and household work · Coffee, paddy and forest life; Kodava clan traditions · Fishing, farming, daiva worship and Yakshagana · SONG TRADITION · Tatva pada — mystic, philosophical songs of the Bhakti–Sufi saint-poets · Work and domestic songs, often sung by women · Kodava folk songs sung at festivals, harvests and gatherings · Tulu paddanas — oral epics"
+        "alt": "/ mapping the land · Four regions. Four landscapes. Four ways of singing. · Uttara Karnataka · Dakshina Karnataka · Malenadu · Karavali · Dry Deccan plateau, black soil, wide open skies · Kaveri river plains, paddy and sugarcane fields · Rainforests, coffee estates and misty hills of the Western Ghats · The Arabian Sea coast, rivers, paddy and coconut groves · LANDSCAPE · Rain-fed farming; a strong saint-poet tradition · Agrarian village life and household work · Coffee, paddy and forest life; Kodava clan traditions · Fishing, farming, daiva worship and Yakshagana · LIFE & LIVELIHOOD · Tatva p"
       },
       {
         "src": "assets/janapada/case/13.webp",
         "src2x": "assets/janapada/case/13@2x.webp",
         "h": 1200,
-        "alt": "Raghu Dixit · Sanjith Hegde · Kindred folk spirit, new gen · Kantara (2022) · / iterations · Three ways to touch the land and why two of them failed. · The idea stayed the same throughout: a person meets a region, and the region sings. What kept changing was how a body should meet the map. Each version was tested against respect, comfort, attention and buildability. · / field visit · Learning how people listen, at the Indian Music Experience, Bengaluru. · ITERATION 01 · REJECTED · Stand on the region · A large floor map. Step onto a region and its song plays, as if you have travelled there. · — · Standing on a map of the land — “Bhoomi”, which many revere as mother — risked hurting people’s sentiments. · — · Pressure or proximity sensing across a floor-sized map was complex and unreliable to build in the time I had. · Dropped — the gesture disrespected the very land the project celebrate"
+        "alt": "Kodagana Koli Nungitha · Taare Bindigeya · Kodava Valaga · Varaha Roopam · Raghu Dixit · Sanjith Hegde · Kindred folk spirit, new gen · Kantara (2022) · / iterations · Three ways to touch the land and why two of them failed. · The idea stayed the same throughout: a person meets a region, and the region sings. What kept changing was how a body should meet the map. Each version was tested against respect, comfort, attention and buildability. · / field visit · ITERATION 01 · REJECTED · Learning how people listen, at the Indian Music Experience, Bengaluru. · Stand on the region · A large floor map"
       },
       {
         "src": "assets/janapada/case/14.webp",
         "src2x": "assets/janapada/case/14@2x.webp",
         "h": 1200,
-        "alt": "ITERATION 02 · REJECTED · Touch with your palm · A table-top map with touch sensors in each region. Rest a palm on a region to hear it. · — · Ergonomics: holding a hand on the map for a full song strained the wrist and shoulder. · — · Attention split: eyes went to the hand on the map, so the visuals and the meaning on screen were missed. · Dropped — listening became a physical chore instead of a pause. · ITERATION 03 · CHOSEN · Place an RFID card · Each region has its own card. Place a card on its region and the song, visuals and meaning appear. A fifth tag plays the modern version. · + · Hands are free once the card is placed — the body relaxes and the eyes move to the screen. · + · Cards are tangible, collectible and easy to understand without instructions. · Chosen — respectful, comfortable and reliable to build with Arduino. · / Evaluating the three · Stand on map · Palm touch · RFID"
+        "alt": "ITERATION 02 · REJECTED · Touch with your palm · A table-top map with touch sensors in each region. Rest a palm on a region to hear it. · Ergonomics: holding a hand on the map for a full song strained the wrist and shoulder. · — · Attention split: eyes went to the hand on the map, so the visuals and the meaning on screen were missed. · — · Dropped — listening became a physical chore instead of a pause. · ITERATION 03 · CHOSEN · Place an RFID card · Each region has its own card. Place a card on its region and the song, visuals and meaning appear. A fifth tag plays the modern version. · Hands ar"
       },
       {
         "src": "assets/janapada/case/15.webp",
@@ -854,25 +865,25 @@ window.CASE_STUDIES = {
         "src": "assets/janapada/case/16.webp",
         "src2x": "assets/janapada/case/16@2x.webp",
         "h": 1200,
-        "alt": "Each card carries the art and a one-line spirit of its region, a minstrel for Uttara, a woman carrying water for Dakshina, plantation and forest for Malenadu, the daiva mask for Karavali. The card itself becomes a small invitation to listen. · A keychain RFID tag. Placed on any region, it plays the reimagined version of that region’s song. · / The Two Rules · Region card · + MAP · → · Folk song · Regional visuals · Meaning of the lyrics on screen · PLACED ON ITS OWN REGION · Modern Mix tag · + MAP · → · The reimagined, new-generation version of that region’s song · PLACED ON ANY REGION · / experience storyboard · A journey in six moments. · Designed so that a first-time visitor needs no instructions, the cards, the map and the screen explain each other."
+        "alt": "Each card carries the art and a one-line spirit of its region, a minstrel for Uttara, a woman carrying water for Dakshina, plantation and forest for Malenadu, the daiva mask for Karavali. The card itself becomes a small invitation to listen. · A keychain RFID tag. Placed on any region, it plays the reimagined version of that region’s song. · / The Two Rules · Region card · Folk song · Regional visuals · Meaning of the lyrics on screen · → · + MAP · PLACED ON ITS OWN REGION · Modern Mix tag · The reimagined, new-generation version of that region’s song · → · + MAP · PLACED ON ANY REGION · / exp"
       },
       {
         "src": "assets/janapada/case/17.webp",
         "src2x": "assets/janapada/case/17@2x.webp",
         "h": 1200,
-        "alt": "01 · 02 · 03 · Arrive · Choose · Place · The idle screen shows the map softly glowing with an invitation: pick a card, choose a land. · The visitor picks a region card. Its artwork and one-line hint spark curiosity before a sound is heard. · The card goes onto its region. The reader hidden beneath recognises it instantly. · 04 · 05 · 06 · Listen · Travel in time · Carry it home · The folk song plays. Regional visuals fill the screen with the meaning of the lyrics, so the song is understood, not just heard. · They swap in the Modern Mix tag on the same region — and the same song returns in a new-generation voice. · A folk token with a Spotify code lets them keep listening long after they leave. · / user flow · Who does what, and when."
+        "alt": "01 · 02 · 03 · Arrive · Choose · Place · The idle screen shows the map softly glowing with an invitation: pick a card, choose a land. · The visitor picks a region card. Its artwork and one-line hint spark curiosity before a sound is heard. · The card goes onto its region. The reader hidden beneath recognises it instantly. · 04 · 05 · 06 · Listen · Travel in time · Carry it home · The folk song plays. Regional visuals fill the screen with the meaning of the lyrics, so the song is understood, not just heard. · They swap in the Modern Mix tag on the same region — and the same song returns in a ne"
       },
       {
         "src": "assets/janapada/case/18.webp",
         "src2x": "assets/janapada/case/18@2x.webp",
         "h": 1200,
-        "alt": "VISITOR · Picks a token · Listens, reads, compares · Takes a folk token home · MAP & TOKENS · Places it on a region · Swaps or removes token · card · Reader + Arduino identify region & token · SYSTEM · p5.js: card or Modern Mix? · tag · Folk song + visuals + meaning · SCREEN & SOUND · Idle screen: “pick a card, choose a land” · Reimagined version plays · ↺ another region, or the same region in another era · / technical setup · From a card on the map to a song in the room. · A simple, sturdy loop: detect the token, work out where it is, trigger the right song and visuals, and let the visitor experience it."
+        "alt": "Listens, reads, compares · VISITOR · Takes a folk token home · Picks a token · Places it on a region · Swaps or removes token · MAP & TOKENS · card · Reader + Arduino identify region & token · p5.js: card or Modern Mix? · SYSTEM · tag · Folk song + visuals + meaning · Idle screen: “pick a card, choose a land” · SCREEN & SOUND · Reimagined version plays · ↺ another region, or the same region in another era · / technical setup · From a card on the map to a song in the room. · A simple, sturdy loop: detect the token, work out where it is, trigger the right song and visuals, and let the visitor ex"
       },
       {
         "src": "assets/janapada/case/19.webp",
         "src2x": "assets/janapada/case/19@2x.webp",
         "h": 1200,
-        "alt": "INPUT · CONTROLLER · THE BRIDGE · OUTPUT · RFID reader + tokens · Arduino · p5.js · Screen + speakers · Readers under the regions sense the card or tag and read its unique ID. · Receives the ID, identifies the region and token type, and sends it over serial to the computer. · Listens to serial data and fires the matching folk or reimagined song and its visual sequence. · Visuals and the meaning of the lyrics fill the screen while the song plays in the room. · Detect · Process · Trigger · Experience · THE LOGIC · HARDWARE · // Arduino loop(): for each region reader r: if r.detectsNewTag(): Serial.println(r.region + \":\" + r.readUID()) // p5.js onSerial(region, uid): if uid == MODERN_MIX_TAG: play(reimagined[region]) else if uid == card[region]: play(folk[region]) show(visuals[region], meaning[region]) onTagRemoved(): fadeTo(idle) · Arduino Uno · RC522 RFID reader modules — beneath the regi"
+        "alt": "INPUT · CONTROLLER · THE BRIDGE · OUTPUT · RFID reader + tokens · Arduino · p5.js · Screen + speakers · Readers under the regions sense the card or tag and read its unique ID. · Receives the ID, identifies the region and token type, and sends it over serial to the computer. · Listens to serial data and fires the matching folk or reimagined song and its visual sequence. · Visuals and the meaning of the lyrics fill the screen while the song plays in the room. · Detect · Process · Trigger · Experience · THE LOGIC · HARDWARE · // Arduino loop(): for each region reader r: if r.detectsNewTag(): Seri"
       },
       {
         "src": "assets/janapada/case/20.webp",
@@ -908,19 +919,30 @@ window.CASE_STUDIES = {
         "src": "assets/janapada/case/25.webp",
         "src2x": "assets/janapada/case/25@2x.webp",
         "h": 1200,
-        "alt": "WHAT I OBSERVED · 03 · 01 · Hands free, eyes up · Cards needed no explanation · 02 · 04 · Once the card was down, people turned to the screen and read the meaning while listening. · Most visitors matched a card to the region of the same colour on their first try. · The Modern Mix was the “aha” · They wanted more · Hearing the same song return in a new-generation voice sparked the most conversation and replays. · → RFID solved the attention split of the palm version. · Requests for more regions, the singers’ stories and a way to save the songs. · → Colour-coding cards to regions did the teaching. · → Placing old and new side by side worked. · → Fed directly into the future scope. · WHAT I WOULD REFINE · Better visuals for the folk songs incorporated with Touchdesign. · Add a clear audio-visual cue when a card is lifted, before returning to idle. · Directional speakers or headphones for a"
+        "alt": "WHAT I OBSERVED · 03 · 01 · Hands free, eyes up · Cards needed no explanation · 02 · 04 · Once the card was down, people turned to the screen and read the meaning while listening. · Most visitors matched a card to the region of the same colour on their first try. · The Modern Mix was the “aha” · They wanted more · → RFID solved the attention split of the palm version. · Hearing the same song return in a new-generation voice sparked the most conversation and replays. · Requests for more regions, the singers’ stories and a way to save the songs. · → Colour-coding cards to regions did the teachin"
       },
       {
         "src": "assets/janapada/case/26.webp",
         "src2x": "assets/janapada/case/26@2x.webp",
         "h": 1200,
-        "alt": "/ Future Scope · Where the map could travel next · More regions · Schools & museums · Kalyana Karnataka, Bayaluseeme and more — until the whole state can sing. · A portable version that travels to classrooms and cultural spaces. · A living archive · Voices behind the songs · A recording corner where singers and visitors add songs — keeping Janapada passed from person to person. · Short clips of folk singers and the artists reimagining them."
+        "alt": "/ Future Scope · Where the map could travel next · More regions · Schools & museums · Kalyana Karnataka, Bayaluseeme and more — until the whole state can sing. · A portable version that travels to classrooms and cultural spaces. · Voices behind the songs · A living archive · A recording corner where singers and visitors add songs — keeping Janapada passed from person to person. · Short clips of folk singers and the artists reimagining them."
       },
       {
         "src": "assets/janapada/case/27.webp",
         "src2x": "assets/janapada/case/27@2x.webp",
-        "h": 667,
+        "h": 744,
         "alt": "These songs once travelled from one mouth to another. Here, they travel from one hand to another. · Thank You"
+      }
+    ],
+    "videos": [
+      {
+        "youtube": "qFaohtxuNUs",
+        "label": "Quick view of the Janapada Bhoomi project (YouTube video)",
+        "radius": 20,
+        "x": 120,
+        "y": 1809,
+        "w": 1200,
+        "h": 675
       }
     ]
   }

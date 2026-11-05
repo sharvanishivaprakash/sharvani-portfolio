@@ -186,7 +186,11 @@
           width="${study.width}" height="${s.h}" alt="${esc(s.alt)}"${i > 1 ? ' loading="lazy"' : ""} decoding="async">`)
       .join("");
     const videos = (study.videos || (study.video ? [study.video] : []))
-      .map((v) => `
+      .map((v) => v.youtube ? `
+        <div class="figma-video figma-video--youtube" style="${at(v)}${v.radius ? `;border-radius:${(v.radius / v.w) * 100}% / ${(v.radius / v.h) * 100}%` : ""}">
+          <iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.youtube)}?rel=0&playsinline=1" title="${esc(v.label)}"
+            allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+        </div>` : `
         <div class="figma-video${v.controls ? " figma-video--player" : ""}" style="${at(v)}">
           <video src="${esc(v.src)}" poster="${esc(v.poster)}" ${v.controls ? "controls" : "autoplay muted loop"} playsinline preload="${v.controls ? "none" : "metadata"}" aria-label="${esc(v.label)}"></video>
           ${v.overlay ? `<img class="figma-video-over" src="${esc(v.overlay)}" alt="" loading="lazy">` : ""}
