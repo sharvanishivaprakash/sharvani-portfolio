@@ -56,7 +56,7 @@ window.SITE = {
       summary: "Bringing folk music culture to life through interaction.",
       tags: ["Physical Computing", "Arduino Prototyping", "Sound Interaction"],
       image: "assets/final/janapada-cover.webp",
-      hover: null,
+      hover: "assets/final/janapada-hover.webp",
       meta: { type: "[Project type]", discipline: "[Discipline]", year: "[Year]", team: "[Individual / Team]" }
     }
   ]
