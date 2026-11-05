@@ -177,26 +177,30 @@
       </a>`;
   }
 
-  // A case study exported from Figma: a centred stack of image slices, plus the screens video in its spot.
+  // A case study exported from Figma: a centred stack of image slices, with clips and links laid over their spots.
   function renderFigmaStudy(study, p, next) {
     const pct = (v, total) => `${(v / total) * 100}%`;
+    const at = (o) => `left:${pct(o.x, study.width)};top:${pct(o.y, study.height)};width:${pct(o.w, study.width)};height:${pct(o.h, study.height)}`;
     const slices = study.slices
       .map((s, i) => `<img src="${esc(s.src)}" srcset="${esc(s.src)} 1440w, ${esc(s.src2x)} 2880w" sizes="(max-width: 900px) 100vw, 75vw"
           width="${study.width}" height="${s.h}" alt="${esc(s.alt)}"${i > 1 ? ' loading="lazy"' : ""} decoding="async">`)
       .join("");
-    const v = study.video;
-    const at = v ? `left:${pct(v.x, study.width)};top:${pct(v.y, study.height)};width:${pct(v.w, study.width)};height:${pct(v.h, study.height)}` : "";
-    const video = v ? `
-        <div class="figma-video" style="${at}">
-          <video src="${esc(v.src)}" poster="${esc(v.poster)}" autoplay muted loop playsinline preload="metadata" aria-label="${esc(v.label)}"></video>
+    const videos = (study.videos || (study.video ? [study.video] : []))
+      .map((v) => `
+        <div class="figma-video${v.controls ? " figma-video--player" : ""}" style="${at(v)}">
+          <video src="${esc(v.src)}" poster="${esc(v.poster)}" ${v.controls ? "controls" : "autoplay muted loop"} playsinline preload="${v.controls ? "none" : "metadata"}" aria-label="${esc(v.label)}"></video>
           ${v.overlay ? `<img class="figma-video-over" src="${esc(v.overlay)}" alt="" loading="lazy">` : ""}
-        </div>` : "";
+        </div>`)
+      .join("");
+    const links = (study.links || [])
+      .map((l) => `<a class="figma-link" href="${esc(l.href)}" target="_blank" rel="noopener" style="${at(l)}" aria-label="${esc(l.label)}"></a>`)
+      .join("");
 
     const case_ = $("#case");
     case_.classList.add("case--figma");
     case_.innerHTML = `
       <h1 class="sr-only">${esc(p.title)}</h1>
-      <div class="figma-study" style="aspect-ratio:${study.width} / ${study.height}">${slices}${video}</div>
+      <div class="figma-study" style="aspect-ratio:${study.width} / ${study.height}">${slices}${videos}${links}</div>
       <div class="case-end">
         <a class="case-back" href="index.html#work">← All work</a>
         <a class="case-next" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="view" data-cursor-label="Next">
@@ -204,10 +208,15 @@
         </a>
       </div>`;
 
-    // Play the screens only while they're on screen (and not at all for reduced motion).
-    const vid = $(".figma-video video", case_);
-    if (!vid) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { vid.removeAttribute("autoplay"); vid.pause(); vid.controls = true; return; }
-    new IntersectionObserver(([e]) => (e.isIntersecting ? vid.play().catch(() => {}) : vid.pause()), { rootMargin: "200px" }).observe(vid);
+    // Looping clips play only while they're on screen (and not at all for reduced motion).
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    case_.querySelectorAll(".figma-video:not(.figma-video--player) video").forEach((vid) => {
+      if (reduce) { vid.removeAttribute("autoplay"); vid.pause(); vid.controls = true; return; }
+      new IntersectionObserver(([e]) => (e.isIntersecting ? vid.play().catch(() => {}) : vid.pause()), { rootMargin: "200px" }).observe(vid);
+    });
+    // A film with sound pauses once it's scrolled away.
+    case_.querySelectorAll(".figma-video--player video").forEach((vid) => {
+      new IntersectionObserver(([e]) => { if (!e.isIntersecting) vid.pause(); }).observe(vid);
+    });
   }
 })();
