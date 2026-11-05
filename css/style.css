@@ -510,32 +510,15 @@ b { font-weight: 500; }
 }
 .c-sticker:hover { scale: 1.04; }
 .c-sticker.is-held { cursor: grabbing; scale: 1.08; filter: drop-shadow(0 calc(16 * var(--u)) calc(22 * var(--u)) rgba(0, 30, 70, 0.35)); }
-.c-badge { aspect-ratio: 1; }
-.c-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.cs-base { fill: #f4efe4; }
-.cs-ring { fill: none; stroke: #1a1a1a; stroke-width: 1; }
-.cs-say { font-family: "Outfit", sans-serif; font-size: 14px; fill: #1a1a1a; }
-.cs-art { position: absolute; left: 30%; top: 30%; width: 40%; height: 40%; object-fit: contain; pointer-events: none; }
-.cs-doodle-art {
-  background: #004988;
-  -webkit-mask: url("../assets/doodle/doodle.svg") center / contain no-repeat;
-  mask: url("../assets/doodle/doodle.svg") center / contain no-repeat;
-}
-.cs-cat .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; border-radius: 50%; object-fit: cover; object-position: 50% 55%; }
-.cs-lemon .cs-art { left: 27%; top: 27%; width: 46%; height: 46%; }
-/* the lemon sticker has a little spiky (seal) edge, softened with a round stroke */
-.cs-spiky { stroke: #f4efe4; stroke-width: 6; stroke-linejoin: round; }
-/* the fish from Outside the briefs, tilted a little more than its sticker */
-.cs-fish .cs-art { left: 16.2%; top: 35.3%; width: 70.3%; height: 32.8%; rotate: 21.96deg; }
+/* the four round stickers are pictures from Figma "preloader" (their tilt and soft shadow are in the picture) */
+.c-badge { filter: none; }
+.c-badge img { display: block; width: 100%; height: auto; pointer-events: none; }
+.c-badge.is-held { filter: drop-shadow(0 calc(10 * var(--u)) calc(14 * var(--u)) rgba(0, 30, 70, 0.25)); }
 .c-pill {
   display: flex; align-items: center; justify-content: center; aspect-ratio: 260 / 72;
   border-radius: 999px; background: #f4efe4; color: #121212; text-decoration: none;
   font-family: "Outfit", sans-serif; font-weight: 500; font-size: calc(22 * var(--u)); letter-spacing: calc(0.5 * var(--u)); text-transform: uppercase;
 }
-/* the folded corner of the doodle sticker */
-.cs-flap { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;
-  filter: drop-shadow(calc(-3 * var(--u)) calc(-3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.18)); }
-
 /* the email up top: big and white, the one thing to press, with a copy button beside it */
 .next-mail { display: flex; align-items: center; gap: calc(12 * var(--u)); }
 .next-gmail {
@@ -735,7 +718,6 @@ body.cursor-out .cursor-eye { opacity: 0; }
   .next-run span { padding: 0 16px; }
   .c-pile { position: relative; margin-top: 32px; }
   .c-pill { font-size: clamp(12px, 3.4vw, 16px); }
-  .cs-say { font-size: 15px; }
   .next-gmail { flex: 1; min-width: 0; height: 52px; padding: 0 14px; font-size: clamp(14px, 4.2vw, 18px); gap: 8px; justify-content: center; }
   .next-gmail .btn-icon { width: 14px; height: 14px; }
   .next-copy { width: 52px; height: 52px; }
@@ -765,40 +747,51 @@ body.cursor-out .cursor-eye { opacity: 0; }
 @media (hover: none) { .c-sticker { touch-action: auto; } }
 
 /* ---------- Intro (js/preloader.js) ---------- */
-/* The black screen with moving dots. The doodle looks left and right, its glasses drop on,
-   "sharvani" types in and the screen slides up to open the page. */
+/* A black screen with moving grain. The four stickers (Figma "preloader", node 332:77) float in one by one
+   and keep bobbing; the bar under them fills as the page loads, then the screen slides up. */
 .preloader { display: none; }
 html.is-preloading, html.is-preloading body { overflow: hidden; }
 html.is-preloading .preloader, .preloader.is-open {
-  position: fixed; inset: 0; z-index: 200;
-  display: grid; place-items: center;
+  position: fixed; inset: 0; z-index: 200; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   background: var(--paper);
 }
-.pl-dots { position: absolute; inset: 0; width: 100%; height: 100%; }
-.pl-stage { position: relative; display: grid; justify-items: center; gap: 22px; }
-.pl-doodle {
-  width: clamp(120px, 14vw, 190px); height: auto; overflow: visible;
-  opacity: 0; transform: scale(0.85);
-  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 1.4, 0.4, 1);
+/* film grain: the same noise tile as "What next ?", faint and jumping about */
+.preloader::before {
+  content: ""; position: absolute; inset: -120px; pointer-events: none;
+  animation: grain 0.9s steps(1) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.11;
 }
-.preloader.is-in .pl-doodle { opacity: 1; transform: none; }
-.pl-eyes { transition: transform 0.35s cubic-bezier(0.5, 0, 0.3, 1); }
-.pl-glasses { opacity: 0; transform: translateY(-14px); }
-.preloader.has-glasses .pl-glasses {
-  opacity: 1; transform: none;
-  transition: opacity 0.15s ease, transform 0.55s cubic-bezier(0.3, 1.7, 0.5, 1);
+/* the stickers keep their Figma layout: --x / --y / --w are Figma px inside a 670 x 215 box */
+.pl-stage { position: relative; width: min(90vw, max(46.5vw, 380px)); aspect-ratio: 670 / 215; }
+.pl-st {
+  position: absolute; left: calc(var(--x) / 670 * 100%); top: calc(var(--y) / 215 * 100%); width: calc(var(--w) / 670 * 100%);
+  opacity: 0; translate: 0 60px; scale: 0.7; rotate: -10deg;
 }
-.pl-name {
-  margin: 0; min-height: 1.2em;
-  font: 500 clamp(28px, 3vw, 40px)/1.2 var(--display); letter-spacing: -0.01em; color: var(--ink);
+.preloader.is-in .pl-st {
+  opacity: 1; translate: 0 0; scale: 1; rotate: 0deg;
+  transition: opacity 0.5s ease, translate 0.9s cubic-bezier(0.2, 1.3, 0.4, 1), scale 0.9s cubic-bezier(0.2, 1.3, 0.4, 1), rotate 0.9s cubic-bezier(0.2, 1.3, 0.4, 1);
+  transition-delay: calc(var(--i) * 380ms);
 }
-.pl-caret {
-  display: inline-block; width: 0.08em; height: 0.95em; margin-left: 0.06em;
-  vertical-align: -0.12em; background: var(--blue);
-  opacity: 0; animation: pl-blink 0.9s steps(1) infinite;
+.pl-st img {
+  display: block; width: 100%; height: auto;
+  animation: pl-float 3.4s ease-in-out calc(var(--i) * -0.85s) infinite;
 }
-.preloader.is-typing .pl-caret { opacity: 1; }
-@keyframes pl-blink { 50% { visibility: hidden; } }
+@keyframes pl-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-9%) rotate(2.5deg); }
+}
+.pl-bar {
+  position: relative; width: clamp(160px, 16vw, 240px); height: 2px; margin-top: clamp(48px, 7vh, 80px);
+  border-radius: 2px; background: rgba(255, 255, 255, 0.14); overflow: hidden;
+  opacity: 0; transition: opacity 0.5s ease 0.4s;
+}
+.preloader.is-in .pl-bar { opacity: 1; }
+.pl-bar i { position: absolute; inset: 0; background: #f4efe4; transform-origin: left; transform: scaleX(var(--p, 0)); }
+/* on the way out the stickers lift off, then the screen slides up */
+.preloader.is-leaving .pl-st { opacity: 0; translate: 0 -40px; scale: 1.05; transition: opacity 0.45s ease, translate 0.6s ease-in, scale 0.6s ease-in; transition-delay: calc(var(--i) * 60ms); }
+.preloader.is-leaving .pl-bar { opacity: 0; transition: opacity 0.3s ease; }
 .preloader.is-open {
   clip-path: inset(0 0 100% 0);
   transition: clip-path 0.8s cubic-bezier(0.7, 0, 0.2, 1);
