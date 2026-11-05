@@ -274,10 +274,8 @@ window.CASE_STUDIES = {
         "h": 962
       },
       {
-        "src": "assets/andaaj/andaaj-story.mp4",
-        "poster": "assets/andaaj/andaaj-story-poster.webp",
-        "controls": true,
-        "label": "Quick view of the Andaaj project, a short film with music.",
+        "youtube": "18osJz3nkvU",
+        "label": "Quick view of the Andaaj project (YouTube video)",
         "x": 114,
         "y": 47046,
         "w": 1200,

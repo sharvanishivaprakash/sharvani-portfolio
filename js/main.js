@@ -54,9 +54,9 @@
       a.addEventListener("click", (e) => { e.preventDefault(); say("Resume coming soon."); });
     }
   });
-  const playground = $("#nav-playground");
-  if (playground && playground.getAttribute("href") === "#") {
-    playground.addEventListener("click", (e) => { e.preventDefault(); say("Playground coming soon."); });
+  const archives = $("#nav-archives");
+  if (archives && archives.getAttribute("href") === "#") {
+    archives.addEventListener("click", (e) => { e.preventDefault(); say("Archives coming soon."); });
   }
 
   // Contact links in "What next ?": the Gmail button opens a new email in Gmail (its link is in index.html);
