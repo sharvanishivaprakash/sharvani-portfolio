@@ -233,14 +233,14 @@ window.CASE_STUDIES = {
         "alt": "Akka mishears a dish · Dish not in the list · Photo calibration fails · / Recipe discovery · Discover → Adapt → Substitute → Return to meal planning"
       },
       {
-        "src": "assets/andaaj/case/36.webp",
-        "src2x": "assets/andaaj/case/36@2x.webp",
+        "src": "assets/andaaj/case/36.webp?v=48",
+        "src2x": "assets/andaaj/case/36@2x.webp?v=48",
         "h": 1200,
-        "alt": "Browses recipes through categories, collections, and saved or recently viewed content. · Presents saved recipe content with ingredient quantities translated into familiar household measures. · Explores alternative ingredients and lets users adapt a dish to their preferences or availability. · / Personal kitchen and preferences · Profile → Household overview → Saved content and settings · My kitchen · Centralises household profiles, meal-related information, saved recipes, voice settings, and user preferences. · / Decisions and trade-offs · Quick test with 7 home cooks"
+        "alt": "Browses recipes through categories, collections, and saved or recently viewed content. · Presents saved recipe content with ingredient quantities translated into familiar household measures. · Explores alternative ingredients and lets users adapt a dish to their preferences or availability. · / Personal kitchen and preferences · Profile → Household overview → Saved content and settings · My kitchen · Centralises household profiles, meal-related information, saved recipes, voice settings, and user preferences. · / Quick test with 7 home cooks"
       },
       {
-        "src": "assets/andaaj/case/37.webp",
-        "src2x": "assets/andaaj/case/37@2x.webp",
+        "src": "assets/andaaj/case/37.webp?v=48",
+        "src2x": "assets/andaaj/case/37@2x.webp?v=48",
         "h": 1200,
         "alt": "THE TASK · THREE QUESTIONS AFTER · “You are making anna, saaru and beans palya for 4. Use the app to find out how much to cook and serve.” · 1. What did the app tell you to change? · 2. Would you trust it? Why or why not? · 3. Would you use it at lunch tomorrow? · FINDING 1 · FINDING 2 · FINDING 3 · System Usability Scale (SUS) · [ 3 of 7 ] · [ 4 of 7 ] · [ 6 of 7 ] · 82 · They directly went to the bot to say their meal and change some settings. · Were excited for the instant reel share recipe section and tailored ratios. · Said they would use the app when special dishes are made ( like for festivals ). · Tested with 7 home cook users with a specific task and ease of navigation. · MY MOTHER’S REACTION · “I think I would stop pestering your sister and you if I have this app.”"
       },
